@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐷 Peppa en Español · Vera 的西語語塊庫</title>
+<style>
+  :root {
+    --pink: #e8507a;
+    --pink-light: #fce4ec;
+    --pink-dark: #b5294e;
+    --red: #d63047;
+    --yellow: #f7c94b;
+    --green: #4caf7d;
+    --blue: #4a90d9;
+    --bg: #0d0f1a;
+    --bg2: #161928;
+    --bg3: #1e2235;
+    --text: #e8eaf0;
+    --text2: #9ba3bf;
+    --border: rgba(255,255,255,0.08);
+    --gold: #d4b07a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--bg2), #1a0d2e);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 1.25rem 1.25rem;
+    text-align: center;
+  }
+  .pig-emoji { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+  header h1 { font-size: 1.5rem; font-weight: 700; color: var(--pink); margin-bottom: 0.25rem; }
+  header p { font-size: 0.85rem; color: var(--text2); }
+
+  .tabs {
+    display: flex; overflow-x: auto; gap: 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab.active { color: var(--pink); border-bottom-color: var(--pink); }
+  .tab:hover:not(.active) { color: var(--text); background: var(--bg3); }
+
+  .content { padding: 1rem 1rem 4rem; max-width: 680px; margin: 0 auto; }
+
+  .scene-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin: 1.25rem 0 1rem;
+  }
+  .scene-emoji { font-size: 2rem; }
+  .scene-title { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+  .scene-sub { font-size: 0.8rem; color: var(--text2); margin-top: 0.1rem; }
+
+  .chunk-grid { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+
+  .chunk-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .chunk-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--pink);
+    border-radius: 14px 0 0 14px;
+    opacity: 0.6;
+  }
+  .chunk-card:hover { border-color: rgba(232,80,122,0.3); background: var(--bg3); }
+  .chunk-card.revealed::before { opacity: 1; }
+
+  .chunk-visual {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .chunk-icon { font-size: 1.3rem; }
+  .chunk-arrow { font-size: 0.75rem; color: var(--text2); }
+
+  .chunk-spanish {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.02em;
+  }
+  .chunk-chinese {
+    font-size: 0.85rem;
+    color: var(--text2);
+    margin-bottom: 0.4rem;
+  }
+  .chunk-pronunciation {
+    display: none;
+    font-size: 0.8rem;
+    color: var(--pink);
+    background: rgba(232,80,122,0.08);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+  .chunk-card.revealed .chunk-pronunciation { display: block; }
+
+  .chunk-hint {
+    font-size: 0.75rem;
+    color: var(--text2);
+    margin-top: 0.35rem;
+    opacity: 0.7;
+  }
+
+  .tap-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text2);
+    margin: 0.25rem 0 1.25rem;
+    opacity: 0.7;
+  }
+
+  .daily-box {
+    background: linear-gradient(135deg, rgba(232,80,122,0.12), rgba(74,144,217,0.08));
+    border: 1px solid rgba(232,80,122,0.25);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  .daily-label { font-size: 0.75rem; color: var(--pink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .daily-chunk { font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 0.3rem; }
+  .daily-zh { font-size: 0.9rem; color: var(--text2); }
+  .daily-sound { font-size: 0.8rem; color: var(--pink); margin-top: 0.4rem; font-style: italic; }
+
+  .section-divider {
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.75rem;
+    margin: 0.5rem 0 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .cognate-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .cognate-title { font-size: 0.78rem; color: var(--blue); margin-bottom: 0.6rem; font-weight: 600; letter-spacing: 0.05em; }
+  .cognate-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem; font-size: 0.8rem;
+    border-bottom: 1px solid var(--border); padding: 0.35rem 0;
+  }
+  .cognate-row:last-child { border-bottom: none; }
+  .cognate-row span:first-child { color: var(--text2); }
+  .cognate-row span:nth-child(2) { color: var(--gold); font-weight: 600; }
+  .cognate-row span:last-child { color: var(--text2); font-size: 0.75rem; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text2);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="pig-emoji">🐷</span>
+  <h1>Peppa en Español</h1>
+  <p>Vera 的完形西語語塊庫 · ADHD 友善版</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPage('today')">✨ 今日語塊</div>
+  <div class="tab" onclick="showPage('mud')">🌧️ 泥坑</div>
+  <div class="tab" onclick="showPage('family')">👨‍👩‍👧 家庭</div>
+  <div class="tab" onclick="showPage('bedtime')">🌙 睡前</div>
+  <div class="tab" onclick="showPage('food')">🍽️ 吃飯</div>
+  <div class="tab" onclick="showPage('play')">🎪 玩耍</div>
+  <div class="tab" onclick="showPage('cognates')">🔗 英西同源</div>
+</div>
+
+<div class="content">
+
+<!-- ====== 今日語塊 ====== -->
+<div id="page-today" class="page active">
+  <div class="daily-box">
+    <div class="daily-label">🐷 今日語塊 Daily Chunk</div>
+    <div class="daily-chunk" id="daily-spanish">¡Me encantan los charcos!</div>
+    <div class="daily-zh" id="daily-zh">我超愛泥坑！</div>
+    <div class="daily-sound" id="daily-sound">妹 恩坎探 洛斯 恰爾科斯</div>
+  </div>
+
+  <p class="tap-hint">點任何一張卡看發音 👇</p>
+
+  <div class="section-divider">育兒必備語塊</div>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🤝</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Dame la mano.</div>
+      <div class="chunk-chinese">牽我的手</div>
+      <div class="chunk-pronunciation">達妹 拉 馬諾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👍</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Bien hecho!</div>
+      <div class="chunk-chinese">做得好！</div>
+      <div class="chunk-pronunciation">逼恩 廢丘</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🛌</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Es hora de dormir.</div>
+      <div class="chunk-chinese">睡覺時間到了</div>
+      <div class="chunk-pronunciation">誒斯 歐拉 德 都密爾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👀</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Ten cuidado.</div>
+      <div class="chunk-chinese">小心一點</div>
+      <div class="chunk-pronunciation">天 魁達都</div>
+    </div>
+  </div>
+
+  <div class="section-divider">Peppa 最愛說</div>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🌧️</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Me encantan los charcos de barro!</div>
+      <div class="chunk-chinese">我超愛泥坑！</div>
+      <div class="chunk-pronunciation">妹 恩坎探 洛斯 恰爾科斯 德 巴落</div>
+      <div class="chunk-hint">💡 Me encanta = I love（比 me gusta 更強烈）</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">😂</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Qué divertido!</div>
+      <div class="chunk-chinese">好好玩！</div>
+      <div class="chunk-pronunciation">克 迪背爾替都</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🐖</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Soy Peppa Pig!</div>
+      <div class="chunk-chinese">我是佩佩豬！</div>
+      <div class="chunk-pronunciation">嗦依 Peppa Pig</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 泥坑 ====== -->
+<div id="page-mud" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">🌧️</span>
+    <div>
+      <div class="scene-title">泥坑大作戰</div>
+      <div class="scene-sub">Los charcos de barro · 佩佩豬最愛的場景</div>
+    </div>
+  </div>
+  <p class="tap-hint">點卡片看發音 👇</p>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🌧️</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Me encantan los charcos de barro!</div>
+      <div class="chunk-chinese">我超愛泥坑！</div>
+      <div class="chunk-pronunciation">妹 恩坎探 洛斯 恰爾科斯 德 巴落</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👢</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Hay que ponerse las botas!</div>
+      <div class="chunk-chinese">要穿雨靴！</div>
+      <div class="chunk-pronunciation">愛 克 剖內爾誒 拉斯 博塔斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🤸</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Salta en los charcos!</div>
+      <div class="chunk-chinese">跳進泥坑！</div>
+      <div class="chunk-pronunciation">薩爾塔 恩 洛斯 恰爾科斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">😄</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Qué gracioso!</div>
+      <div class="chunk-chinese">好笑！</div>
+      <div class="chunk-pronunciation">克 格拉希歐索</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🌦️</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Está lloviendo.</div>
+      <div class="chunk-chinese">在下雨了</div>
+      <div class="chunk-pronunciation">誒斯塔 攸比恩都</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 家庭 ====== -->
+<div id="page-family" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">👨‍👩‍👧</span>
+    <div>
+      <div class="scene-title">La Familia Pig</div>
+      <div class="scene-sub">豬家庭成員介紹</div>
+    </div>
+  </div>
+  <p class="tap-hint">點卡片看發音 👇</p>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🐷</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Soy Peppa. Tengo cuatro años.</div>
+      <div class="chunk-chinese">我是佩佩，我四歲了</div>
+      <div class="chunk-pronunciation">嗦依 Peppa · 天勾 魁托 阿尼歐斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👨</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Este es Papá Pig.</div>
+      <div class="chunk-chinese">這是佩佩豬爸爸</div>
+      <div class="chunk-pronunciation">誒斯替 誒斯 帕帕 Pig</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👩</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Esta es Mamá Pig.</div>
+      <div class="chunk-chinese">這是佩佩豬媽媽</div>
+      <div class="chunk-pronunciation">誒斯塔 誒斯 媽媽 Pig</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">👶</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Este es mi hermano Jorge.</div>
+      <div class="chunk-chinese">這是我弟弟喬治</div>
+      <div class="chunk-pronunciation">誒斯替 誒斯 米 誒爾馬諾 何爾黑</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🏠</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Esta es nuestra casa.</div>
+      <div class="chunk-chinese">這是我們的家</div>
+      <div class="chunk-pronunciation">誒斯塔 誒斯 ㄋ溫斯特拉 卡薩</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🐉</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Mi dinosaurio favorito se llama Sr. Dinosaurio.</div>
+      <div class="chunk-chinese">我最愛的恐龍叫恐龍先生</div>
+      <div class="chunk-pronunciation">Mi 迪諾搜里歐 法沃里托</div>
+      <div class="chunk-hint">💡 dinosaurio ↔ dinosaur（英西同源！）</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 睡前 ====== -->
+<div id="page-bedtime" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">🌙</span>
+    <div>
+      <div class="scene-title">睡前語塊</div>
+      <div class="scene-sub">La hora de dormir · 每晚都用得到</div>
+    </div>
+  </div>
+  <p class="tap-hint">點卡片看發音 👇</p>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🛌</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Es hora de dormir.</div>
+      <div class="chunk-chinese">睡覺時間到了</div>
+      <div class="chunk-pronunciation">誒斯 歐拉 德 都密爾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🥱</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Tengo sueño.</div>
+      <div class="chunk-chinese">我好睏</div>
+      <div class="chunk-pronunciation">天勾 蘇誒尼歐</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🌟</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Buenas noches.</div>
+      <div class="chunk-chinese">晚安</div>
+      <div class="chunk-pronunciation">步誒納斯 諾切斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">💡</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Apaga la luz.</div>
+      <div class="chunk-chinese">關燈</div>
+      <div class="chunk-pronunciation">阿帕嘎 拉 路斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">😴</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Cierra los ojos.</div>
+      <div class="chunk-chinese">閉上眼睛</div>
+      <div class="chunk-pronunciation">希誒拉 洛斯 歐號斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🧸</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¿Dónde está tu osito?</div>
+      <div class="chunk-chinese">你的小熊在哪裡？</div>
+      <div class="chunk-pronunciation">冬德 誒斯塔 圖 歐希托</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 吃飯 ====== -->
+<div id="page-food" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">🍽️</span>
+    <div>
+      <div class="scene-title">吃飯語塊</div>
+      <div class="scene-sub">La hora de comer · 餐桌上的西語</div>
+    </div>
+  </div>
+  <p class="tap-hint">點卡片看發音 👇</p>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🍽️</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Es hora de comer!</div>
+      <div class="chunk-chinese">吃飯時間到了！</div>
+      <div class="chunk-pronunciation">誒斯 歐拉 德 科妹爾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🍕</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Tengo hambre.</div>
+      <div class="chunk-chinese">我餓了</div>
+      <div class="chunk-pronunciation">天勾 阿姆不雷</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">😋</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Qué rico!</div>
+      <div class="chunk-chinese">好好吃！</div>
+      <div class="chunk-pronunciation">克 里科</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">☕</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">Me gusta el café caliente.</div>
+      <div class="chunk-chinese">我喜歡熱咖啡</div>
+      <div class="chunk-pronunciation">妹 菇薩 誒爾 卡費 卡連替</div>
+      <div class="chunk-hint">💡 café ↔ coffee，caliente = hot（記住「卡連替」= 熱的）</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🙅</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">No me gusta.</div>
+      <div class="chunk-chinese">我不喜歡</div>
+      <div class="chunk-pronunciation">諾 妹 菇薩</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🥛</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¿Quieres más?</div>
+      <div class="chunk-chinese">還要嗎？</div>
+      <div class="chunk-pronunciation">啟誒雷斯 馬斯</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 玩耍 ====== -->
+<div id="page-play" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">🎪</span>
+    <div>
+      <div class="scene-title">玩耍語塊</div>
+      <div class="scene-sub">¡Vamos a jugar! · 陪伴最常說的話</div>
+    </div>
+  </div>
+  <p class="tap-hint">點卡片看發音 👇</p>
+  <div class="chunk-grid">
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🎮</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Vamos a jugar!</div>
+      <div class="chunk-chinese">我們來玩！</div>
+      <div class="chunk-pronunciation">法莫斯 阿 胡嘎爾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🏃</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Vamos!</div>
+      <div class="chunk-chinese">走囉！出發！</div>
+      <div class="chunk-pronunciation">法莫斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🎨</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¿Qué quieres hacer?</div>
+      <div class="chunk-chinese">你想做什麼？</div>
+      <div class="chunk-pronunciation">克 啟誒雷斯 阿塞爾</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🔍</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¿Dónde está?</div>
+      <div class="chunk-chinese">在哪裡？</div>
+      <div class="chunk-pronunciation">冬德 誒斯塔</div>
+      <div class="chunk-hint">💡 萬用句！找玩具找人都用得到</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">😄</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Otra vez!</div>
+      <div class="chunk-chinese">再來一次！</div>
+      <div class="chunk-pronunciation">歐特拉 倍斯</div>
+    </div>
+    <div class="chunk-card" onclick="this.classList.toggle('revealed')">
+      <div class="chunk-visual"><span class="chunk-icon">🏆</span><span class="chunk-arrow">➔</span></div>
+      <div class="chunk-spanish">¡Muy bien hecho!</div>
+      <div class="chunk-chinese">做得超好！</div>
+      <div class="chunk-pronunciation">木依 逼恩 廢丘</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 英西同源 ====== -->
+<div id="page-cognates" class="page">
+  <div class="scene-header">
+    <span class="scene-emoji">🔗</span>
+    <div>
+      <div class="scene-title">英西同源槓桿</div>
+      <div class="scene-sub">你的英文就是超能力</div>
+    </div>
+  </div>
+
+  <div class="cognate-box">
+    <div class="cognate-title">-tion → -ción</div>
+    <div class="cognate-row"><span>nation</span><span>nación</span><span>國家</span></div>
+    <div class="cognate-row"><span>action</span><span>acción</span><span>行動</span></div>
+    <div class="cognate-row"><span>emotion</span><span>emoción</span><span>情緒</span></div>
+    <div class="cognate-row"><span>information</span><span>información</span><span>資訊</span></div>
+  </div>
+
+  <div class="cognate-box">
+    <div class="cognate-title">-ty → -dad</div>
+    <div class="cognate-row"><span>city</span><span>ciudad</span><span>城市</span></div>
+    <div class="cognate-row"><span>reality</span><span>realidad</span><span>現實</span></div>
+    <div class="cognate-row"><span>quality</span><span>calidad</span><span>品質</span></div>
+    <div class="cognate-row"><span>university</span><span>universidad</span><span>大學</span></div>
+  </div>
+
+  <div class="cognate-box">
+    <div class="cognate-title">-ce / -cy → -cia / -ncia</div>
+    <div class="cognate-row"><span>patience</span><span>paciencia</span><span>耐心</span></div>
+    <div class="cognate-row"><span>experience</span><span>experiencia</span><span>經驗</span></div>
+    <div class="cognate-row"><span>distance</span><span>distancia</span><span>距離</span></div>
+  </div>
+
+  <div class="cognate-box">
+    <div class="cognate-title">Peppa 裡的同源詞</div>
+    <div class="cognate-row"><span>dinosaur</span><span>dinosaurio</span><span>恐龍</span></div>
+    <div class="cognate-row"><span>family</span><span>familia</span><span>家庭</span></div>
+    <div class="cognate-row"><span>animal</span><span>animal</span><span>動物（一樣！）</span></div>
+    <div class="cognate-row"><span>hospital</span><span>hospital</span><span>醫院（一樣！）</span></div>
+    <div class="cognate-row"><span>super</span><span>súper</span><span>超級（一樣！）</span></div>
+  </div>
+</div>
+
+</div>
+
+<footer>🐷 Peppa en Español · Vera 的 ADHD 完形西語學習庫</footer>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const chunks = [
+  { es: '¡Me encantan los charcos!', zh: '我超愛泥坑！', sound: '妹 恩坎探 洛斯 恰爾科斯' },
+  { es: '¡Vamos a jugar!', zh: '我們來玩！', sound: '法莫斯 阿 胡嘎爾' },
+  { es: 'Es hora de dormir.', zh: '睡覺時間到了', sound: '誒斯 歐拉 德 都密爾' },
+  { es: '¡Bien hecho!', zh: '做得好！', sound: '逼恩 廢丘' },
+  { es: 'Dame la mano.', zh: '牽我的手', sound: '達妹 拉 馬諾' },
+  { es: '¡Qué divertido!', zh: '好好玩！', sound: '克 迪背爾替都' },
+  { es: '¡Otra vez!', zh: '再來一次！', sound: '歐特拉 倍斯' },
+  { es: 'Tengo sueño.', zh: '我好睏', sound: '天勾 蘇誒尼歐' },
+];
+const today = chunks[new Date().getDay() % chunks.length];
+document.getElementById('daily-spanish').textContent = today.es;
+document.getElementById('daily-zh').textContent = today.zh;
+document.getElementById('daily-sound').textContent = today.sound;
+</script>
+</body>
+</html>
