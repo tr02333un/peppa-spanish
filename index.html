@@ -1,30 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peppa Pig 西語語塊庫</title>
-    <!-- 引入最新版藍色系極簡 Tailwind CSS 框架（一秒把白網頁變超美藍色卡片） -->
+    <!-- 1. 強制在網頁內引入 Tailwind CSS，一秒把白網頁變超美藍色 -->
     <script src="https://jsdelivr.net"></script>
     <style>
         body { font-family: sans-serif; background-color: #f0f7ff; -webkit-tap-highlight-color: transparent; }
-        /* 💡 核心：這兩行能徹底隱藏細節預設的醜箭頭，讓「點擊伸縮」反應變超級流暢 */
+        /* 徹底隱藏 details 預設的醜箭頭與白底，啟動流暢伸縮 */
         summary::-webkit-details-marker { display: none; }
         summary { list-style: none; outline: none; }
-    </style>
-</head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peppa Pig 西語語塊庫</title>
-    <!-- 引入最新穩定版藍色系極簡 Tailwind CSS 框架 -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        body { font-family: sans-serif; background-color: #f0f7ff; -webkit-tap-highlight-color: transparent; }
-        /* 隱藏 details 預設的醜箭頭 */
-        summary::-webkit-details-marker { display: none; }
-        summary { list-style: none; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
@@ -38,8 +24,11 @@
     <!-- 主要內容區 -->
     <main class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- 區塊一：真實聲音播放器 (YouGlish 驅動，保證不跳錯誤 153) -->
+        <!-- 區塊一：真實聲音播放器 (YouGlish 官方安全嵌入，徹底解決錯誤 153) -->
         <section class="bg-white rounded-2xl p-4 shadow-sm border border-blue-100">
+            <h2 class="text-xs font-semibold text-blue-800 mb-2 flex items-center gap-1">
+                <span>📺</span> 真實人類卡通發音 (YouGlish 驅動)
+            </h2>
             <div class="aspect-video bg-blue-50 rounded-xl flex items-center justify-center border-2 border-dashed border-blue-200 p-2">
                 <div id="yg-widget-container" class="text-blue-500 text-xs text-center w-full h-full flex items-center justify-center">
                     點擊下方「🔊 語塊發音」，在此載入真實聲音...
@@ -67,8 +56,8 @@
         Made for ADHDers with 💙
     </footer>
 
+    <!-- 2. 大腦邏輯與精華彈藥庫合體，絕不漏氣 -->
     <script>
-        // 100% 還原並升級的 5 大核心彈藥庫（包含你打好的原句與同源字細節）
         const AMMO_DATA = [
             {
                 id: "chunk_1",
@@ -82,7 +71,7 @@
                     "<b>Yo soy Peppa Pig.</b>",
                     "<span class='text-blue-600 font-bold'>🔵 Ser</span> (動詞原型：是)",
                     "我是佩佩豬。",
-                    "💡 <b>成功解鎖</b>：把 Yo 遮住直接單用 <b>Soy</b> 也是一模一樣的意思！例如：<i>Soy Peppa.</i> 速度快一倍！"
+                    "💡 <b>成功解鎖</b>：把 Yo 遮住直接單用 <b>Soy</b> 也是一模一樣的意思！例如：<i>Soy Peppa.</i>"
                 ]
             },
             {
@@ -105,42 +94,14 @@
                 tag: "日常對話",
                 text: "Yo soy (tu professora) de español.",
                 translation: "我是你的西語老師。",
-                searchKeyword: "tu profesora",
+                searchKeyword: "tu professora",
                 title: "💥 核心彈藥（點擊伸縮）",
                 notes: [
                     "<b>Yo soy tu professora de español.</b>",
                     "<span class='text-blue-600 font-bold'>🔵 Ser</span> (動詞原型：是)",
                     "我是你的西語老師。",
-                    "👉 <b>👑 Tú eres + 身分</b> = 你是某人。（Tú 有戴帽子，代表國王/你本人。例如：<i>Tú eres estudiante.</i> 💡 <b>estudiante</b> 與英文 student 同源！）",
-                    "👉 <b>📦 Tu + 物品</b> = 你的東西。（Tu 沒戴帽子，是個箱子。例如：<i>Tu profesora es buena.</i> 你的老師很好。）"
-                ]
-            },
-            {
-                id: "chunk_4",
-                episode: "💦 經典愛好",
-                tag: "劇情核心",
-                text: "Le encanta saltar en los charcos de barro.",
-                translation: "她超級喜歡在泥巴水坑裡跳來跳去。",
-                searchKeyword: "Le encanta saltar",
-                title: "💥 核心彈藥（點擊伸縮）",
-                notes: [
-                    "<b>Le encanta saltar en los charcos de barro.</b>",
-                    "👉 <b>Le (對她)</b> ＋ <b>encanta (施了著迷的魔法)</b> ＝ 她超級喜歡！",
-                    "💡 <b>標記同源</b>：西語的 <b>encanta</b> 根本就是英文 <b>enchant</b>（使著迷）的雙胞胎！大腦自動無腦同步！"
-                ]
-            },
-            {
-                id: "chunk_5",
-                episode: "🦖 恐龍不見了",
-                tag: "尋物雷達",
-                text: "George, ¿dónde está el Señor Dinosaurio?",
-                translation: "喬治，恐龍先生在哪裡？",
-                searchKeyword: "¿dónde está",
-                title: "💥 核心彈藥（點擊伸縮）",
-                notes: [
-                    "<b>George, ¿dónde está el Señor Dinosaurio?</b>",
-                    "👉 <b>¿Dónde está...?</b> 是一整塊不可拆的尋物雷達，後面直接加你想找的東西。",
-                    "💡 <b>成功解鎖</b>：尋找媽媽無腦套用：<i>¿Dónde está mamá?</i> 👩"
+                    "👉 <b>👑 Tú eres + 身分</b> = 你是某人。（💡 <b>estudiante</b> 與英文 student 同源！）",
+                    "👉 <b>📦 Tu + 物品</b> = 你的東西。（例如：<i>Tu professora es buena.</i>）"
                 ]
             }
         ];
@@ -169,13 +130,11 @@
                         <p class="font-bold text-base text-slate-900 leading-relaxed">${chunk.text}</p>
                         <p class="text-xs text-slate-500 mt-1">${chunk.translation}</p>
                         
-                        <!-- 大按鈕專門負責：呼叫 YouGlish 真實發音 ＆ 亮星星 -->
                         <button onclick="triggerAction('${chunk.id}', '${chunk.searchKeyword}')" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-2 rounded-xl transition active:scale-95 shadow-sm font-bold flex flex-col items-center gap-0.5">
                             <span>🔊</span><span>語塊發音</span>
                         </button>
                     </div>
 
-                    <!-- 💡 核心彈藥一鍵伸縮寶箱：裡面有你調整好的所有文法延伸與同源細節 -->
                     <details class="bg-blue-50/40 border border-dashed border-blue-300 rounded-xl transition-all duration-200">
                         <summary class="p-2.5 text-xs font-bold text-blue-900 cursor-pointer flex justify-between items-center select-none active:bg-blue-100/50 rounded-xl">
                             <span class="flex items-center gap-1">${chunk.title}</span>
@@ -192,13 +151,17 @@
 
         function triggerAction(id, keyword) {
             const widget = document.getElementById('yg-widget-container');
-            widget.innerHTML = `<iframe id="yg-iframe" class="w-full h-full rounded-xl" src="https://youglish.com{encodeURIComponent(keyword)}?bgcol=f0f7ff&mute=0" frameborder="0" allow="autocomplete; encrypted-media; picture-in-picture"></iframe>`;
+            if (widget) {
+                // 直接向 YouGlish 請求最安全的官方外嵌，徹底解決黑框與錯誤 153
+                widget.innerHTML = `<iframe id="yg-iframe" class="w-full h-full rounded-xl shadow-inner" src="https://youglish.com{encodeURIComponent(keyword)}?bgcol=f0f7ff&mute=0" frameborder="0" allow="autocomplete; encrypted-media; picture-in-picture"></iframe>`;
+            }
             completedChunks.add(id);
             updateStars();
         }
 
         function updateStars() {
             const starLabel = document.getElementById('star-rating');
+            if (!starLabel) return;
             const count = completedChunks.size;
             let stars = '';
             for(let i = 0; i < 5; i++) {
