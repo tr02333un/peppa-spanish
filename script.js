@@ -154,14 +154,12 @@ let ammoStars = {};    // {ammo_id: 0|1|2}
 // Map sentence global index → ammo_id(s) to unlock
 // (SENTENCE_AMMO_MAP 保留作備份；實際使用 SENTENCE_AMMO_MAP2)
 const SENTENCE_AMMO_MAP2 = {
-  0:  ['e1_01','e1_estar','e1_ser_adj'],
-  1:  ['e1_02'],
-  6:  ['e1_03'],
-  8:  ['e1_04','e1_05'],
-  12: ['e2_01'],
-  13: ['e2_02'],
-  25: ['e3_01'],
-  26: ['e3_02'],
+  0:['e1_01'], 1:['e1_02'], 2:['e1_03'], 3:['e1_04'], 4:['e1_05'],
+  5:['e1_06'], 6:['e1_07'], 7:['e1_08'], 8:['e1_09'], 9:['e1_10'],
+  10:['e2_01'], 11:['e2_02'], 12:['e2_03'], 13:['e2_04'], 14:['e2_05'],
+  15:['e2_06'], 16:['e2_07'], 17:['e2_08'], 18:['e2_09'], 19:['e2_10'],
+  20:['e3_01'], 21:['e3_02'], 22:['e3_03'], 23:['e3_04'], 24:['e3_05'],
+  25:['e3_06'], 26:['e3_07'], 27:['e3_08'], 28:['e3_09'], 29:['e3_10'],
 };
 
 function unlockAmmo(globalIdx){
@@ -178,12 +176,22 @@ function cycleAmmoStar(id){
   renderAmmo();
 }
 
+function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
+
+function renderAmmoFireChunks(fire){
+  if(!fire.chunks || !fire.chunks.length) return '';
+  return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>
+    `<span class="ammo-fire-chunk ${c.type||''}" onclick="event.stopPropagation();speakWord('${escAttr(c.word)}')">${c.word}</span>`
+  ).join('')}</div>`;
+}
+
 function renderAmmoFireRow(fire, type){
   const tag = type==='peppa' ? '🎯 一發命中（佩佩豬原句）' : '🔥 火力全開（日常對話）';
-  return `<div class="ammo-fire-row ${type}" onclick="speakFull('${fire.es.replace(/'/g,"\\'")}')">
+  return `<div class="ammo-fire-row ${type}" onclick="speakFull('${escAttr(fire.es)}')">
     <div class="ammo-fire-tag ${type}">${tag}</div>
-    <div class="ammo-fire-es">${fire.es}</div>
+    <div class="ammo-fire-es">${fire.es} <span class="vocab-add-btn" onclick="event.stopPropagation();addToVocab('${escAttr(fire.es)}','${escAttr(fire.zh)}','彈藥例句')">＋</span></div>
     <div class="ammo-fire-zh">${fire.zh}</div>
+    ${renderAmmoFireChunks(fire)}
   </div>`;
 }
 
@@ -229,24 +237,30 @@ function renderAmmo(){
       <!-- 核心彈藥 -->
       <div class="ammo-chunk-row">
         <span class="ammo-label l-chunk">💥 核心彈藥</span>
-        <span class="ammo-chunk" onclick="speakFull('${a.core_ammo.replace(/'/g,"\\'")}')">${a.core_ammo}</span>
+        <span class="ammo-chunk" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo}</span>
         ${renderBeVerbTag(a)}
+        <span class="vocab-add-btn" onclick="addToVocab('${escAttr(a.core_ammo)}','${escAttr(a.core_zh)}','彈藥核心')">＋</span>
         <span class="ammo-chunk-zh">${a.core_zh}</span>
       </div>
       ${renderBeVerbNote(a)}
-      <!-- 武器改裝 -->
-      <div class="ammo-label l-pattern" style="margin-bottom:5px">🔧 武器改裝</div>
-      <div class="ammo-pattern-box">
-        <div class="ammo-pattern-es">${renderAmmoPatternEs(a)}</div>
-        <div class="ammo-pattern-zh">${a.pattern_zh}</div>
-        <div class="ammo-pattern-note">${a.pattern_note}</div>
-      </div>
-      <!-- 實戰射擊 -->
-      <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
-      <div class="ammo-fire-section">
-        ${renderAmmoFireRow(a.fire_peppa,'peppa')}
-        ${dailyRows}
-      </div>
+      <details class="ammo-details">
+        <summary><span>🔧 展開例句與句型</span><span>▾</span></summary>
+        <div class="ammo-details-body">
+          <!-- 武器改裝 -->
+          <div class="ammo-label l-pattern" style="margin-bottom:5px">🔧 武器改裝</div>
+          <div class="ammo-pattern-box">
+            <div class="ammo-pattern-es">${renderAmmoPatternEs(a)}</div>
+            <div class="ammo-pattern-zh">${a.pattern_zh}</div>
+            <div class="ammo-pattern-note">${a.pattern_note}</div>
+          </div>
+          <!-- 實戰射擊 -->
+          <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
+          <div class="ammo-fire-section">
+            ${renderAmmoFireRow(a.fire_peppa,'peppa')}
+            ${dailyRows}
+          </div>
+        </div>
+      </details>
       <div class="ammo-star" onclick="cycleAmmoStar('${a.ammo_id}')">${star}</div>
     </div>`;
   }).join('');
@@ -257,6 +271,108 @@ function toggleAmmo(){
   const t=document.getElementById('ammoToggle');
   const open=body.classList.toggle('open');
   t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+// ── 英西同源詞庫總覽（COGNATE_LIBRARY → cognates.js） ──
+function toggleCogLibrary(){
+  const body=document.getElementById('cogLibraryBody');
+  const t=document.getElementById('cogLibToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+function renderCogLibrary(filter){
+  const body=document.getElementById('cogLibraryBody');
+  if(!body) return;
+  const q=(filter||'').toLowerCase().trim();
+  const epOrder=[];
+  const groups={};
+  COGNATE_LIBRARY.forEach(c=>{
+    if(q && !(c.en.toLowerCase().includes(q)||c.es.toLowerCase().includes(q)||c.zh.includes(q))) return;
+    if(!groups[c.ep]){groups[c.ep]=[];epOrder.push(c.ep);}
+    groups[c.ep].push(c);
+  });
+  let html=`<input type="text" class="cog-search" id="cogSearchInput" placeholder="🔍 搜尋英文／西語／中文…" value="${(filter||'').replace(/"/g,'&quot;')}">`;
+  if(!epOrder.length){
+    html+=`<div class="passbook-empty">找不到符合的詞彙</div>`;
+  } else {
+    epOrder.forEach(epLabel=>{
+      html+=`<div class="cog-group"><div class="cog-group-title">${epLabel}</div><div class="cog-row-list">`;
+      html+=groups[epLabel].map(c=>`
+        <div class="cog-row">
+          <span class="cog-en">${c.en}</span>
+          <span class="cog-arrow">→</span>
+          <span class="cog-es" onclick="speakWord('${escAttr(c.es)}')">${c.es}</span>
+          <span class="cog-zh">${c.zh}</span>
+          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(c.es)}','${escAttr(c.zh)}','同源詞庫')">＋</span>
+        </div>`).join('');
+      html+=`</div></div>`;
+    });
+  }
+  body.innerHTML=html;
+  const input=document.getElementById('cogSearchInput');
+  if(input){
+    input.oninput=()=>renderCogLibrary(input.value);
+    if(filter!==undefined){ input.focus(); const len=input.value.length; input.setSelectionRange(len,len); }
+  }
+}
+
+// ── 陌生詞彙收藏（localStorage key: peppa_es_vocab_v1，獨立於 peppa_es_v4） ──
+let vocabList=[];
+
+function addToVocab(text,zh,source){
+  const clean=(text||'').replace(/[¡!¿?,.:;]+$/,'').replace(/^[¡¿]+/,'').trim();
+  if(!clean) return;
+  if(vocabList.some(v=>v.text===clean)){ toast('已經收藏過了！'); return; }
+  vocabList.push({id:Date.now()+Math.random(), text:clean, zh:zh||'', source:source||''});
+  saveVocabToLS();
+  renderVocab();
+  toast('⭐ 已收藏到詞彙本！');
+}
+
+function removeFromVocab(id){
+  vocabList=vocabList.filter(v=>v.id!==id);
+  saveVocabToLS();
+  renderVocab();
+}
+
+function renderVocab(){
+  const countEl=document.getElementById('vocabCount');
+  if(countEl) countEl.textContent=vocabList.length;
+  const el=document.getElementById('vocabEntries');
+  if(!el) return;
+  if(!vocabList.length){
+    el.innerHTML='<div class="passbook-empty">還沒收藏任何詞彙 — 點任何語塊旁的 ＋ 試試看</div>';
+    return;
+  }
+  el.innerHTML=vocabList.map(v=>`
+    <div class="vocab-card">
+      <div class="vocab-text">
+        <div class="vocab-es" onclick="speakWord('${escAttr(v.text)}')">${v.text}</div>
+        <div class="vocab-zh">${v.zh}</div>
+        <div class="vocab-source">${v.source}</div>
+      </div>
+      <div class="vocab-remove" onclick="removeFromVocab(${v.id})">✕</div>
+    </div>`).join('');
+}
+
+function toggleVocabBox(){
+  const body=document.getElementById('vocabBody');
+  const t=document.getElementById('vocabToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+function saveVocabToLS(){
+  try{ localStorage.setItem('peppa_es_vocab_v1', JSON.stringify(vocabList)); }catch(e){}
+}
+function loadVocabFromLS(){
+  try{
+    const raw=localStorage.getItem('peppa_es_vocab_v1');
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(Array.isArray(d)) vocabList=d;
+  }catch(e){}
 }
 
 
@@ -500,7 +616,11 @@ function render(){
   area.innerHTML='';
   s.chunks.forEach(c=>{
     const div=document.createElement('div');div.className='chunk';
-    const pill=document.createElement('div');pill.className='chunk-pill '+(c.type||'');pill.textContent=c.word;
+    const pill=document.createElement('div');pill.className='chunk-pill '+(c.type||'');
+    const word=document.createElement('span');word.textContent=c.word;
+    const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
+    addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.word,c.hint||'',s.es.slice(0,12)+'…語塊');};
+    pill.appendChild(word);pill.appendChild(addBtn);
     const hint=document.createElement('div');hint.className='chunk-hint';hint.textContent=c.hint||'';
     div.appendChild(pill);div.appendChild(hint);
     div.onclick=()=>speakWord(c.word,div);
@@ -708,16 +828,20 @@ function toast(msg){
 function clearLS(){
   if(!confirm('確定清除所有學習紀錄？')) return;
   localStorage.removeItem('peppa_es_v4');
-  ammoUnlocked=[];ammoStars={};
-  renderAmmo();
+  localStorage.removeItem('peppa_es_vocab_v1');
+  ammoUnlocked=[];ammoStars={};vocabList=[];
+  renderAmmo();renderVocab();
   toast('已清除所有學習紀錄');
 }
 
 // ── INIT ──
 (function init(){
   loadFromLS();
+  loadVocabFromLS();
   buildNav();
   render();
   renderAmmo();
+  renderCogLibrary();
+  renderVocab();
   initTTS();
 })();

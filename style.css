@@ -1,10 +1,8 @@
 /* Peppa-Spanish S1 — Stylesheet */
-@import url('https://jsdelivr.net');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 
 summary::-webkit-details-marker { display: none; }
 summary { list-style: none; outline: none; }
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 :root{
   --mizu:#9FD0DE;--usumizu:#BCE1DF;--sora:#8AC4DE;--misora:#6C9BD2;
   --nezumi:#B8C8D1;--konpeki:#005B98;--benikake:#8491C3;
@@ -46,7 +44,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* CHUNKS */
 .chunks-area{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;padding:12px 8px;background:var(--bg2);border-radius:13px;border:1px solid var(--usumizu)}
 .chunk{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
-.chunk-pill{font-size:14px;font-weight:800;color:#005B98;background:white;border:2px dashed #B8C8D1;border-radius:8px;padding:5px 10px;line-height:1.3;transition:all .15s;min-height:34px;display:flex;align-items:center}
+.chunk-pill{font-size:14px;font-weight:800;color:#005B98;background:white;border:2px dashed #B8C8D1;border-radius:8px;padding:5px 10px;line-height:1.3;transition:all .15s;min-height:34px;display:flex;align-items:center;gap:5px}
 .chunk:hover .chunk-pill{border-color:var(--mizu);background:rgba(159,208,222,.12);transform:translateY(-2px)}
 .chunk:active .chunk-pill{transform:scale(.95)}
 .chunk-pill.verb{border-color:#A8D8B0;background:#F0FDF4;color:#1A5C30}
@@ -182,7 +180,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-locked{filter:blur(2px);pointer-events:none;user-select:none}
 .ammo-ep-tag{position:absolute;top:12px;right:12px;font-size:10px;font-weight:800;color:white;background:var(--misora);padding:2px 8px;border-radius:999px}
 /* 核心彈藥 */
-.ammo-chunk-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.ammo-chunk-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .ammo-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
 .ammo-label.l-chunk{color:#E05C5C}
 .ammo-label.l-pattern{color:#F5A623}
@@ -209,6 +207,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* star */
 .ammo-star{font-size:15px;cursor:pointer;flex-shrink:0;transition:transform .15s;user-select:none;position:absolute;bottom:12px;right:14px}
 .ammo-star:active{transform:scale(1.4)}
+.ammo-star::after{content:'';position:absolute;top:50%;left:50%;width:36px;height:36px;transform:translate(-50%,-50%)}
 /* BE 動詞標籤 */
 .be-verb-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
 .be-verb-tag.ser{background:rgba(100,149,237,.18);color:#2955A8;border:1px solid rgba(100,149,237,.5)}
@@ -218,6 +217,45 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .be-verb-note.estar{background:rgba(245,130,35,.1);color:#B05A00;border-left:2px solid #F58223}
 .ammo-slot-ser{display:inline-block;background:rgba(100,149,237,.2);color:#2955A8;border-radius:5px;padding:1px 7px;font-style:italic;font-size:13px;font-weight:700}
 .ammo-slot-estar{display:inline-block;background:rgba(245,130,35,.2);color:#B05A00;border-radius:5px;padding:1px 7px;font-style:italic;font-size:13px;font-weight:700}
+
+/* AMMO/VOCAB BODY (collapsible book section) */
+.ammo-body{display:none}
+.ammo-body.open{display:block;animation:fadeUp .2s ease}
+
+/* AMMO DETAILS (collapsible pattern/fire section) */
+.ammo-details{border:1.5px dashed #F5A623;border-radius:10px;margin-top:4px;background:rgba(245,166,35,.04);overflow:hidden}
+.ammo-details summary{padding:8px 11px;font-size:11px;font-weight:800;color:#B87800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.ammo-details summary:active{background:rgba(245,166,35,.1)}
+.ammo-details[open] summary{border-bottom:1px dashed rgba(245,166,35,.4)}
+.ammo-details-body{padding:10px 11px 11px}
+.ammo-fire-chunks{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.ammo-fire-chunk{font-size:12px;font-weight:700;color:#005B98;background:white;border:1.5px dashed #B8C8D1;border-radius:6px;padding:2px 7px;cursor:pointer}
+.ammo-fire-chunk:active{transform:scale(.95)}
+.ammo-fire-chunk.verb{border-color:#A8D8B0;background:#F0FDF4;color:#1A5C30}
+.ammo-fire-chunk.noun{border-color:var(--sora);background:rgba(138,196,222,.1)}
+.ammo-fire-chunk.adj{border-color:var(--benikake);background:rgba(132,145,195,.1);color:#3A3E6B}
+
+/* VOCAB ADD BUTTON / COLLECTION */
+.vocab-add-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(132,145,195,.15);color:var(--benikake);font-size:12px;font-weight:900;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1;position:relative}
+.vocab-add-btn::after{content:'';position:absolute;top:50%;left:50%;width:36px;height:36px;transform:translate(-50%,-50%)}
+.vocab-add-btn:hover{background:var(--benikake);color:white}
+.vocab-add-btn:active{transform:scale(1.3)}
+.vocab-add-btn.added{background:var(--ok);color:white}
+.vocab-card{background:white;border-bottom:1px solid var(--bg2);padding:12px 16px;display:flex;align-items:center;gap:10px;position:relative}
+.vocab-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.vocab-text{flex:1;min-width:0}
+.vocab-es{font-size:14px;font-weight:800;color:var(--konpeki);cursor:pointer}
+.vocab-zh{font-size:11px;color:var(--tlight);font-weight:600;margin-top:2px}
+.vocab-source{font-size:9px;color:var(--nezumi);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.vocab-remove{font-size:16px;color:var(--err);cursor:pointer;flex-shrink:0;padding:2px 6px;position:relative}
+.vocab-remove::after{content:'';position:absolute;top:50%;left:50%;width:36px;height:36px;transform:translate(-50%,-50%)}
+.vocab-remove:active{transform:scale(1.3)}
+
+/* COGNATE LIBRARY OVERVIEW */
+.cog-library-body{display:none}
+.cog-library-body.open{display:block;animation:fadeUp .2s ease}
+.cog-search{width:calc(100% - 28px);margin:10px 14px;border:2px solid var(--usumizu);border-radius:10px;padding:8px 12px;font-size:13px;font-family:'Nunito',sans-serif;outline:none}
+.cog-search:focus{border-color:var(--mizu)}
 
 /* COMPLETE */
 .complete-screen{display:none;text-align:center;background:white;border-radius:20px;padding:34px 22px;width:100%;max-width:480px;border:1.5px solid var(--usumizu);box-shadow:0 6px 28px rgba(0,91,152,.08)}

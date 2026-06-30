@@ -261,6 +261,51 @@ const SENTENCE_COGNATES = {
   },
 };
 
+// ── 英西同源詞庫總覽（從 SENTENCE_COGNATES 整理出的扁平清單，供 #cogLibraryBody 瀏覽搜尋）──
+const COGNATE_LIBRARY = [
+  // E1 · 泥巴坑
+  {en:'germane',   es:'hermano',   zh:'兄弟',       ep:'E1 · 泥巴坑'},
+  {en:'potent',    es:'poder',     zh:'能夠／有力的', ep:'E1 · 泥巴坑'},
+  {en:'juggle',    es:'jugar',     zh:'玩',         ep:'E1 · 泥巴坑'},
+  {en:'boots',     es:'botas',     zh:'靴子',       ep:'E1 · 泥巴坑'},
+  {en:'duty',      es:'deber',     zh:'必須／義務',  ep:'E1 · 泥巴坑'},
+  {en:'charcoal',  es:'charco',    zh:'水坑',       ep:'E1 · 泥巴坑'},
+  {en:'enchant',   es:'encantar',  zh:'使著迷／超愛', ep:'E1 · 泥巴坑'},
+  {en:'counter',   es:'contra',    zh:'相對／遇見',  ep:'E1 · 泥巴坑'},
+  {en:'encounter', es:'encontrar', zh:'找到／遭遇',  ep:'E1 · 泥巴坑'},
+  {en:'grand',     es:'grande',    zh:'宏大／大的',  ep:'E1 · 泥巴坑'},
+  {en:'barren',    es:'barro',     zh:'泥巴',       ep:'E1 · 泥巴坑'},
+  {en:'pass',      es:'pasar',     zh:'通過／發生',  ep:'E1 · 泥巴坑'},
+  {en:'total',     es:'todos',     zh:'全部／所有人', ep:'E1 · 泥巴坑'},
+  // E2 · 恐龍先生不見了
+  {en:'favorite',   es:'favorito',  zh:'最喜歡的',   ep:'E2 · 恐龍先生不見了'},
+  {en:'lateral',    es:'lado',      zh:'側面',       ep:'E2 · 恐龍先生不見了'},
+  {en:'perdition',  es:'perdido',   zh:'失落／弄丟了', ep:'E2 · 恐龍先生不見了'},
+  {en:'preoccupy',  es:'preocupar', zh:'擔心',       ep:'E2 · 恐龍先生不見了'},
+  {en:'detective',  es:'detective', zh:'偵探',       ep:'E2 · 恐龍先生不見了'},
+  {en:'person',     es:'persona',   zh:'人',         ep:'E2 · 恐龍先生不見了'},
+  {en:'bath',       es:'bañera',    zh:'浴缸',       ep:'E2 · 恐龍先生不見了'},
+  {en:'where',      es:'dónde',     zh:'哪裡',       ep:'E2 · 恐龍先生不見了'},
+  {en:'chamber',    es:'cama',      zh:'床／房間',    ep:'E2 · 恐龍先生不見了'},
+  {en:'dad',        es:'papá',      zh:'爸爸',       ep:'E2 · 恐龍先生不見了'},
+  // E3 · 最好的朋友
+  {en:'expect',    es:'esperar',  zh:'期待／等待',  ep:'E3 · 最好的朋友'},
+  {en:'major',     es:'mejor',    zh:'較好的／最好的', ep:'E3 · 最好的朋友'},
+  {en:'much',      es:'mucho',    zh:'很多',       ep:'E3 · 最好的朋友'},
+  {en:'query',     es:'querer',   zh:'尋求／喜歡',  ep:'E3 · 最好的朋友'},
+  {en:'game',      es:'juego',    zh:'遊戲',       ep:'E3 · 最好的朋友'},
+  {en:'princess',  es:'princesa', zh:'公主',       ep:'E3 · 最好的朋友'},
+  {en:'account',   es:'cuento',   zh:'故事',       ep:'E3 · 最好的朋友'},
+  {en:'gusto',     es:'gustar',   zh:'品味／享受／喜歡', ep:'E3 · 最好的朋友'},
+  {en:'doctor',    es:'doctora',  zh:'醫生',       ep:'E3 · 最好的朋友'},
+  {en:'infirmary', es:'enfermera', zh:'醫務室／護士', ep:'E3 · 最好的朋友'},
+  {en:'respire',   es:'respirar', zh:'呼吸',       ep:'E3 · 最好的朋友'},
+  {en:'profound',  es:'hondo',    zh:'深刻／深的',  ep:'E3 · 最好的朋友'},
+  {en:'credible',  es:'creer',    zh:'相信',       ep:'E3 · 最好的朋友'},
+  {en:'core',      es:'corazón',  zh:'核心／心臟',  ep:'E3 · 最好的朋友'},
+  {en:'cure',      es:'curar',    zh:'治療／康復',  ep:'E3 · 最好的朋友'},
+];
+
 // ── 建立 cognate details HTML ──
 function buildCogDetails(data){
   const rowsHtml = data.rows.map(r=>`<div class="cog-detail-row">${r}</div>`).join('');
