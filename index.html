@@ -1,139 +1,197 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐷 佩佩豬學西語 S1</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peppa Pig 西語語塊庫</title>
+    <!-- 引入最新穩定版藍色系極簡 Tailwind CSS 框架 -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f7ff; -webkit-tap-highlight-color: transparent; }
+        /* 隱藏 details 預設的醜箭頭 */
+        summary::-webkit-details-marker { display: none; }
+        summary { list-style: none; }
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen text-slate-800">
 
-<div class="header">
-  <div class="header-title">🐷 佩佩豬<span>學西語</span></div>
-  <div class="ep-badge" id="epBadge">S1 · E1 · 泥巴坑</div>
-  <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px">
-    <span style="font-size:10px;font-weight:700;color:#8AABB8">成就解鎖：</span>
-    <span id="star-rating" style="font-size:16px;color:#F59E0B;letter-spacing:2px;transition:all .3s">☆☆☆☆☆☆☆☆☆☆</span>
-  </div>
-</div>
+    <!-- 頂部導覽列：極簡舒壓藍 -->
+    <header class="bg-blue-600 text-white text-center py-4 shadow-sm sticky top-0 z-50">
+        <h1 class="text-lg font-bold tracking-wide">🐷 Peppa Pig 西語語塊庫</h1>
+        <p class="text-xs text-blue-100 mt-0.5">ADHD 專屬 · 語塊伸縮解鎖 · 亮星成就機制</p>
+    </header>
 
-<div class="season-nav" id="seasonNav"></div>
+    <!-- 主要內容區 -->
+    <main class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+        
+        <!-- 區塊一：真實聲音播放器 (YouGlish 驅動，保證不跳錯誤 153) -->
+        <section class="bg-white rounded-2xl p-4 shadow-sm border border-blue-100">
+            <div class="aspect-video bg-blue-50 rounded-xl flex items-center justify-center border-2 border-dashed border-blue-200 p-2">
+                <div id="yg-widget-container" class="text-blue-500 text-xs text-center w-full h-full flex items-center justify-center">
+                    點擊下方「🔊 語塊發音」，在此載入真實聲音...
+                </div>
+            </div>
+        </section>
 
-<div class="star-progress">
-  <div class="star-row" id="starRow"></div>
-  <div class="star-label" id="starLabel">完成一句點亮一顆星 ⭐</div>
-</div>
+        <!-- 區塊二：多巴胺星星計數器 -->
+        <div class="bg-white p-3 rounded-xl border border-blue-50 flex justify-between items-center text-xs">
+            <span class="text-slate-500">當前進度：<b>S1 · E1~E3 精華彈藥</b></span>
+            <div class="flex items-center gap-1 font-bold text-blue-600">
+                <span>成就解鎖：</span>
+                <span id="star-rating" class="text-amber-400 text-sm tracking-wider">☆☆☆☆☆</span>
+            </div>
+        </div>
 
-<div class="card-container">
-  <div class="card" id="mainCard">
-    <div class="card-top">
-      <span class="card-num" id="cardNum">句 1</span>
-      <span class="tts-badge" onclick="testTTS()"><span class="tts-dot" id="ttsDot"></span>點語塊 → 西語朗讀</span>
-    </div>
-    <div class="chunks-area" id="chunksArea"></div>
-    <div class="full-sent" id="fullSent"></div>
-    <div style="text-align:right;margin:-6px 0 10px">
-      <button id="yg-card-btn" style="font-size:11px;font-weight:800;color:var(--misora);background:white;border:1.5px solid var(--usumizu);border-radius:8px;padding:5px 13px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;display:inline-flex;align-items:center;gap:5px" onmouseover="this.style.borderColor='var(--mizu)'" onmouseout="this.style.borderColor='var(--usumizu)'">
-        🔊 聽真人：<span class="yg-label" style="color:var(--konpeki)">...</span>
-      </button>
-    </div>
+        <!-- 區塊三：純粹的語塊句型貨架（每句自帶獨立伸縮寶箱） -->
+        <section id="chunks-container" class="space-y-4">
+            <!-- 由下方 JS 自動渲染 -->
+        </section>
 
-    <span class="sec-label">✏️ 試著翻譯這句話</span>
-    <textarea class="trans-input" id="userInput" placeholder="輸入中文或英文翻譯…" rows="2"></textarea>
+    </main>
 
-    <div class="make-section">
-      <div class="make-toggle" onclick="toggleMake()">
-        <span class="make-icon" id="makeIcon">▶</span>
-        <span class="make-toggle-label">✍️ 自己造一個句子試試？</span>
-      </div>
-      <div class="make-body" id="makeBody">
-        <div class="make-hint-text" id="makeHintText">照這個句型，換成你自己的詞 👇</div>
-        <div class="make-pattern-box" id="makePatternBox"></div>
-        <!-- 心智圖換詞區（有 expand 資料才顯示）-->
-        <div class="expand-map" id="expandMap" style="display:none"></div>
-        <!-- 自由輸入 -->
-        <textarea class="make-free-input" id="makeFreeInput" placeholder="e.g. Yo soy Vera …" rows="2"></textarea>
-        <div class="make-result" id="makeResult" style="display:none"></div>
-        <button class="btn-check-make" onclick="checkMakeFree()">✅ 核對句型</button>
-        <button class="btn-reset-make" onclick="resetMakeFree()">🔄 清空</button>
-      </div>
-    </div>
+    <footer class="text-center py-4 text-[10px] text-slate-400 bg-white border-t border-blue-50">
+        Made for ADHDers with 💙
+    </footer>
 
-    <div class="answer-box" id="answerBox">
-      <div class="answer-tabs">
-        <button class="a-tab on" onclick="switchLang('zh')">🇹🇼 中文</button>
-        <button class="a-tab"    onclick="switchLang('en')">🇺🇸 English</button>
-      </div>
-      <div class="answer-content">
-        <div class="a-lang on" id="aZh"><div class="a-text" id="aTextZh"></div><div class="a-note" id="aNoteZh"></div></div>
-        <div class="a-lang"    id="aEn"><div class="a-text" id="aTextEn"></div><div class="a-note" id="aNoteEn"></div></div>
-      </div>
-    </div>
+    <script>
+        // 100% 還原並升級的 5 大核心彈藥庫（包含你打好的原句與同源字細節）
+        const AMMO_DATA = [
+            {
+                id: "chunk_1",
+                episode: "🎯 一發命中",
+                tag: "佩佩豬原句",
+                text: "Yo soy Peppa Pig.",
+                translation: "我是佩佩豬。",
+                searchKeyword: "Yo soy Peppa Pig",
+                title: "💥 核心彈藥（點擊伸縮）",
+                notes: [
+                    "<b>Yo soy Peppa Pig.</b>",
+                    "<span class='text-blue-600 font-bold'>🔵 Ser</span> (動詞原型：是)",
+                    "我是佩佩豬。",
+                    "💡 <b>成功解鎖</b>：把 Yo 遮住直接單用 <b>Soy</b> 也是一模一樣的意思！例如：<i>Soy Peppa.</i> 速度快一倍！"
+                ]
+            },
+            {
+                id: "chunk_2",
+                episode: "🔥 火力全開",
+                tag: "日常對話",
+                text: "Yo soy la mamá de (cuatro niños).",
+                translation: "我是四個孩子的媽媽。",
+                searchKeyword: "Yo soy la mama",
+                title: "💥 核心彈藥（點擊伸縮）",
+                notes: [
+                    "<b>Yo soy la mamá de cuatro niños.</b>",
+                    "<span class='text-blue-600 font-bold'>🔵 Ser</span> (動詞原型：是)",
+                    "我是四個孩子的媽媽。"
+                ]
+            },
+            {
+                id: "chunk_3",
+                episode: "🔥 火力全開",
+                tag: "日常對話",
+                text: "Yo soy (tu professora) de español.",
+                translation: "我是你的西語老師。",
+                searchKeyword: "tu profesora",
+                title: "💥 核心彈藥（點擊伸縮）",
+                notes: [
+                    "<b>Yo soy tu professora de español.</b>",
+                    "<span class='text-blue-600 font-bold'>🔵 Ser</span> (動詞原型：是)",
+                    "我是你的西語老師。",
+                    "👉 <b>👑 Tú eres + 身分</b> = 你是某人。（Tú 有戴帽子，代表國王/你本人。例如：<i>Tú eres estudiante.</i> 💡 <b>estudiante</b> 與英文 student 同源！）",
+                    "👉 <b>📦 Tu + 物品</b> = 你的東西。（Tu 沒戴帽子，是個箱子。例如：<i>Tu profesora es buena.</i> 你的老師很好。）"
+                ]
+            },
+            {
+                id: "chunk_4",
+                episode: "💦 經典愛好",
+                tag: "劇情核心",
+                text: "Le encanta saltar en los charcos de barro.",
+                translation: "她超級喜歡在泥巴水坑裡跳來跳去。",
+                searchKeyword: "Le encanta saltar",
+                title: "💥 核心彈藥（點擊伸縮）",
+                notes: [
+                    "<b>Le encanta saltar en los charcos de barro.</b>",
+                    "👉 <b>Le (對她)</b> ＋ <b>encanta (施了著迷的魔法)</b> ＝ 她超級喜歡！",
+                    "💡 <b>標記同源</b>：西語的 <b>encanta</b> 根本就是英文 <b>enchant</b>（使著迷）的雙胞胎！大腦自動無腦同步！"
+                ]
+            },
+            {
+                id: "chunk_5",
+                episode: "🦖 恐龍不見了",
+                tag: "尋物雷達",
+                text: "George, ¿dónde está el Señor Dinosaurio?",
+                translation: "喬治，恐龍先生在哪裡？",
+                searchKeyword: "¿dónde está",
+                title: "💥 核心彈藥（點擊伸縮）",
+                notes: [
+                    "<b>George, ¿dónde está el Señor Dinosaurio?</b>",
+                    "👉 <b>¿Dónde está...?</b> 是一整塊不可拆的尋物雷達，後面直接加你想找的東西。",
+                    "💡 <b>成功解鎖</b>：尋找媽媽無腦套用：<i>¿Dónde está mamá?</i> 👩"
+                ]
+            }
+        ];
 
-    <div class="btn-row">
-      <button class="btn btn-reveal" onclick="revealAnswer()">👀 看答案</button>
-      <button class="btn btn-next" id="nextBtn" onclick="nextCard()">下一句 →</button>
-    </div>
-  </div>
-</div>
+        let completedChunks = new Set();
 
-<div class="nav-row">
-  <button class="nav-btn" id="prevBtn" onclick="prevCard()">← 上一句</button>
-  <span class="nav-count" id="navCount">1 / 10</span>
-  <button class="nav-btn" id="nextBtnB" onclick="nextCard()">下一句 →</button>
-</div>
+        window.onload = function() {
+            renderChunks();
+        };
 
-<div class="complete-screen" id="completeScreen">
-  <div class="complete-stars" id="completeStars"></div>
-  <div class="complete-title" id="completeTitle">一集完成！</div>
-  <div class="complete-sub" id="completeSub"></div>
+        function renderChunks() {
+            const container = document.getElementById('chunks-container');
+            if(!container) return;
+            container.innerHTML = '';
 
-  <!-- 統計三格 -->
-  <div class="stats">
-    <div class="stat-box"><div class="stat-num" id="finalScore">0</div><div class="stat-lbl">句翻對</div></div>
-    <div class="stat-box"><div class="stat-num" id="finalMake">0</div><div class="stat-lbl">造句成功</div></div>
-    <div class="stat-box"><div class="stat-num" id="finalWords">0</div><div class="stat-lbl">新單字</div></div>
-  </div>
+            AMMO_DATA.forEach(chunk => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-4 rounded-2xl shadow-sm border border-blue-100 space-y-2";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-[10px] text-slate-400 font-mono">
+                        <span class="bg-blue-50 text-blue-500 px-2 py-0.5 rounded-full font-sans font-bold">${chunk.tag}</span>
+                        <span>${chunk.episode}</span>
+                    </div>
+                    
+                    <div class="w-full bg-slate-50 p-3 rounded-xl border border-slate-100 relative pr-20">
+                        <p class="font-bold text-base text-slate-900 leading-relaxed">${chunk.text}</p>
+                        <p class="text-xs text-slate-500 mt-1">${chunk.translation}</p>
+                        
+                        <!-- 大按鈕專門負責：呼叫 YouGlish 真實發音 ＆ 亮星星 -->
+                        <button onclick="triggerAction('${chunk.id}', '${chunk.searchKeyword}')" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-2 rounded-xl transition active:scale-95 shadow-sm font-bold flex flex-col items-center gap-0.5">
+                            <span>🔊</span><span>語塊發音</span>
+                        </button>
+                    </div>
 
-  <!-- 本集英西同源預覽 -->
-  <div class="ep-cognate-box" id="epCognateBox">
-    <div class="ec-title">🔗 你已經會了這些同源詞！</div>
-    <div class="ec-sub">英文底子讓你秒懂西語</div>
-    <div class="ec-list" id="ecList"></div>
-  </div>
+                    <!-- 💡 核心彈藥一鍵伸縮寶箱：裡面有你調整好的所有文法延伸與同源細節 -->
+                    <details class="bg-blue-50/40 border border-dashed border-blue-300 rounded-xl transition-all duration-200">
+                        <summary class="p-2.5 text-xs font-bold text-blue-900 cursor-pointer flex justify-between items-center select-none active:bg-blue-100/50 rounded-xl">
+                            <span class="flex items-center gap-1">${chunk.title}</span>
+                            <span class="text-[10px] text-blue-600 bg-white border border-blue-200 px-1.5 py-0.5 rounded-md shadow-sm">展開 / 收起</span>
+                        </summary>
+                        <div class="px-3 pb-3 pt-1 text-xs space-y-2 border-t border-dashed border-blue-200/60 mt-0.5">
+                            ${chunk.notes.map(note => `<p class="text-slate-600 leading-relaxed">${note}</p>`).join('')}
+                        </div>
+                    </details>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-  <!-- 鼓勵語 -->
-  <div class="complete-cheer" id="completeCheer"></div>
+        function triggerAction(id, keyword) {
+            const widget = document.getElementById('yg-widget-container');
+            widget.innerHTML = `<iframe id="yg-iframe" class="w-full h-full rounded-xl" src="https://youglish.com{encodeURIComponent(keyword)}?bgcol=f0f7ff&mute=0" frameborder="0" allow="autocomplete; encrypted-media; picture-in-picture"></iframe>`;
+            completedChunks.add(id);
+            updateStars();
+        }
 
-  <div style="display:flex;gap:8px;justify-content:center;margin-top:18px">
-    <button class="btn-restart" onclick="restartEp()">🔄 再練一次</button>
-    <button class="btn-next-ep" id="nextEpBtn" onclick="goNextEp()">下一集 →</button>
-  </div>
-</div>
-
-<!-- ② 語塊彈藥庫 -->
-<div class="passbook-wrap ammo-wrap" id="ammoWrap" style="margin-top:12px">
-  <div class="passbook-header" onclick="toggleAmmo()">
-    <div class="passbook-title">🔫 語塊彈藥庫 <span class="passbook-count" id="ammoCount">0</span></div>
-    <div class="passbook-toggle" id="ammoToggle">▼ 展開</div>
-  </div>
-  <div class="passbook-body" id="ammoBody">
-    <div class="ammo-book-top">
-      <div class="pb-logo">💥</div>
-      <div>
-      </div>
-    </div>
-    <div id="ammoEntries"><div class="passbook-empty">還沒有彈藥 — 完成句子後自動解鎖！</div></div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-<script src="episodes.js"></script>
-<script src="ammo.js"></script>
-<script src="cognates.js"></script>
-<script src="script.js"></script>
+        function updateStars() {
+            const starLabel = document.getElementById('star-rating');
+            const count = completedChunks.size;
+            let stars = '';
+            for(let i = 0; i < 5; i++) {
+                stars += (i < count) ? '★' : '☆';
+            }
+            starLabel.textContent = stars;
+        }
+    </script>
 </body>
 </html>
