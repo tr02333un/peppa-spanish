@@ -1,4 +1,9 @@
 /* Peppa-Spanish S1 — Stylesheet */
+@import url('https://jsdelivr.net');
+
+summary::-webkit-details-marker { display: none; }
+summary { list-style: none; outline: none; }
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 :root{
   --mizu:#9FD0DE;--usumizu:#BCE1DF;--sora:#8AC4DE;--misora:#6C9BD2;
