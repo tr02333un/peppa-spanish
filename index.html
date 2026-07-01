@@ -19,6 +19,12 @@
   <!-- EPISODE NAV -->
   <div class="season-nav" id="seasonNav"></div>
 
+  <!-- YouGlish 極簡網址列 -->
+  <div class="yg-mini-row" id="yg-mini-row">
+    <span class="yg-mini-text" id="yg-mini-text"></span>
+    <span class="yg-mini-copy" onclick="copyYGUrl()">複製</span>
+  </div>
+
   <!-- STAR PROGRESS -->
   <div class="star-progress">
     <div class="star-row" id="starRow"></div>
@@ -46,13 +52,6 @@
       <button class="btn-jump-ammo" id="jumpAmmoBtn" onclick="jumpToAmmo(currentGlobalIdx())" style="width:100%;margin-bottom:12px;padding:9px;border-radius:11px;border:none;background:var(--misora);color:white;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">
         🔫 看懂骨架了 → 背這句的語塊模組
       </button>
-
-      <!-- YouGlish 網址（可複製） -->
-      <div class="yg-url-box" id="yg-url-box">
-        <span class="yg-url-label">📺 YouGlish：</span>
-        <span class="yg-url-text" id="yg-url-text" onclick="copyYGUrl()"></span>
-        <span class="yg-copy-btn" onclick="copyYGUrl()">複製</span>
-      </div>
 
       <!-- 翻譯輸入 -->
       <span class="sec-label">你的翻譯</span>
