@@ -125,7 +125,7 @@ const AMMO_DATA = [
     pattern:"A todos les encanta [原形動詞].", pattern_zh:"所有人都超愛 ___。",
     pattern_note:"encanta 「他們」的說法，les 取代 me", slots:["原形動詞"],
     fire_peppa:{es:"A todos les encanta saltar en los charcos de barro.", zh:"所有人都超愛在泥巴坑裡跳！", ts:null,
-      chunks:[{w:"A todos les",role:"s",hideYg:true},{w:"encanta saltar en los charcos de barro.",role:"v",note:"encantar ➔ encanta（「他/她」的說法）+ les（間接受詞代詞）➔ 意思：所有人都超愛（A+人+le/les encanta = 某人超愛）"}]},
+      chunks:[{w:"A todos les",role:"s",hideYg:true},{w:"encanta saltar en los charcos de barro.",role:"v",note:"encantar ➔ encanta（「他/她」的說法）+ les（間接受詞（英文的 to him / to her / to them）代詞）➔ 意思：所有人都超愛（A+人+le/les encanta = 某人超愛）"}]},
     fire_daily:[
       {es:"A todos les encanta cantar.", zh:"所有人都超愛唱歌。", chunks:[{w:"A todos les",role:"s"},{w:"encanta el verano.",role:"v"}]},
       {es:"A todos les encanta el verano.", zh:"所有人都超愛夏天。", chunks:[{w:"A todos les",role:"s"},{w:"encanta el verano.",role:"v"}]}
@@ -337,7 +337,7 @@ const AMMO_DATA = [
     pattern:"A [人] no le gusta [原形動詞].", pattern_zh:"___ 不喜歡 ___。",
     pattern_note:"A + 人 + le gusta = 某人喜歡，西語必學句型", slots:["人","原形動詞"],
     fire_peppa:{es:"A George no le gusta jugar solo.", zh:"喬治不喜歡一個人玩。", ts:null,
-      chunks:[{w:"A George",role:"s"},{w:"no le gusta",role:"v",note:"gustar ➔ gusta（「他/她」的說法）+ le（間接受詞）+ no ➔ 意思：不喜歡（倒裝：A+人+le gusta+動詞）"},{w:"jugar solo.",role:"o"}]},
+      chunks:[{w:"A George",role:"s"},{w:"no le gusta",role:"v",note:"gustar ➔ gusta（「他/她」的說法）+ le（間接受詞（英文的 to him / to her / to them））+ no ➔ 意思：不喜歡（倒裝：A+人+le gusta+動詞）"},{w:"jugar solo.",role:"o"}]},
     fire_daily:[
       {es:"A mí no me gusta el café.", zh:"我不喜歡咖啡。", chunks:[{w:"A Susi",role:"s"},{w:"le gusta",role:"v"},{w:"dibujar.",role:"o"}]},
       {es:"A Susi le gusta dibujar.", zh:"蘇西喜歡畫畫。", chunks:[{w:"A Susi",role:"s"},{w:"le gusta",role:"v"},{w:"dibujar.",role:"o"}]}
