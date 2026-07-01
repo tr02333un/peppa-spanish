@@ -776,6 +776,7 @@ function render(){
   revealed=false;makeOpen=false;builtTokens=[];
   document.getElementById('answerBox').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
+  const rb=document.getElementById('revealBtn');if(rb){rb.style.display='';}
   const tipEl = document.getElementById('grammarTip');
   if(tipEl) tipEl.style.display='none';
   document.getElementById('userInput').value='';
@@ -868,7 +869,10 @@ function revealAnswer(){
   document.getElementById('aTextEn').textContent=s.en;
   document.getElementById('aNoteEn').textContent=s.noteEn;
   document.getElementById('answerBox').classList.add('show');
-  document.getElementById('nextBtn').style.display='block';
+  const rb=document.getElementById('revealBtn');
+  if(rb){rb.style.display='none';}
+  const nb=document.getElementById('nextBtn');
+  nb.style.display='block';nb.style.flex='1';
   showGrammarTip(ep * 10 + idx);
   if(!answered.includes(idx)){
     answered.push(idx);
