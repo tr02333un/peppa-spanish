@@ -158,6 +158,18 @@
     <div id="cogLibraryBody" class="cog-library-body"></div>
   </div>
 
+  <!-- ── 🔄 動詞變位庫（獨立瀏覽區）── -->
+  <div class="conj-lib-wrap card-container">
+    <div class="ammo-book-top" onclick="toggleConjLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#6C9BD2,#5A7FC7)">
+      <div>
+        <div class="pb-book-title">🔄 動詞變位庫</div>
+        <div class="pb-book-sub">ser／estar／poder／deber…完整六人稱一次查</div>
+      </div>
+      <span id="conjLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="conjLibBody" class="ammo-body"></div>
+  </div>
+
   <!-- ── 文法酷庫 Modal ── -->
   <div id="grammarModal" onclick="closeGrammarModal()">
     <div class="grammar-modal-box" onclick="event.stopPropagation()">
