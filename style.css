@@ -405,6 +405,15 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .conj-expand{grid-column:1/-1}
 .conj-expand-summary{font-size:10px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
 .conj-expand-summary::-webkit-details-marker{display:none}
+.conj-jump-btn{margin:6px 12px 4px;padding:6px 10px;background:var(--misora);color:white;font-size:10px;font-weight:800;border-radius:8px;text-align:center;cursor:pointer}
+.conj-jump-btn:active{opacity:.7}
+
+/* 動詞變位庫獨立卡片 */
+.conj-lib-card{background:white;border-bottom:1px solid var(--bg2);padding:10px 4px}
+.conj-lib-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.conj-lib-header{font-size:14px;font-weight:900;color:var(--konpeki);padding:2px 12px 4px}
+.conj-lib-card .conj-section{margin:0 8px 4px;border:none}
+.conj-lib-card .conj-title{display:none}
 
 /* ── 熟悉度星號系統 ── */
 .fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
