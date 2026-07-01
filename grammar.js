@@ -1,5 +1,15 @@
 /* ── 文法酷庫資料：從 S1 E1~E3 課文萃取 ── */
 
+/* 人稱中文化 ROUND7 */
+const PERSON_LABEL_ZH = {
+  yo:'我', tú:'你', él:'他', ella:'她',
+  nosotros:'我們', nosotras:'我們',
+  vosotros:'你們', vosotras:'你們',
+  ellos:'他們', ellas:'她們',
+  usted:'您', ustedes:'您們'
+};
+const CONJ_ORDER_ZH = ['我','你','他/她','我們','你們','他們'];
+
 const GRAMMAR_CATS = [
   {key:"all",          label:"全部"},
   {key:"ser-estar",    label:"SER vs ESTAR"},
