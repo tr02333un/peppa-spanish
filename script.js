@@ -211,7 +211,9 @@ function renderAmmoFireChunks(fire){
   if(!fire.chunks || !fire.chunks.length) return '';
   return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>{
     const personCls=c.role==='s'?getPersonClass(c.w):'';
-    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>`;
+    const clean=c.w.replace(/[¡¿.,!?;:（）]/g,'').trim();
+    const starHtml=isVocabWorthy(clean) ? `<span class="ammo-chunk-star" onclick="event.stopPropagation();addToVocab('${escAttr(c.w)}','${escAttr(fire.zh)}','彈藥例句');this.textContent='⭐'" title="收藏這個語塊">☆</span>` : '';
+    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>${starHtml}`;
   }).join('')}</div>`;
 }
 
@@ -291,7 +293,6 @@ function renderAmmo(){
         <div class="ammo-chunk-row">
           <span class="ammo-chunk" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo}</span>
           ${renderBeVerbTag(a)}
-          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(a.core_ammo)}','${escAttr(a.core_zh)}','彈藥核心')">＋</span>
         </div>
         ${renderBeVerbNote(a)}
         <!-- 武器改裝 -->
