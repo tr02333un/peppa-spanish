@@ -189,6 +189,15 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-hint{font-size:11px;color:var(--tmid)}
 .suffix-body{padding:4px 8px 8px}
 
+/* 詞綴單字卡 + 例句疊加 */
+.suffix-word-card{border-bottom:1px solid var(--bg2);padding:7px 4px;last-child:border:none}
+.suffix-word-card:last-child{border-bottom:none}
+.suffix-word-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.suffix-ex{margin-top:4px;padding:5px 9px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;cursor:pointer;transition:background .15s}
+.suffix-ex:active{background:rgba(108,155,210,.2)}
+.suffix-ex-es{font-size:12px;font-weight:700;color:var(--konpeki);margin-right:6px}
+.suffix-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
+
 /* PATTERN BOOK ENTRIES */
 .pt-entry{align-items:flex-start}
 .pt-content{flex:1;min-width:0}
