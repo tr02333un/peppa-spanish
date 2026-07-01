@@ -27,16 +27,23 @@ function openYG(word, lang){
   window.open(url, '_blank', 'noopener');
 }
 
-// ── FORVO / SPANISHDICT 自動跳轉 ──
-// openYGPanel 原本開 YouGlish，現在改走 Forvo（給同源詞庫、詞彙收藏用）
+// ── WORDREFERENCE 直接跳轉（給單字：同源詞庫、詞綴單字卡）──
 function openYGPanel(word){
-  openForvo(String(word).replace(/[¡¿.,!?;:（）]/g,'').trim());
+  openWordReference(String(word).replace(/[¡¿.,!?;:（）]/g,'').trim());
 }
 
-function openForvo(word){
+function openWordReference(word){
   if(!word) return;
-  window.open('https://forvo.com/word/'+encodeURIComponent(word)+'/#es','_blank','noopener');
+  window.open('https://www.wordreference.com/es/translation.asp?spen='+encodeURIComponent(word),'_blank','noopener');
   showPronBackup(word);
+}
+
+// ── 陌生詞彙收藏點擊：依內容判斷單字或語塊 ──
+function pronounceVocab(text){
+  const clean=String(text).replace(/[¡¿.,!?;:（）]/g,'').trim();
+  if(!clean) return;
+  if(clean.includes(' ')) speakWord(clean, null); // 語塊/句子 → TTS
+  else openWordReference(clean); // 單字 → WordReference
 }
 
 // ── SPEECH SYNTHESIS (TTS) ──
@@ -71,8 +78,8 @@ function speakWord(text, el){
   // Must cancel first on Android or it queues silently
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(clean);
-  utt.lang = 'es-419';
-  utt.rate = 0.82;
+  utt.lang = 'es-MX';
+  utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.volume = 1;
   if(ttsVoice) utt.voice = ttsVoice;
@@ -325,7 +332,7 @@ function seekYT(sec){
 }
 
 function copyYGUrl(){
-  const el=document.getElementById('yg-url-text');
+  const el=document.getElementById('yg-mini-text');
   if(!el) return;
   const url=el.dataset.url||el.textContent;
   if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>toast('✅ 已複製！')); }
@@ -386,7 +393,7 @@ function renderCogLibrary(filter){
           const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
           if(!clean) return '<span class="suffix-ex-punct">'+ck.w+'</span>';
           const starHtml = isVocabWorthy(ck.w) ? '<span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏">☆</span>' : '';
-          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span>'+starHtml;
+          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="speakWord(\''+escAttr(clean)+'\',this)">'+ck.w+'</span>'+starHtml;
         }).join('');
         return `
         <div class="suffix-word-card">
@@ -484,7 +491,7 @@ function renderVocab(){
   const renderCard=(v)=>`
     <div class="vocab-card${(v.stars||0)>=5?' vocab-done':''}">
       <div class="vocab-text">
-        <div class="vocab-es" onclick="openYGPanel('${escAttr(v.text)}')">${v.text}</div>
+        <div class="vocab-es" onclick="pronounceVocab('${escAttr(v.text)}')">${v.text}</div>
         <div class="vocab-zh">${v.zh}</div>
         <div class="vocab-source">${v.source}</div>
       </div>
@@ -782,7 +789,8 @@ function render(){
   }
 
   document.getElementById('epBadge').textContent=`S1 · E${ep+1} · ${epData().titleZh}`;
-  document.getElementById('cardNum').textContent=`句 ${idx+1} / ${n}`;
+  const tsVal = s.ts!=null ? ` <span class="card-num-ts">${Math.floor(s.ts/60)}:${String(s.ts%60).padStart(2,'0')}</span>` : '';
+  document.getElementById('cardNum').innerHTML = `句 ${idx+1} / ${n}${tsVal}`;
   document.getElementById('navCount').textContent=`${idx+1} / ${n}`;
 
   const area=document.getElementById('chunksArea');
@@ -813,7 +821,7 @@ function render(){
   // ── YouGlish 語塊按鈕 keyword ──
   const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.chunks.find(c=>c.role==='v')?.w || s.es.slice(0,15);
   const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish/am';
-  const urlEl = document.getElementById('yg-url-text');
+  const urlEl = document.getElementById('yg-mini-text');
   if(urlEl){ urlEl.textContent = ygUrl; urlEl.dataset.url = ygUrl; }
 
   // ── 英西同源槓桿 details 注入 ──
@@ -1048,9 +1056,9 @@ function toast(msg){
 }
 
 function showPronBackup(word){
-  const url = 'https://www.spanishdict.com/translate/'+encodeURIComponent(word);
+  const url = 'https://es.wiktionary.org/wiki/'+encodeURIComponent(word);
   const t = document.getElementById('toast');
-  t.innerHTML = 'Forvo 沒有？→ <a href="'+url+'" target="_blank" rel="noopener" style="color:var(--mizu);font-weight:900;text-decoration:none">SpanishDict ↗</a>';
+  t.innerHTML = 'WordReference 沒有？→ <a href="'+url+'" target="_blank" rel="noopener" style="color:var(--mizu);font-weight:900;text-decoration:none">Wiktionary ↗</a>';
   t.classList.add('show');
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(()=>{ t.classList.remove('show'); }, 4000);
@@ -1151,10 +1159,6 @@ function _famStarHtml(word){
 
 function handleChunkTap(c, el){
   speakWord(c.w, el);
-  if(!c.hideYg){
-    const clean = c.w.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) openForvo(clean);
-  }
   if(c.note){
     openGrammarSheet(_famStarHtml(c.w)+'<div class="grammar-chunk-note">'+c.note+'</div>');
   }
@@ -1162,10 +1166,6 @@ function handleChunkTap(c, el){
 
 function ammoChunkTap(word, hideYg, note){
   speakWord(word, null);
-  if(!hideYg){
-    const clean = word.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) openForvo(clean);
-  }
   if(note){
     openGrammarSheet(_famStarHtml(word)+'<div class="grammar-chunk-note">'+note+'</div>');
   }
@@ -1175,8 +1175,8 @@ function speakSentence(text){
   if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'es-419';
-  utt.rate = 0.82;
+  utt.lang = 'es-MX';
+  utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.volume = 1;
   if(ttsVoice) utt.voice = ttsVoice;
