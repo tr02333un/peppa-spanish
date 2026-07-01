@@ -21,15 +21,22 @@ function updateStarDisplay(){
   el.style.color = unlockedStars.size >= epTotal ? '#D97706' : '#F59E0B';
 }
 
-// ── YOUGLISH PRONUNCIATION ──
+// ── YOUGLISH PRONUNCIATION（僅手動複製，不做自動跳轉）──
 function openYG(word, lang){
   const url = `https://youglish.com/pronounce/${encodeURIComponent(word)}/${lang}`;
   window.open(url, '_blank', 'noopener');
 }
 
+// ── FORVO / SPANISHDICT 自動跳轉 ──
+// openYGPanel 原本開 YouGlish，現在改走 Forvo（給同源詞庫、詞彙收藏用）
 function openYGPanel(word){
-  const clean = String(word).replace(/[¡¿.,!?;:（）]/g,'').trim();
-  if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+  openForvo(String(word).replace(/[¡¿.,!?;:（）]/g,'').trim());
+}
+
+function openForvo(word){
+  if(!word) return;
+  window.open('https://forvo.com/word/'+encodeURIComponent(word)+'/#es','_blank','noopener');
+  showPronBackup(word);
 }
 
 // ── SPEECH SYNTHESIS (TTS) ──
@@ -978,11 +985,22 @@ function goNextEp(){
 }
 
 // ── TOAST ──
+let _toastTimer = null;
 function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2200);
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function showPronBackup(word){
+  const url = 'https://www.spanishdict.com/translate/'+encodeURIComponent(word);
+  const t = document.getElementById('toast');
+  t.innerHTML = 'Forvo 沒有？→ <a href="'+url+'" target="_blank" rel="noopener" style="color:var(--mizu);font-weight:900;text-decoration:none">SpanishDict ↗</a>';
+  t.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(()=>{ t.classList.remove('show'); }, 4000);
 }
 
 function clearLS(){
@@ -1053,7 +1071,7 @@ function handleChunkTap(c, el){
   speakWord(c.w, el);
   if(!c.hideYg){
     const clean = c.w.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+    if(clean) openForvo(clean);
   }
   if(c.note) openGrammarSheet('<div class="grammar-chunk-note">'+c.note+'</div>');
 }
@@ -1062,7 +1080,7 @@ function ammoChunkTap(word, hideYg, note){
   speakWord(word, null);
   if(!hideYg){
     const clean = word.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+    if(clean) openForvo(clean);
   }
   if(note) openGrammarSheet('<div class="grammar-chunk-note">'+note+'</div>');
 }
