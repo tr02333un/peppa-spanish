@@ -94,6 +94,7 @@ function testTTS(){
 /* EPS data → episodes.js */
 // ── STATE ──
 let ep=0,idx=0,revealed=false,score=0,makeScore=0,answered=[],makeAnswered=[];
+function currentGlobalIdx(){ return ep*10+idx; }
 let vocab=[]; // cross-episode passbook
 let makeOpen=false,builtTokens=[];
 let isPlaying=false; // kept for compat
@@ -232,7 +233,7 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
-    return `<div class="ammo-card">
+    return `<div class="ammo-card" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <!-- 核心彈藥 -->
       <div class="ammo-chunk-row">
@@ -271,6 +272,26 @@ function toggleAmmo(){
   const t=document.getElementById('ammoToggle');
   const open=body.classList.toggle('open');
   t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+// ── 骨架看完 → 跳到這句對應的語塊彈藥卡（S/V/O 分析 → 語塊記憶 的橋接）──
+function jumpToAmmo(globalIdx){
+  const ids = SENTENCE_AMMO_MAP2[globalIdx] || [];
+  if(!ids.length) return;
+  unlockAmmo(globalIdx);
+  const body=document.getElementById('ammoBody');
+  const t=document.getElementById('ammoToggle');
+  body.classList.add('open');
+  t.textContent='▲ 收起';
+  setTimeout(()=>{
+    const card=document.getElementById('ammo-'+ids[0]);
+    if(!card) return;
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    const details=card.querySelector('.ammo-details');
+    if(details) details.open=true;
+    card.classList.add('ammo-flash');
+    setTimeout(()=>card.classList.remove('ammo-flash'),1200);
+  },50);
 }
 
 // ── 英西同源詞庫總覽（COGNATE_LIBRARY → cognates.js） ──
@@ -418,23 +439,21 @@ function togglePassbook(){/* removed */}
 // Each sentence has a "pattern" = the structural slots
 // We check if user sentence uses the SAME verb/structure slots
 function getMakePattern(s){
-  // Build a pattern description from chunks
-  const slots = s.chunks
-    .filter(c=>c.type==='verb'||c.type==='noun'||c.type==='adj')
-    .map(c=>c.type);
+  // v-role chunks = 動詞語塊；把裡面的字拆成一個個 word 供比對
+  const verbWords = new Set(
+    s.chunks.filter(c=>c.role==='v')
+      .flatMap(c=>c.w.split(/\s+/))
+      .map(w=>w.replace(/[¡!¿?,.:;]/g,'').toLowerCase())
+  );
   return {
     es: s.es,
     display: s.es.replace(/\S+/g, w => {
-      const chunk = s.chunks.find(c=>c.word===w);
-      if(!chunk) return w;
-      if(chunk.type==='noun'&&chunk.hint&&chunk.hint.includes('名字'))
-        return `<span class="mp-slot">${chunk.hint}</span>`;
-      if(chunk.type==='verb')
-        return `<span class="mp-slot">${chunk.word}</span>`;
+      const clean = w.replace(/[¡!¿?,.:;]/g,'').toLowerCase();
+      if(verbWords.has(clean)) return `<span class="mp-slot">${w}</span>`;
       return w;
     }),
     // key verbs that must appear
-    keyVerbs: s.chunks.filter(c=>c.type==='verb').map(c=>c.word.replace(/[¡!¿?,.:;]/g,'').toLowerCase()),
+    keyVerbs: [...verbWords],
     wordCount: s.chunks.length,
   };
 }
@@ -638,14 +657,13 @@ function render(){
   area.innerHTML='';
   s.chunks.forEach(c=>{
     const div=document.createElement('div');div.className='chunk';
-    const pill=document.createElement('div');pill.className='chunk-pill '+(c.type||'');
-    const word=document.createElement('span');word.textContent=c.word;
+    const pill=document.createElement('div');pill.className='chunk-pill role-'+(c.role||'plain');
+    const word=document.createElement('span');word.textContent=c.w;
     const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
-    addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.word,c.hint||'',s.es.slice(0,12)+'…語塊');};
+    addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
     pill.appendChild(word);pill.appendChild(addBtn);
-    const hint=document.createElement('div');hint.className='chunk-hint';hint.textContent=c.hint||'';
-    div.appendChild(pill);div.appendChild(hint);
-    div.onclick=()=>speakWord(c.word,div);
+    div.appendChild(pill);
+    div.onclick=()=>speakWord(c.w,div);
     area.appendChild(div);
   });
 
