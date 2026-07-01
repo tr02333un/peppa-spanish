@@ -252,7 +252,6 @@ function renderAmmo(){
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
         <span class="ammo-num">${numDisplay}</span>
-        <span class="ammo-header-zh">${a.core_zh}</span>
         <span class="ammo-chevron">▾</span>
       </div>
       <div class="ammo-card-body">
