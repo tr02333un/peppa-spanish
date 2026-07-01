@@ -340,8 +340,13 @@ function renderCogLibrary(filter){
             <span class="cog-zh">${w.zh}</span>
             <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
           </div>
-          ${w.ex?`<div class="suffix-ex" onclick="openYGPanel('${escAttr(w.ex.es)}')">
-            <span class="suffix-ex-es">${w.ex.es}</span>
+          ${w.ex?`<div class="suffix-ex">
+            <div class="suffix-ex-chunks">${(w.ex.chunks||[]).map(ck=>{
+              const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
+              return clean
+                ? '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span>'
+                : '<span class="suffix-ex-punct">'+ck.w+'</span>';
+            }).join('')}</div>
             <span class="suffix-ex-zh">${w.ex.zh}</span>
           </div>`:''}
         </div>`).join('');
