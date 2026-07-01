@@ -389,15 +389,25 @@ function renderCogLibrary(filter){
 
 // ── 陌生詞彙收藏（localStorage key: peppa_es_vocab_v1，獨立於 peppa_es_v4） ──
 let vocabList=[];
+const VOCAB_STARS=['☆','★','★★','★★★','★★★★','✓'];
+// 0=新收藏 1~4=熟悉度 5=已熟悉(沉底)
 
 function addToVocab(text,zh,source){
   const clean=(text||'').replace(/[¡!¿?,.:;]+$/,'').replace(/^[¡¿]+/,'').trim();
   if(!clean) return;
   if(vocabList.some(v=>v.text===clean)){ toast('已經收藏過了！'); return; }
-  vocabList.push({id:Date.now()+Math.random(), text:clean, zh:zh||'', source:source||''});
+  vocabList.push({id:Date.now()+Math.random(), text:clean, zh:zh||'', source:source||'', stars:0});
   saveVocabToLS();
   renderVocab();
-  toast('⭐ 已收藏到詞彙本！');
+  toast('☆ 已收藏到詞彙本！');
+}
+
+function cycleVocabStar(id){
+  const v=vocabList.find(v=>v.id===id);
+  if(!v) return;
+  v.stars=((v.stars||0)+1)%6;
+  saveVocabToLS();
+  renderVocab();
 }
 
 function removeFromVocab(id){
@@ -415,15 +425,26 @@ function renderVocab(){
     el.innerHTML='<div class="passbook-empty">還沒收藏任何詞彙 — 點任何語塊旁的 ＋ 試試看</div>';
     return;
   }
-  el.innerHTML=vocabList.map(v=>`
-    <div class="vocab-card">
+  const active=vocabList.filter(v=>(v.stars||0)<5);
+  const done=vocabList.filter(v=>(v.stars||0)>=5);
+  const renderCard=(v)=>`
+    <div class="vocab-card${(v.stars||0)>=5?' vocab-done':''}">
       <div class="vocab-text">
-        <div class="vocab-es" onclick="speakWord('${escAttr(v.text)}')">${v.text}</div>
+        <div class="vocab-es" onclick="openYGPanel('${escAttr(v.text)}')">${v.text}</div>
         <div class="vocab-zh">${v.zh}</div>
         <div class="vocab-source">${v.source}</div>
       </div>
-      <div class="vocab-remove" onclick="removeFromVocab(${v.id})">✕</div>
-    </div>`).join('');
+      <div class="vocab-right">
+        <div class="vocab-star" onclick="cycleVocabStar(${v.id})" title="點擊增加熟悉度">${VOCAB_STARS[v.stars||0]}</div>
+        <div class="vocab-remove" onclick="removeFromVocab(${v.id})">✕</div>
+      </div>
+    </div>`;
+  let html=active.map(renderCard).join('');
+  if(done.length){
+    html+=`<div class="vocab-done-header">✓ 已熟悉（${done.length}）</div>`;
+    html+=done.map(renderCard).join('');
+  }
+  el.innerHTML=html;
 }
 
 function toggleVocabBox(){
@@ -441,7 +462,7 @@ function loadVocabFromLS(){
     const raw=localStorage.getItem('peppa_es_vocab_v1');
     if(!raw) return;
     const d=JSON.parse(raw);
-    if(Array.isArray(d)) vocabList=d;
+    if(Array.isArray(d)) vocabList=d.map(v=>({stars:0,...v}));
   }catch(e){}
 }
 
