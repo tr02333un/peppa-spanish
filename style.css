@@ -261,11 +261,11 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-section{display:flex;flex-direction:column;gap:6px}
 .ammo-fire-row{border-radius:9px;padding:8px 11px;cursor:pointer;transition:opacity .15s}
 .ammo-fire-row:active{opacity:.7}
-.ammo-fire-row.peppa{background:rgba(108,155,210,.08);border-left:3px solid var(--misora)}
-.ammo-fire-row.daily{background:rgba(61,184,122,.07);border-left:3px solid #3DB87A}
+.ammo-fire-row.peppa{background:rgba(108,155,210,.1);border-left:3px solid var(--misora)}
+.ammo-fire-row.daily{background:rgba(108,155,210,.05);border-left:3px solid var(--sora)}
 .ammo-fire-tag{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px;display:flex;align-items:center;gap:6px}
 .ammo-fire-tag.peppa{color:var(--misora)}
-.ammo-fire-tag.daily{color:#3DB87A}
+.ammo-fire-tag.daily{color:var(--konpeki)}
 .ammo-fire-ts{background:var(--misora);color:white;border-radius:5px;padding:1px 7px;font-size:10px;cursor:pointer;font-weight:900}
 .ammo-fire-ts:active{opacity:.7}
 .ammo-fire-es{font-size:13px;font-weight:800;color:var(--konpeki);line-height:1.5}
@@ -296,6 +296,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-chunk.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
 .ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
+.ammo-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
+.ammo-chunk-star:hover{opacity:1}
 
 /* VOCAB ADD BUTTON / COLLECTION */
 .vocab-add-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(132,145,195,.15);color:var(--benikake);font-size:12px;font-weight:900;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1;position:relative}
