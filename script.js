@@ -162,7 +162,7 @@ function renderStars(){
   row.appendChild(epS);
   const done=answered.length;
   document.getElementById('starLabel').textContent=
-    done===0?'完成一句點亮一顆星 ⭐':
+    done===0?'':
     done===n?`🌟 E${ep+1} 全集完成！`:
     `⭐ ${done} / ${n} 句完成`;
 }
@@ -386,7 +386,7 @@ function renderCogLibrary(filter){
       html+=`<details class="suffix-group"><summary class="suffix-summary"><span class="suffix-rule">${p.rule}</span><span class="suffix-hint">${p.hint}</span></summary><div class="suffix-body">`;
       html+=p.words.map(w=>{
         const genderHtml = w.gendered
-          ? `<div class="suffix-gender-row"><span class="sg-cell el">el ${w.gendered.ms}</span><span class="sg-cell la">la ${w.gendered.fs}</span><span class="sg-cell los">los ${w.gendered.mp}</span><span class="sg-cell las">las ${w.gendered.fp}</span></div>`
+          ? `<div class="suffix-gender-row"><span class="sg-cell gender-ms">el ${w.gendered.ms}</span><span class="sg-cell gender-fs">la ${w.gendered.fs}</span><span class="sg-cell gender-mp">los ${w.gendered.mp}</span><span class="sg-cell gender-fp">las ${w.gendered.fp}</span></div>`
           : '';
         const addBtnHtml = isVocabWorthy(w.es) ? `<span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>` : '';
         const chunksHtml = (w.ex?.chunks||[]).map(ck=>{

@@ -310,7 +310,7 @@ const COGNATE_LIBRARY = [
 const SUFFIX_PATTERNS = [
   {
     rule: '-tion → -ción',
-    hint: '英文 -tion 結尾幾乎全都適用，直接套用就對了！全部陰性（la）',
+    hint: '看到英文 -tion 結尾，直接把 -tion 換成 -ción，發音接近！（例：education → la educación）<br><strong>🔔 這類字全部都是陰性，前面記得自動加上 la 喔！</strong>',
     words: [
       {en:'nation',      es:'nación',       art:'la', zh:'國家',   ex:{es:'La nación entera celebra.',      zh:'整個國家都在慶祝。', chunks:[{w:"La nación entera",role:"s"},{w:"celebra.",role:"v"}]}},
       {en:'action',      es:'acción',       art:'la', zh:'行動',   ex:{es:'¡En acción!',                   zh:'行動！', chunks:[{w:"¡En acción!",role:"c"}]}},
@@ -322,7 +322,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ty → -dad',
-    hint: '英文 -ty 抽象名詞 → 西語 -dad（全部陰性，記得加 la）',
+    hint: '看到英文 -ty 結尾，直接把 -ty 換成 -dad，唸起來也很像！（例：university → la universidad）<br><strong>🔔 這類字全部都是陰性，前面記得自動加上 la 喔！</strong>',
     words: [
       {en:'city',        es:'ciudad',       art:'la', zh:'城市',   ex:{es:'La ciudad es muy grande.',      zh:'這個城市很大。', chunks:[{w:"La ciudad",role:"s"},{w:"es",role:"v"},{w:"muy grande.",role:"c"}]}},
       {en:'reality',     es:'realidad',     art:'la', zh:'現實',   ex:{es:'En la realidad es diferente.',  zh:'現實中不一樣。', chunks:[{w:"En la realidad",role:"c"},{w:"es",role:"v"},{w:"diferente.",role:"c"}]}},

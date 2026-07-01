@@ -136,11 +136,9 @@ function renderStage2(){
   el.innerHTML = TU_YO_PAIRS.map((p,i)=>`
     <div class="stage2-pair">
       <div class="stage2-card yo" onclick="speakSentence('${escStage(p.yo)}')">
-        <div class="stage2-card-label">YO</div>
         ${p.yo}
       </div>
       <div class="stage2-card tu" onclick="speakSentence('${escStage(p.tu)}')">
-        <div class="stage2-card-label">TÚ</div>
         ${p.tu}
       </div>
     </div>

@@ -60,22 +60,14 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .chunk-pill{font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
 .chunk:active .chunk-pill{opacity:.75}
 
-/* 主詞 S — 虛線框 */
-.chunk-pill.role-s{background:#FAFAFA}
-
-/* 動詞 V — 實色底 */
-.chunk-pill.role-v{background:var(--vn-baby-blue)}
-
-/* 受詞 O — 實線框（也用於整句/子句包框）*/
-.chunk-pill.role-o{background:var(--vn-bubble-pink)}
-
-/* 連接詞/介詞 C — 淡色小卡，無框，跟 S/V/O 區隔開但仍是獨立語塊 */
-.chunk-pill.role-c{background:var(--vn-bubble-pink)}
-
-/* 其他純文字（稱呼/感嘆詞等，非連接詞）— 完全無底色 */
-.chunk-pill.role-plain{background:#FAFAFA}
-.chunk-pill.person-yo{background:var(--vn-lake-green) !important}
-.chunk-pill.person-tu{background:var(--vn-lavender-purple) !important}
+/* ── 馬卡龍配色：僅作用於 .chunks-area 內的語塊卡片，禁止全域污染 ── */
+.chunks-area .chunk-pill.role-s{background:#FAFAFA}
+.chunks-area .chunk-pill.role-v{background:var(--vn-baby-blue)}
+.chunks-area .chunk-pill.role-o{background:var(--vn-bubble-pink)}
+.chunks-area .chunk-pill.role-c{background:var(--vn-bubble-pink)}
+.chunks-area .chunk-pill.role-plain{background:#FAFAFA}
+.chunks-area .chunk-pill.person-yo{background:var(--vn-lake-green)}
+.chunks-area .chunk-pill.person-tu{background:var(--vn-lavender-purple)}
 
 .chunk.playing .chunk-pill{opacity:.7}
 @keyframes ripple{0%{box-shadow:0 0 0 0 rgba(108,155,210,.4)}100%{box-shadow:0 0 0 10px rgba(108,155,210,0)}}
@@ -144,7 +136,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .a-lang{display:none}
 .a-lang.on{display:block;animation:fadeUp .2s ease}
 .a-text{font-size:15px;font-weight:700;color:var(--tdark);line-height:1.6;margin-bottom:6px}
-.a-note{font-size:12px;color:var(--tmid);line-height:1.5;padding:7px 9px;background:rgba(159,208,222,.12);border-radius:7px;border-left:3px solid var(--mizu)}
+.a-note{font-size:13px;color:var(--tmid);line-height:1.6;padding:8px 10px;background:rgba(159,208,222,.12);border-radius:7px;border-left:3px solid var(--mizu)}
 
 .btn-row{display:flex;gap:8px}
 .btn{flex:1;padding:11px 8px;border-radius:11px;border:none;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .16s}
@@ -214,7 +206,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
 .suffix-chunk-star:hover{opacity:1}
 .suffix-ex-punct{font-size:12px;font-weight:700;color:var(--tlight);padding:2px 1px}
-.suffix-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
+.suffix-ex-zh{font-size:13px;color:var(--tlight);font-weight:600}
 
 /* PATTERN BOOK ENTRIES */
 .pt-entry{align-items:flex-start}
@@ -261,8 +253,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-pattern-box{background:rgba(245,166,35,.07);border:1.5px dashed #F5A623;border-radius:10px;padding:9px 12px;margin-bottom:10px}
 .ammo-pattern-es{font-size:14px;font-weight:800;color:var(--tdark);line-height:1.6;margin-bottom:3px}
 .ammo-slot{display:inline-block;background:rgba(245,166,35,.2);color:#B87800;border-radius:5px;padding:1px 7px;font-style:italic;font-size:13px}
-.ammo-pattern-zh{font-size:12px;color:var(--tmid);font-weight:600}
-.ammo-pattern-note{font-size:11px;color:var(--tlight);margin-top:4px;font-weight:600;border-left:2px solid #F5A623;padding-left:6px}
+.ammo-pattern-zh{font-size:13px;color:var(--tmid);font-weight:600}
+.ammo-pattern-note{font-size:12px;color:var(--tlight);margin-top:4px;font-weight:600;border-left:2px solid #F5A623;padding-left:6px}
 /* 實戰射擊 */
 .ammo-fire-section{display:flex;flex-direction:column;gap:6px}
 .ammo-fire-row{border-radius:9px;padding:8px 11px;cursor:pointer;transition:opacity .15s}
@@ -275,7 +267,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-ts{background:var(--misora);color:white;border-radius:5px;padding:1px 7px;font-size:10px;cursor:pointer;font-weight:900}
 .ammo-fire-ts:active{opacity:.7}
 .ammo-fire-es{font-size:13px;font-weight:800;color:var(--konpeki);line-height:1.5}
-.ammo-fire-zh{font-size:11px;color:var(--tlight);font-weight:600}
+.ammo-fire-zh{font-size:13px;color:var(--tlight);font-weight:600}
 /* star */
 .ammo-star{font-size:15px;cursor:pointer;flex-shrink:0;transition:transform .15s;user-select:none;position:absolute;bottom:12px;right:14px}
 .ammo-star:active{transform:scale(1.4)}
@@ -378,13 +370,13 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-modal-close:active{opacity:.7}
 .grammar-cat-tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:10px;background:rgba(138,196,222,.18);color:var(--misora);border:1px solid rgba(138,196,222,.4)}
 .grammar-title{font-size:17px;font-weight:900;color:var(--konpeki);margin-bottom:9px;line-height:1.3}
-.grammar-rule{font-size:12px;color:var(--tmid);font-weight:600;line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
+.grammar-rule{font-size:13px;color:var(--tmid);font-weight:600;line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-examples{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
 .grammar-ex-row{display:flex;flex-direction:column;gap:3px;padding:8px 11px;background:var(--bg2);border-radius:10px;cursor:pointer;transition:background .15s;border:1px solid transparent;user-select:none}
 .grammar-ex-row:active{opacity:.7}
 .grammar-ex-es{font-size:14px;font-weight:800;color:var(--konpeki);line-height:1.4}
-.grammar-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
-.grammar-trap{font-size:11px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
+.grammar-ex-zh{font-size:13px;color:var(--tmid);font-weight:600}
+.grammar-trap{font-size:13px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
 .grammar-rule-emph{font-size:14.4px;font-weight:900;color:var(--tmid);line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
 
@@ -413,7 +405,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .conj-lib-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
 .conj-lib-header{font-size:14px;font-weight:900;color:var(--konpeki);padding:2px 12px 4px}
 .conj-lib-card .conj-section{margin:0 8px 4px;border:none}
-.conj-lib-card .conj-title{display:none}
+.conj-title{display:none}
 
 /* 人稱代名詞查詢庫 */
 .pron-cat-card{background:white;border-bottom:1px solid var(--bg2);padding:12px 14px}
@@ -443,11 +435,11 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* ── 性別四形式 ── */
 .suffix-gender-row{display:flex;gap:4px;flex-wrap:wrap;margin:3px 0 5px}
-.sg-cell{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
-.sg-cell.el{background:rgba(108,155,210,.15);color:var(--misora)}
-.sg-cell.la{background:rgba(252,209,220,.5);color:#c05080}
-.sg-cell.los{background:rgba(108,155,210,.08);color:var(--konpeki)}
-.sg-cell.las{background:rgba(252,209,220,.3);color:#a03060}
+.sg-cell{font-size:12px;font-weight:800;padding:2px 8px;border-radius:999px}
+.sg-cell.gender-ms{background:rgba(108,155,210,.18);color:var(--misora)}
+.sg-cell.gender-fs{background:rgba(252,209,220,.6);color:#c05080}
+.sg-cell.gender-mp{background:rgba(108,155,210,.08);color:var(--konpeki)}
+.sg-cell.gender-fp{background:rgba(252,209,220,.3);color:#a03060}
 
 /* ── 詞綴區字體放大 ── */
 .suffix-word-row .cog-en{font-size:15px;font-weight:900;color:var(--tmid)}
@@ -455,13 +447,15 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-word-row .cog-zh{font-size:13px;font-weight:700;color:var(--tmid)}
 .suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
 .suffix-ex-chunk{font-size:13px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
-.suffix-ex-zh{font-size:12px;color:var(--tlight);font-weight:700}
+.suffix-ex-zh{font-size:13px;color:var(--tlight);font-weight:700}
 .suffix-title{font-size:13px;font-weight:900;color:var(--konpeki);margin-bottom:8px;padding:2px 0}
 
 /* ── GRAMMAR / CHUNK BOTTOM SHEET ── */
 #grammarSheet{display:none;position:fixed;inset:0;background:rgba(26,46,59,.55);z-index:999}
 .grammar-sheet-box{position:absolute;bottom:0;left:0;right:0;background:white;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px 18px 32px;max-width:480px;margin:0 auto}
 .grammar-chunk-note{font-size:14px;font-weight:700;color:var(--konpeki);line-height:1.7;padding:8px 0 4px;white-space:pre-line}
+.suffix-hint{font-size:13px;color:var(--tmid);font-weight:600;line-height:1.55}
+.suffix-hint strong{color:var(--konpeki);font-weight:900}
 
 /* ── STAGE CHUNK PILLS ── */
 .stage-chunk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;cursor:pointer;transition:opacity .15s;margin:2px;user-select:none}
