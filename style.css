@@ -159,7 +159,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .cog-click{cursor:pointer;text-decoration:underline dotted var(--mizu);transition:all .15s}
 .cog-click:hover{color:var(--misora);text-decoration:underline solid var(--misora)}
 .cog-click:active{transform:scale(.95)}
-.cog-art{font-size:15px;font-weight:900;color:var(--nezumi);font-style:italic;margin-right:2px}
+.cog-art{font-size:15px;font-weight:900;color:inherit;font-style:italic;margin-right:2px}
 
 /* PATTERN BOOK ENTRIES */
 .pt-entry{align-items:flex-start}
