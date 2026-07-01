@@ -69,7 +69,7 @@ const EPS=[
   }},
   {es:"¡Me encanta saltar en los charcos!",chunks:[{w:"¡Me",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos!",role:"o"}],zh:"我超愛在水坑裡跳！",en:"I love jumping in puddles!",noteZh:"「Me encanta」= 我超愛，比 me gusta 更強烈",noteEn:"'Me encanta' = I love it (stronger than 'me gusta')",
   expand:{
-    note:"encanta 動詞不變，只換前面的間接受詞代名詞（我/你/他）",
+    note:"encanta 動詞不變，只換前面的間接受詞（英文的 to him / to her / to them）代名詞（我/你/他）",
     template:[{g:"who"},{t:"encanta saltar en los charcos!"}],
     groups:[{label:"誰超愛",key:"who",options:[
       {es:"¡Me",zh:"我"},
