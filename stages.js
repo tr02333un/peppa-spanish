@@ -11,27 +11,28 @@ const TU_YO_PAIRS = [
   {yo:"No paso nada.",          tu:"No te preocupes.",         zh:"我沒事。/你不要擔心。"}
 ];
 
-// ── Stage 3: 核心 + 補語 ──
-const STAGE_CORES = [
-  {zh:"我是",    es:"Yo soy"},
-  {zh:"你是",    es:"Tú eres"},
-  {zh:"我正在",  es:"Yo estoy"},
-  {zh:"我可以",  es:"Yo puedo"},
-  {zh:"我必須",  es:"Yo debo"},
-  {zh:"我超愛",  es:"Me encanta"},
-  {zh:"我找到了", es:"He encontrado"}
+// ── Stage 3: 造句核心（重設計版）──
+const S3_CORES = [
+  {es:"Soy",           zh:"我是"},
+  {es:"Eres",          zh:"你是"},
+  {es:"Estoy",         zh:"我正在"},
+  {es:"Puedo",         zh:"我可以"},
+  {es:"Debo",          zh:"我必須"},
+  {es:"Me encanta",    zh:"我超愛"},
+  {es:"He encontrado", zh:"我找到了"}
+];
+const S3_COMPS = [
+  {es:"estudiante",               zh:"學生"},
+  {es:"amigo",                    zh:"朋友"},
+  {es:"detective",                zh:"偵探"},
+  {es:"médico",                   zh:"醫生"},
+  {es:"saltar en charcos de barro", zh:"跳水坑"},
+  {es:"salir a jugar",            zh:"出去玩"},
+  {es:"ver la televisión",        zh:"看電視"},
+  {es:"lavarme las manos",        zh:"洗手"}
 ];
 
-const STAGE_VERBS = [
-  {zh:"學生",    es:"estudiante"},
-  {zh:"朋友",    es:"amigo/a"},
-  {zh:"偵探",    es:"detective"},
-  {zh:"醫生",    es:"médico/a"},
-  {zh:"跳水坑",  es:"saltar en los charcos"},
-  {zh:"出去玩",  es:"salir a jugar"},
-  {zh:"看電視",  es:"ver la tele"},
-  {zh:"洗手",    es:"lavarme las manos"}
-];
+let _s3CoreEs='', _s3CoreZh='', _s3CompEs='', _s3CompZh='';
 
 // ── Stage 1 State ──
 let _s1Pool = [];
@@ -79,8 +80,6 @@ function _renderS1(){
 
   document.getElementById('stage1Target').textContent = '👆 點語塊，還原原句順序';
 
-  // shuffle chunks
-  // 過濾掉全形括號中文主詞提示（如「（我）」「（你們）」）
   const visibleChunks = fire.chunks.filter(c => !/^（.*）$/.test(c.w.trim()));
   const shuffled = [...visibleChunks];
   for(let i=shuffled.length-1;i>0;i--){
@@ -147,61 +146,70 @@ function renderStage2(){
   `).join('');
 }
 
-// ── Stage 3: 造句核心 ──
-let _s3Core = null;
-let _s3Verb = null;
-
+// ── Stage 3: 造句核心 render ──
 function renderStage3(){
   const el = document.getElementById('stage3Area');
   if(!el) return;
   el.innerHTML = `
-    <div>
-      <div class="stage3-label">選核心主幹</div>
-      <div class="stage3-row" id="s3CoreRow">
-        ${STAGE_CORES.map((c,i)=>`<span class="stage3-chip" onclick="s3PickCore(${i})" id="s3c${i}">${c.zh}</span>`).join('')}
+    <div class="stage3-container">
+      <div class="sentence-output-box">
+        <div class="output-label">🎬 你的造句結果</div>
+        <div class="combined-sentence" id="s3CombinedText">請選擇下方的核心與補語…</div>
+        <button class="speak-btn" id="s3SpeakBtn" onclick="s3SpeakCurrent()" disabled>🔊 點輸出聽整句</button>
+      </div>
+      <div class="puzzle-columns-grid">
+        <div class="puzzle-column">
+          <h3>🎯 選核心主幹</h3>
+          <div class="chip-pool">
+            ${S3_CORES.map(c=>`<button class="core-chip" data-es="${escStage(c.es)}" data-zh="${c.zh}" onclick="s3SelectCore(this)">${c.zh} (${c.es})</button>`).join('')}
+          </div>
+        </div>
+        <div class="puzzle-column">
+          <h3>🧩 選補語</h3>
+          <div class="chip-pool">
+            ${S3_COMPS.map(c=>`<button class="comp-chip" data-es="${escStage(c.es)}" data-zh="${c.zh}" onclick="s3SelectComp(this)">${c.zh}</button>`).join('')}
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <div class="stage3-label">選補語</div>
-      <div class="stage3-row" id="s3VerbRow">
-        ${STAGE_VERBS.map((v,i)=>`<span class="stage3-chip" onclick="s3PickVerb(${i})" id="s3v${i}">${v.zh}</span>`).join('')}
-      </div>
-    </div>
-    <div class="stage3-output" id="s3Output" onclick="s3Speak()">（點上方選項，這裡顯示造句）</div>
   `;
+  _s3CoreEs=''; _s3CoreZh=''; _s3CompEs=''; _s3CompZh='';
 }
 
-function s3PickCore(i){
-  _s3Core = STAGE_CORES[i];
-  document.querySelectorAll('#s3CoreRow .stage3-chip').forEach((el,j)=>{
-    el.classList.toggle('selected', j===i);
-  });
-  _s3UpdateOutput();
+function s3SelectCore(el){
+  document.querySelectorAll('.core-chip').forEach(c=>c.classList.remove('is-selected'));
+  el.classList.add('is-selected');
+  _s3CoreEs=el.dataset.es; _s3CoreZh=el.dataset.zh;
+  _s3UpdateOutput3();
 }
 
-function s3PickVerb(i){
-  _s3Verb = STAGE_VERBS[i];
-  document.querySelectorAll('#s3VerbRow .stage3-chip').forEach((el,j)=>{
-    el.classList.toggle('selected', j===i);
-  });
-  _s3UpdateOutput();
+function s3SelectComp(el){
+  document.querySelectorAll('.comp-chip').forEach(c=>c.classList.remove('is-selected'));
+  el.classList.add('is-selected');
+  _s3CompEs=el.dataset.es; _s3CompZh=el.dataset.zh;
+  _s3UpdateOutput3();
 }
 
-function _s3UpdateOutput(){
-  const el = document.getElementById('s3Output');
-  if(!el) return;
-  if(_s3Core && _s3Verb){
-    el.textContent = _s3Core.es+' '+_s3Verb.es+'.';
-  } else if(_s3Core){
-    el.textContent = _s3Core.es+' ___';
-  } else {
-    el.textContent = '（點上方選項，這裡顯示造句）';
+function _s3UpdateOutput3(){
+  const out=document.getElementById('s3CombinedText');
+  const btn=document.getElementById('s3SpeakBtn');
+  if(!out) return;
+  if(_s3CoreEs && _s3CompEs){
+    const full=`${_s3CoreEs} ${_s3CompEs}.`;
+    out.innerHTML=`<div>${full}</div><div style="font-size:13px;color:var(--ok);font-weight:600;margin-top:4px;">意即：${_s3CoreZh}${_s3CompZh}</div>`;
+    if(btn) btn.disabled=false;
+  } else if(_s3CoreEs){
+    out.textContent=`${_s3CoreEs} …`;
+    if(btn) btn.disabled=true;
+  } else if(_s3CompEs){
+    out.textContent=`… ${_s3CompEs}`;
+    if(btn) btn.disabled=true;
   }
 }
 
-function s3Speak(){
-  const el = document.getElementById('s3Output');
-  if(el && _s3Core && _s3Verb) speakSentence(el.textContent);
+function s3SpeakCurrent(){
+  if(!_s3CoreEs||!_s3CompEs) return;
+  speakFull(`${_s3CoreEs} ${_s3CompEs}.`);
 }
 
 function escStage(s){ return String(s).replace(/'/g,"\\'"); }

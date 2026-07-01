@@ -524,3 +524,21 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* 主卡片語塊：隱藏 + 收藏按鈕 */
 .chunk-pill .vocab-add-btn{display:none}
+
+/* ── Stage 3 造句核心（重設計版）── */
+.stage3-container{background:#fff;border:2px solid #e2e8f0;border-radius:20px;padding:24px;max-width:600px;margin:20px auto;box-shadow:0 4px 15px rgba(0,0,0,.05);font-family:'Nunito',sans-serif}
+.sentence-output-box{background:#f8fafc;border:2px solid #3b82f6;border-radius:12px;padding:16px;text-align:center;margin-bottom:24px}
+.output-label{font-size:12px;color:#3b82f6;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.combined-sentence{font-size:24px;font-weight:700;color:var(--konpeki);min-height:36px;margin-bottom:12px}
+.speak-btn{background:#3b82f6;color:white;border:none;padding:8px 20px;border-radius:20px;font-weight:600;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 6px rgba(59,130,246,.2);transition:all .2s}
+.speak-btn:disabled{background:#cbd5e1;color:#94a3b8;box-shadow:none;cursor:not-allowed}
+.puzzle-columns-grid{display:flex;gap:20px}
+.puzzle-column{flex:1;background:#f8fafc;padding:14px;border-radius:12px}
+.puzzle-column h3{font-size:14px;color:#475569;margin:0 0 12px;text-align:center}
+.chip-pool{display:flex;flex-direction:column;gap:8px}
+.core-chip,.comp-chip{background:#fff;padding:10px;border-radius:8px;font-size:14px;font-weight:600;text-align:left;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
+.core-chip{border:1px solid #93c5fd;color:#2563eb}
+.core-chip.is-selected{background:#3b82f6;color:white;border-color:#3b82f6}
+.comp-chip{border:1px solid #c084fc;color:#7c3aed}
+.comp-chip.is-selected{background:#8b5cf6;color:white;border-color:#8b5cf6}
+@media(max-width:480px){.puzzle-columns-grid{flex-direction:column;gap:12px}.combined-sentence{font-size:18px}}
