@@ -233,38 +233,44 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
-    return `<div class="ammo-card" id="ammo-${a.ammo_id}">
+    const num = (a.ammo_id.match(/(\d+)$/)||['','?'])[1].replace(/^0/,'');
+    return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
-      <!-- 核心彈藥 -->
-      <div class="ammo-chunk-row">
-        <span class="ammo-label l-chunk">💥 核心彈藥</span>
-        <span class="ammo-chunk" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo}</span>
-        ${renderBeVerbTag(a)}
-        <span class="vocab-add-btn" onclick="addToVocab('${escAttr(a.core_ammo)}','${escAttr(a.core_zh)}','彈藥核心')">＋</span>
-        <span class="ammo-chunk-zh">${a.core_zh}</span>
+      <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
+        <span class="ammo-num">${num}</span>
+        <span class="ammo-header-zh">${a.core_zh}</span>
+        <span class="ammo-chevron">▾</span>
       </div>
-      ${renderBeVerbNote(a)}
-      <details class="ammo-details">
-        <summary><span>🔧 展開例句與句型</span><span>▾</span></summary>
-        <div class="ammo-details-body">
-          <!-- 武器改裝 -->
-          <div class="ammo-label l-pattern" style="margin-bottom:5px">🔧 武器改裝</div>
-          <div class="ammo-pattern-box">
-            <div class="ammo-pattern-es">${renderAmmoPatternEs(a)}</div>
-            <div class="ammo-pattern-zh">${a.pattern_zh}</div>
-            <div class="ammo-pattern-note">${a.pattern_note}</div>
-          </div>
-          <!-- 實戰射擊 -->
-          <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
-          <div class="ammo-fire-section">
-            ${renderAmmoFireRow(a.fire_peppa,'peppa')}
-            ${dailyRows}
-          </div>
+      <div class="ammo-card-body">
+        <!-- 核心彈藥 -->
+        <div class="ammo-chunk-row">
+          <span class="ammo-chunk" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo}</span>
+          ${renderBeVerbTag(a)}
+          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(a.core_ammo)}','${escAttr(a.core_zh)}','彈藥核心')">＋</span>
         </div>
-      </details>
-      <div class="ammo-star" onclick="cycleAmmoStar('${a.ammo_id}')">${star}</div>
+        ${renderBeVerbNote(a)}
+        <!-- 武器改裝 -->
+        <div class="ammo-label l-pattern" style="margin-bottom:5px">🔧 武器改裝</div>
+        <div class="ammo-pattern-box">
+          <div class="ammo-pattern-es">${renderAmmoPatternEs(a)}</div>
+          <div class="ammo-pattern-zh">${a.pattern_zh}</div>
+          <div class="ammo-pattern-note">${a.pattern_note}</div>
+        </div>
+        <!-- 實戰射擊 -->
+        <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
+        <div class="ammo-fire-section">
+          ${renderAmmoFireRow(a.fire_peppa,'peppa')}
+          ${dailyRows}
+        </div>
+      </div>
+      <div class="ammo-star" onclick="event.stopPropagation();cycleAmmoStar('${a.ammo_id}')">${star}</div>
     </div>`;
   }).join('');
+}
+
+function toggleAmmoCard(ammoId){
+  const card=document.getElementById('ammo-'+ammoId);
+  if(card) card.classList.toggle('ammo-collapsed');
 }
 
 function toggleAmmo(){
@@ -286,9 +292,8 @@ function jumpToAmmo(globalIdx){
   setTimeout(()=>{
     const card=document.getElementById('ammo-'+ids[0]);
     if(!card) return;
+    card.classList.remove('ammo-collapsed');
     card.scrollIntoView({behavior:'smooth',block:'center'});
-    const details=card.querySelector('.ammo-details');
-    if(details) details.open=true;
     card.classList.add('ammo-flash');
     setTimeout(()=>card.classList.remove('ammo-flash'),1200);
   },50);
