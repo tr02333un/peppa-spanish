@@ -1117,6 +1117,37 @@ function buildConjTable(conj, gId){
   </div>`;
 }
 
+// ── 👤 人稱代名詞查詢庫 ──
+function renderPronounLibrary(){
+  const el = document.getElementById('pronounLibBody');
+  if(!el) return;
+  el.innerHTML = PRONOUN_LIBRARY.map(cat=>`
+    <div class="pron-cat-card">
+      <div class="pron-cat-header">${cat.cat} <span class="pron-cat-en">${cat.catEn}</span></div>
+      <div class="pron-cat-hint">${cat.hint}</div>
+      <div class="pron-rows">
+        ${cat.rows.map(r=>`
+          <div class="pron-row">
+            <span class="pron-es" onclick="speakWord('${escAttr(r.es)}',this)">${r.es}</span>
+            <span class="pron-zh">${r.zh}</span>
+            <span class="pron-en">${r.en}</span>
+          </div>`).join('')}
+      </div>
+      ${cat.example?`<div class="pron-example" onclick="speakSentence('${escAttr(cat.example.es)}')">
+        <div class="pron-ex-es">▶ ${cat.example.es}</div>
+        <div class="pron-ex-zh">${cat.example.zh}</div>
+      </div>`:''}
+      ${cat.note?`<div class="pron-note">${cat.note}</div>`:''}
+    </div>`).join('');
+}
+
+function togglePronounLib(){
+  const body=document.getElementById('pronounLibBody');
+  const t=document.getElementById('pronounLibToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
 // ── 🔄 動詞變位庫（獨立瀏覽區）──
 function renderConjLibrary(){
   const el = document.getElementById('conjLibBody');
@@ -1234,6 +1265,7 @@ function speakSentence(text){
   renderAmmo();
   renderCogLibrary();
   renderConjLibrary();
+  renderPronounLibrary();
   renderVocab();
   initTTS();
 })();
