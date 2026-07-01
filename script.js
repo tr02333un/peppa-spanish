@@ -188,8 +188,11 @@ function renderAmmoFireChunks(fire){
 
 function renderAmmoFireRow(fire, type){
   const tag = type==='peppa' ? '🎯 一發命中（佩佩豬原句）' : '🔥 火力全開（日常對話）';
-  return `<div class="ammo-fire-row ${type}" onclick="speakFull('${escAttr(fire.es)}')">
-    <div class="ammo-fire-tag ${type}">${tag}</div>
+  const tsLabel = type==='peppa' && fire.ts!=null
+    ? `<span class="ammo-fire-ts" onclick="seekYT(${fire.ts})">▶ ${Math.floor(fire.ts/60)}:${String(fire.ts%60).padStart(2,'0')}</span>`
+    : '';
+  return `<div class="ammo-fire-row ${type}" onclick="${type==='peppa'?(fire.ts!=null?`seekYT(${fire.ts})`:''):`speakFull('${escAttr(fire.es)}')`}">
+    <div class="ammo-fire-tag ${type}">${tag}${tsLabel}</div>
     <div class="ammo-fire-es">${fire.es} <span class="vocab-add-btn" onclick="event.stopPropagation();addToVocab('${escAttr(fire.es)}','${escAttr(fire.zh)}','彈藥例句')">＋</span></div>
     <div class="ammo-fire-zh">${fire.zh}</div>
     ${renderAmmoFireChunks(fire)}
@@ -284,6 +287,27 @@ function renderAmmo(){
 function toggleAmmoCard(ammoId){
   const card=document.getElementById('ammo-'+ammoId);
   if(card) card.classList.toggle('ammo-collapsed');
+}
+
+function seekYT(sec){
+  if(window.ytPlayer && typeof ytPlayer.seekTo==='function'){
+    ytPlayer.seekTo(sec, true);
+    ytPlayer.playVideo();
+    // 展開播放器
+    const ytBody=document.getElementById('ytBody');
+    if(ytBody && !ytBody.classList.contains('open')) toggleYT();
+    toast('▶ 跳到 '+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0'));
+  } else {
+    toast('請先開啟下方影片播放器');
+  }
+}
+
+function copyYGUrl(){
+  const el=document.getElementById('yg-url-text');
+  if(!el) return;
+  const url=el.dataset.url||el.textContent;
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>toast('✅ 已複製！')); }
+  else{ const ta=document.createElement('textarea'); ta.value=url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); toast('✅ 已複製！'); }
 }
 
 function toggleAmmo(){
@@ -749,9 +773,10 @@ function render(){
   document.getElementById('fullSent').onclick=()=>speakFull(s.es);
 
   // ── YouGlish 語塊按鈕 keyword ──
-  const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.es.slice(0,20);
-  const ygBtn = document.getElementById('yg-card-btn');
-  if(ygBtn){ ygBtn.onclick = ()=>{ openYGPanel(ygKw); unlockStar(idx + ep * 10); }; ygBtn.querySelector('.yg-label').textContent = ygKw; }
+  const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.chunks.find(c=>c.role==='v')?.w || s.es.slice(0,15);
+  const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish';
+  const urlEl = document.getElementById('yg-url-text');
+  if(urlEl){ urlEl.textContent = ygUrl; urlEl.dataset.url = ygUrl; }
 
   // ── 英西同源槓桿 details 注入 ──
   let cogBox = document.getElementById('cogBox');
