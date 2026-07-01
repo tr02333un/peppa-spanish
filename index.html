@@ -47,10 +47,12 @@
         🔫 看懂骨架了 → 背這句的語塊模組
       </button>
 
-      <!-- YouGlish 真人發音按鈕 -->
-      <button class="btn-yg" id="yg-card-btn" style="width:100%;margin-bottom:12px;padding:10px;border-radius:11px;border:1.5px solid var(--usumizu);background:white;color:var(--misora);font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">
-        📺 YouGlish 真人發音：<span class="yg-label">…</span>
-      </button>
+      <!-- YouGlish 網址（可複製） -->
+      <div class="yg-url-box" id="yg-url-box">
+        <span class="yg-url-label">📺 YouGlish：</span>
+        <span class="yg-url-text" id="yg-url-text" onclick="copyYGUrl()"></span>
+        <span class="yg-copy-btn" onclick="copyYGUrl()">複製</span>
+      </div>
 
       <!-- 翻譯輸入 -->
       <span class="sec-label">你的翻譯</span>
@@ -165,22 +167,6 @@
     </div>
   </div>
 
-  <!-- ── 文法酷庫 瀏覽區 ── -->
-  <div class="card-container">
-    <div class="ammo-book-top" onclick="toggleGrammarLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--misora),var(--benikake))">
-      <div>
-        <div class="pb-book-title">📚 文法酷庫 <span id="grammarUnlockCount">0</span> / 16</div>
-        <div class="pb-book-sub">答對翻譯或造句挑戰後解鎖 · 點擊看詳解</div>
-      </div>
-      <span id="grammarLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
-    </div>
-    <div id="grammarLibBody" class="ammo-body">
-      <button class="btn-conj-sheet" onclick="openConjSheet()">¡Variadísimo! 常用動詞變位速查 →</button>
-      <div class="grammar-cat-chips" id="grammarCatChips"></div>
-      <div id="grammarLibCards"></div>
-    </div>
-  </div>
-
   <!-- ── 陌生詞彙收藏區 ── -->
   <div class="vocab-wrap card-container">
     <div class="ammo-book-top" onclick="toggleVocabBox()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--benikake),#5A6BA8)">
@@ -199,10 +185,55 @@
     <button class="nav-btn" onclick="clearLS()" style="font-size:11px;color:var(--err);border-color:var(--err)">清除所有學習紀錄</button>
   </div>
 
+  <!-- ── 練習關卡 ── -->
+  <div class="stages-wrap card-container">
+    <div class="stages-top" onclick="toggleStages()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="pb-book-title">⚔️ 實戰練習關卡</div>
+        <div class="pb-book-sub">三個難度，從洗牌到造句</div>
+      </div>
+      <span id="stagesToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="stagesBody" class="ammo-body">
+      <!-- Stage 1 -->
+      <div class="stage-section">
+        <div class="stage-header">🃏 第一關：洗牌復原</div>
+        <div class="stage-sub">點語塊，拼出原句順序</div>
+        <div class="stage-controls">
+          <button class="stage-btn" onclick="startStage1()">開始 / 換一句</button>
+        </div>
+        <div id="stage1Target" class="stage-target"></div>
+        <div id="stage1Chunks" class="stage-chunks"></div>
+        <div id="stage1Result" class="stage-result" style="display:none"></div>
+      </div>
+      <!-- Stage 2 -->
+      <div class="stage-section">
+        <div class="stage-header">🔄 第二關：你我互換</div>
+        <div class="stage-sub">點語塊聽發音，左欄 yo → 右欄 tú</div>
+        <div id="stage2Cards" class="stage2-cards"></div>
+      </div>
+      <!-- Stage 3 -->
+      <div class="stage-section">
+        <div class="stage-header">🏗️ 第三關：造句核心</div>
+        <div class="stage-sub">選核心 + 選補語，點輸出聽整句</div>
+        <div id="stage3Area" class="stage3-area"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 文法/語塊說明 Bottom Sheet ── -->
+  <div id="grammarSheet" onclick="closeGrammarSheet()">
+    <div class="grammar-sheet-box" onclick="event.stopPropagation()">
+      <button class="grammar-modal-close" onclick="closeGrammarSheet()">✕</button>
+      <div id="grammarSheetContent"></div>
+    </div>
+  </div>
+
   <script src="episodes.js?v=20260701"></script>
   <script src="ammo.js?v=20260701"></script>
   <script src="cognates.js?v=20260701"></script>
   <script src="grammar.js?v=20260701"></script>
+  <script src="stages.js?v=20260701"></script>
   <script src="script.js?v=20260701"></script>
 </body>
 </html>
