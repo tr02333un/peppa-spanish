@@ -230,3 +230,41 @@ const GRAMMAR_DATA = [
   }
 
 ];
+
+/* 全局句子索引（ep*10 + sentenceIdx）→ grammar_id
+   null = 該句沒有對應的主要文法點 */
+const SENTENCE_GRAMMAR_MAP = {
+  // E1 泥巴坑
+   0:'g01',  // Yo soy Peppa Pig. → SER 身分
+   1:'g01',  // Este es mi hermano → SER 關係
+   2:'g03',  // está lloviendo → ESTAR + -ando
+   3:'g10',  // ¿Podemos salir? → Podemos
+   4:'g11',  // debes ponerte → Deber
+   5:'g08',  // Me encanta saltar → encanta
+   6:'g05',  // ha encontrado → 現在完成式
+   7:'g01',  // sí que es grande → SER 本質
+   8:'g14',  // No pasa nada → 固定用語
+   9:'g09',  // A todos les encanta → A+人+le
+  // E2 恐龍先生不見了
+  10:'g01',  // juguete favorito de George es → SER
+  11: null,  // se va a la cama（反身動詞，無對應文法點）
+  12:'g05',  // ha perdido → 現在完成式
+  13:'g15',  // No te preocupes → 固定用語
+  14:'g01',  // Un detective es una persona → SER 職業
+  15: null,  // siempre se trae（無對應文法點）
+  16:'g02',  // dónde está → ESTAR 位置
+  17:'g02',  // no está en la cama → ESTAR 位置
+  18:'g03',  // están jugando → ESTAR + -ando
+  19:'g06',  // habéis estado saltando → 完成進行式
+  // E3 最好的朋友
+  20:'g03',  // está esperando → ESTAR + -ando
+  21:'g09',  // quiere mucho a Susi → A+人+le 同族結構
+  22:'g01',  // Son las mejores amigas → SER
+  23:'g01',  // Este juego es solo para → SER
+  24:'g01',  // Soy una princesa → SER 身分
+  25:'g09',  // A George no le gusta → A+人+le
+  26:'g07',  // Yo seré la doctora → SER 未來式
+  27:'g16',  // respira hondo / tose → 命令式
+  28:'g13',  // Creo que tienes → Creo que
+  29:'g12',  // para curarse → para + infinitive
+};

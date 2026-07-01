@@ -598,6 +598,8 @@ function render(){
   revealed=false;makeOpen=false;builtTokens=[];
   document.getElementById('answerBox').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
+  const tipEl = document.getElementById('grammarTip');
+  if(tipEl) tipEl.style.display='none';
   document.getElementById('userInput').value='';
   document.getElementById('userInput').className='trans-input';
   document.getElementById('makeBody').classList.remove('show');
@@ -680,6 +682,7 @@ function revealAnswer(){
   document.getElementById('aNoteEn').textContent=s.noteEn;
   document.getElementById('answerBox').classList.add('show');
   document.getElementById('nextBtn').style.display='block';
+  showGrammarTip(ep * 10 + idx);
   if(!answered.includes(idx)){
     answered.push(idx);
     const val=document.getElementById('userInput').value.trim();
@@ -836,6 +839,47 @@ function clearLS(){
 
 // ── 文法酷庫 ──
 let grammarCat = 'all';
+
+function showGrammarTip(globalIdx){
+  const el = document.getElementById('grammarTip');
+  if(!el) return;
+  const gId = SENTENCE_GRAMMAR_MAP[globalIdx];
+  if(!gId){ el.style.display='none'; return; }
+  const g = GRAMMAR_DATA.find(x => x.id===gId);
+  if(!g){ el.style.display='none'; return; }
+  el.style.display = 'block';
+  el.innerHTML = `<div class="grammar-tip-inner" onclick="openGrammarCard('${gId}')">
+    <span class="grammar-tip-icon">💡</span>
+    <div class="grammar-tip-text">
+      <div class="grammar-tip-label">這句的文法點</div>
+      <div class="grammar-tip-title">${g.title}</div>
+    </div>
+    <span class="grammar-tip-arrow">→</span>
+  </div>`;
+}
+
+function openGrammarCard(gId){
+  const g = GRAMMAR_DATA.find(x => x.id===gId);
+  if(!g) return;
+  const body = document.getElementById('grammarBody');
+  const tog  = document.getElementById('grammarToggle');
+  if(!body.classList.contains('open')){
+    body.classList.add('open');
+    tog.textContent = '▲ 收起';
+    renderGrammar();
+  }
+  if(grammarCat !== g.cat){ grammarCat = g.cat; renderGrammarFilter(); renderGrammarCards(); }
+  setTimeout(()=>{
+    document.querySelector('.grammar-section').scrollIntoView({behavior:'smooth',block:'start'});
+    const allInCat = GRAMMAR_DATA.filter(x => x.cat===g.cat);
+    const cardIdx  = allInCat.findIndex(x => x.id===gId);
+    const cards    = document.querySelectorAll('#grammarList .grammar-card');
+    if(cards[cardIdx]){
+      cards[cardIdx].classList.add('grammar-card-hl');
+      setTimeout(()=>cards[cardIdx].classList.remove('grammar-card-hl'), 2000);
+    }
+  }, 120);
+}
 
 function speakSentence(text){
   if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
