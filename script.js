@@ -186,11 +186,19 @@ function cycleAmmoStar(id){
 
 function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
 
+function getPersonClass(w){
+  const t = w.replace(/[¡¿（）]/g,'').trim().toLowerCase();
+  if(t==='yo') return 'person-yo';
+  if(t==='tú'||t==='tu') return 'person-tu';
+  return '';
+}
+
 function renderAmmoFireChunks(fire){
   if(!fire.chunks || !fire.chunks.length) return '';
-  return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>
-    `<span class="ammo-fire-chunk role-${c.role||'plain'}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>`
-  ).join('')}</div>`;
+  return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>{
+    const personCls=c.role==='s'?getPersonClass(c.w):'';
+    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>`;
+  }).join('')}</div>`;
 }
 
 function renderAmmoFireRow(fire, type){
@@ -766,7 +774,8 @@ function render(){
   area.innerHTML='';
   s.chunks.forEach(c=>{
     const div=document.createElement('div');div.className='chunk';
-    const pill=document.createElement('div');pill.className='chunk-pill role-'+(c.role||'plain');
+    const personCls=c.role==='s'?getPersonClass(c.w):'';
+    const pill=document.createElement('div');pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'');
     const word=document.createElement('span');word.textContent=c.w;
     const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
     addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};

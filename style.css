@@ -9,6 +9,12 @@ summary { list-style: none; outline: none; }
   --bg:#EEF7F9;--bg2:#F5FAFA;--card:#fff;
   --tdark:#1A2E3B;--tmid:#4A6572;--tlight:#8AABB8;
   --ok:#3DB87A;--err:#E05C5C;
+  /* Venngage 馬卡龍語塊配色 */
+  --vn-lake-green:#A7FFEB;
+  --vn-lavender-purple:#E8DFFF;
+  --vn-baby-blue:#B3E5FC;
+  --vn-bubble-pink:#FFD1DC;
+  --vn-border-gray:#424242;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 40px;color:var(--tdark)}
@@ -50,30 +56,27 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* CHUNKS — S(主詞) V(動詞) O(受詞) */
 .chunks-area{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;padding:12px 8px;background:var(--bg2);border-radius:13px;border:1px solid var(--usumizu)}
 .chunk{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
-.chunk-pill{font-size:14px;font-weight:800;border-radius:8px;padding:5px 10px;line-height:1.3;transition:all .15s;min-height:34px;display:flex;align-items:center;gap:5px}
-.chunk:active .chunk-pill{transform:scale(.95)}
+.chunk-pill{font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
+.chunk:active .chunk-pill{opacity:.75}
 
 /* 主詞 S — 虛線框 */
-.chunk-pill.role-s{border:2px dashed var(--misora);background:white;color:var(--konpeki)}
-.chunk:hover .chunk-pill.role-s{background:rgba(108,155,210,.1);transform:translateY(-2px)}
+.chunk-pill.role-s{background:#FAFAFA}
 
 /* 動詞 V — 實色底 */
-.chunk-pill.role-v{border:none;background:var(--misora);color:white}
-.chunk:hover .chunk-pill.role-v{background:var(--konpeki);transform:translateY(-2px)}
+.chunk-pill.role-v{background:var(--vn-baby-blue)}
 
 /* 受詞 O — 實線框（也用於整句/子句包框）*/
-.chunk-pill.role-o{border:2px solid var(--misora);background:white;color:var(--konpeki)}
-.chunk:hover .chunk-pill.role-o{background:rgba(108,155,210,.1);transform:translateY(-2px)}
+.chunk-pill.role-o{background:var(--vn-bubble-pink)}
 
 /* 連接詞/介詞 C — 淡色小卡，無框，跟 S/V/O 區隔開但仍是獨立語塊 */
-.chunk-pill.role-c{border:none;background:rgba(184,200,209,.35);color:var(--tmid);font-weight:700;padding:4px 9px;font-size:13px}
-.chunk:hover .chunk-pill.role-c{background:rgba(184,200,209,.6);color:var(--konpeki)}
+.chunk-pill.role-c{background:var(--vn-bubble-pink)}
 
 /* 其他純文字（稱呼/感嘆詞等，非連接詞）— 完全無底色 */
-.chunk-pill.role-plain{border:none;background:transparent;color:var(--tmid);font-weight:600;padding:5px 3px}
-.chunk:hover .chunk-pill.role-plain{color:var(--konpeki)}
+.chunk-pill.role-plain{background:#FAFAFA}
+.chunk-pill.person-yo{background:var(--vn-lake-green) !important}
+.chunk-pill.person-tu{background:var(--vn-lavender-purple) !important}
 
-.chunk.playing .chunk-pill{animation:ripple .4s ease}
+.chunk.playing .chunk-pill{opacity:.7}
 @keyframes ripple{0%{box-shadow:0 0 0 0 rgba(108,155,210,.4)}100%{box-shadow:0 0 0 10px rgba(108,155,210,0)}}
 
 .ammo-flash{animation:ammoFlash 1.2s ease}
