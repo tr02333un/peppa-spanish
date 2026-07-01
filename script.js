@@ -941,6 +941,18 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
+function annotateConjTable(text){
+  return text.replace(
+    /([A-Za-záéíóúüñÁÉÍÓÚÜÑ]+(?:\s*\/\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+){5})/,
+    function(match){
+      const forms = match.split(/\s*\/\s*/);
+      if(forms.length !== 6) return match;
+      const zh = CONJ_ORDER_ZH;
+      return `<table class="conj-table"><tr><th>${zh[0]}</th><th>${zh[1]}</th><th>${zh[2]}</th></tr><tr><td>${forms[0]}</td><td>${forms[1]}</td><td>${forms[2]}</td></tr><tr><th>${zh[3]}</th><th>${zh[4]}</th><th>${zh[5]}</th></tr><tr><td>${forms[3]}</td><td>${forms[4]}</td><td>${forms[5]}</td></tr></table>`;
+    }
+  );
+}
+
 function openGrammarCard(gId){
   const g = GRAMMAR_DATA.find(x => x.id===gId);
   if(!g) return;
@@ -956,7 +968,7 @@ function openGrammarCard(gId){
     <div class="grammar-title">${g.title}</div>
     <div class="grammar-rule">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
-    <div class="grammar-trap">${g.trap}</div>
+    <div class="grammar-trap">${annotateConjTable(g.trap)}</div>
     <div class="grammar-source">📍 ${g.source}</div>
   `;
   document.getElementById('grammarModal').classList.add('open');
