@@ -310,7 +310,7 @@ const COGNATE_LIBRARY = [
 const SUFFIX_PATTERNS = [
   {
     rule: '-tion → -ción',
-    hint: '看到英文 -tion 結尾，直接把 -tion 換成 -ción，發音接近！（例：education → la educación）<br><strong>🔔 這類字全部都是陰性，前面記得自動加上 la 喔！</strong>',
+    hint: '看到英文 -tion 結尾，直接把 -tion 換成 la__ -ción，發音接近！（例：education → la educación）<br><strong>🔔 這類字全部都是陰性！</strong>',
     words: [
       {en:'nation',      es:'nación',       art:'la', zh:'國家',   ex:{es:'La nación entera celebra.',      zh:'整個國家都在慶祝。', chunks:[{w:"La nación entera",role:"s"},{w:"celebra.",role:"v"}]}},
       {en:'action',      es:'acción',       art:'la', zh:'行動',   ex:{es:'¡En acción!',                   zh:'行動！', chunks:[{w:"¡En acción!",role:"c"}]}},
@@ -322,7 +322,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ty → -dad',
-    hint: '看到英文 -ty 結尾，直接把 -ty 換成 -dad，唸起來也很像！（例：university → la universidad）<br><strong>🔔 這類字全部都是陰性，前面記得自動加上 la 喔！</strong>',
+    hint: '看到英文 -ty 結尾，直接把 -ty 換成 la__ -dad，唸起來也很像！（例：university → la universidad）<br><strong>🔔 這類字全部都是陰性！</strong>',
     words: [
       {en:'city',        es:'ciudad',       art:'la', zh:'城市',   ex:{es:'La ciudad es muy grande.',      zh:'這個城市很大。', chunks:[{w:"La ciudad",role:"s"},{w:"es",role:"v"},{w:"muy grande.",role:"c"}]}},
       {en:'reality',     es:'realidad',     art:'la', zh:'現實',   ex:{es:'En la realidad es diferente.',  zh:'現實中不一樣。', chunks:[{w:"En la realidad",role:"c"},{w:"es",role:"v"},{w:"diferente.",role:"c"}]}},
@@ -334,7 +334,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ce / -cy → -cia / -ncia',
-    hint: '英文 -ce/-cy 結尾 → 西語 -cia/-ncia（全部陰性，記得加 la）',
+    hint: '英文 -ce/-cy 結尾 → 西語 la__ -cia/-ncia（全部陰性）',
     words: [
       {en:'patience',    es:'paciencia',    art:'la', zh:'耐心',   ex:{es:'Hay que tener paciencia.',      zh:'要有耐心。', chunks:[{w:"Hay que tener",role:"v"},{w:"paciencia.",role:"o"}]}},
       {en:'experience',  es:'experiencia',  art:'la', zh:'經驗',   ex:{es:'Tiene mucha experiencia.',      zh:'她很有經驗。', chunks:[{w:"Tiene",role:"v"},{w:"mucha experiencia.",role:"o"}]}},
@@ -345,7 +345,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ment → -mento / -miento',
-    hint: '英文 -ment → 西語 -mento 或 -miento，動作名詞化的規律！全部陽性（el）',
+    hint: '英文 -ment → 西語 el__ -mento / -miento，動作名詞化的規律！全部陽性',
     words: [
       {en:'moment',     es:'momento',      art:'el', zh:'時刻',   ex:{es:'Es el momento perfecto.',        zh:'這是完美的時刻。', chunks:[{w:"Es",role:"v"},{w:"el momento perfecto.",role:"c"}]}},
       {en:'movement',   es:'movimiento',   art:'el', zh:'動作',   ex:{es:'Haz el movimiento lento.',      zh:'動作慢一點做。', chunks:[{w:"Haz",role:"v"},{w:"el movimiento",role:"o"},{w:"lento.",role:"c"}]}},
@@ -356,7 +356,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ble → -ble',
-    hint: '英文 -ble 字尾幾乎完全保留！看英文直接念西語！形容詞無冠詞',
+    hint: '英文 -ble 形容詞字尾直接念西語！幾乎完全保留，無冠詞（形容詞不用 el/la）',
     words: [
       {en:'possible',    es:'posible',      art:'', zh:'可能的',     ex:{es:'Todo es posible.',              zh:'一切都是可能的。', chunks:[{w:"Todo",role:"s"},{w:"es",role:"v"},{w:"posible.",role:"c"}]}},
       {en:'terrible',    es:'terrible',     art:'', zh:'可怕的',     ex:{es:'¡Es terrible!',                zh:'太可怕了！', chunks:[{w:"¡Es",role:"v"},{w:"terrible!",role:"c"}]}},
@@ -367,7 +367,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-or → -or / -ora（職業）',
-    hint: '英文 -or 職業 → 西語 -or（男 el）/ -ora（女 la）；actor 例外變 actriz',
+    hint: '英文 -or 職業 → 西語 el__ -or（男）/ la__ -ora（女）；actor 例外變 actriz',
     words: [
       {en:'doctor',    es:'doctor',    art:'el', zh:'醫生',   gendered:{ms:'doctor',fs:'doctora',mp:'doctores',fp:'doctoras'},   ex:{es:'La doctora es muy buena.',    zh:'這位醫生很厲害。', chunks:[{w:"La doctora",role:"s"},{w:"es",role:"v"},{w:"muy buena.",role:"c"}]}},
       {en:'actor',     es:'actor',     art:'el', zh:'演員',   gendered:{ms:'actor',fs:'actriz',mp:'actores',fp:'actrices'},      ex:{es:'Es un actor famoso.',         zh:'他是知名演員。', chunks:[{w:"Es",role:"v"},{w:"un actor famoso.",role:"c"}]}},
@@ -378,7 +378,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-y → -ia（名詞）',
-    hint: '英文 -y 結尾名詞 → 西語 -ia，發音接近，幾乎零學習成本！全部陰性（la）',
+    hint: '英文 -y → 西語 la__ -ia，名詞字尾，發音接近，幾乎零學習成本！全部陰性',
     words: [
       {en:'history',   es:'historia',  art:'la', zh:'歷史',   ex:{es:'Me gusta la historia.',          zh:'我喜歡歷史。', chunks:[{w:"Me gusta",role:"v"},{w:"la historia.",role:"s"}]}},
       {en:'memory',    es:'memoria',   art:'la', zh:'記憶',   ex:{es:'Tiene buena memoria.',           zh:'她記憶力很好。', chunks:[{w:"Tiene",role:"v"},{w:"buena memoria.",role:"o"}]}},
