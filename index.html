@@ -89,6 +89,9 @@
         </div>
       </div>
 
+      <!-- 文法情境提示（看完答案後出現） -->
+      <div id="grammarTip" style="display:none;margin:10px 0 2px"></div>
+
       <div class="btn-row">
         <button class="btn btn-reveal" onclick="revealAnswer()">👀 看答案</button>
         <button class="btn btn-next" id="nextBtn" onclick="nextCard()">下一句 →</button>
@@ -149,6 +152,14 @@
     <div id="cogLibraryBody" class="cog-library-body"></div>
   </div>
 
+  <!-- ── 文法酷庫 Modal ── -->
+  <div id="grammarModal" onclick="closeGrammarModal()">
+    <div class="grammar-modal-box" onclick="event.stopPropagation()">
+      <button class="grammar-modal-close" onclick="closeGrammarModal()">✕</button>
+      <div id="grammarModalContent"></div>
+    </div>
+  </div>
+
   <!-- ── 陌生詞彙收藏區 ── -->
   <div class="vocab-wrap card-container">
     <div class="ammo-book-top" onclick="toggleVocabBox()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--benikake),#5A6BA8)">
@@ -170,6 +181,7 @@
   <script src="episodes.js"></script>
   <script src="ammo.js"></script>
   <script src="cognates.js"></script>
+  <script src="grammar.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

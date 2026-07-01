@@ -598,6 +598,8 @@ function render(){
   revealed=false;makeOpen=false;builtTokens=[];
   document.getElementById('answerBox').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
+  const tipEl = document.getElementById('grammarTip');
+  if(tipEl) tipEl.style.display='none';
   document.getElementById('userInput').value='';
   document.getElementById('userInput').className='trans-input';
   document.getElementById('makeBody').classList.remove('show');
@@ -680,6 +682,7 @@ function revealAnswer(){
   document.getElementById('aNoteEn').textContent=s.noteEn;
   document.getElementById('answerBox').classList.add('show');
   document.getElementById('nextBtn').style.display='block';
+  showGrammarTip(ep * 10 + idx);
   if(!answered.includes(idx)){
     answered.push(idx);
     const val=document.getElementById('userInput').value.trim();
@@ -832,6 +835,70 @@ function clearLS(){
   ammoUnlocked=[];ammoStars={};vocabList=[];
   renderAmmo();renderVocab();
   toast('已清除所有學習紀錄');
+}
+
+// ── 文法酷庫 ──
+
+function showGrammarTip(globalIdx){
+  const el = document.getElementById('grammarTip');
+  if(!el) return;
+  const gId = SENTENCE_GRAMMAR_MAP[globalIdx];
+  if(!gId){ el.style.display='none'; return; }
+  const g = GRAMMAR_DATA.find(x => x.id===gId);
+  if(!g){ el.style.display='none'; return; }
+  el.style.display = 'block';
+  el.innerHTML = `<div class="grammar-tip-inner" onclick="openGrammarCard('${gId}')">
+    <span class="grammar-tip-icon">💡</span>
+    <div class="grammar-tip-text">
+      <div class="grammar-tip-label">這句的文法點</div>
+      <div class="grammar-tip-title">${g.title}</div>
+    </div>
+    <span class="grammar-tip-arrow">→</span>
+  </div>`;
+}
+
+function openGrammarCard(gId){
+  const g = GRAMMAR_DATA.find(x => x.id===gId);
+  if(!g) return;
+  const catLabel = (GRAMMAR_CATS.find(c=>c.key===g.cat)||{label:''}).label;
+  const exHtml = g.examples.map(ex =>
+    `<div class="grammar-ex-row" onclick="speakSentence('${escAttr(ex.es)}')">
+      <div class="grammar-ex-es">▶ ${ex.es}</div>
+      <div class="grammar-ex-zh">${ex.zh}</div>
+    </div>`
+  ).join('');
+  document.getElementById('grammarModalContent').innerHTML = `
+    <div class="grammar-cat-tag">${catLabel}</div>
+    <div class="grammar-title">${g.title}</div>
+    <div class="grammar-rule">${g.rule}</div>
+    <div class="grammar-examples">${exHtml}</div>
+    <div class="grammar-trap">${g.trap}</div>
+    <div class="grammar-source">📍 ${g.source}</div>
+  `;
+  document.getElementById('grammarModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGrammarModal(){
+  document.getElementById('grammarModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function speakSentence(text){
+  if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'es-ES';
+  utt.rate = 0.82;
+  utt.pitch = 1.05;
+  utt.volume = 1;
+  if(ttsVoice) utt.voice = ttsVoice;
+  const dot = document.getElementById('ttsDot');
+  if(dot){ dot.classList.remove('ready'); dot.classList.add('speaking'); }
+  utt.onend = () => { if(dot){ dot.classList.remove('speaking'); dot.classList.add('ready'); } };
+  setTimeout(() => {
+    try{ speechSynthesis.speak(utt); }catch(e){ toast('⚠️ 語音播放失敗'); }
+  }, 0);
 }
 
 // ── INIT ──
