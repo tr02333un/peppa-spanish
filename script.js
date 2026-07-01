@@ -1093,7 +1093,7 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
-function buildConjTable(conj){
+function buildConjTable(conj, gId){
   if(!conj || !conj.rows || !conj.rows.length) return '';
   const renderRow = r =>
     `<div class="conj-row">
@@ -1108,11 +1108,47 @@ function buildConjTable(conj){
   const restHtml = rest3.length
     ? `<details class="conj-expand"><summary class="conj-expand-summary">我們／你們／他們 ▾</summary>${rest3.map(renderRow).join('')}</details>`
     : '';
+  const jumpBtn = gId ? `<div class="conj-jump-btn" onclick="jumpToConjLib('${gId}')">🔄 查完整變位庫 →</div>` : '';
   return `<div class="conj-section">
     <div class="conj-title">¡Variadísimo! 變位速查</div>
     <div class="conj-verb-label">${conj.verb}</div>
     <div class="conj-rows">${main3}${restHtml}</div>
+    ${jumpBtn}
   </div>`;
+}
+
+// ── 🔄 動詞變位庫（獨立瀏覽區）──
+function renderConjLibrary(){
+  const el = document.getElementById('conjLibBody');
+  if(!el) return;
+  const verbs = GRAMMAR_DATA.filter(g=>g.conj && g.conj.rows && g.conj.rows.length);
+  el.innerHTML = verbs.map(g=>`
+    <div class="conj-lib-card" id="conjlib-${g.id}">
+      <div class="conj-lib-header">${g.conj.verb}</div>
+      ${buildConjTable(g.conj)}
+    </div>`).join('');
+}
+
+function toggleConjLib(){
+  const body=document.getElementById('conjLibBody');
+  const t=document.getElementById('conjLibToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+function jumpToConjLib(gId){
+  closeGrammarSheet();
+  const body=document.getElementById('conjLibBody');
+  const t=document.getElementById('conjLibToggle');
+  body.classList.add('open');
+  t.textContent='▲ 收起';
+  setTimeout(()=>{
+    const card=document.getElementById('conjlib-'+gId);
+    if(!card) return;
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    card.classList.add('ammo-flash');
+    setTimeout(()=>card.classList.remove('ammo-flash'),1200);
+  },80);
 }
 
 function openGrammarCard(gId){
@@ -1131,8 +1167,8 @@ function openGrammarCard(gId){
     <div class="grammar-title">${g.title}</div>
     <div class="${ruleClass}">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
-    ${buildConjTable(g.conj)}
-    <div class="grammar-trap">⚠️ ${g.trap}</div>
+    ${buildConjTable(g.conj, g.id)}
+    <div class="grammar-trap">${g.trap}</div>
     <div class="grammar-source">📍 ${g.source}</div>
   `);
 }
@@ -1197,6 +1233,7 @@ function speakSentence(text){
   render();
   renderAmmo();
   renderCogLibrary();
+  renderConjLibrary();
   renderVocab();
   initTTS();
 })();
