@@ -335,7 +335,7 @@ function renderCogLibrary(filter){
         <div class="cog-row">
           <span class="cog-en">${w.en}</span>
           <span class="cog-arrow">→</span>
-          <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.es}</span>
+          <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.art?`<span class="cog-art">${w.art}</span> `:''}${w.es}</span>
           <span class="cog-zh">${w.zh}</span>
           <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
         </div>`).join('');
