@@ -33,7 +33,7 @@ const GRAMMAR_DATA = [
       {es:"Este es mi hermano pequeño.", zh:"這是我的小弟弟。（關係）"},
       {es:"Son las mejores amigas.", zh:"她們是最好的朋友。（本質關係）"}
     ],
-    trap:"⚠️ 「她在廚房」= Está en la cocina，位置要用 ESTAR，不用 SER！",
+    trap:"「她在廚房」= Está en la cocina，位置要用 ESTAR，不用 SER！",
     source:"E1·S1 / E1·S2 / E3·S3"
   },
 
@@ -46,20 +46,20 @@ const GRAMMAR_DATA = [
       {es:"Peppa está esperando a Susi Sheep.", zh:"佩佩正在等蘇西羊。（進行中）"},
       {es:"Estoy cansada.", zh:"我現在很累。（暫時狀態）"}
     ],
-    trap:"⚠️ 口訣：SER = 本質身分（永久）；ESTAR = 位置狀態（暫時）",
+    trap:"口訣：SER = 本質身分（永久）；ESTAR = 位置狀態（暫時）",
     source:"E2·S8 / E3·S1"
   },
 
   {
     id:"g03", cat:"ser-estar",
-    title:"ESTAR + -ando：現在進行式",
-    rule:"ESTAR（正確人稱）+ 動詞 -ando / -iendo = 正在做某事。",
+    title:"ESTAR + -ando：正在做某事",
+    rule:"ESTAR（正確人稱）+ 動詞字尾改成 -ando / -iendo = 正在做某事。就像英文的 -ing！",
     examples:[
-      {es:"Hoy está lloviendo.", zh:"今天正在下雨。（está + lloviendo）"},
-      {es:"Peppa y papá Pig están jugando a las damas.", zh:"佩佩和豬爸爸正在下棋。（están + jugando）"},
-      {es:"Estoy esperando el autobús.", zh:"我正在等公車。（estoy + esperando）"}
+      {es:"Hoy está lloviendo.", zh:"今天正在下雨。（está + llovier → lloviendo）"},
+      {es:"Peppa y papá Pig están jugando a las damas.", zh:"佩佩和豬爸爸正在下棋。（están + jugar → jugando）"},
+      {es:"Estoy esperando el autobús.", zh:"我正在等公車。（estoy + esperar → esperando）"}
     ],
-    trap:"⚠️ -ar 動詞 → -ando（jugar→jugando）；-er/-ir 動詞 → -iendo（comer→comiendo）",
+    trap:"-ar 動詞字尾換 -ando（jugar → jugando）；-er/-ir 動詞字尾換 -iendo（comer → comiendo）",
     source:"E1·S3 / E2·S9 / E3·S1"
   },
 
@@ -72,7 +72,7 @@ const GRAMMAR_DATA = [
       {es:"La sopa está buena.", zh:"這湯現在很好喝。（ESTAR：當下狀態）"},
       {es:"Soy aburrida. vs Estoy aburrida.", zh:"我是無聊的人（SER）vs 我現在很無聊（ESTAR）"}
     ],
-    trap:"⚠️ 問自己：這是「天生/本質」的特質，還是「當下/暫時」的狀態？",
+    trap:"問自己：這是「天生/本質」的特質，還是「當下/暫時」的狀態？",
     source:"E1~E3 綜合"
   },
 
@@ -80,14 +80,14 @@ const GRAMMAR_DATA = [
 
   {
     id:"g05", cat:"tense",
-    title:"現在完成式：haber + 過去分詞",
-    rule:"haber（助動詞）+ 過去分詞 = 「已經做了某事」，結果跟現在有關。",
+    title:"現在完成式：haber + 動詞-ado/-ido形",
+    rule:"haber（助動詞）+ 動詞-ado/-ido形 = 「已經做了某事」，結果跟現在有關。",
     examples:[
       {es:"Peppa ha encontrado un charco pequeño.", zh:"佩佩找到了一個小水坑。（ha + encontrado）"},
       {es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。（ha + perdido）"},
       {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。（第一人稱用 he）"}
     ],
-    trap:"⚠️ 過去分詞規則：-ar → -ado（encontrar→encontrado）；-er/-ir → -ido（perder→perdido）",
+    trap:"字尾規則：-ar → -ado（encontrar→encontrado）；-er/-ir → -ido（perder→perdido）",
     source:"E1·S7 / E2·S3"
   },
 
@@ -100,7 +100,7 @@ const GRAMMAR_DATA = [
       {es:"He estado estudiando toda la tarde.", zh:"我整個下午都在念書。"},
       {es:"Mamá ha estado cocinando.", zh:"媽媽一直在煮飯。"}
     ],
-    trap:"⚠️ habéis = 你們（西班牙用法）；拉美用 han。英語對應：have been + -ing",
+    trap:"habéis = 你們（西班牙用法）；拉美用 han。英語對應：have been + -ing",
     source:"E2·S10"
   },
 
@@ -113,7 +113,7 @@ const GRAMMAR_DATA = [
       {es:"Tú serás una estrella.", zh:"你將成為一顆明星。"},
       {es:"¿Qué serás de mayor?", zh:"你長大想做什麼？（字面：你將成為什麼？）"}
     ],
-    trap:"⚠️ SER 未來式：seré / serás / será / seremos / seréis / serán",
+    trap:"SER 未來式：seré / serás / será / seremos / seréis / serán",
     source:"E3·S7"
   },
 
@@ -124,11 +124,13 @@ const GRAMMAR_DATA = [
     title:"Me gusta vs Me encanta：喜歡的程度",
     rule:"Me gusta = 我喜歡（普通）；Me encanta = 我超愛（更強烈）。動詞跟著事物的單複數走。",
     examples:[
-      {es:"Me gusta el chocolate.", zh:"我喜歡巧克力。（單數名詞用 gusta）"},
+      {es:"Me gusta el chocolate.", zh:"我喜歡巧克力。（單數 → gusta）"},
       {es:"Me encanta saltar en los charcos.", zh:"我超愛在水坑裡跳。"},
-      {es:"Me gustan las galletas.", zh:"我喜歡餅乾。（複數名詞用 gustan）"}
+      {es:"Me gustan las galletas.", zh:"我喜歡餅乾。（複數 → gustan）"},
+      {es:"No me gusta la lluvia.", zh:"我不喜歡下雨。（否定：前面加 no）"},
+      {es:"¿Te gusta el chocolate?", zh:"你喜歡巧克力嗎？（問句：me換成 te）"}
     ],
-    trap:"⚠️ 動詞跟著「被喜歡的事物」走，不跟說話者：Me gusta（單）vs Me gustan（複）",
+    trap:"動詞跟著「被喜歡的事物」走，不跟說話者：Me gusta（單）vs Me gustan（複）",
     source:"E1·S6 / E1·S10"
   },
 
@@ -141,7 +143,7 @@ const GRAMMAR_DATA = [
       {es:"A todos les encanta saltar en los charcos.", zh:"所有人都超愛在水坑裡跳。"},
       {es:"A mí me gusta el café.", zh:"我喜歡咖啡。（加 a mí 是為了強調）"}
     ],
-    trap:"⚠️ 代名詞對應：a mí me / a ti te / a él,ella le / a nosotros nos / a vosotros os / a ellos les",
+    trap:"代名詞對應：a mí me / a ti te / a él,ella le / a nosotros nos / a vosotros os / a ellos les",
     source:"E3·S6 / E1·S10"
   },
 
@@ -156,7 +158,7 @@ const GRAMMAR_DATA = [
       {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？"},
       {es:"¿Podemos ver la tele?", zh:"我們可以看電視嗎？"}
     ],
-    trap:"⚠️ poder 有不規則變化：puedo / puedes / puede / podemos / podéis / pueden",
+    trap:"poder 有不規則變化：puedo / puedes / puede / podemos / podéis / pueden",
     source:"E1·S4"
   },
 
@@ -169,7 +171,7 @@ const GRAMMAR_DATA = [
       {es:"Debes lavarte las manos.", zh:"你必須洗手。"},
       {es:"Debemos respetar las reglas.", zh:"我們應該遵守規則。"}
     ],
-    trap:"⚠️ deber 變化：debo / debes / debe / debemos / debéis / deben",
+    trap:"deber 變化：debo / debes / debe / debemos / debéis / deben",
     source:"E1·S5"
   },
 
@@ -182,7 +184,7 @@ const GRAMMAR_DATA = [
       {es:"Necesitas agua para vivir.", zh:"你需要水才能生存。"},
       {es:"Estudio español para viajar.", zh:"我學西語是為了旅行。"}
     ],
-    trap:"⚠️ para（目的）vs por（原因）：Estudio por dinero = 我讀書是因為錢（原因）",
+    trap:"para（目的）vs por（原因）：Estudio por dinero = 我讀書是因為錢（原因）",
     source:"E3·S10"
   },
 
@@ -195,7 +197,7 @@ const GRAMMAR_DATA = [
       {es:"Creo que tienes fiebre.", zh:"我認為你發燒了。"},
       {es:"Creo que tienes razón.", zh:"我認為你說得對。"}
     ],
-    trap:"⚠️ 口語快速版：Creo que sí（我覺得是）/ Creo que no（我覺得不是）",
+    trap:"口語快速版：Creo que sí（我覺得是）/ Creo que no（我覺得不是）",
     source:"E3·S9"
   },
 
@@ -210,7 +212,7 @@ const GRAMMAR_DATA = [
       {es:"No pasa nada, yo te ayudo.", zh:"沒關係，我來幫你。"},
       {es:"Lo siento. No pasa nada.", zh:"對不起。——沒關係。"}
     ],
-    trap:"⚠️ 超萬用！道歉回應、安慰他人、自我寬解都能用，記起來終身受益！",
+    trap:"超萬用！道歉回應、安慰他人、自我寬解都能用，記起來終身受益！",
     source:"E1·S9"
   },
 
@@ -223,7 +225,7 @@ const GRAMMAR_DATA = [
       {es:"No te preocupes por el examen.", zh:"不要為考試擔心。"},
       {es:"No te preocupes, todo va a salir bien.", zh:"不要擔心，一切都會順利的。"}
     ],
-    trap:"⚠️ 正式場合用：No se preocupe（對 usted）；跟朋友/家人用 No te preocupes",
+    trap:"正式場合用：No se preocupe（對 usted）；跟朋友/家人用 No te preocupes",
     source:"E2·S4"
   },
 
@@ -236,7 +238,7 @@ const GRAMMAR_DATA = [
       {es:"Tose.", zh:"咳嗽。（toser → tose）"},
       {es:"Abre la boca, por favor.", zh:"請張開嘴巴。（abrir → abre）"}
     ],
-    trap:"⚠️ 否定命令完全不同：No abras la boca（不要張嘴）。例外：ir→ve, ser→sé, hacer→haz",
+    trap:"否定命令完全不同：No abras la boca（不要張嘴）。例外：ir→ve, ser→sé, hacer→haz",
     source:"E3·S8"
   }
 
