@@ -1,4 +1,60 @@
-/* ── 文法酷庫資料：從 S1 E1~E3 課文萃取 ── */
+/* ── 人稱代名詞查詢庫 ── */
+const PRONOUN_LIBRARY = [
+  {
+    cat:'主詞代名詞', catEn:'Subject',
+    hint:'做動作的人，西語常省略不寫（動詞字尾就看得出來）',
+    rows:[
+      {es:'yo',            zh:'我',       en:'I'},
+      {es:'tú',             zh:'你',       en:'you'},
+      {es:'él / ella',      zh:'他 / 她',  en:'he / she'},
+      {es:'nosotros',       zh:'我們',     en:'we'},
+      {es:'vosotros',       zh:'你們（西班牙）', en:'you all', note:'拉美常用 ustedes 取代'},
+      {es:'ellos / ellas',  zh:'他們 / 她們', en:'they'}
+    ]
+  },
+  {
+    cat:'直接受詞代名詞', catEn:'Direct Object (him/her/it/them)',
+    hint:'代替「東西/人」本身，動作直接砸在它身上——英文的 him/her/it/them',
+    rows:[
+      {es:'me',   zh:'我（被...）',  en:'me'},
+      {es:'te',   zh:'你（被...）',  en:'you'},
+      {es:'lo / la', zh:'他/她/它（被...）', en:'him / her / it'},
+      {es:'nos',  zh:'我們（被...）', en:'us'},
+      {es:'os',   zh:'你們（被...）', en:'you all'},
+      {es:'los / las', zh:'他們/她們（被...）', en:'them'}
+    ],
+    example:{es:'Compro el libro. → Lo compro.', zh:'我買這本書。→ 我買它。'}
+  },
+  {
+    cat:'間接受詞代名詞', catEn:'Indirect Object (to him/to her/to them)',
+    hint:'「給誰/對誰」——動作的收件人，英文的 to him / to her / to them',
+    rows:[
+      {es:'me',   zh:'給我',   en:'to me'},
+      {es:'te',   zh:'給你',   en:'to you'},
+      {es:'le',   zh:'給他/她/您', en:'to him / to her / to you(formal)'},
+      {es:'nos',  zh:'給我們', en:'to us'},
+      {es:'os',   zh:'給你們', en:'to you all'},
+      {es:'les',  zh:'給他們/她們/您們', en:'to them'}
+    ],
+    example:{es:'Doy el libro a María. → Le doy el libro.', zh:'我把書給瑪麗亞。→ 我把書給她。'},
+    note:'⚡ 超級重點：收件人是特定的名字時，代名詞和名字通常會同時出現！Le doy el libro a María.（Le 和 a María 兩個都要寫）'
+  },
+  {
+    cat:'反身代名詞', catEn:'Reflexive (myself/yourself/himself)',
+    hint:'自己對自己做的動作——英文的 myself/yourself/himself',
+    rows:[
+      {es:'me',   zh:'我自己',  en:'myself'},
+      {es:'te',   zh:'你自己',  en:'yourself'},
+      {es:'se',   zh:'他/她自己', en:'himself / herself'},
+      {es:'nos',  zh:'我們自己', en:'ourselves'},
+      {es:'os',   zh:'你們自己', en:'yourselves'},
+      {es:'se',   zh:'他們/她們自己', en:'themselves'}
+    ],
+    example:{es:'Me lavo las manos.', zh:'我（自己）洗手。'}
+  }
+];
+
+
 
 const GRAMMAR_CATS = [
   {key:"all",          label:"全部"},
