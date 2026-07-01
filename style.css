@@ -261,8 +261,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-section{display:flex;flex-direction:column;gap:6px}
 .ammo-fire-row{border-radius:9px;padding:8px 11px;cursor:pointer;transition:opacity .15s}
 .ammo-fire-row:active{opacity:.7}
-.ammo-fire-row.peppa{background:rgba(108,155,210,.1);border-left:3px solid var(--misora)}
-.ammo-fire-row.daily{background:rgba(108,155,210,.05);border-left:3px solid var(--sora)}
+.ammo-fire-row.peppa{background:rgba(108,155,210,.1);border:1.5px solid var(--misora)}
+.ammo-fire-row.daily{background:white;border:1.5px dashed var(--misora)}
 .ammo-fire-tag{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px;display:flex;align-items:center;gap:6px}
 .ammo-fire-tag.peppa{color:var(--misora)}
 .ammo-fire-tag.daily{color:var(--konpeki)}
