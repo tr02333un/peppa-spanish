@@ -343,6 +343,63 @@ const SUFFIX_PATTERNS = [
       {en:'difference',  es:'diferencia',   zh:'差異'},
     ]
   },
+  {
+    rule: '-ment → -mento / -miento',
+    hint: '英文 -ment → 西語 -mento 或 -miento，動作名詞化的規律！',
+    words: [
+      {en:'moment',     es:'momento',      zh:'時刻'},
+      {en:'movement',   es:'movimiento',   zh:'動作／運動'},
+      {en:'sentiment',  es:'sentimiento',  zh:'情感'},
+      {en:'instrument', es:'instrumento',  zh:'樂器'},
+      {en:'argument',   es:'argumento',    zh:'論點'},
+    ]
+  },
+  {
+    rule: '-ble → -ble',
+    hint: '英文 -ble 字尾幾乎完全保留！看英文直接念西語！',
+    words: [
+      {en:'possible',    es:'posible',      zh:'可能的'},
+      {en:'terrible',    es:'terrible',     zh:'可怕的'},
+      {en:'incredible',  es:'increíble',    zh:'難以置信的'},
+      {en:'responsible', es:'responsable',  zh:'負責任的'},
+      {en:'flexible',    es:'flexible',     zh:'靈活的'},
+    ]
+  },
+  {
+    rule: '-or → -or / -ora（職業）',
+    hint: '英文 -or 職業 → 西語 -or（男）/ -ora（女）；actor 例外變 actriz',
+    words: [
+      {en:'doctor',    es:'doctor',    zh:'醫生（女：doctora）'},
+      {en:'actor',     es:'actor',     zh:'演員（女例外：actriz）'},
+      {en:'professor', es:'profesor',  zh:'教授（女：profesora）'},
+      {en:'director',  es:'director',  zh:'導演（女：directora）'},
+      {en:'inspector', es:'inspector', zh:'督察（女：inspectora）'},
+    ]
+  },
+  {
+    rule: '-y → -ia（名詞）',
+    hint: '英文 -y 結尾名詞 → 西語 -ia，發音接近，幾乎零學習成本！',
+    words: [
+      {en:'history',   es:'historia',  zh:'歷史'},
+      {en:'memory',    es:'memoria',   zh:'記憶'},
+      {en:'pharmacy',  es:'farmacia',  zh:'藥局'},
+      {en:'victory',   es:'victoria',  zh:'勝利'},
+      {en:'biology',   es:'biología',  zh:'生物學'},
+      {en:'economy',   es:'economía',  zh:'經濟'},
+    ]
+  },
+  {
+    rule: '-ar / -er / -ir（動詞字尾）',
+    hint: '英文動詞加上 -ar/-er/-ir 就秒變西語動詞！',
+    words: [
+      {en:'visit',    es:'visitar',    zh:'拜訪'},
+      {en:'practice', es:'practicar',  zh:'練習'},
+      {en:'use',      es:'usar',       zh:'使用'},
+      {en:'depend',   es:'depender',   zh:'依賴'},
+      {en:'exist',    es:'existir',    zh:'存在'},
+      {en:'permit',   es:'permitir',   zh:'允許'},
+    ]
+  },
 ];
 
 // ── 建立 cognate details HTML ──

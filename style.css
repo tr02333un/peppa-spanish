@@ -351,4 +351,29 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
 .conj-table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:12px}
 .conj-table th{background:var(--misora);color:white;padding:3px 0;font-size:10px;font-weight:800;text-align:center;width:33.3%}
-.conj-table td{background:var(--bg2);color:var(--konpeki);padding:5px 0;text-align:center;font-weight:800;font-size:13px;border:1px solid var(--usumizu)}
+.conj-table td{background:var(--bg2);color:var(--konpeki);padding:5px 0;text-align:center;font-weight:800;font-size:13px;border:1px solid var(--usumizu);cursor:pointer}
+.conj-table td:active{opacity:.7}
+/* Grammar library section */
+.grammar-cat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px 6px}
+.grammar-cat-chip{padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(108,155,210,.1);color:var(--misora);border:1.5px solid rgba(108,155,210,.3);cursor:pointer;transition:all .15s}
+.grammar-cat-chip.active{background:var(--misora);color:white;border-color:var(--misora)}
+#grammarLibCards{padding:0 14px 14px;display:flex;flex-direction:column;gap:7px}
+.grammar-lib-card{padding:11px 13px;border-radius:12px;display:flex;align-items:center;gap:9px}
+.grammar-lib-card.unlocked{background:white;border:1.5px solid var(--usumizu);box-shadow:0 1px 4px rgba(0,0,0,.05);cursor:pointer}
+.grammar-lib-card.unlocked:active{opacity:.75}
+.grammar-lib-card.locked{background:var(--bg2);border:1.5px solid rgba(0,0,0,.05);opacity:.55;cursor:default}
+.grammar-lib-cat{flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:rgba(138,196,222,.18);color:var(--misora)}
+.grammar-lib-title{flex:1;font-size:12px;font-weight:800;color:var(--konpeki);line-height:1.35}
+.grammar-lib-lock{font-size:15px;color:var(--nezumi)}
+.grammar-lib-arrow{font-size:13px;color:var(--misora);font-weight:900}
+/* ¡変位秘訣! button */
+.btn-conj-sheet{display:block;width:calc(100% - 28px);margin:12px 14px 0;padding:10px 14px;border:2px solid var(--misora);border-radius:11px;background:white;color:var(--misora);font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;text-align:left}
+.btn-conj-sheet:active{opacity:.75}
+/* Conjugation cheat sheet modal */
+.conj-sheet-verb{margin-bottom:16px}
+.conj-sheet-verb-header{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.conj-sheet-verb-name{font-size:16px;font-weight:900;color:var(--konpeki);font-style:italic}
+.conj-sheet-verb-zh{font-size:11px;color:var(--tlight);font-weight:700}
+/* User examples in grammar modal */
+.grammar-user-examples{margin-bottom:10px}
+.grammar-user-label{font-size:10px;font-weight:800;color:var(--benikake);letter-spacing:.4px;margin-bottom:5px;padding-left:2px}
