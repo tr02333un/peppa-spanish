@@ -25,7 +25,13 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .header-title span{color:var(--misora)}
 .ep-badge{display:inline-block;background:var(--mizu);color:var(--konpeki);font-size:11px;font-weight:800;padding:4px 14px;border-radius:999px;margin-top:7px;letter-spacing:.5px}
 
-.season-nav{display:flex;gap:8px;margin-bottom:16px;justify-content:center;flex-wrap:wrap}
+.season-nav{display:flex;gap:8px;margin-bottom:10px;justify-content:center;flex-wrap:wrap}
+.yg-mini-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:14px;padding:0 8px}
+.yg-mini-text{font-size:9px;color:var(--nezumi);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:78vw;cursor:pointer}
+.yg-mini-text:active{opacity:.6}
+.yg-mini-copy{flex-shrink:0;font-size:9px;font-weight:700;color:var(--nezumi);border:1px solid var(--nezumi);border-radius:5px;padding:1px 7px;cursor:pointer}
+.yg-mini-copy:active{opacity:.6;background:var(--bg2)}
+.card-num-ts{color:var(--nezumi);font-weight:600;font-size:11px}
 .ep-chip{padding:5px 14px;border-radius:999px;border:1.5px solid var(--usumizu);font-size:12px;font-weight:800;color:var(--misora);background:white;cursor:pointer;transition:all .18s}
 .ep-chip.active{background:var(--misora);color:white;border-color:var(--misora)}
 
@@ -44,12 +50,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mizu),var(--misora),var(--benikake))}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
 .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px}
-.yg-url-box{display:flex;align-items:center;gap:6px;margin-bottom:12px;padding:9px 12px;border:1.5px solid var(--usumizu);border-radius:11px;background:white;flex-wrap:wrap}
-.yg-url-label{font-size:11px;font-weight:800;color:var(--misora);flex-shrink:0}
-.yg-url-text{font-size:10px;color:var(--tmid);flex:1;word-break:break-all;cursor:pointer;font-family:monospace}
-.yg-url-text:active{opacity:.6}
-.yg-copy-btn{flex-shrink:0;font-size:11px;font-weight:800;color:white;background:var(--misora);border:none;border-radius:6px;padding:3px 10px;cursor:pointer}
-.yg-copy-btn:active{opacity:.7}
+/* yg-url-box 已搬移至 yg-mini-row（見上方 season-nav 區塊） */
 .card-num{font-size:14px;font-weight:900;color:var(--misora);background:rgba(159,208,222,.2);padding:4px 16px;border-radius:999px;text-align:center;width:100%;display:block;margin-bottom:4px}
 
 
