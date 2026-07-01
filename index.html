@@ -47,10 +47,12 @@
         🔫 看懂骨架了 → 背這句的語塊模組
       </button>
 
-      <!-- YouGlish 真人發音按鈕 -->
-      <button class="btn-yg" id="yg-card-btn" style="width:100%;margin-bottom:12px;padding:10px;border-radius:11px;border:1.5px solid var(--usumizu);background:white;color:var(--misora);font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">
-        📺 YouGlish 真人發音：<span class="yg-label">…</span>
-      </button>
+      <!-- YouGlish 網址（可複製） -->
+      <div class="yg-url-box" id="yg-url-box">
+        <span class="yg-url-label">📺 YouGlish：</span>
+        <span class="yg-url-text" id="yg-url-text" onclick="copyYGUrl()"></span>
+        <span class="yg-copy-btn" onclick="copyYGUrl()">複製</span>
+      </div>
 
       <!-- 翻譯輸入 -->
       <span class="sec-label">你的翻譯</span>
@@ -162,22 +164,6 @@
     <div class="grammar-modal-box" onclick="event.stopPropagation()">
       <button class="grammar-modal-close" onclick="closeGrammarModal()">✕</button>
       <div id="grammarModalContent"></div>
-    </div>
-  </div>
-
-  <!-- ── 文法酷庫 瀏覽區 ── -->
-  <div class="card-container">
-    <div class="ammo-book-top" onclick="toggleGrammarLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--misora),var(--benikake))">
-      <div>
-        <div class="pb-book-title">📚 文法酷庫 <span id="grammarUnlockCount">0</span> / 16</div>
-        <div class="pb-book-sub">答對翻譯或造句挑戰後解鎖 · 點擊看詳解</div>
-      </div>
-      <span id="grammarLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
-    </div>
-    <div id="grammarLibBody" class="ammo-body">
-      <button class="btn-conj-sheet" onclick="openConjSheet()">¡Variadísimo! 常用動詞變位速查 →</button>
-      <div class="grammar-cat-chips" id="grammarCatChips"></div>
-      <div id="grammarLibCards"></div>
     </div>
   </div>
 
