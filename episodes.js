@@ -36,8 +36,26 @@ const EPS=[
       ]},
     ]
   }},
-  {es:"Hoy está lloviendo así que no pueden jugar fuera.",chunks:[{w:"Hoy"},{w:"está lloviendo",role:"v"},{w:"así que",role:"c"},{w:"no pueden jugar fuera.",role:"v"}],zh:"今天在下雨，所以不能去外面玩。",en:"Today it is raining so they cannot play outside.",noteZh:"「está lloviendo」= 現在進行式，正在下雨",noteEn:"'está lloviendo' = present continuous, it is raining"},
-  {es:"¿Podemos salir a jugar?",chunks:[{w:"¿Podemos",role:"v"},{w:"salir a jugar?",role:"o"}],zh:"我們可以出去玩嗎？",en:"Can we go out to play?",noteZh:"「¿Podemos…?」= 我們可以…嗎？（poder 動詞一人稱複數）",noteEn:"'¿Podemos?' = Can we? (poder = to be able to)"},
+  {es:"Hoy está lloviendo así que no pueden jugar fuera.",chunks:[{w:"Hoy"},{w:"está lloviendo",role:"v"},{w:"así que",role:"c"},{w:"no pueden jugar fuera.",role:"v"}],zh:"今天在下雨，所以不能去外面玩。",en:"Today it is raining so they cannot play outside.",noteZh:"「está lloviendo」= 現在進行式，正在下雨",noteEn:"'está lloviendo' = present continuous, it is raining",
+  expand:{
+    note:"está + Ving = 正在…（天氣現在進行式）",
+    template:[{t:"Hoy está"},{g:"weather"},{t:"así que no pueden jugar fuera."}],
+    groups:[{label:"天氣",key:"weather",options:[
+      {es:"lloviendo",zh:"下雨"},
+      {es:"nevando",zh:"下雪"},
+      {es:"tronando",zh:"打雷"},
+    ]}]
+  }},
+  {es:"¿Podemos salir a jugar?",chunks:[{w:"¿Podemos",role:"v"},{w:"salir a jugar?",role:"o"}],zh:"我們可以出去玩嗎？",en:"Can we go out to play?",noteZh:"「¿Podemos…?」= 我們可以…嗎？（poder 動詞一人稱複數）",noteEn:"'¿Podemos?' = Can we? (poder = to be able to)",
+  expand:{
+    note:"¿Podemos + 原形動詞…? = 徵求許可的萬用句型",
+    template:[{t:"¿Podemos"},{g:"activity"}],
+    groups:[{label:"做什麼",key:"activity",options:[
+      {es:"salir a jugar?",zh:"出去玩？"},
+      {es:"ver la tele?",zh:"看電視？"},
+      {es:"comer algo?",zh:"吃點東西？"},
+    ]}]
+  }},
   {es:"Peppa, debes ponerte las botas de agua.",chunks:[{w:"Peppa,"},{w:"debes ponerte",role:"v"},{w:"las botas de agua.",role:"o"}],zh:"佩佩，你必須穿上雨靴。",en:"Peppa, you must put on your wellies.",noteZh:"「debes + 原形動詞」= 你必須做…",noteEn:"'debes + infinitive' = you must do...",
   expand:{
     note:"debes + 原形動詞 = 你必須…（對某人說的命令句）",
@@ -78,8 +96,26 @@ const EPS=[
       {es:"pequeño!",zh:"小的"},
     ]}]
   }},
-  {es:"No pasa nada. Sólo es barro.",chunks:[{w:"No pasa nada.",role:"v"},{w:"Sólo"},{w:"es",role:"v"},{w:"barro.",role:"o"}],zh:"沒關係，只是泥巴而已。",en:"It's okay. It's only mud.",noteZh:"「No pasa nada」= 沒關係，西語最常用的安慰語！",noteEn:"'No pasa nada' = It's okay / No worries. Super common!"},
-  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，第三人稱複數",noteEn:"'A todos les encanta' = everyone loves it (3rd person plural)"}
+  {es:"No pasa nada. Sólo es barro.",chunks:[{w:"No pasa nada.",role:"v"},{w:"Sólo"},{w:"es",role:"v"},{w:"barro.",role:"o"}],zh:"沒關係，只是泥巴而已。",en:"It's okay. It's only mud.",noteZh:"「No pasa nada」= 沒關係，西語最常用的安慰語！",noteEn:"'No pasa nada' = It's okay / No worries. Super common!",
+  expand:{
+    note:"No pasa nada. Sólo es ___. = 安慰句型，換弄髒/弄倒的東西",
+    template:[{t:"No pasa nada. Sólo es"},{g:"thing"}],
+    groups:[{label:"只是",key:"thing",options:[
+      {es:"barro.",zh:"泥巴"},
+      {es:"agua.",zh:"水"},
+      {es:"pintura.",zh:"顏料"},
+    ]}]
+  }},
+  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，第三人稱複數",noteEn:"'A todos les encanta' = everyone loves it (3rd person plural)",
+  expand:{
+    note:"A todos les encanta + 原形動詞 = 所有人都超愛…",
+    template:[{t:"A todos les encanta"},{g:"activity"}],
+    groups:[{label:"做什麼",key:"activity",options:[
+      {es:"saltar en los charcos de barro.",zh:"在泥巴坑裡跳"},
+      {es:"bailar.",zh:"跳舞"},
+      {es:"cantar.",zh:"唱歌"},
+    ]}]
+  }}
 ]},
 
 // ── E2 恐龍先生不見了 ──
@@ -127,7 +163,16 @@ const EPS=[
       {es:"Mamá,",zh:"媽媽"},
     ]}]
   }},
-  {es:"Un detective es una persona muy buena encontrando cosas.",chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena encontrando cosas.",role:"o"}],zh:"偵探是一個非常擅長找東西的人。",en:"A detective is a person who is very good at finding things.",noteZh:"「muy buena encontrando」= 非常擅長於做某事",noteEn:"'muy buena encontrando' = very good at finding (gerund phrase)"},
+  {es:"Un detective es una persona muy buena encontrando cosas.",chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena encontrando cosas.",role:"o"}],zh:"偵探是一個非常擅長找東西的人。",en:"A detective is a person who is very good at finding things.",noteZh:"「muy buena encontrando」= 非常擅長於做某事",noteEn:"'muy buena encontrando' = very good at finding (gerund phrase)",
+  expand:{
+    note:"muy buena/o + Ving = 非常擅長於做…；換擅長找的東西",
+    template:[{t:"Un detective es una persona muy buena encontrando"},{g:"thing"}],
+    groups:[{label:"找什麼",key:"thing",options:[
+      {es:"cosas.",zh:"東西"},
+      {es:"animales.",zh:"動物"},
+      {es:"tesoros.",zh:"寶藏"},
+    ]}]
+  }},
   {es:"George siempre se trae al señor Dinosaurio a la bañera.",chunks:[{w:"George",role:"s"},{w:"siempre se trae",role:"v"},{w:"al señor Dinosaurio a la bañera.",role:"o"}],zh:"喬治總是帶著恐龍先生去洗澡。",en:"George always brings Mr Dinosaur to the bath.",noteZh:"「siempre」= 總是，頻率副詞放在動詞前",noteEn:"'siempre' = always (frequency adverb, placed before verb)",
   expand:{
     note:"se trae + 東西 = 隨身帶著；換掉帶去的東西練習",
@@ -141,7 +186,16 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"¡Ya lo sé dónde está el señor Dinosaurio!",chunks:[{w:"¡Ya lo sé",role:"v"},{w:"dónde",role:"c"},{w:"está",role:"v"},{w:"el señor Dinosaurio!",role:"s"}],zh:"我知道恐龍先生在哪裡了！",en:"I know where Mr Dinosaur is!",noteZh:"「Ya lo sé」= 我知道了，ya 表示已然發生",noteEn:"'Ya lo sé' = I already know! 'ya' indicates something just realized"},
+  {es:"¡Ya lo sé dónde está el señor Dinosaurio!",chunks:[{w:"¡Ya lo sé",role:"v"},{w:"dónde",role:"c"},{w:"está",role:"v"},{w:"el señor Dinosaurio!",role:"s"}],zh:"我知道恐龍先生在哪裡了！",en:"I know where Mr Dinosaur is!",noteZh:"「Ya lo sé」= 我知道了，ya 表示已然發生",noteEn:"'Ya lo sé' = I already know! 'ya' indicates something just realized",
+  expand:{
+    note:"¡Ya lo sé dónde está ___! = 我知道…在哪！換要找的東西",
+    template:[{t:"¡Ya lo sé dónde está"},{g:"thing"}],
+    groups:[{label:"什麼東西",key:"thing",options:[
+      {es:"el señor Dinosaurio!",zh:"恐龍先生"},
+      {es:"su pelota!",zh:"他的球"},
+      {es:"su osito!",zh:"他的小熊"},
+    ]}]
+  }},
   {es:"El señor Dinosaurio no está en la cama de George.",chunks:[{w:"El señor Dinosaurio",role:"s"},{w:"no está",role:"v"},{w:"en la cama de George.",role:"o"}],zh:"恐龍先生不在喬治的床上。",en:"Mr Dinosaur is not in George's bed.",noteZh:"「no está」= 不在（用 estar 表示位置）",noteEn:"'no está' = is not there (uses 'estar' for location)",
   expand:{
     note:"en la cama de + 人 = 在…的床上",
@@ -162,7 +216,16 @@ const EPS=[
       {es:"George",zh:"喬治"},
     ]}]
   }},
-  {es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!",chunks:[{w:"¡Ya lo sé,",role:"v"},{w:"habéis estado saltando",role:"v"},{w:"en los charcos de barro!",role:"o"}],zh:"我知道了，你們一直在泥巴坑裡跳！",en:"I know, you've been jumping in muddy puddles!",noteZh:"「habéis estado + 動名詞」= 現在完成進行式，一直在做…",noteEn:"'habéis estado + gerund' = you have been doing... (present perfect continuous)"}
+  {es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!",chunks:[{w:"¡Ya lo sé,",role:"v"},{w:"habéis estado saltando",role:"v"},{w:"en los charcos de barro!",role:"o"}],zh:"我知道了，你們一直在泥巴坑裡跳！",en:"I know, you've been jumping in muddy puddles!",noteZh:"「habéis estado + 動名詞」= 現在完成進行式，一直在做…",noteEn:"'habéis estado + gerund' = you have been doing... (present perfect continuous)",
+  expand:{
+    note:"habéis estado + Ving = 你們一直在做…（現在完成進行式）",
+    template:[{t:"¡Ya lo sé, habéis estado"},{g:"activity"}],
+    groups:[{label:"一直在做什麼",key:"activity",options:[
+      {es:"saltando en los charcos de barro!",zh:"在泥巴坑裡跳"},
+      {es:"jugando con la pelota!",zh:"玩球"},
+      {es:"cantando en la ducha!",zh:"在浴室唱歌"},
+    ]}]
+  }},
 ]},
 
 // ── E3 最好的朋友 ──
@@ -177,8 +240,25 @@ const EPS=[
       {es:"Mamá",zh:"媽媽"},
     ]}]
   }},
-  {es:"Peppa quiere mucho a Susi y Susi quiere mucho a Peppa.",chunks:[{w:"Peppa",role:"s"},{w:"quiere mucho",role:"v"},{w:"a Susi",role:"o"},{w:"y",role:"c"},{w:"Susi",role:"s"},{w:"quiere mucho",role:"v"},{w:"a Peppa.",role:"o"}],zh:"佩佩非常喜歡蘇西，蘇西也非常喜歡佩佩。",en:"Peppa loves Suzy very much and Suzy loves Peppa very much.",noteZh:"「querer + mucho」= 非常喜歡、愛，人名前加 a",noteEn:"'querer a alguien' = to love someone. 'a' is required before person"},
-  {es:"Son las mejores amigas.",chunks:[{w:"Son",role:"v"},{w:"las mejores amigas.",role:"o"}],zh:"她們是最好的朋友。",en:"They are best friends.",noteZh:"「mejores amigas」= 最好的朋友；mejor 的複數形",noteEn:"'mejores' = best (plural of 'mejor'); 'amigas' = female friends"},
+  {es:"Peppa quiere mucho a Susi y Susi quiere mucho a Peppa.",chunks:[{w:"Peppa",role:"s"},{w:"quiere mucho",role:"v"},{w:"a Susi",role:"o"},{w:"y",role:"c"},{w:"Susi",role:"s"},{w:"quiere mucho",role:"v"},{w:"a Peppa.",role:"o"}],zh:"佩佩非常喜歡蘇西，蘇西也非常喜歡佩佩。",en:"Peppa loves Suzy very much and Suzy loves Peppa very much.",noteZh:"「querer + mucho」= 非常喜歡、愛，人名前加 a",noteEn:"'querer a alguien' = to love someone. 'a' is required before person",
+  expand:{
+    note:"互相喜歡句型：兩邊的［好朋友］要選同一個人",
+    template:[{t:"Peppa quiere mucho a"},{g:"friend"},{t:"y"},{g:"friend"},{t:"quiere mucho a Peppa."}],
+    groups:[{label:"好朋友",key:"friend",options:[
+      {es:"Susi",zh:"蘇西"},
+      {es:"George",zh:"喬治"},
+      {es:"Rebecca",zh:"瑞貝卡兔"},
+    ]}]
+  }},
+  {es:"Son las mejores amigas.",chunks:[{w:"Son",role:"v"},{w:"las mejores amigas.",role:"o"}],zh:"她們是最好的朋友。",en:"They are best friends.",noteZh:"「mejores amigas」= 最好的朋友；mejor 的複數形",noteEn:"'mejores' = best (plural of 'mejor'); 'amigas' = female friends",
+  expand:{
+    note:"amigas(女) / amigos(男) 陰陽性複數要一起變",
+    template:[{g:"pair"}],
+    groups:[{label:"哪一組",key:"pair",options:[
+      {es:"Son las mejores amigas.",zh:"她們是最好的朋友（女）"},
+      {es:"Son los mejores amigos.",zh:"他們是最好的朋友（男）"},
+    ]}]
+  }},
   {es:"¡No George! Este juego es solo para niñas mayores.",chunks:[{w:"¡No George!"},{w:"Este juego",role:"s"},{w:"es",role:"v"},{w:"solo para niñas mayores.",role:"o"}],zh:"不行喬治！這個遊戲只給大一點的女孩玩。",en:"No George! This game is just for older girls.",noteZh:"「solo para」= 只給、只限；「niñas mayores」= 大一點的女孩",noteEn:"'solo para' = only for; 'niñas mayores' = older girls",
   expand:{
     note:"¡No + 人! = 制止某人的固定開場",
@@ -188,7 +268,16 @@ const EPS=[
       {es:"¡No Papá!",zh:"不行爸爸！"},
     ]}]
   }},
-  {es:"¡Soy una princesa salida de un cuento!",chunks:[{w:"¡Soy",role:"v"},{w:"una princesa salida de un cuento!",role:"o"}],zh:"我是從故事書裡走出來的公主！",en:"I am a princess from a fairy tale!",noteZh:"「salida de un cuento」= 從故事書裡走出來的",noteEn:"'salida de un cuento' = come out of a story / fairy tale princess"},
+  {es:"¡Soy una princesa salida de un cuento!",chunks:[{w:"¡Soy",role:"v"},{w:"una princesa salida de un cuento!",role:"o"}],zh:"我是從故事書裡走出來的公主！",en:"I am a princess from a fairy tale!",noteZh:"「salida de un cuento」= 從故事書裡走出來的",noteEn:"'salida de un cuento' = come out of a story / fairy tale princess",
+  expand:{
+    note:"salido/salida 要跟角色的陰陽性一致，整句一起換比較不會出錯",
+    template:[{g:"role"}],
+    groups:[{label:"角色",key:"role",options:[
+      {es:"¡Soy una princesa salida de un cuento!",zh:"我是故事書裡的公主！"},
+      {es:"¡Soy un pirata salido de un cuento!",zh:"我是故事書裡的海盜！"},
+      {es:"¡Soy un dragón salido de un cuento!",zh:"我是故事書裡的龍！"},
+    ]}]
+  }},
   {es:"A George no le gusta jugar solo.",chunks:[{w:"A George",role:"s"},{w:"no le gusta",role:"v"},{w:"jugar solo.",role:"o"}],zh:"喬治不喜歡一個人玩。",en:"George doesn't like to play alone.",noteZh:"「A + 人 + le gusta」= 某人喜歡，西語必學句型！",noteEn:"'A + person + le gusta' = someone likes. Key Spanish structure!",
   expand:{
     note:"A + 人 + le gusta 是固定句型；換主詞就能套用在任何人身上",
@@ -236,7 +325,25 @@ const EPS=[
       {es:"Ahora mi hija,",zh:"現在我女兒，"},
     ]}]
   }},
-  {es:"Creo que tienes el corazón un poco flojo.",chunks:[{w:"Creo",role:"v"},{w:"que",role:"c"},{w:"tienes",role:"v"},{w:"el corazón un poco flojo.",role:"o"}],zh:"我認為你的心臟有點虛弱。",en:"I think your heart is a little weak.",noteZh:"「Creo que」= 我認為，後接完整子句",noteEn:"'Creo que' = I think that... (followed by a full clause)"},
-  {es:"Todos necesitan muchas galletas para curarse.",chunks:[{w:"Todos",role:"s"},{w:"necesitan",role:"v"},{w:"muchas galletas para curarse.",role:"o"}],zh:"所有人都需要很多餅乾才能康復。",en:"Everyone needs lots of cookies to get better.",noteZh:"「para + 原形動詞」= 為了做某事；「curarse」= 康復",noteEn:"'para + infinitive' = in order to do; 'curarse' = to recover"}
+  {es:"Creo que tienes el corazón un poco flojo.",chunks:[{w:"Creo",role:"v"},{w:"que",role:"c"},{w:"tienes",role:"v"},{w:"el corazón un poco flojo.",role:"o"}],zh:"我認為你的心臟有點虛弱。",en:"I think your heart is a little weak.",noteZh:"「Creo que」= 我認為，後接完整子句",noteEn:"'Creo que' = I think that... (followed by a full clause)",
+  expand:{
+    note:"形容詞要跟身體部位的陰陽性一致，整組換才不會出錯",
+    template:[{t:"Creo que tienes"},{g:"symptom"}],
+    groups:[{label:"哪裡不舒服",key:"symptom",options:[
+      {es:"el corazón un poco flojo.",zh:"心臟有點虛弱"},
+      {es:"la barriga un poco floja.",zh:"肚子有點不舒服"},
+      {es:"la cabeza un poco caliente.",zh:"頭有點熱"},
+    ]}]
+  }},
+  {es:"Todos necesitan muchas galletas para curarse.",chunks:[{w:"Todos",role:"s"},{w:"necesitan",role:"v"},{w:"muchas galletas para curarse.",role:"o"}],zh:"所有人都需要很多餅乾才能康復。",en:"Everyone needs lots of cookies to get better.",noteZh:"「para + 原形動詞」= 為了做某事；「curarse」= 康復",noteEn:"'para + infinitive' = in order to do; 'curarse' = to recover",
+  expand:{
+    note:"Todos necesitan ___ para curarse. = 康復需要的東西",
+    template:[{t:"Todos necesitan"},{g:"thing"},{t:"para curarse."}],
+    groups:[{label:"需要什麼",key:"thing",options:[
+      {es:"muchas galletas",zh:"很多餅乾"},
+      {es:"mucha agua",zh:"很多水"},
+      {es:"mucho descanso",zh:"很多休息"},
+    ]}]
+  }},
 ]}
 ];
