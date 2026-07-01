@@ -834,6 +834,79 @@ function clearLS(){
   toast('已清除所有學習紀錄');
 }
 
+// ── 文法酷庫 ──
+let grammarCat = 'all';
+
+function speakSentence(text){
+  if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'es-ES';
+  utt.rate = 0.82;
+  utt.pitch = 1.05;
+  utt.volume = 1;
+  if(ttsVoice) utt.voice = ttsVoice;
+  const dot = document.getElementById('ttsDot');
+  if(dot){ dot.classList.remove('ready'); dot.classList.add('speaking'); }
+  utt.onend = () => { if(dot){ dot.classList.remove('speaking'); dot.classList.add('ready'); } };
+  setTimeout(() => {
+    try{ speechSynthesis.speak(utt); }catch(e){ toast('⚠️ 語音播放失敗'); }
+  }, 0);
+}
+
+function toggleGrammar(){
+  const body = document.getElementById('grammarBody');
+  const tog  = document.getElementById('grammarToggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  tog.textContent = isOpen ? '▼ 展開' : '▲ 收起';
+  if(!isOpen) renderGrammar();
+}
+
+function renderGrammar(){
+  renderGrammarFilter();
+  renderGrammarCards();
+}
+
+function renderGrammarFilter(){
+  const el = document.getElementById('grammarFilter');
+  if(!el) return;
+  el.innerHTML = GRAMMAR_CATS.map(c =>
+    `<button class="ep-chip${grammarCat===c.key?' active':''}" onclick="setGrammarCat('${c.key}')">${c.label}</button>`
+  ).join('');
+}
+
+function setGrammarCat(cat){
+  grammarCat = cat;
+  renderGrammarFilter();
+  renderGrammarCards();
+}
+
+function renderGrammarCards(){
+  const el = document.getElementById('grammarList');
+  if(!el) return;
+  const list = grammarCat==='all'
+    ? GRAMMAR_DATA
+    : GRAMMAR_DATA.filter(g => g.cat===grammarCat);
+  el.innerHTML = list.map(g => {
+    const catLabel = (GRAMMAR_CATS.find(c=>c.key===g.cat)||{label:''}).label;
+    const exHtml = g.examples.map(ex =>
+      `<div class="grammar-ex-row" onclick="speakSentence('${escAttr(ex.es)}')">
+        <div class="grammar-ex-es">▶ ${ex.es}</div>
+        <div class="grammar-ex-zh">${ex.zh}</div>
+      </div>`
+    ).join('');
+    return `<div class="grammar-card">
+      <div class="grammar-cat-tag">${catLabel}</div>
+      <div class="grammar-title">${g.title}</div>
+      <div class="grammar-rule">${g.rule}</div>
+      <div class="grammar-examples">${exHtml}</div>
+      <div class="grammar-trap">${g.trap}</div>
+      <div class="grammar-source">📍 ${g.source}</div>
+    </div>`;
+  }).join('');
+}
+
 // ── INIT ──
 (function init(){
   loadFromLS();
@@ -844,4 +917,5 @@ function clearLS(){
   renderCogLibrary();
   renderVocab();
   initTTS();
+  document.getElementById('grammarCount').textContent = GRAMMAR_DATA.length;
 })();

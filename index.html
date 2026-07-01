@@ -149,6 +149,21 @@
     <div id="cogLibraryBody" class="cog-library-body"></div>
   </div>
 
+  <!-- ── 文法酷庫 ── -->
+  <div class="grammar-section card-container">
+    <div class="grammar-header" onclick="toggleGrammar()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="color:white;font-size:14px;font-weight:900">📖 文法酷庫 · <span id="grammarCount">16</span> 條</div>
+        <div style="color:rgba(255,255,255,.65);font-size:11px;font-weight:600">從課文萃取，點例句即聽發音</div>
+      </div>
+      <span id="grammarToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="grammarBody" class="grammar-body">
+      <div class="grammar-filter" id="grammarFilter"></div>
+      <div class="grammar-list" id="grammarList"></div>
+    </div>
+  </div>
+
   <!-- ── 陌生詞彙收藏區 ── -->
   <div class="vocab-wrap card-container">
     <div class="ammo-book-top" onclick="toggleVocabBox()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--benikake),#5A6BA8)">
@@ -170,6 +185,7 @@
   <script src="episodes.js"></script>
   <script src="ammo.js"></script>
   <script src="cognates.js"></script>
+  <script src="grammar.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
