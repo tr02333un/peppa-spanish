@@ -42,6 +42,11 @@
       <!-- 整句 -->
       <div class="full-sent" id="fullSent"></div>
 
+      <!-- 骨架看完 → 跳語塊彈藥 -->
+      <button class="btn-jump-ammo" id="jumpAmmoBtn" onclick="jumpToAmmo(currentGlobalIdx())" style="width:100%;margin-bottom:12px;padding:9px;border-radius:11px;border:none;background:var(--misora);color:white;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">
+        🔫 看懂骨架了 → 背這句的語塊模組
+      </button>
+
       <!-- YouGlish 真人發音按鈕 -->
       <button class="btn-yg" id="yg-card-btn" style="width:100%;margin-bottom:12px;padding:10px;border-radius:11px;border:1.5px solid var(--usumizu);background:white;color:var(--misora);font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">
         📺 YouGlish 真人發音：<span class="yg-label">…</span>
