@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>佩佩豬學西語 · 語塊彈藥庫</title>
-<link rel="stylesheet" href="style.css?v=20260702d">
+<link rel="stylesheet" href="style.css?v=20260702e">
 </head>
 <body>
 
@@ -29,6 +29,17 @@
   <div class="star-progress">
     <div class="star-row" id="starRow"></div>
     <div class="star-label" id="starLabel"></div>
+  </div>
+
+  <!-- SEQUENCE BAR -->
+  <div class="ammo-header-container" id="seqBarWrap">
+    <div class="sequence-bar-segments" id="seqBar">
+      <button class="sequence-segment-btn is-active" data-group="0">uno / 1</button>
+      <button class="sequence-segment-btn" data-group="1">dos / 2</button>
+      <button class="sequence-segment-btn" data-group="2">tres / 3</button>
+      <button class="sequence-segment-btn" data-group="3">cuatro / 4</button>
+    </div>
+    <div class="episode-badge-tag" id="seqEpBadge">ep1. 泥巴坑</div>
   </div>
 
   <!-- MAIN CARD -->
@@ -56,9 +67,12 @@
         ⚔️ 背熟了 → 去實戰練習關卡玩
       </button>
 
-      <!-- 翻譯輸入 -->
-      <span class="sec-label">你的翻譯</span>
-      <textarea class="trans-input" id="userInput" placeholder="輸入中文或英文翻譯…"></textarea>
+      <!-- 解鎖遮罩（取代翻譯輸入） -->
+      <div class="unlock-zone" id="unlockZone">
+        <button class="mask-toggle-btn" onclick="revealAnswer()">⚡ 點擊解鎖中文與說明</button>
+      </div>
+      <!-- userInput 保留在 DOM 供 JS 相容，不顯示 -->
+      <textarea class="trans-input" id="userInput" style="display:none"></textarea>
 
       <!-- 造句區 -->
       <div class="make-section">
@@ -80,7 +94,7 @@
       <!-- 英西同源槓桿（逐句） -->
       <div id="cogBox"></div>
 
-      <!-- 看答案 -->
+      <!-- 解鎖後展開：中文翻譯 + 說明 -->
       <div class="answer-box" id="answerBox">
         <div class="answer-tabs">
           <button class="a-tab" onclick="switchLang('zh')">中文</button>
@@ -98,11 +112,10 @@
         </div>
       </div>
 
-      <!-- 文法情境提示（看完答案後出現） -->
+      <!-- 文法情境提示（解鎖後出現） -->
       <div id="grammarTip" style="display:none;margin:10px 0 2px"></div>
 
       <div class="btn-row">
-        <button class="btn btn-reveal" id="revealBtn" onclick="revealAnswer()">👀 看答案</button>
         <button class="btn btn-next" id="nextBtn" onclick="nextCard()">下一句 →</button>
       </div>
     </div>
@@ -135,6 +148,17 @@
 
     <button class="btn-restart" onclick="restartEp()">🔁 重來一次</button>
     <button class="btn-next-ep" id="nextEpBtn" onclick="goNextEp()">下一集 →</button>
+  </div>
+
+  <!-- ── 分組實戰射擊常駐展示 ── -->
+  <div class="group-fire-wrap card-container" id="groupFireWrap">
+    <div class="ammo-book-top" style="cursor:default;background:linear-gradient(135deg,#1A8C50,#3DB87A)">
+      <div>
+        <div class="pb-book-title">🎯 實戰射擊</div>
+        <div class="pb-book-sub">目前分組的佩佩豬原句＋日常對話，常駐顯示</div>
+      </div>
+    </div>
+    <div id="groupFireArea" style="padding:8px 4px 4px"></div>
   </div>
 
   <!-- ── 語塊彈藥庫 ── -->
@@ -255,11 +279,11 @@
     </div>
   </div>
 
-  <script src="episodes.js?v=20260702d"></script>
-  <script src="ammo.js?v=20260702d"></script>
-  <script src="cognates.js?v=20260702d"></script>
-  <script src="grammar.js?v=20260702d"></script>
-  <script src="stages.js?v=20260702d"></script>
-  <script src="script.js?v=20260702d"></script>
+  <script src="episodes.js?v=20260702e"></script>
+  <script src="ammo.js?v=20260702e"></script>
+  <script src="cognates.js?v=20260702e"></script>
+  <script src="grammar.js?v=20260702e"></script>
+  <script src="stages.js?v=20260702e"></script>
+  <script src="script.js?v=20260702e"></script>
 </body>
 </html>
