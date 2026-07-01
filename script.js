@@ -344,7 +344,7 @@ function renderCogLibrary(filter){
             <div class="suffix-ex-chunks">${(w.ex.chunks||[]).map(ck=>{
               const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
               return clean
-                ? '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span>'
+                ? '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span><span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏這個語塊">☆</span>'
                 : '<span class="suffix-ex-punct">'+ck.w+'</span>';
             }).join('')}</div>
             <span class="suffix-ex-zh">${w.ex.zh}</span>
