@@ -219,3 +219,21 @@ function toggleStages(){
     renderStage3();
   }
 }
+
+function jumpToStages(){
+  const body = document.getElementById('stagesBody');
+  const tog = document.getElementById('stagesToggle');
+  const wrap = document.querySelector('.stages-wrap');
+  if(!body) return;
+  body.classList.add('open');
+  tog.textContent = '▲ 收起';
+  renderStage2();
+  renderStage3();
+  setTimeout(()=>{
+    if(wrap){
+      wrap.scrollIntoView({behavior:'smooth',block:'start'});
+      wrap.classList.add('ammo-flash');
+      setTimeout(()=>wrap.classList.remove('ammo-flash'),1200);
+    }
+  },80);
+}
