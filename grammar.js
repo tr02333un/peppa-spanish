@@ -109,7 +109,7 @@ const GRAMMAR_DATA = [
     examples:[
       {es:"Peppa ha encontrado un charco pequeño.", zh:"佩佩找到了一個小水坑。（ha + encontrado）"},
       {es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。（ha + perdido）"},
-      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。（第一人稱用 he）"}
+      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。（「我」的說法用 he）"}
     ],
     trap:"字尾規則：-ar → -ado（encontrar→encontrado）；-er/-ir → -ido（perder→perdido）",
     source:"E1·S7 / E2·S3",
@@ -151,7 +151,7 @@ const GRAMMAR_DATA = [
     trap:"SER 未來人稱：seré / serás / será / seremos / seréis / serán",
     source:"E3·S7",
     conj:{
-      verb:"ser（未來式：將成為）",
+      verb:"ser（以後要做的說法：將成為）",
       rows:[
         {person:"yo",         form:"seré",    ex:"Seré médico.",        zh:"我會成為醫生。"},
         {person:"tú",         form:"serás",   ex:"Serás famosa.",       zh:"你會出名的。"},
@@ -204,7 +204,7 @@ const GRAMMAR_DATA = [
       {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？"},
       {es:"¿Podemos ver la tele?", zh:"我們可以看電視嗎？"}
     ],
-    trap:"poder 不規則：puedo / puedes / puede / podemos / podéis（拉美:pueden）/ pueden",
+    trap:"poder 變化比較特別：puedo / puedes / puede / podemos / podéis（拉美:pueden）/ pueden",
     source:"E1·S4",
     conj:{
       verb:"poder（能夠／可以）",
@@ -300,7 +300,7 @@ const GRAMMAR_DATA = [
   {
     id:"g16", cat:"phrase",
     title:"直接下指令（對你說）",
-    rule:"對「你」直接下指令：直接用動詞第三人稱的形式就行了，就像英文命令句去掉 You 一樣。",
+    rule:"對「你」直接下指令：直接用動詞「他/她」的說法的形式就行了，就像英文命令句去掉 You 一樣。",
     examples:[
       {es:"Respira hondo.", zh:"深呼吸。（respirar → respira）"},
       {es:"Tose.", zh:"咳嗽。（toser → tose）"},
