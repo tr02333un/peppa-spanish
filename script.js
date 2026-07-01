@@ -222,6 +222,19 @@ function renderBeVerbNote(a){
   return `<div class="be-verb-note ${a.be_verb_type}">💡 ${a.be_verb_note}</div>`;
 }
 
+// 西語數字 1-10：基數/序數/emoji 三態循環（序數預設陽性 primero/segundo…）
+const NUM_EMOJI=['','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
+const NUM_WORDS=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'];
+const ORD_WORDS=['','primero','segundo','tercero','cuarto','quinto','sexto','séptimo','octavo','noveno','décimo'];
+function cycleNumBadge(el){
+  const n = parseInt(el.dataset.n,10);
+  const mode = (parseInt(el.dataset.mode,10)+1)%3;
+  el.dataset.mode = mode;
+  if(mode===0){ el.textContent = NUM_EMOJI[n]; el.classList.remove('word-mode'); }
+  else if(mode===1){ el.textContent = NUM_WORDS[n]; el.classList.add('word-mode'); speakWord(NUM_WORDS[n]); }
+  else { el.textContent = ORD_WORDS[n]; el.classList.add('word-mode'); speakWord(ORD_WORDS[n]); }
+}
+
 function renderAmmo(){
   document.getElementById('ammoCount').textContent = ammoUnlocked.length;
   const el = document.getElementById('ammoEntries');
@@ -233,11 +246,11 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
-    const num = (a.ammo_id.match(/(\d+)$/)||['','?'])[1].replace(/^0/,'');
+    const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
-        <span class="ammo-num">${num}</span>
+        <span class="ammo-num" data-n="${num}" data-mode="0" onclick="event.stopPropagation();cycleNumBadge(this)">${NUM_EMOJI[num]}</span>
         <span class="ammo-header-zh">${a.core_zh}</span>
         <span class="ammo-chevron">▾</span>
       </div>
