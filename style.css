@@ -37,8 +37,14 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .card{background:var(--card);border-radius:20px;box-shadow:0 2px 0 rgba(159,208,222,.6),0 6px 24px rgba(0,91,152,.07);padding:20px 18px 18px;border:1.5px solid rgba(188,225,223,.7);position:relative;animation:cardIn .32s cubic-bezier(.34,1.46,.64,1);overflow:hidden}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mizu),var(--misora),var(--benikake))}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
-.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.card-num{font-size:11px;font-weight:800;color:var(--misora);background:rgba(159,208,222,.2);padding:3px 10px;border-radius:999px}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px}
+.yg-url-box{display:flex;align-items:center;gap:6px;margin-bottom:12px;padding:9px 12px;border:1.5px solid var(--usumizu);border-radius:11px;background:white;flex-wrap:wrap}
+.yg-url-label{font-size:11px;font-weight:800;color:var(--misora);flex-shrink:0}
+.yg-url-text{font-size:10px;color:var(--tmid);flex:1;word-break:break-all;cursor:pointer;font-family:monospace}
+.yg-url-text:active{opacity:.6}
+.yg-copy-btn{flex-shrink:0;font-size:11px;font-weight:800;color:white;background:var(--misora);border:none;border-radius:6px;padding:3px 10px;cursor:pointer}
+.yg-copy-btn:active{opacity:.7}
+.card-num{font-size:14px;font-weight:900;color:var(--misora);background:rgba(159,208,222,.2);padding:4px 16px;border-radius:999px;text-align:center;width:100%;display:block;margin-bottom:4px}
 
 
 /* CHUNKS — S(主詞) V(動詞) O(受詞) */
@@ -259,9 +265,11 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-row:active{opacity:.7}
 .ammo-fire-row.peppa{background:rgba(108,155,210,.08);border-left:3px solid var(--misora)}
 .ammo-fire-row.daily{background:rgba(61,184,122,.07);border-left:3px solid #3DB87A}
-.ammo-fire-tag{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px}
+.ammo-fire-tag{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px;display:flex;align-items:center;gap:6px}
 .ammo-fire-tag.peppa{color:var(--misora)}
 .ammo-fire-tag.daily{color:#3DB87A}
+.ammo-fire-ts{background:var(--misora);color:white;border-radius:5px;padding:1px 7px;font-size:10px;cursor:pointer;font-weight:900}
+.ammo-fire-ts:active{opacity:.7}
 .ammo-fire-es{font-size:13px;font-weight:800;color:var(--konpeki);line-height:1.5}
 .ammo-fire-zh{font-size:11px;color:var(--tlight);font-weight:600}
 /* star */
