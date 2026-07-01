@@ -207,6 +207,18 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
 .ammo-locked{filter:blur(2px);pointer-events:none;user-select:none}
 .ammo-ep-tag{position:absolute;top:12px;right:12px;font-size:10px;font-weight:800;color:white;background:var(--misora);padding:2px 8px;border-radius:999px}
+
+/* 收合卡頭：數字圖示取代「核心彈藥」文字 */
+.ammo-header{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;padding-right:60px}
+.ammo-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--misora);color:white;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.ammo-header-zh{font-size:13px;font-weight:700;color:var(--tmid);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ammo-chevron{flex-shrink:0;font-size:12px;color:var(--tlight);transition:transform .2s}
+.ammo-card:not(.ammo-collapsed) .ammo-chevron{transform:rotate(180deg)}
+
+/* 整卡收合的內容區 */
+.ammo-card-body{margin-top:12px;animation:fadeUp .2s ease}
+.ammo-card.ammo-collapsed .ammo-card-body{display:none}
+
 /* 核心彈藥 */
 .ammo-chunk-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .ammo-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
@@ -250,12 +262,6 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-body{display:none}
 .ammo-body.open{display:block;animation:fadeUp .2s ease}
 
-/* AMMO DETAILS (collapsible pattern/fire section) */
-.ammo-details{border:1.5px dashed #F5A623;border-radius:10px;margin-top:4px;background:rgba(245,166,35,.04);overflow:hidden}
-.ammo-details summary{padding:8px 11px;font-size:11px;font-weight:800;color:#B87800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
-.ammo-details summary:active{background:rgba(245,166,35,.1)}
-.ammo-details[open] summary{border-bottom:1px dashed rgba(245,166,35,.4)}
-.ammo-details-body{padding:10px 11px 11px}
 .ammo-fire-chunks{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 .ammo-fire-chunk{font-size:12px;font-weight:700;color:#005B98;background:white;border:1.5px dashed #B8C8D1;border-radius:6px;padding:2px 7px;cursor:pointer}
 .ammo-fire-chunk:active{transform:scale(.95)}
