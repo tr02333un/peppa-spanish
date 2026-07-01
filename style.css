@@ -505,3 +505,22 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage3-chip:active{opacity:.7}
 .stage3-output{font-size:14px;font-weight:800;color:var(--konpeki);background:rgba(159,208,222,.12);border-radius:10px;padding:10px 13px;min-height:36px;cursor:pointer}
 .stage3-output:active{opacity:.7}
+
+/* ── 分組導覽橫條 ── */
+.ammo-header-container{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:440px;margin:0 auto 12px auto;padding:0 8px}
+.sequence-bar-segments{display:flex;flex:1;justify-content:center;align-items:center;gap:8px;margin-right:12px}
+.sequence-segment-btn{flex:1;max-width:80px;min-width:55px;padding:6px 0;background:var(--misora);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;cursor:pointer;transition:all .2s ease}
+.sequence-segment-btn.is-active{background:var(--konpeki);box-shadow:0 0 0 2px var(--sora)}
+.sequence-segment-btn:hover{opacity:.85}
+.sequence-segment-btn:active{transform:scale(.96)}
+.episode-badge-tag{flex-shrink:0;background:#eff6ff;color:var(--misora);border:1px solid var(--usumizu);padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}
+
+/* ── 分組實戰射擊常駐展示 ── */
+.group-fire-wrap{overflow:hidden}
+.group-fire-header{font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--konpeki);padding:10px 14px 4px;opacity:.7}
+.group-fire-card{border:1px solid var(--usumizu);border-radius:12px;margin:0 12px 10px;overflow:hidden}
+.group-fire-core{padding:10px 12px;font-size:14px;font-weight:700;color:var(--konpeki);background:var(--bg2);cursor:pointer;border-bottom:1px solid var(--usumizu)}
+.group-fire-core:active{opacity:.75}
+
+/* 主卡片語塊：隱藏 + 收藏按鈕 */
+.chunk-pill .vocab-add-btn{display:none}

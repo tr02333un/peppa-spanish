@@ -173,8 +173,17 @@ function renderStars(){
 let ammoUnlocked = []; // array of ammo_ids unlocked so far
 let ammoStars = {};    // {ammo_id: 0|1|2}
 
+// ── 分組導覽 (E1 only) ──
+const AMMO_GROUPS = [
+  { label:'uno',    range:['e1_01','e1_02','e1_03'] },
+  { label:'dos',    range:['e1_04','e1_05'] },
+  { label:'tres',   range:['e1_06','e1_07','e1_08'] },
+  { label:'cuatro', range:['e1_09','e1_10'] }
+];
+let currentGroupIndex = 0;
+
 // Map sentence global index → ammo_id(s) to unlock
-// (SENTENCE_AMMO_MAP 保留作備份；實際使用 SENTENCE_AMMO_MAP2)
+// (SENTENCE_AMMO_MAP 保留作備充；實際使用 SENTENCE_AMMO_MAP2)
 const SENTENCE_AMMO_MAP2 = {
   0:['e1_01'], 1:['e1_02'], 2:['e1_03'], 3:['e1_04'], 4:['e1_05'],
   5:['e1_06'], 6:['e1_07'], 7:['e1_08'], 8:['e1_09'], 9:['e1_10'],
@@ -317,6 +326,51 @@ function renderAmmo(){
 function toggleAmmoCard(ammoId){
   const card=document.getElementById('ammo-'+ammoId);
   if(card) card.classList.toggle('ammo-collapsed');
+}
+
+// ── 分組導覽函式 ──
+function ammoIdToSentenceIdx(id){ return parseInt(id.split('_')[1],10)-1; }
+
+function initGroupButtons(){
+  document.querySelectorAll('.sequence-segment-btn').forEach((btn,i)=>{
+    btn.addEventListener('click',()=>{
+      if(ep!==0) return;
+      currentGroupIndex=i;
+      idx=ammoIdToSentenceIdx(AMMO_GROUPS[i].range[0]);
+      render();
+    });
+  });
+}
+
+function syncGroupBtn(){
+  const wrap=document.getElementById('seqBarWrap');
+  if(ep!==0){if(wrap)wrap.style.display='none';return;}
+  if(wrap)wrap.style.display='';
+  AMMO_GROUPS.forEach((g,i)=>{
+    const first=ammoIdToSentenceIdx(g.range[0]);
+    const last=ammoIdToSentenceIdx(g.range[g.range.length-1]);
+    if(idx>=first&&idx<=last) currentGroupIndex=i;
+  });
+  document.querySelectorAll('.sequence-segment-btn').forEach((btn,i)=>{
+    btn.classList.toggle('is-active',i===currentGroupIndex);
+  });
+  const entries=AMMO_GROUPS[currentGroupIndex].range
+    .map(k=>AMMO_DATA.find(a=>a.ammo_id===k)).filter(Boolean);
+  renderGroupFireArea(entries);
+  const badge=document.getElementById('seqEpBadge');
+  if(badge) badge.textContent=`ep${ep+1}. ${epData().titleZh}`;
+}
+
+function renderGroupFireArea(entries){
+  const el=document.getElementById('groupFireArea');
+  if(!el) return;
+  el.innerHTML=entries.map(a=>`
+    <div class="group-fire-card">
+      <div class="group-fire-core" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo} <small style="color:var(--tlight);font-weight:500">${a.core_zh}</small></div>
+      ${renderAmmoFireRow(a.fire_peppa,'peppa')}
+      ${a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('')}
+    </div>
+  `).join('');
 }
 
 function seekYT(sec){
@@ -790,7 +844,7 @@ function render(){
     document.getElementById('makeFreeInput').className='make-free-input';
   }
 
-  document.getElementById('epBadge').textContent=`S1 · E${ep+1} · ${epData().titleZh}`;
+  document.getElementById('epBadge').textContent=`S1 · ep${ep+1} · ${epData().titleZh}`;
   const tsVal = s.ts!=null ? ` <span class="card-num-ts">${Math.floor(s.ts/60)}:${String(s.ts%60).padStart(2,'0')}</span>` : '';
   document.getElementById('cardNum').innerHTML = `句 ${idx+1} / ${n}${tsVal}`;
   document.getElementById('navCount').textContent=`${idx+1} / ${n}`;
@@ -846,6 +900,7 @@ function render(){
   const card=document.getElementById('mainCard');
   card.style.animation='none';card.offsetHeight;card.style.animation='';
   switchLang('zh');renderStars();
+  syncGroupBtn();
 }
 
 function smartMatch(input,s){
@@ -1275,4 +1330,5 @@ function speakSentence(text){
   renderPronounLibrary();
   renderVocab();
   initTTS();
+  initGroupButtons();
 })();

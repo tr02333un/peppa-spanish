@@ -31,6 +31,17 @@
     <div class="star-label" id="starLabel"></div>
   </div>
 
+  <!-- SEQUENCE BAR -->
+  <div class="ammo-header-container" id="seqBarWrap">
+    <div class="sequence-bar-segments" id="seqBar">
+      <button class="sequence-segment-btn is-active" data-group="0">uno / 1</button>
+      <button class="sequence-segment-btn" data-group="1">dos / 2</button>
+      <button class="sequence-segment-btn" data-group="2">tres / 3</button>
+      <button class="sequence-segment-btn" data-group="3">cuatro / 4</button>
+    </div>
+    <div class="episode-badge-tag" id="seqEpBadge">ep1. 泥巴坑</div>
+  </div>
+
   <!-- MAIN CARD -->
   <div class="card-container">
     <div class="card" id="mainCard">
@@ -137,6 +148,17 @@
 
     <button class="btn-restart" onclick="restartEp()">🔁 重來一次</button>
     <button class="btn-next-ep" id="nextEpBtn" onclick="goNextEp()">下一集 →</button>
+  </div>
+
+  <!-- ── 分組實戰射擊常駐展示 ── -->
+  <div class="group-fire-wrap card-container" id="groupFireWrap">
+    <div class="ammo-book-top" style="cursor:default;background:linear-gradient(135deg,#1A8C50,#3DB87A)">
+      <div>
+        <div class="pb-book-title">🎯 實戰射擊</div>
+        <div class="pb-book-sub">目前分組的佩佩豬原句＋日常對話，常駐顯示</div>
+      </div>
+    </div>
+    <div id="groupFireArea" style="padding:8px 4px 4px"></div>
   </div>
 
   <!-- ── 語塊彈藥庫 ── -->
