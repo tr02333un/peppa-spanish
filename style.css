@@ -415,6 +415,24 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .conj-lib-card .conj-section{margin:0 8px 4px;border:none}
 .conj-lib-card .conj-title{display:none}
 
+/* 人稱代名詞查詢庫 */
+.pron-cat-card{background:white;border-bottom:1px solid var(--bg2);padding:12px 14px}
+.pron-cat-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.pron-cat-header{font-size:14px;font-weight:900;color:var(--konpeki)}
+.pron-cat-en{font-size:10px;font-weight:700;color:var(--tlight);margin-left:4px}
+.pron-cat-hint{font-size:11px;color:var(--tmid);font-weight:600;margin:2px 0 8px}
+.pron-rows{display:flex;flex-direction:column;gap:2px}
+.pron-row{display:grid;grid-template-columns:64px 1fr auto;align-items:baseline;gap:8px;padding:4px 0;border-top:1px solid rgba(184,200,209,.15)}
+.pron-row:first-child{border-top:none}
+.pron-es{font-size:13px;font-weight:900;color:var(--misora);cursor:pointer}
+.pron-es:active{opacity:.6}
+.pron-zh{font-size:11px;color:var(--tmid);font-weight:600}
+.pron-en{font-size:10px;color:var(--tlight);font-style:italic}
+.pron-example{margin-top:8px;padding:7px 10px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;cursor:pointer}
+.pron-ex-es{font-size:12px;font-weight:700;color:var(--konpeki)}
+.pron-ex-zh{font-size:11px;color:var(--tlight);margin-top:2px}
+.pron-note{margin-top:6px;font-size:10px;color:var(--benikake);font-weight:700;line-height:1.5}
+
 /* ── 熟悉度星號系統 ── */
 .fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
 .fam-star-btn:active{transform:scale(1.2)}
