@@ -557,6 +557,7 @@ function selectExpand(key,i){
 }
 
 function buildExpandPreview(exp){
+  if(exp.template) return buildExpandPreviewGeneric(exp);
   const relGroup=exp.groups.find(g=>g.key==='rel');
   const sizeGroup=exp.groups.find(g=>g.key==='size');
   const nameGroup=exp.groups.find(g=>g.key==='name');
@@ -580,7 +581,34 @@ function buildExpandPreview(exp){
   return `${dem} <span class="ep-fixed">es mi</span> ${relStr} ${sizeStr} ${nameStr}${gNote}`;
 }
 
+// ── 通用版 expand（E2/E3 新句子用）：template = 固定字/佔位符 陣列 ──
+function buildExpandPreviewGeneric(exp){
+  return exp.template.map(tok=>{
+    if(tok.t!==undefined) return `<span class="ep-fixed">${tok.t}</span>`;
+    const g=exp.groups.find(g=>g.key===tok.g);
+    const i=expandSel[tok.g];
+    if(i===undefined) return `<span style="color:var(--nezumi)">[${g.label}]</span>`;
+    return `<span class="ep-demo">${g.options[i].es}</span>`;
+  }).join(' ');
+}
+
+function buildExpandSentenceGeneric(exp){
+  const firstGroupKey=exp.groups[0].key;
+  if(expandSel[firstGroupKey]===undefined) return '';
+  const parts=exp.template.map(tok=>{
+    if(tok.t!==undefined) return tok.t;
+    const g=exp.groups.find(g=>g.key===tok.g);
+    const i=expandSel[tok.g];
+    return i!==undefined ? g.options[i].es : '';
+  }).filter(Boolean);
+  return parts.join(' ');
+}
+
 function buildExpandSentence(exp){
+  if(exp.template){
+    const built=buildExpandSentenceGeneric(exp);
+    return built ? built+(/[.!?]$/.test(built)?'':'.') : '';
+  }
   const relGroup=exp.groups.find(g=>g.key==='rel');
   const sizeGroup=exp.groups.find(g=>g.key==='size');
   const nameGroup=exp.groups.find(g=>g.key==='name');
