@@ -302,7 +302,7 @@ function renderCogLibrary(filter){
         <div class="cog-row">
           <span class="cog-en">${c.en}</span>
           <span class="cog-arrow">→</span>
-          <span class="cog-es" onclick="speakWord('${escAttr(c.es)}')">${c.es}</span>
+          <span class="cog-es" onclick="speakWord('${escAttr(c.es)}')">${c.art?`<span class="cog-art">${c.art}</span> `:''}${c.es}</span>
           <span class="cog-zh">${c.zh}</span>
           <span class="vocab-add-btn" onclick="addToVocab('${escAttr(c.es)}','${escAttr(c.zh)}','同源詞庫')">＋</span>
         </div>`).join('');
