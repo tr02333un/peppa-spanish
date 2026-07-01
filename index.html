@@ -185,10 +185,55 @@
     <button class="nav-btn" onclick="clearLS()" style="font-size:11px;color:var(--err);border-color:var(--err)">清除所有學習紀錄</button>
   </div>
 
+  <!-- ── 練習關卡 ── -->
+  <div class="stages-wrap card-container">
+    <div class="stages-top" onclick="toggleStages()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="pb-book-title">⚔️ 實戰練習關卡</div>
+        <div class="pb-book-sub">三個難度，從洗牌到造句</div>
+      </div>
+      <span id="stagesToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="stagesBody" class="ammo-body">
+      <!-- Stage 1 -->
+      <div class="stage-section">
+        <div class="stage-header">🃏 第一關：洗牌復原</div>
+        <div class="stage-sub">點語塊，拼出原句順序</div>
+        <div class="stage-controls">
+          <button class="stage-btn" onclick="startStage1()">開始 / 換一句</button>
+        </div>
+        <div id="stage1Target" class="stage-target"></div>
+        <div id="stage1Chunks" class="stage-chunks"></div>
+        <div id="stage1Result" class="stage-result" style="display:none"></div>
+      </div>
+      <!-- Stage 2 -->
+      <div class="stage-section">
+        <div class="stage-header">🔄 第二關：你我互換</div>
+        <div class="stage-sub">點語塊聽發音，左欄 yo → 右欄 tú</div>
+        <div id="stage2Cards" class="stage2-cards"></div>
+      </div>
+      <!-- Stage 3 -->
+      <div class="stage-section">
+        <div class="stage-header">🏗️ 第三關：造句核心</div>
+        <div class="stage-sub">選核心 + 選補語，點輸出聽整句</div>
+        <div id="stage3Area" class="stage3-area"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 文法/語塊說明 Bottom Sheet ── -->
+  <div id="grammarSheet" onclick="closeGrammarSheet()">
+    <div class="grammar-sheet-box" onclick="event.stopPropagation()">
+      <button class="grammar-modal-close" onclick="closeGrammarSheet()">✕</button>
+      <div id="grammarSheetContent"></div>
+    </div>
+  </div>
+
   <script src="episodes.js?v=20260701"></script>
   <script src="ammo.js?v=20260701"></script>
   <script src="cognates.js?v=20260701"></script>
   <script src="grammar.js?v=20260701"></script>
+  <script src="stages.js?v=20260701"></script>
   <script src="script.js?v=20260701"></script>
 </body>
 </html>

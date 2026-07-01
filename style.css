@@ -291,11 +291,13 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-body.open{display:block;animation:fadeUp .2s ease}
 
 .ammo-fire-chunks{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.ammo-fire-chunk{font-size:12px;font-weight:700;color:#005B98;background:white;border:1.5px dashed #B8C8D1;border-radius:6px;padding:2px 7px;cursor:pointer}
-.ammo-fire-chunk:active{transform:scale(.95)}
-.ammo-fire-chunk.verb{border-color:#A8D8B0;background:#F0FDF4;color:#1A5C30}
-.ammo-fire-chunk.noun{border-color:var(--sora);background:rgba(138,196,222,.1)}
-.ammo-fire-chunk.adj{border-color:var(--benikake);background:rgba(132,145,195,.1);color:#3A3E6B}
+.ammo-fire-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
+.ammo-fire-chunk:active{opacity:.6}
+.ammo-fire-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
+.ammo-fire-chunk.role-v{background:var(--misora);color:white;border:none}
+.ammo-fire-chunk.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
+.ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
+.ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 
 /* VOCAB ADD BUTTON / COLLECTION */
 .vocab-add-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(132,145,195,.15);color:var(--benikake);font-size:12px;font-weight:900;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1;position:relative}
@@ -380,3 +382,51 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
 .grammar-trap{font-size:11px;font-weight:700;color:var(--tmid);background:rgba(224,92,92,.06);border-radius:8px;padding:8px 11px;margin-bottom:8px;border-left:3px solid var(--err);line-height:1.6}
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
+
+/* ── GRAMMAR / CHUNK BOTTOM SHEET ── */
+#grammarSheet{display:none;position:fixed;inset:0;background:rgba(26,46,59,.55);z-index:999}
+.grammar-sheet-box{position:absolute;bottom:0;left:0;right:0;background:white;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px 18px 32px;max-width:480px;margin:0 auto}
+.grammar-chunk-note{font-size:14px;font-weight:700;color:var(--konpeki);line-height:1.7;padding:8px 0 4px;white-space:pre-line}
+
+/* ── STAGE CHUNK PILLS ── */
+.stage-chunk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;cursor:pointer;transition:opacity .15s;margin:2px;user-select:none}
+.stage-chunk-pill:active{opacity:.6}
+.stage-chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
+.stage-chunk-pill.role-v{background:var(--misora);color:white;border:none}
+.stage-chunk-pill.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
+.stage-chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
+.stage-chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
+
+/* ── STAGES SECTION ── */
+.stages-wrap{}
+.stages-top{background:linear-gradient(135deg,#1A2E3B,var(--konpeki));padding:14px 16px;display:flex;align-items:center;gap:10px;border-radius:14px 14px 0 0}
+.stages-top .pb-book-title{color:white;font-size:14px;font-weight:900}
+.stages-top .pb-book-sub{color:rgba(255,255,255,.6);font-size:11px;font-weight:600}
+.stage-section{padding:14px 16px;border-bottom:1px solid var(--bg2)}
+.stage-section:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.stage-header{font-size:14px;font-weight:900;color:var(--konpeki);margin-bottom:3px}
+.stage-sub{font-size:11px;color:var(--tlight);font-weight:600;margin-bottom:10px}
+.stage-controls{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.stage-btn{padding:7px 14px;border-radius:10px;border:none;background:var(--misora);color:white;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+.stage-btn.sec{background:rgba(108,155,210,.15);color:var(--misora)}
+.stage-btn:active{opacity:.7}
+.stage-target{font-size:13px;font-weight:800;color:var(--konpeki);background:rgba(159,208,222,.12);border-radius:9px;padding:9px 12px;margin-bottom:8px;line-height:1.5;min-height:36px}
+.stage-chunks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.stage-result{font-size:13px;font-weight:800;border-radius:9px;padding:9px 12px;margin-top:4px}
+.stage-result.ok{background:rgba(61,184,122,.1);color:#1A5C30;border-left:3px solid var(--ok)}
+.stage-result.err{background:rgba(224,92,92,.06);color:var(--err);border-left:3px solid var(--err)}
+.stage2-cards{display:flex;flex-direction:column;gap:8px}
+.stage2-pair{display:flex;gap:8px;align-items:stretch}
+.stage2-card{flex:1;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:800;cursor:pointer;transition:opacity .15s}
+.stage2-card:active{opacity:.7}
+.stage2-card.yo{background:rgba(108,155,210,.12);border:1.5px solid var(--misora);color:var(--konpeki)}
+.stage2-card.tu{background:rgba(61,184,122,.08);border:1.5px solid var(--ok);color:#1A5C30}
+.stage2-card-label{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;opacity:.7}
+.stage3-area{display:flex;flex-direction:column;gap:10px}
+.stage3-row{display:flex;flex-wrap:wrap;gap:6px}
+.stage3-label{font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--tlight);text-transform:uppercase;margin-bottom:4px}
+.stage3-chip{padding:5px 12px;border-radius:20px;border:1.5px solid var(--usumizu);font-size:12px;font-weight:800;color:var(--misora);background:white;cursor:pointer;transition:all .15s}
+.stage3-chip.selected{background:var(--misora);color:white;border-color:var(--misora)}
+.stage3-chip:active{opacity:.7}
+.stage3-output{font-size:14px;font-weight:800;color:var(--konpeki);background:rgba(159,208,222,.12);border-radius:10px;padding:10px 13px;min-height:36px;cursor:pointer}
+.stage3-output:active{opacity:.7}

@@ -27,6 +27,11 @@ function openYG(word, lang){
   window.open(url, '_blank', 'noopener');
 }
 
+function openYGPanel(word){
+  const clean = String(word).replace(/[¡¿.,!?;:（）]/g,'').trim();
+  if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+}
+
 // ── SPEECH SYNTHESIS (TTS) ──
 let ttsReady = false;
 let ttsVoice = null;
@@ -35,8 +40,10 @@ function initTTS(){
   if(!window.speechSynthesis){ return; }
   function pickVoice(){
     const voices = speechSynthesis.getVoices();
-    ttsVoice = voices.find(v=>v.lang==='es-ES')
-      || voices.find(v=>v.lang==='es-MX')
+    ttsVoice = voices.find(v=>v.lang==='es-MX')
+      || voices.find(v=>v.lang==='es-419')
+      || voices.find(v=>v.lang==='es-US')
+      || voices.find(v=>v.lang==='es-ES')
       || voices.find(v=>v.lang.startsWith('es'))
       || null;
     if(voices.length > 0){
@@ -57,7 +64,7 @@ function speakWord(text, el){
   // Must cancel first on Android or it queues silently
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(clean);
-  utt.lang = 'es-ES';
+  utt.lang = 'es-419';
   utt.rate = 0.82;
   utt.pitch = 1.05;
   utt.volume = 1;
@@ -182,7 +189,7 @@ function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
 function renderAmmoFireChunks(fire){
   if(!fire.chunks || !fire.chunks.length) return '';
   return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>
-    `<span class="ammo-fire-chunk ${c.type||''}" onclick="event.stopPropagation();openYGPanel('${escAttr(c.word)}')">${c.word}</span>`
+    `<span class="ammo-fire-chunk role-${c.role||'plain'}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>`
   ).join('')}</div>`;
 }
 
@@ -765,7 +772,7 @@ function render(){
     addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
     pill.appendChild(word);pill.appendChild(addBtn);
     div.appendChild(pill);
-    div.onclick=()=>openYGPanel(c.w);
+    div.onclick=()=>handleChunkTap(c,div);
     area.appendChild(div);
   });
 
@@ -774,7 +781,7 @@ function render(){
 
   // ── YouGlish 語塊按鈕 keyword ──
   const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.chunks.find(c=>c.role==='v')?.w || s.es.slice(0,15);
-  const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish';
+  const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish/am';
   const urlEl = document.getElementById('yg-url-text');
   if(urlEl){ urlEl.textContent = ygUrl; urlEl.dataset.url = ygUrl; }
 
@@ -1008,28 +1015,54 @@ function openGrammarCard(gId){
       <div class="grammar-ex-zh">${ex.zh}</div>
     </div>`
   ).join('');
-  document.getElementById('grammarModalContent').innerHTML = `
+  openGrammarSheet(`
     <div class="grammar-cat-tag">${catLabel}</div>
     <div class="grammar-title">${g.title}</div>
     <div class="grammar-rule">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
     <div class="grammar-trap">${g.trap}</div>
     <div class="grammar-source">📍 ${g.source}</div>
-  `;
-  document.getElementById('grammarModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  `);
 }
 
 function closeGrammarModal(){
-  document.getElementById('grammarModal').classList.remove('open');
+  closeGrammarSheet();
+}
+
+function openGrammarSheet(html){
+  document.getElementById('grammarSheetContent').innerHTML = html;
+  document.getElementById('grammarSheet').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGrammarSheet(){
+  document.getElementById('grammarSheet').style.display = 'none';
   document.body.style.overflow = '';
+}
+
+function handleChunkTap(c, el){
+  speakWord(c.w, el);
+  if(!c.hideYg){
+    const clean = c.w.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
+    if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+  }
+  if(c.note) openGrammarSheet('<div class="grammar-chunk-note">'+c.note+'</div>');
+}
+
+function ammoChunkTap(word, hideYg, note){
+  speakWord(word, null);
+  if(!hideYg){
+    const clean = word.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
+    if(clean) window.open('https://youglish.com/pronounce/'+encodeURIComponent(clean)+'/spanish/am','_blank','noopener');
+  }
+  if(note) openGrammarSheet('<div class="grammar-chunk-note">'+note+'</div>');
 }
 
 function speakSentence(text){
   if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'es-ES';
+  utt.lang = 'es-419';
   utt.rate = 0.82;
   utt.pitch = 1.05;
   utt.volume = 1;
