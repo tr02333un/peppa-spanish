@@ -1118,6 +1118,7 @@ function buildConjTable(conj, gId){
 }
 
 // ── 👤 人稱代名詞查詢庫 ──
+const PERSON_ICONS = ['🙋','👉','👤','👥','🙌','👨‍👩‍👧‍👦']; // 依序：1單/2單/3單/1複/2複/3複
 function renderPronounLibrary(){
   const el = document.getElementById('pronounLibBody');
   if(!el) return;
@@ -1126,8 +1127,9 @@ function renderPronounLibrary(){
       <div class="pron-cat-header">${cat.cat} <span class="pron-cat-en">${cat.catEn}</span></div>
       <div class="pron-cat-hint">${cat.hint}</div>
       <div class="pron-rows">
-        ${cat.rows.map(r=>`
+        ${cat.rows.map((r,i)=>`
           <div class="pron-row">
+            <span class="pron-icon">${PERSON_ICONS[i]||''}</span>
             <span class="pron-es" onclick="speakWord('${escAttr(r.es)}',this)">${r.es}</span>
             <span class="pron-zh">${r.zh}</span>
             <span class="pron-en">${r.en}</span>
