@@ -140,7 +140,7 @@ const GRAMMAR_DATA = [
   {
     id:"g10", cat:"verb-pattern",
     title:"¿Podemos + infinitive?：我們可以…嗎？",
-    rule:"poder（能夠）第一人稱複數 podemos + 原形動詞 = 徵求／許可／詢問可能性。podemos = poder（我們）能夠。",
+    rule:"poder（能夠）徵求／許可／詢問可能性。我們能夠 podemos + 原形動詞",
     examples:[
       {es:"¿Podemos salir a jugar?", zh:"我們可以出去玩嗎？"},
       {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？"},
