@@ -161,6 +161,16 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .cog-click:active{transform:scale(.95)}
 .cog-art{font-size:15px;font-weight:900;color:inherit;font-style:italic;margin-right:2px}
 
+/* SUFFIX PATTERNS */
+.suffix-section{margin:8px 0 14px}
+.suffix-title{font-size:12px;font-weight:800;color:var(--konpeki);margin-bottom:8px;letter-spacing:.03em}
+.suffix-group{border:1.5px solid var(--usumizu);border-radius:10px;margin-bottom:7px;overflow:hidden}
+.suffix-summary{display:flex;flex-direction:column;gap:3px;padding:10px 12px;cursor:pointer;background:var(--bg2);list-style:none}
+.suffix-summary::-webkit-details-marker{display:none}
+.suffix-rule{font-size:14px;font-weight:900;color:var(--misora)}
+.suffix-hint{font-size:11px;color:var(--tmid)}
+.suffix-body{padding:4px 8px 8px}
+
 /* PATTERN BOOK ENTRIES */
 .pt-entry{align-items:flex-start}
 .pt-content{flex:1;min-width:0}

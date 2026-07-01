@@ -285,6 +285,27 @@ function renderCogLibrary(filter){
   const body=document.getElementById('cogLibraryBody');
   if(!body) return;
   const q=(filter||'').toLowerCase().trim();
+  let html=`<input type="text" class="cog-search" id="cogSearchInput" placeholder="🔍 搜尋英文／西語／中文…" value="${(filter||'').replace(/"/g,'&quot;')}">`;
+
+  // 詞綴規律區（無搜尋時顯示）
+  if(!q){
+    html+=`<div class="suffix-section"><div class="suffix-title">🔤 詞綴規律 — 一個規律解鎖一整類</div>`;
+    SUFFIX_PATTERNS.forEach(p=>{
+      html+=`<details class="suffix-group"><summary class="suffix-summary"><span class="suffix-rule">${p.rule}</span><span class="suffix-hint">${p.hint}</span></summary><div class="suffix-body">`;
+      html+=p.words.map(w=>`
+        <div class="cog-row">
+          <span class="cog-en">${w.en}</span>
+          <span class="cog-arrow">→</span>
+          <span class="cog-es" onclick="speakWord('${escAttr(w.es)}')">${w.es}</span>
+          <span class="cog-zh">${w.zh}</span>
+          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
+        </div>`).join('');
+      html+=`</div></details>`;
+    });
+    html+=`</div>`;
+  }
+
+  // 按集數分組
   const epOrder=[];
   const groups={};
   COGNATE_LIBRARY.forEach(c=>{
@@ -292,8 +313,7 @@ function renderCogLibrary(filter){
     if(!groups[c.ep]){groups[c.ep]=[];epOrder.push(c.ep);}
     groups[c.ep].push(c);
   });
-  let html=`<input type="text" class="cog-search" id="cogSearchInput" placeholder="🔍 搜尋英文／西語／中文…" value="${(filter||'').replace(/"/g,'&quot;')}">`;
-  if(!epOrder.length){
+  if(!epOrder.length && q){
     html+=`<div class="passbook-empty">找不到符合的詞彙</div>`;
   } else {
     epOrder.forEach(epLabel=>{

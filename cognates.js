@@ -306,6 +306,45 @@ const COGNATE_LIBRARY = [
   {en:'cure',      es:'curar',     art:'',    zh:'治療／康復',      ep:'E3 · 最好的朋友'},
 ];
 
+// ── 詞綴規律資料（-tion→-ción 等三組） ──
+const SUFFIX_PATTERNS = [
+  {
+    rule: '-tion → -ción',
+    hint: '英文 -tion 結尾幾乎全都適用，直接套用就對了！',
+    words: [
+      {en:'nation',      es:'nación',       zh:'國家'},
+      {en:'action',      es:'acción',       zh:'行動'},
+      {en:'emotion',     es:'emoción',      zh:'情緒'},
+      {en:'information', es:'información',  zh:'資訊'},
+      {en:'education',   es:'educación',    zh:'教育'},
+      {en:'situation',   es:'situación',    zh:'情況'},
+    ]
+  },
+  {
+    rule: '-ty → -dad',
+    hint: '英文 -ty 抽象名詞 → 西語 -dad（全部陰性，記得加 la）',
+    words: [
+      {en:'city',        es:'ciudad',       zh:'城市'},
+      {en:'reality',     es:'realidad',     zh:'現實'},
+      {en:'quality',     es:'calidad',      zh:'品質'},
+      {en:'university',  es:'universidad',  zh:'大學'},
+      {en:'society',     es:'sociedad',     zh:'社會'},
+      {en:'liberty',     es:'libertad',     zh:'自由'},
+    ]
+  },
+  {
+    rule: '-ce / -cy → -cia / -ncia',
+    hint: '英文 -ce/-cy 結尾 → 西語 -cia/-ncia（全部陰性，記得加 la）',
+    words: [
+      {en:'patience',    es:'paciencia',    zh:'耐心'},
+      {en:'experience',  es:'experiencia',  zh:'經驗'},
+      {en:'distance',    es:'distancia',    zh:'距離'},
+      {en:'importance',  es:'importancia',  zh:'重要性'},
+      {en:'difference',  es:'diferencia',   zh:'差異'},
+    ]
+  },
+];
+
 // ── 建立 cognate details HTML ──
 function buildCogDetails(data){
   const rowsHtml = data.rows.map(r=>`<div class="cog-detail-row">${r}</div>`).join('');
