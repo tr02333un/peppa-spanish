@@ -210,7 +210,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* 收合卡頭：數字圖示取代「核心彈藥」文字 */
 .ammo-header{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;padding-right:60px}
-.ammo-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--misora);color:white;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.ammo-num{flex-shrink:0;min-width:26px;height:26px;border-radius:50%;background:var(--misora);color:white;font-size:15px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;transition:all .15s}
+.ammo-num:active{transform:scale(1.15)}
+.ammo-num.word-mode{border-radius:999px;padding:0 10px;font-size:12px;font-style:italic}
 .ammo-header-zh{font-size:13px;font-weight:700;color:var(--tmid);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ammo-chevron{flex-shrink:0;font-size:12px;color:var(--tlight);transition:transform .2s}
 .ammo-card:not(.ammo-collapsed) .ammo-chevron{transform:rotate(180deg)}
