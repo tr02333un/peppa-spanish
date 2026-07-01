@@ -4,7 +4,7 @@
 const EPS=[
 // ── E1 泥巴坑 ──
 {title:"Charcos de Barro",titleZh:"泥巴坑",dur:187,sentences:[
-  {es:"Yo soy Peppa Pig.",chunks:[{w:"Yo",role:"s"},{w:"soy",role:"v"},{w:"Peppa Pig.",role:"o"}],zh:"我是佩佩豬。",en:"I am Peppa Pig.",noteZh:"「soy」= 我是（ser 動詞第一人稱）",noteEn:"soy = I am (1st person of 'ser')",
+  {es:"Yo soy Peppa Pig.",chunks:[{w:"Yo",role:"s"},{w:"soy",role:"v"},{w:"Peppa Pig.",role:"o"}],zh:"我是佩佩豬。",en:"I am Peppa Pig.",noteZh:"「soy」= 我是（ser 動詞「我」的說法）",noteEn:"soy = I am (1st person of 'ser')",
   expand:{
     note:"Yo soy + 名字 = 自我介紹固定句型",
     template:[{t:"Yo soy"},{g:"name"}],
@@ -77,9 +77,9 @@ const EPS=[
       {es:"¡Le",zh:"他／她"},
     ]}]
   }},
-  {es:"Peppa ha encontrado un charco pequeño.",chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v"},{w:"un charco pequeño.",role:"o"}],zh:"佩佩找到了一個小水坑。",en:"Peppa has found a small puddle.",noteZh:"「ha encontrado」= 現在完成式，已經找到了",noteEn:"'ha encontrado' = has found (present perfect tense)",
+  {es:"Peppa ha encontrado un charco pequeño.",chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v"},{w:"un charco pequeño.",role:"o"}],zh:"佩佩找到了一個小水坑。",en:"Peppa has found a small puddle.",noteZh:"「ha encontrado」= 剛剛做完的說法，已經找到了",noteEn:"'ha encontrado' = has found (present perfect tense)",
   expand:{
-    note:"ha encontrado = 現在完成式，換主詞練習",
+    note:"ha encontrado = 剛剛做完的說法，換主詞練習",
     template:[{g:"name"},{t:"ha encontrado un charco pequeño."}],
     groups:[{label:"誰",key:"name",options:[
       {es:"Peppa",zh:"佩佩"},
@@ -106,7 +106,7 @@ const EPS=[
       {es:"pintura.",zh:"顏料"},
     ]}]
   }},
-  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，第三人稱複數",noteEn:"'A todos les encanta' = everyone loves it (3rd person plural)",
+  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，「他們」的說法",noteEn:"'A todos les encanta' = everyone loves it (3rd person plural)",
   expand:{
     note:"A todos les encanta + 原形動詞 = 所有人都超愛…",
     template:[{t:"A todos les encanta"},{g:"activity"}],
@@ -143,7 +143,7 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"George ha perdido al señor Dinosaurio.",chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v"},{w:"al señor Dinosaurio.",role:"o"}],zh:"喬治把恐龍先生弄丟了。",en:"George has lost Mr Dinosaur.",noteZh:"「ha perdido」= 現在完成式，已經弄丟了",noteEn:"'ha perdido' = has lost (present perfect tense)",
+  {es:"George ha perdido al señor Dinosaurio.",chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v"},{w:"al señor Dinosaurio.",role:"o"}],zh:"喬治把恐龍先生弄丟了。",en:"George has lost Mr Dinosaur.",noteZh:"「ha perdido」= 剛剛做完的說法，已經弄丟了",noteEn:"'ha perdido' = has lost (present perfect tense)",
   expand:{
     note:"ha perdido = 弄丟了，換主詞練習",
     template:[{g:"name"},{t:"ha perdido al señor Dinosaurio."}],
@@ -153,7 +153,7 @@ const EPS=[
       {es:"Papá",zh:"爸爸"},
     ]}]
   }},
-  {es:"No te preocupes George, entre todos lo encontraremos.",chunks:[{w:"No te preocupes",role:"v"},{w:"George,"},{w:"entre todos",role:"s"},{w:"lo encontraremos.",role:"v"}],zh:"不要擔心喬治，我們大家一起會找到牠的。",en:"Don't worry George, together we will find it.",noteZh:"「No te preocupes」= 不要擔心，反身動詞命令句",noteEn:"'No te preocupes' = Don't worry (reflexive imperative)",
+  {es:"No te preocupes George, entre todos lo encontraremos.",chunks:[{w:"No te preocupes",role:"v"},{w:"George,"},{w:"entre todos",role:"s"},{w:"lo encontraremos.",role:"v"}],zh:"不要擔心喬治，我們大家一起會找到牠的。",en:"Don't worry George, together we will find it.",noteZh:"「No te preocupes」= 不要擔心，自己對自己做的動詞命令句",noteEn:"'No te preocupes' = Don't worry (reflexive imperative)",
   expand:{
     note:"No te preocupes = 安慰語固定句型，換被安慰的人",
     template:[{t:"No te preocupes"},{g:"name"},{t:"entre todos lo encontraremos."}],
@@ -291,7 +291,7 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"Yo seré la doctora y tú serás la enfermera.",chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v"},{w:"la doctora",role:"o"},{w:"y",role:"c"},{w:"tú",role:"s"},{w:"serás",role:"v"},{w:"la enfermera.",role:"o"}],zh:"我來當醫生，你來當護士。",en:"I will be the doctor and you will be the nurse.",noteZh:"「seré / serás」= ser 動詞的未來式，我/你將是",noteEn:"'seré / serás' = I will be / you will be (future tense of 'ser')",
+  {es:"Yo seré la doctora y tú serás la enfermera.",chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v"},{w:"la doctora",role:"o"},{w:"y",role:"c"},{w:"tú",role:"s"},{w:"serás",role:"v"},{w:"la enfermera.",role:"o"}],zh:"我來當醫生，你來當護士。",en:"I will be the doctor and you will be the nurse.",noteZh:"「seré / serás」= ser 動詞的以後要做的說法，我/你將是",noteEn:"'seré / serás' = I will be / you will be (future tense of 'ser')",
   expand:{
     note:"職業陰陽性成對：la doctora/el doctor、la enfermera/el enfermero…換角色順便練性別變化",
     template:[{t:"Yo seré"},{g:"prof1"},{t:"y tú serás"},{g:"prof2"}],
@@ -314,9 +314,9 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"Ahora George, respira hondo. Después tose.",chunks:[{w:"Ahora George,"},{w:"respira hondo.",role:"v"},{w:"Después",role:"c"},{w:"tose.",role:"v"}],zh:"現在喬治，深呼吸。然後咳嗽。",en:"Now George, breathe deeply. Then cough.",noteZh:"「respira hondo」= 深呼吸，命令式動詞直接用",noteEn:"'respira hondo' = breathe deeply (imperative form, informal)",
+  {es:"Ahora George, respira hondo. Después tose.",chunks:[{w:"Ahora George,"},{w:"respira hondo.",role:"v"},{w:"Después",role:"c"},{w:"tose.",role:"v"}],zh:"現在喬治，深呼吸。然後咳嗽。",en:"Now George, breathe deeply. Then cough.",noteZh:"「respira hondo」= 深呼吸，直接下指令的說法動詞直接用",noteEn:"'respira hondo' = breathe deeply (imperative form, informal)",
   expand:{
-    note:"Ahora + 人, respira hondo. = 命令式對某人說",
+    note:"Ahora + 人, respira hondo. = 直接下指令的說法對某人說",
     template:[{g:"name"},{t:"respira hondo. Después tose."}],
     groups:[{label:"跟誰說",key:"name",options:[
       {es:"Ahora George,",zh:"現在喬治，"},
