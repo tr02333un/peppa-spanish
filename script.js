@@ -152,11 +152,6 @@ function renderStars(){
 let ammoUnlocked = []; // array of ammo_ids unlocked so far
 let ammoStars = {};    // {ammo_id: 0|1|2}
 
-// ── GRAMMAR LIBRARY STATE ──
-let grammarUnlocked = []; // gIds unlocked via answering/making
-let userExamples = {};    // {gId: ['user sentence', ...]}
-let grammarLibCat = 'all';
-
 // Map sentence global index → ammo_id(s) to unlock
 // (SENTENCE_AMMO_MAP 保留作備份；實際使用 SENTENCE_AMMO_MAP2)
 const SENTENCE_AMMO_MAP2 = {
@@ -187,7 +182,7 @@ function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
 function renderAmmoFireChunks(fire){
   if(!fire.chunks || !fire.chunks.length) return '';
   return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>
-    `<span class="ammo-fire-chunk ${c.type||''}" onclick="event.stopPropagation();speakWord('${escAttr(c.word)}')">${c.word}</span>`
+    `<span class="ammo-fire-chunk ${c.type||''}" onclick="event.stopPropagation();openYGPanel('${escAttr(c.word)}')">${c.word}</span>`
   ).join('')}</div>`;
 }
 
@@ -252,10 +247,11 @@ function renderAmmo(){
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
     const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
+    const numDisplay = `<span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
-        <span class="ammo-num" data-n="${num}" data-mode="0" onclick="event.stopPropagation();cycleNumBadge(this)">${NUM_EMOJI[num]}</span>
+        <span class="ammo-num">${numDisplay}</span>
         <span class="ammo-header-zh">${a.core_zh}</span>
         <span class="ammo-chevron">▾</span>
       </div>
@@ -340,7 +336,7 @@ function renderCogLibrary(filter){
         <div class="cog-row">
           <span class="cog-en">${w.en}</span>
           <span class="cog-arrow">→</span>
-          <span class="cog-es" onclick="speakWord('${escAttr(w.es)}')">${w.es}</span>
+          <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.es}</span>
           <span class="cog-zh">${w.zh}</span>
           <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
         </div>`).join('');
@@ -366,7 +362,7 @@ function renderCogLibrary(filter){
         <div class="cog-row">
           <span class="cog-en">${c.en}</span>
           <span class="cog-arrow">→</span>
-          <span class="cog-es" onclick="speakWord('${escAttr(c.es)}')">${c.art?`<span class="cog-art">${c.art}</span> `:''}${c.es}</span>
+          <span class="cog-es" onclick="openYGPanel('${escAttr(c.es)}')">${c.art?`<span class="cog-art">${c.art}</span> `:''}${c.es}</span>
           <span class="cog-zh">${c.zh}</span>
           <span class="vocab-add-btn" onclick="addToVocab('${escAttr(c.es)}','${escAttr(c.zh)}','同源詞庫')">＋</span>
         </div>`).join('');
@@ -664,14 +660,6 @@ function checkMakeFree(){
     res.style.display='block';
     document.getElementById('makeFreeInput').className='make-free-input ok';
     if(!makeAnswered.includes(idx)){makeAnswered.push(idx);makeScore++;}
-    // Store user example & unlock grammar card
-    const gIdx=ep*10+idx, gId=SENTENCE_GRAMMAR_MAP[gIdx];
-    if(gId){
-      if(!userExamples[gId]) userExamples[gId]=[];
-      if(!userExamples[gId].includes(val)) userExamples[gId].push(val);
-      unlockGrammarCard(gIdx);
-    }
-    saveToLS();
     // speak the user's sentence
     speakFull(val);
     toast('🔊 念你的句子給你聽！');
@@ -722,7 +710,7 @@ function render(){
     addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
     pill.appendChild(word);pill.appendChild(addBtn);
     div.appendChild(pill);
-    div.onclick=()=>speakWord(c.w,div);
+    div.onclick=()=>openYGPanel(c.w);
     area.appendChild(div);
   });
 
@@ -789,7 +777,7 @@ function revealAnswer(){
     else{document.getElementById('userInput').classList.add('wrong');}
     addToPassbook(s);
     const globalIdx = ep * 10 + idx;
-    unlockAmmo(globalIdx); unlockStar(globalIdx); unlockGrammarCard(globalIdx);
+    unlockAmmo(globalIdx); unlockStar(globalIdx);
     saveToLS();
     renderStars();
   }
@@ -845,21 +833,20 @@ const CHEERS = [
 // ── SAVE / LOAD (LocalStorage) ──
 function saveToLS(){
   try{
-    const data = { ammoUnlocked, ammoStars, grammarUnlocked, userExamples };
+    const data = { ammoUnlocked, ammoStars };
     localStorage.setItem('peppa_es_v4', JSON.stringify(data));
   }catch(e){}
 }
 
 function loadFromLS(){
   try{
+    // 清除舊版
     ['peppa_es_v1','peppa_es_v2','peppa_es_v3'].forEach(k=>localStorage.removeItem(k));
     const raw = localStorage.getItem('peppa_es_v4');
     if(!raw) return;
     const d = JSON.parse(raw);
-    if(d.ammoUnlocked)    ammoUnlocked    = d.ammoUnlocked;
-    if(d.ammoStars)       ammoStars       = d.ammoStars;
-    if(d.grammarUnlocked) grammarUnlocked = d.grammarUnlocked;
-    if(d.userExamples)    userExamples    = d.userExamples;
+    if(d.ammoUnlocked) ammoUnlocked = d.ammoUnlocked;
+    if(d.ammoStars)    ammoStars    = d.ammoStars;
   }catch(e){}
 }
 
@@ -937,86 +924,6 @@ function clearLS(){
 
 // ── 文法酷庫 ──
 
-const CONJ_SHEET = [
-  {verb:'ser',   zh:'是（本質）',      forms:['soy','eres','es','somos','sois','son']},
-  {verb:'estar', zh:'是（狀態/位置）',  forms:['estoy','estás','está','estamos','estáis','están']},
-  {verb:'tener', zh:'有',             forms:['tengo','tienes','tiene','tenemos','tenéis','tienen']},
-  {verb:'ir',    zh:'去',             forms:['voy','vas','va','vamos','vais','van']},
-  {verb:'poder', zh:'能夠',           forms:['puedo','puedes','puede','podemos','podéis','pueden']},
-  {verb:'gustar',zh:'喜歡（逆向）',    forms:['me gusta','te gusta','le gusta','nos gusta','os gusta','les gusta']},
-];
-
-function unlockGrammarCard(globalIdx){
-  const gId = SENTENCE_GRAMMAR_MAP[globalIdx];
-  if(!gId) return;
-  if(!grammarUnlocked.includes(gId)) grammarUnlocked.push(gId);
-  renderGrammarLib();
-}
-
-function toggleGrammarLib(){
-  const body=document.getElementById('grammarLibBody');
-  const t=document.getElementById('grammarLibToggle');
-  const open=body.classList.toggle('open');
-  t.textContent=open?'▲ 收起':'▼ 展開';
-}
-
-function setGrammarLibCat(key){
-  grammarLibCat=key;
-  renderGrammarLib();
-}
-
-function renderGrammarLib(){
-  const countEl=document.getElementById('grammarUnlockCount');
-  if(countEl) countEl.textContent=grammarUnlocked.length;
-  const chipsEl=document.getElementById('grammarCatChips');
-  if(chipsEl){
-    chipsEl.innerHTML=GRAMMAR_CATS.map(c=>
-      `<span class="grammar-cat-chip${grammarLibCat===c.key?' active':''}" onclick="setGrammarLibCat('${c.key}')">${c.label}</span>`
-    ).join('');
-  }
-  const el=document.getElementById('grammarLibCards');
-  if(!el) return;
-  const cards=grammarLibCat==='all'?GRAMMAR_DATA:GRAMMAR_DATA.filter(g=>g.cat===grammarLibCat);
-  el.innerHTML=cards.map(g=>{
-    const unlocked=grammarUnlocked.includes(g.id);
-    const catLabel=(GRAMMAR_CATS.find(c=>c.key===g.cat)||{label:''}).label;
-    return unlocked
-      ? `<div class="grammar-lib-card unlocked" onclick="openGrammarCard('${g.id}')">
-          <span class="grammar-lib-cat">${catLabel}</span>
-          <span class="grammar-lib-title">${g.title}</span>
-          <span class="grammar-lib-arrow">→</span>
-        </div>`
-      : `<div class="grammar-lib-card locked">
-          <span class="grammar-lib-cat">${catLabel}</span>
-          <span class="grammar-lib-title">${g.title}</span>
-          <span class="grammar-lib-lock">🔒</span>
-        </div>`;
-  }).join('');
-}
-
-function openConjSheet(){
-  const zh=CONJ_ORDER_ZH;
-  const tableHtml=CONJ_SHEET.map(v=>`
-    <div class="conj-sheet-verb">
-      <div class="conj-sheet-verb-header">
-        <span class="conj-sheet-verb-name">${v.verb}</span>
-        <span class="conj-sheet-verb-zh">${v.zh}</span>
-      </div>
-      <table class="conj-table">
-        <tr><th>${zh[0]}</th><th>${zh[1]}</th><th>${zh[2]}</th></tr>
-        <tr>${v.forms.slice(0,3).map(f=>`<td onclick="speakSentence('${escAttr(f)}')">${f}</td>`).join('')}</tr>
-        <tr><th>${zh[3]}</th><th>${zh[4]}</th><th>${zh[5]}</th></tr>
-        <tr>${v.forms.slice(3,6).map(f=>`<td onclick="speakSentence('${escAttr(f)}')">${f}</td>`).join('')}</tr>
-      </table>
-    </div>`).join('');
-  document.getElementById('grammarModalContent').innerHTML=`
-    <div class="grammar-title">¡Variadísimo! 常用動詞變位速查</div>
-    <div class="grammar-rule" style="margin-bottom:14px">人稱：${zh.join('／')}</div>
-    ${tableHtml}`;
-  document.getElementById('grammarModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
 function showGrammarTip(globalIdx){
   const el = document.getElementById('grammarTip');
   if(!el) return;
@@ -1035,18 +942,6 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
-function annotateConjTable(text){
-  return text.replace(
-    /([A-Za-záéíóúüñÁÉÍÓÚÜÑ]+(?:\s*\/\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+){5})/,
-    function(match){
-      const forms = match.split(/\s*\/\s*/);
-      if(forms.length !== 6) return match;
-      const zh = CONJ_ORDER_ZH;
-      return `<table class="conj-table"><tr><th>${zh[0]}</th><th>${zh[1]}</th><th>${zh[2]}</th></tr><tr><td>${forms[0]}</td><td>${forms[1]}</td><td>${forms[2]}</td></tr><tr><th>${zh[3]}</th><th>${zh[4]}</th><th>${zh[5]}</th></tr><tr><td>${forms[3]}</td><td>${forms[4]}</td><td>${forms[5]}</td></tr></table>`;
-    }
-  );
-}
-
 function openGrammarCard(gId){
   const g = GRAMMAR_DATA.find(x => x.id===gId);
   if(!g) return;
@@ -1057,18 +952,12 @@ function openGrammarCard(gId){
       <div class="grammar-ex-zh">${ex.zh}</div>
     </div>`
   ).join('');
-  const userEx = userExamples[gId] || [];
-  const userExHtml = userEx.length ? `<div class="grammar-user-examples">
-    <div class="grammar-user-label">✏️ 你的造句</div>
-    ${userEx.map(es=>`<div class="grammar-ex-row" onclick="speakSentence('${escAttr(es)}')"><div class="grammar-ex-es">▶ ${es}</div></div>`).join('')}
-  </div>` : '';
   document.getElementById('grammarModalContent').innerHTML = `
     <div class="grammar-cat-tag">${catLabel}</div>
     <div class="grammar-title">${g.title}</div>
     <div class="grammar-rule">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
-    ${userExHtml}
-    <div class="grammar-trap">${annotateConjTable(g.trap)}</div>
+    <div class="grammar-trap">${g.trap}</div>
     <div class="grammar-source">📍 ${g.source}</div>
   `;
   document.getElementById('grammarModal').classList.add('open');
@@ -1105,7 +994,6 @@ function speakSentence(text){
   render();
   renderAmmo();
   renderCogLibrary();
-  renderGrammarLib();
   renderVocab();
   initTTS();
 })();
