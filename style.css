@@ -193,9 +193,15 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-word-card{border-bottom:1px solid var(--bg2);padding:7px 4px;last-child:border:none}
 .suffix-word-card:last-child{border-bottom:none}
 .suffix-word-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.suffix-ex{margin-top:4px;padding:5px 9px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;cursor:pointer;transition:background .15s}
-.suffix-ex:active{background:rgba(108,155,210,.2)}
-.suffix-ex-es{font-size:12px;font-weight:700;color:var(--konpeki);margin-right:6px}
+.suffix-ex{margin-top:4px;padding:5px 9px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0}
+.suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
+.suffix-ex-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
+.suffix-ex-chunk:active{opacity:.6}
+.suffix-ex-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
+.suffix-ex-chunk.role-v{background:var(--misora);color:white;border:none}
+.suffix-ex-chunk.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
+.suffix-ex-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
+.suffix-ex-punct{font-size:12px;font-weight:700;color:var(--tlight);padding:2px 1px}
 .suffix-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
 
 /* PATTERN BOOK ENTRIES */
