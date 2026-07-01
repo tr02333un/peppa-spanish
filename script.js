@@ -332,12 +332,18 @@ function renderCogLibrary(filter){
     SUFFIX_PATTERNS.forEach(p=>{
       html+=`<details class="suffix-group"><summary class="suffix-summary"><span class="suffix-rule">${p.rule}</span><span class="suffix-hint">${p.hint}</span></summary><div class="suffix-body">`;
       html+=p.words.map(w=>`
-        <div class="cog-row">
-          <span class="cog-en">${w.en}</span>
-          <span class="cog-arrow">→</span>
-          <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.art?`<span class="cog-art">${w.art}</span> `:''}${w.es}</span>
-          <span class="cog-zh">${w.zh}</span>
-          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
+        <div class="suffix-word-card">
+          <div class="suffix-word-row">
+            <span class="cog-en">${w.en}</span>
+            <span class="cog-arrow">→</span>
+            <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.art?`<span class="cog-art">${w.art}</span> `:''}${w.es}</span>
+            <span class="cog-zh">${w.zh}</span>
+            <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
+          </div>
+          ${w.ex?`<div class="suffix-ex" onclick="openYGPanel('${escAttr(w.ex.es)}')">
+            <span class="suffix-ex-es">${w.ex.es}</span>
+            <span class="suffix-ex-zh">${w.ex.zh}</span>
+          </div>`:''}
         </div>`).join('');
       html+=`</div></details>`;
     });
