@@ -215,7 +215,7 @@ function renderAmmoFireRow(fire, type){
     : '';
   return `<div class="ammo-fire-row ${type}" onclick="${type==='peppa'?(fire.ts!=null?`seekYT(${fire.ts})`:''):`speakFull('${escAttr(fire.es)}')`}">
     <div class="ammo-fire-tag ${type}">${tag}${tsLabel}</div>
-    <div class="ammo-fire-es">${fire.es} <span class="vocab-add-btn" onclick="event.stopPropagation();addToVocab('${escAttr(fire.es)}','${escAttr(fire.zh)}','彈藥例句')">＋</span></div>
+    <div class="ammo-fire-es">${fire.es}</div>
     <div class="ammo-fire-zh">${fire.zh}</div>
     ${renderAmmoFireChunks(fire)}
   </div>`;
@@ -374,28 +374,36 @@ function renderCogLibrary(filter){
 
   // 詞綴規律區（無搜尋時顯示）
   if(!q){
-    html+=`<div class="suffix-section"><div class="suffix-title">🔤 詞綴規律 — 一個規律解鎖一整類</div>`;
+    html+=`<div class="suffix-section"><div class="suffix-title">🔤 前後綴歡心－英西鞏固一籮筐雙重解鎖</div>`;
     SUFFIX_PATTERNS.forEach(p=>{
       html+=`<details class="suffix-group"><summary class="suffix-summary"><span class="suffix-rule">${p.rule}</span><span class="suffix-hint">${p.hint}</span></summary><div class="suffix-body">`;
-      html+=p.words.map(w=>`
+      html+=p.words.map(w=>{
+        const genderHtml = w.gendered
+          ? `<div class="suffix-gender-row"><span class="sg-cell el">el ${w.gendered.ms}</span><span class="sg-cell la">la ${w.gendered.fs}</span><span class="sg-cell los">los ${w.gendered.mp}</span><span class="sg-cell las">las ${w.gendered.fp}</span></div>`
+          : '';
+        const addBtnHtml = isVocabWorthy(w.es) ? `<span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>` : '';
+        const chunksHtml = (w.ex?.chunks||[]).map(ck=>{
+          const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
+          if(!clean) return '<span class="suffix-ex-punct">'+ck.w+'</span>';
+          const starHtml = isVocabWorthy(ck.w) ? '<span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏">☆</span>' : '';
+          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span>'+starHtml;
+        }).join('');
+        return `
         <div class="suffix-word-card">
           <div class="suffix-word-row">
             <span class="cog-en">${w.en}</span>
             <span class="cog-arrow">→</span>
             <span class="cog-es" onclick="openYGPanel('${escAttr(w.es)}')">${w.art?`<span class="cog-art">${w.art}</span> `:''}${w.es}</span>
             <span class="cog-zh">${w.zh}</span>
-            <span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>
+            ${addBtnHtml}
           </div>
+          ${genderHtml}
           ${w.ex?`<div class="suffix-ex">
-            <div class="suffix-ex-chunks">${(w.ex.chunks||[]).map(ck=>{
-              const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
-              return clean
-                ? '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span><span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏這個語塊">☆</span>'
-                : '<span class="suffix-ex-punct">'+ck.w+'</span>';
-            }).join('')}</div>
+            <div class="suffix-ex-chunks">${chunksHtml}</div>
             <span class="suffix-ex-zh">${w.ex.zh}</span>
           </div>`:''}
-        </div>`).join('');
+        </div>`;
+      }).join('');
       html+=`</div></details>`;
     });
     html+=`</div>`;
@@ -782,11 +790,18 @@ function render(){
   s.chunks.forEach(c=>{
     const div=document.createElement('div');div.className='chunk';
     const personCls=c.role==='s'?getPersonClass(c.w):'';
-    const pill=document.createElement('div');pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'');
+    const famState=getFamState(c.w);
+    const famCls=famState>0?' '+FAM_CLASSES[famState]:'';
+    const pill=document.createElement('div');
+    pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'')+famCls;
+    pill.dataset.famWord=c.w;
     const word=document.createElement('span');word.textContent=c.w;
-    const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
-    addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
-    pill.appendChild(word);pill.appendChild(addBtn);
+    pill.appendChild(word);
+    if(isVocabWorthy(c.w)){
+      const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
+      addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
+      pill.appendChild(addBtn);
+    }
     div.appendChild(pill);
     div.onclick=()=>handleChunkTap(c,div);
     area.appendChild(div);
@@ -908,6 +923,44 @@ const CHEERS = [
   '你的大腦現在正在建立西語神經連線！繼續！🧠',
   '就是這樣！語塊學習法讓你學得快又記得住！🚀',
 ];
+
+// ── 熟悉度系統（localStorage key: peppa_es_familiarity_v1） ──
+let chunkFamiliarity = {};
+const FAM_STARS   = ['☆','◑','★'];
+const FAM_LABELS  = ['未熟','半熟','全熟'];
+const FAM_CLASSES = ['fam-0','fam-1','fam-2'];
+
+function loadFamiliarity(){
+  try{ chunkFamiliarity = JSON.parse(localStorage.getItem('peppa_es_familiarity_v1')||'{}'); }catch(e){ chunkFamiliarity={}; }
+}
+function saveFamiliarity(){
+  try{ localStorage.setItem('peppa_es_familiarity_v1', JSON.stringify(chunkFamiliarity)); }catch(e){}
+}
+function getFamState(word){ return chunkFamiliarity[word] || 0; }
+
+function cycleFamiliarity(word){
+  const next = (getFamState(word)+1)%3;
+  chunkFamiliarity[word] = next;
+  saveFamiliarity();
+  const btn = document.querySelector('.fam-star-btn');
+  if(btn && btn.dataset.word === word){
+    btn.textContent = FAM_STARS[next];
+    btn.title = FAM_LABELS[next];
+    btn.dataset.state = next;
+  }
+  document.querySelectorAll('.chunk-pill[data-fam-word], .ammo-fire-chunk[data-fam-word]').forEach(el=>{
+    if(el.dataset.famWord === word){
+      FAM_CLASSES.forEach(c=>el.classList.remove(c));
+      if(next>0) el.classList.add(FAM_CLASSES[next]);
+    }
+  });
+}
+
+function isVocabWorthy(word){
+  const w = (word||'').toLowerCase().replace(/[¡¿.,!?;:]+/g,'').trim();
+  const SKIP = new Set(['yo','tú','tu','él','el','ella','nosotros','nosotras','vosotros','vosotras','ellos','ellas','usted','ustedes','me','te','se','le','les','soy','eres','es','somos','sois','son','estoy','estás','estas','está','esta','estamos','estáis','estais','están','estan','hay','y','o','a','de','en','que','no','si','sí','muy','más','mas','todo','todos','una','un','la','lo','las','los','del','al','qué','quién']);
+  return w.length > 1 && !SKIP.has(w);
+}
 
 // ── SAVE / LOAD (LocalStorage) ──
 function saveToLS(){
@@ -1032,6 +1085,28 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
+function buildConjTable(conj){
+  if(!conj || !conj.rows || !conj.rows.length) return '';
+  const renderRow = r =>
+    `<div class="conj-row">
+      <span class="conj-person">${r.person}</span>
+      <span class="conj-form" onclick="speakSentence('${escAttr(r.ex)}')">${r.form}</span>
+      <span class="conj-ex" onclick="speakSentence('${escAttr(r.ex)}')">${r.ex}</span>
+      <span class="conj-zh">${r.zh}</span>
+      ${r.note?`<span class="conj-note">（${r.note}）</span>`:''}
+    </div>`;
+  const main3 = conj.rows.slice(0,3).map(renderRow).join('');
+  const rest3 = conj.rows.slice(3);
+  const restHtml = rest3.length
+    ? `<details class="conj-expand"><summary class="conj-expand-summary">我們／你們／他們 ▾</summary>${rest3.map(renderRow).join('')}</details>`
+    : '';
+  return `<div class="conj-section">
+    <div class="conj-title">¡Variadísimo! 變位速查</div>
+    <div class="conj-verb-label">${conj.verb}</div>
+    <div class="conj-rows">${main3}${restHtml}</div>
+  </div>`;
+}
+
 function openGrammarCard(gId){
   const g = GRAMMAR_DATA.find(x => x.id===gId);
   if(!g) return;
@@ -1042,12 +1117,14 @@ function openGrammarCard(gId){
       <div class="grammar-ex-zh">${ex.zh}</div>
     </div>`
   ).join('');
+  const ruleClass = g.emph ? 'grammar-rule grammar-rule-emph' : 'grammar-rule';
   openGrammarSheet(`
     <div class="grammar-cat-tag">${catLabel}</div>
     <div class="grammar-title">${g.title}</div>
-    <div class="grammar-rule">${g.rule}</div>
+    <div class="${ruleClass}">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
-    <div class="grammar-trap">${g.trap}</div>
+    ${buildConjTable(g.conj)}
+    <div class="grammar-trap">⚠️ ${g.trap}</div>
     <div class="grammar-source">📍 ${g.source}</div>
   `);
 }
@@ -1067,13 +1144,20 @@ function closeGrammarSheet(){
   document.body.style.overflow = '';
 }
 
+function _famStarHtml(word){
+  const s = getFamState(word);
+  return `<button class="fam-star-btn" data-word="${escAttr(word)}" data-state="${s}" onclick="cycleFamiliarity('${escAttr(word)}')" title="${FAM_LABELS[s]}">${FAM_STARS[s]}</button>`;
+}
+
 function handleChunkTap(c, el){
   speakWord(c.w, el);
   if(!c.hideYg){
     const clean = c.w.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
     if(clean) openForvo(clean);
   }
-  if(c.note) openGrammarSheet('<div class="grammar-chunk-note">'+c.note+'</div>');
+  if(c.note){
+    openGrammarSheet(_famStarHtml(c.w)+'<div class="grammar-chunk-note">'+c.note+'</div>');
+  }
 }
 
 function ammoChunkTap(word, hideYg, note){
@@ -1082,7 +1166,9 @@ function ammoChunkTap(word, hideYg, note){
     const clean = word.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
     if(clean) openForvo(clean);
   }
-  if(note) openGrammarSheet('<div class="grammar-chunk-note">'+note+'</div>');
+  if(note){
+    openGrammarSheet(_famStarHtml(word)+'<div class="grammar-chunk-note">'+note+'</div>');
+  }
 }
 
 function speakSentence(text){
@@ -1106,6 +1192,7 @@ function speakSentence(text){
 (function init(){
   loadFromLS();
   loadVocabFromLS();
+  loadFamiliarity();
   buildNav();
   render();
   renderAmmo();

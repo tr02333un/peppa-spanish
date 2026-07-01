@@ -369,11 +369,11 @@ const SUFFIX_PATTERNS = [
     rule: '-or → -or / -ora（職業）',
     hint: '英文 -or 職業 → 西語 -or（男 el）/ -ora（女 la）；actor 例外變 actriz',
     words: [
-      {en:'doctor',    es:'doctor',    art:'el/la', zh:'醫生',   ex:{es:'El doctor es muy bueno.',       zh:'這位醫生很厲害。', chunks:[{w:"El doctor",role:"s"},{w:"es",role:"v"},{w:"muy bueno.",role:"c"}]}},
-      {en:'actor',     es:'actor',     art:'el',    zh:'演員',   ex:{es:'Es un actor famoso.',           zh:'他是知名演員。', chunks:[{w:"Es",role:"v"},{w:"un actor famoso.",role:"c"}]}},
-      {en:'professor', es:'profesor',  art:'el/la', zh:'教授',   ex:{es:'La profesora explica bien.',   zh:'老師解釋得很清楚。', chunks:[{w:"La profesora",role:"s"},{w:"explica",role:"v"},{w:"bien.",role:"c"}]}},
-      {en:'director',  es:'director',  art:'el/la', zh:'導演',   ex:{es:'El director ganó un premio.',  zh:'導演贏得了獎項。', chunks:[{w:"El director",role:"s"},{w:"ganó",role:"v"},{w:"un premio.",role:"o"}]}},
-      {en:'inspector', es:'inspector', art:'el/la', zh:'督察',   ex:{es:'El inspector revisa todo.',    zh:'督察檢查一切。', chunks:[{w:"El inspector",role:"s"},{w:"revisa",role:"v"},{w:"todo.",role:"o"}]}},
+      {en:'doctor',    es:'doctor',    art:'el', zh:'醫生',   gendered:{ms:'doctor',fs:'doctora',mp:'doctores',fp:'doctoras'},   ex:{es:'La doctora es muy buena.',    zh:'這位醫生很厲害。', chunks:[{w:"La doctora",role:"s"},{w:"es",role:"v"},{w:"muy buena.",role:"c"}]}},
+      {en:'actor',     es:'actor',     art:'el', zh:'演員',   gendered:{ms:'actor',fs:'actriz',mp:'actores',fp:'actrices'},      ex:{es:'Es un actor famoso.',         zh:'他是知名演員。', chunks:[{w:"Es",role:"v"},{w:"un actor famoso.",role:"c"}]}},
+      {en:'professor', es:'profesor',  art:'el', zh:'教授',   gendered:{ms:'profesor',fs:'profesora',mp:'profesores',fp:'profesoras'}, ex:{es:'La profesora explica bien.',zh:'老師解釋得很清楚。', chunks:[{w:"La profesora",role:"s"},{w:"explica",role:"v"},{w:"bien.",role:"c"}]}},
+      {en:'director',  es:'director',  art:'el', zh:'導演',   gendered:{ms:'director',fs:'directora',mp:'directores',fp:'directoras'}, ex:{es:'La directora ganó un premio.',zh:'導演贏得了獎項。', chunks:[{w:"La directora",role:"s"},{w:"ganó",role:"v"},{w:"un premio.",role:"o"}]}},
+      {en:'inspector', es:'inspector', art:'el', zh:'督察',   gendered:{ms:'inspector',fs:'inspectora',mp:'inspectores',fp:'inspectoras'}, ex:{es:'La inspectora revisa todo.',zh:'督察檢查一切。', chunks:[{w:"La inspectora",role:"s"},{w:"revisa",role:"v"},{w:"todo.",role:"o"}]}},
     ]
   },
   {

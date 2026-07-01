@@ -383,8 +383,51 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-ex-row:active{opacity:.7}
 .grammar-ex-es{font-size:14px;font-weight:800;color:var(--konpeki);line-height:1.4}
 .grammar-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
-.grammar-trap{font-size:11px;font-weight:700;color:var(--tmid);background:rgba(224,92,92,.06);border-radius:8px;padding:8px 11px;margin-bottom:8px;border-left:3px solid var(--err);line-height:1.6}
+.grammar-trap{font-size:11px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
+.grammar-rule-emph{font-size:14.4px;font-weight:900;color:var(--tmid);line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
+
+/* ── ¡Variadísimo! 變位速查 ── */
+.conj-section{margin:10px 0 8px;border-radius:10px;overflow:hidden;border:1.5px solid rgba(159,208,222,.4)}
+.conj-title{font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--misora);background:rgba(159,208,222,.12);padding:6px 12px}
+.conj-verb-label{font-size:10px;color:var(--tlight);font-weight:700;padding:2px 12px 6px}
+.conj-rows{padding:0 0 4px}
+.conj-row{display:grid;grid-template-columns:60px 52px 1fr auto;align-items:baseline;gap:4px;padding:5px 12px;border-top:1px solid rgba(184,200,209,.2)}
+.conj-row:first-child{border-top:none}
+.conj-person{font-size:10px;color:var(--tlight);font-weight:700}
+.conj-form{font-size:13px;font-weight:900;color:var(--konpeki);cursor:pointer}
+.conj-form:active{opacity:.6}
+.conj-ex{font-size:11px;color:var(--tmid);font-style:italic;cursor:pointer;grid-column:3}
+.conj-ex:active{opacity:.6}
+.conj-zh{font-size:10px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
+.conj-note{font-size:9px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
+.conj-expand{grid-column:1/-1}
+.conj-expand-summary{font-size:10px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
+.conj-expand-summary::-webkit-details-marker{display:none}
+
+/* ── 熟悉度星號系統 ── */
+.fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
+.fam-star-btn:active{transform:scale(1.2)}
+.grammar-sheet-box{position:relative}
+.chunk-pill.fam-0{font-weight:900;text-decoration:underline 1.5px solid var(--konpeki)}
+.chunk-pill.fam-1{text-decoration:underline 1px dashed var(--tlight)}
+
+/* ── 性別四形式 ── */
+.suffix-gender-row{display:flex;gap:4px;flex-wrap:wrap;margin:3px 0 5px}
+.sg-cell{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
+.sg-cell.el{background:rgba(108,155,210,.15);color:var(--misora)}
+.sg-cell.la{background:rgba(252,209,220,.5);color:#c05080}
+.sg-cell.los{background:rgba(108,155,210,.08);color:var(--konpeki)}
+.sg-cell.las{background:rgba(252,209,220,.3);color:#a03060}
+
+/* ── 詞綴區字體放大 ── */
+.suffix-word-row .cog-en{font-size:15px;font-weight:900;color:var(--tmid)}
+.suffix-word-row .cog-es{font-size:15px;font-weight:900;color:var(--konpeki)}
+.suffix-word-row .cog-zh{font-size:13px;font-weight:700;color:var(--tmid)}
+.suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
+.suffix-ex-chunk{font-size:13px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
+.suffix-ex-zh{font-size:12px;color:var(--tlight);font-weight:700}
+.suffix-title{font-size:13px;font-weight:900;color:var(--konpeki);margin-bottom:8px;padding:2px 0}
 
 /* ── GRAMMAR / CHUNK BOTTOM SHEET ── */
 #grammarSheet{display:none;position:fixed;inset:0;background:rgba(26,46,59,.55);z-index:999}

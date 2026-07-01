@@ -30,11 +30,11 @@ const AMMO_DATA = [
   {
     ammo_id:"e1_03", ep:"E1 · 泥巴坑",
     core_ammo:"Hoy está lloviendo así que no pueden jugar fuera.", core_zh:"今天在下雨，所以不能去外面玩。",
-    be_verb_type:"estar", be_verb_note:"Estar + -ando/-iendo = 現在進行式，描述正在發生的事",
+    be_verb_type:"estar", be_verb_note:"Estar + -ando/-iendo = 正在做的說法，描述正在發生的事",
     pattern:"Hoy está [動詞-ndo].", pattern_zh:"今天正在 ___。",
-    pattern_note:"estar + 現在分詞，暫時性動作", slots:["動詞-ndo"],
+    pattern_note:"estar + -ing形態，暫時性動作", slots:["動詞-ndo"],
     fire_peppa:{es:"Hoy está lloviendo así que no pueden jugar fuera.", zh:"今天在下雨，所以不能去外面玩。", ts:null,
-      chunks:[{w:"Hoy",hideYg:true},{w:"está lloviendo",role:"v",note:"estar ➔ está + llover ➔ lloviendo ➔ 意思：正在下雨（estar + 動名詞 = 進行式）"},{w:"así que",role:"c",hideYg:true},{w:"no pueden jugar fuera.",role:"v",note:"poder ➔ pueden（第三人稱複數）+ no ➔ 意思：不能去玩"}]},
+      chunks:[{w:"Hoy",hideYg:true},{w:"está lloviendo",role:"v",note:"estar ➔ está + llover ➔ lloviendo ➔ 意思：正在下雨（estar + -ing形態 = 進行式）"},{w:"así que",role:"c",hideYg:true},{w:"no pueden jugar fuera.",role:"v",note:"poder ➔ pueden（第三人稱複數）+ no ➔ 意思：不能去玩"}]},
     fire_daily:[
       {es:"Hoy está nevando mucho.", zh:"今天下很大的雪。", chunks:[{w:"Ahora mismo"},{w:"está sonando",role:"v"},{w:"el teléfono.",role:"s"}]},
       {es:"Ahora mismo está sonando el teléfono.", zh:"現在電話正在響。", chunks:[{w:"Ahora mismo"},{w:"está sonando",role:"v"},{w:"el teléfono.",role:"s"}]}
@@ -84,9 +84,9 @@ const AMMO_DATA = [
     core_ammo:"Peppa ha encontrado un charco pequeño.", core_zh:"佩佩找到了一個小水坑。",
     be_verb_type:"none", be_verb_note:"",
     pattern:"[人] ha encontrado [受詞].", pattern_zh:"___ 找到了 ___。",
-    pattern_note:"ha + 過去分詞 = 現在完成式", slots:["人","受詞"],
+    pattern_note:"ha + -ado/-ido形 = 已完成說法", slots:["人","受詞"],
     fire_peppa:{es:"Peppa ha encontrado un charco pequeño.", zh:"佩佩找到了一個小水坑。", ts:null,
-      chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v",note:"encontrar ➔ encontrado（過去分詞）+ haber ➔ ha ➔ 意思：找到了（現在完成式）"},{w:"un charco pequeño.",role:"o"}]},
+      chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v",note:"encontrar ➔ encontrado（-ado/-ido形）+ haber ➔ ha ➔ 意思：找到了（已完成說法）"},{w:"un charco pequeño.",role:"o"}]},
     fire_daily:[
       {es:"Mamá ha encontrado las llaves.", zh:"媽媽找到鑰匙了。", chunks:[{w:"（我）",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]},
       {es:"He encontrado mi libro.", zh:"我找到我的書了。", chunks:[{w:"（我）",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]}
@@ -164,9 +164,9 @@ const AMMO_DATA = [
     core_ammo:"George ha perdido al señor Dinosaurio.", core_zh:"喬治把恐龍先生弄丟了。",
     be_verb_type:"none", be_verb_note:"",
     pattern:"[人] ha perdido [受詞].", pattern_zh:"___ 把 ___ 弄丟了。",
-    pattern_note:"ha perdido = 已經弄丟了（現在完成式）", slots:["人","受詞"],
+    pattern_note:"ha perdido = 已經弄丟了（已完成說法）", slots:["人","受詞"],
     fire_peppa:{es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。", ts:null,
-      chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v",note:"perder ➔ perdido（過去分詞）+ haber ➔ ha ➔ 意思：弄丟了（現在完成式）"},{w:"al señor Dinosaurio.",role:"o"}]},
+      chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v",note:"perder ➔ perdido（-ado/-ido形）+ haber ➔ ha ➔ 意思：弄丟了（已完成說法）"},{w:"al señor Dinosaurio.",role:"o"}]},
     fire_daily:[
       {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。", chunks:[{w:"Ella",role:"s"},{w:"ha perdido",role:"v"},{w:"su teléfono.",role:"o"}]},
       {es:"Papá ha perdido las llaves del coche.", zh:"爸爸把車鑰匙弄丟了。", chunks:[{w:"Papá",role:"s"},{w:"ha perdido",role:"v"},{w:"las llaves del coche.",role:"o"}]}
@@ -189,8 +189,8 @@ const AMMO_DATA = [
     ammo_id:"e2_05", ep:"E2 · 恐龍先生不見了",
     core_ammo:"Un detective es una persona muy buena encontrando cosas.", core_zh:"偵探是一個非常擅長找東西的人。",
     be_verb_type:"ser", be_verb_note:"Ser 定義身分職業：detective es = 偵探是…（本質定義）",
-    pattern:"Un [職業] es una persona muy buena [動名詞].", pattern_zh:"___ 是一個非常擅長 ___ 的人。",
-    pattern_note:"muy buena + 動名詞 = 非常擅長於做某事", slots:["職業","動名詞"],
+    pattern:"Un [職業] es una persona muy buena [-ing形態].", pattern_zh:"___ 是一個非常擅長 ___ 的人。",
+    pattern_note:"muy buena + -ing形態 = 非常擅長於做某事", slots:["職業","-ing形態"],
     fire_peppa:{es:"Un detective es una persona muy buena encontrando cosas.", zh:"偵探是一個非常擅長找東西的人。", ts:null,
       chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v",note:"ser ➔ es ➔ 意思：是（職業定義用 ser）"},{w:"una persona muy buena encontrando cosas.",role:"o"}]},
     fire_daily:[
@@ -240,11 +240,11 @@ const AMMO_DATA = [
   {
     ammo_id:"e2_09", ep:"E2 · 恐龍先生不見了",
     core_ammo:"Peppa y papá Pig están jugando a las damas.", core_zh:"佩佩和豬爸爸正在下西洋棋。",
-    be_verb_type:"estar", be_verb_note:"Estar + -ando = 現在進行式，正在做某事",
+    be_verb_type:"estar", be_verb_note:"Estar + -ando = 正在做的說法，正在做某事",
     pattern:"[人] están jugando a [遊戲].", pattern_zh:"___ 正在玩 ___。",
-    pattern_note:"están jugando = 現在進行式複數", slots:["人","遊戲"],
+    pattern_note:"están jugando = 正在做的說法複數", slots:["人","遊戲"],
     fire_peppa:{es:"Peppa y papá Pig están jugando a las damas.", zh:"佩佩和豬爸爸正在下西洋棋。", ts:null,
-      chunks:[{w:"Peppa y papá Pig",role:"s"},{w:"están jugando",role:"v",note:"jugar ➔ jugando + estar ➔ están ➔ 意思：正在玩（複數進行式，estar + 動名詞）"},{w:"a las damas.",role:"o"}]},
+      chunks:[{w:"Peppa y papá Pig",role:"s"},{w:"están jugando",role:"v",note:"jugar ➔ jugando + estar ➔ están ➔ 意思：正在玩（複數進行式，estar + -ing形態）"},{w:"a las damas.",role:"o"}]},
     fire_daily:[
       {es:"Los niños están jugando al fútbol.", zh:"孩子們正在踢足球。", chunks:[{w:"Mi hermano y yo",role:"s"},{w:"estamos jugando",role:"v"},{w:"a las cartas.",role:"o"}]},
       {es:"Mi hermano y yo estamos jugando a las cartas.", zh:"我哥哥和我正在玩牌。", chunks:[{w:"Mi hermano y yo",role:"s"},{w:"estamos jugando",role:"v"},{w:"a las cartas.",role:"o"}]}
@@ -253,11 +253,11 @@ const AMMO_DATA = [
   {
     ammo_id:"e2_10", ep:"E2 · 恐龍先生不見了",
     core_ammo:"¡Ya lo sé, habéis estado saltando en los charcos de barro!", core_zh:"我知道了，你們一直在泥巴坑裡跳！",
-    be_verb_type:"estar", be_verb_note:"habéis estado + -ando = 現在完成進行式，一直在做某事",
+    be_verb_type:"estar", be_verb_note:"habéis estado + -ando = 一直做到現在的說法，一直在做某事",
     pattern:"Habéis estado [動詞-ndo] en [地點].", pattern_zh:"你們一直在 ___ ___。",
-    pattern_note:"habéis estado + 動名詞 = 完成進行式", slots:["動詞-ndo","地點"],
+    pattern_note:"habéis estado + -ing形態 = 完成進行式", slots:["動詞-ndo","地點"],
     fire_peppa:{es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!", zh:"我知道了，你們一直在泥巴坑裡跳！", ts:null,
-      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé,",role:"v",note:"saber ➔ sé（不規則）+ ya ➔ 意思：我知道了（強調已知）"},{w:"habéis estado saltando",role:"v",note:"saltar ➔ saltando + haber ➔ habéis + estar ➔ estado ➔ 意思：你們一直在跳（現在完成進行式）"},{w:"en los charcos de barro!",role:"o"}]},
+      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé,",role:"v",note:"saber ➔ sé（不規則）+ ya ➔ 意思：我知道了（強調已知）"},{w:"habéis estado saltando",role:"v",note:"saltar ➔ saltando + haber ➔ habéis + estar ➔ estado ➔ 意思：你們一直在跳（一直做到現在的說法）"},{w:"en los charcos de barro!",role:"o"}]},
     fire_daily:[
       {es:"Habéis estado corriendo en el parque.", zh:"你們一直在公園裡跑步。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]},
       {es:"Habéis estado cantando toda la tarde.", zh:"你們整個下午都在唱歌。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]}
@@ -268,11 +268,11 @@ const AMMO_DATA = [
   {
     ammo_id:"e3_01", ep:"E3 · 最好的朋友",
     core_ammo:"Peppa está esperando a su mejor amiga, Susi Sheep.", core_zh:"佩佩正在等她最好的朋友蘇西羊。",
-    be_verb_type:"estar", be_verb_note:"Estar + -ando = 現在進行式，正在等待",
+    be_verb_type:"estar", be_verb_note:"Estar + -ando = 正在做的說法，正在等待",
     pattern:"[人] está esperando a [人2].", pattern_zh:"___ 正在等 ___。",
-    pattern_note:"está esperando = 現在進行式", slots:["人","人2"],
+    pattern_note:"está esperando = 正在做的說法", slots:["人","人2"],
     fire_peppa:{es:"Peppa está esperando a su mejor amiga, Susi Sheep.", zh:"佩佩正在等她最好的朋友蘇西羊。", ts:null,
-      chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v",note:"esperar ➔ esperando + estar ➔ está ➔ 意思：正在等（進行式，動名詞 -ando）"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}]},
+      chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v",note:"esperar ➔ esperando + estar ➔ está ➔ 意思：正在等（進行式，-ing形態 -ando）"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}]},
     fire_daily:[
       {es:"Mamá está esperando el autobús.", zh:"媽媽正在等公車。", chunks:[{w:"（我）",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]},
       {es:"Estoy esperando a mi amigo en la puerta.", zh:"我正在門口等我朋友。", chunks:[{w:"（我）",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]}
