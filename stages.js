@@ -158,7 +158,7 @@ function renderStage3(){
     <div>
       <div class="stage3-label">選核心主幹</div>
       <div class="stage3-row" id="s3CoreRow">
-        ${STAGE_CORES.map((c,i)=>`<span class="stage3-chip" onclick="s3PickCore(${i})" id="s3c${i}">${c.zh}</span>`).join('')}
+        ${STAGE_CORES.map((c,i)=>`<span class="stage3-chip" onclick="s3PickCore(${i})" id="s3c${i}">${c.es}</span>`).join('')}
       </div>
     </div>
     <div>
