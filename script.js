@@ -777,6 +777,7 @@ function checkMakeFree(){
     res.style.display='block';
     document.getElementById('makeFreeInput').className='make-free-input ok';
     if(!makeAnswered.includes(idx)){makeAnswered.push(idx);makeScore++;}
+    if(!answered.includes(idx)){answered.push(idx);renderStars();}
     // speak the user's sentence
     speakFull(val);
     toast('🔊 念你的句子給你聽！');
@@ -816,7 +817,8 @@ function render(){
 
   document.getElementById('epBadge').textContent=`S1 · ep${ep+1} · ${epData().titleZh}`;
   const tsVal = s.ts!=null ? ` <span class="card-num-ts">${Math.floor(s.ts/60)}:${String(s.ts%60).padStart(2,'0')}</span>` : '';
-  document.getElementById('cardNum').innerHTML = `句 ${idx+1} / ${n}${tsVal}`;
+  const cardNumEl = document.getElementById('cardNum');
+  if(cardNumEl) cardNumEl.innerHTML = `句 ${idx+1} / ${n}${tsVal}`;
   document.getElementById('navCount').textContent=`${idx+1} / ${n}`;
 
   const area=document.getElementById('chunksArea');
