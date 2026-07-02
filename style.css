@@ -7,8 +7,8 @@ summary { list-style: none; outline: none; }
   --mizu:#9FD0DE;--usumizu:#BCE1DF;--sora:#8AC4DE;--misora:#6C9BD2;
   --nezumi:#B8C8D1;--konpeki:#005B98;--benikake:#8491C3;
   --s-babyblue:#89CFF0;
-  --v-navy:#ACC8E5;--v-gold:#FFFFFF;
-  --o-deepblue:#1B365D;--o-cream:#FFF9D2;
+  --v-navy:#6C9BD2;--v-gold:#FFFFFF;
+  --o-deepblue:#4A6FA5;--o-cream:#FFF9D2;
   --cog-silver:#CCD6F6;
   --bg:#EEF7F9;--bg2:#F5FAFA;--card:#fff;
   --tdark:#1A2E3B;--tmid:#4A6572;--tlight:#8AABB8;
@@ -69,7 +69,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* 動詞 V — 實色底 */
 .chunks-area .chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
 .v-word-light{color:#FFFFFF;font-weight:700}
-.v-word-dark{color:#FFFFFF;font-weight:900;border:1.5px solid #FFFFFF;border-radius:5px;padding:0 4px}
+.v-word-dark{color:#FFFFFF;font-weight:700}
 /* 受詞 O — 實線框 */
 .chunks-area .chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 /* 連接詞 C — 淡色無框 */
