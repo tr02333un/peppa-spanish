@@ -68,6 +68,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .chunks-area .chunk-pill.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
 /* 動詞 V — 實色底 */
 .chunks-area .chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
+.v-word-light{color:#FFE9A0;font-weight:700}
+.v-word-dark{color:#B8860B;font-weight:900;text-shadow:0 0 2px rgba(255,255,255,.15)}
 /* 受詞 O — 實線框 */
 .chunks-area .chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 /* 連接詞 C — 淡色無框 */
