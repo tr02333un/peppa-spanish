@@ -322,7 +322,7 @@ const AMMO_DATA = [
     core_ammo:"¡Soy una princesa salida de un cuento!", core_zh:"我是從故事書裡走出來的公主！",
     be_verb_type:"ser", be_verb_note:"Ser 描述身分：Soy = 我是（角色扮演）",
     pattern:"¡Soy [角色] salida de [來源]!", pattern_zh:"我是從 ___ 走出來的 ___！",
-    pattern_note:"salida de = 從…走出來的（陰性形容詞）", slots:["角色","來源"],
+    pattern_note:"salida de = 從…走出來的（a陰性）", slots:["角色","來源"],
     fire_peppa:{es:"¡Soy una princesa salida de un cuento!", zh:"我是從故事書裡走出來的公主！", ts:null,
       chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Soy",role:"v",note:"ser ➔ soy（「我」）➔ 意思：我是（角色扮演身分，恆久本質用 ser）"},{w:"una princesa salida de un cuento!",role:"o"}]},
     fire_daily:[
