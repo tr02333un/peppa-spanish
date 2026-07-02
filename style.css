@@ -454,6 +454,18 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .pron-ex-zh{font-size:15px;color:var(--tlight);margin-top:2px}
 .pron-note{margin-top:6px;font-size:14px;color:var(--benikake);font-weight:700;line-height:1.5}
 
+/* 陰陽字尾語塊卡 */
+.gp-card{background:white;border-bottom:1px solid var(--bg2);padding:14px 16px}
+.gp-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.gp-zh{font-size:15px;font-weight:800;color:var(--konpeki);margin-bottom:8px}
+.gp-toggles{display:flex;gap:8px}
+.gp-toggle{font-size:16px;font-weight:900;padding:8px 16px;border-radius:10px;border:1.5px dashed var(--misora);color:var(--misora);background:white;cursor:pointer;transition:all .15s}
+.gp-toggle.active{background:var(--misora);color:white;border-style:solid}
+.gp-toggle:active{transform:scale(.95)}
+.gp-example{margin-top:10px;padding:9px 12px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;animation:fadeUp .2s ease}
+.gp-ex-es{font-size:14px;font-weight:700;color:var(--konpeki);display:block}
+.gp-ex-zh{font-size:13px;color:var(--tlight);display:block;margin-top:2px}
+
 /* ── 熟悉度星號系統 ── */
 .fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
 .fam-star-btn:active{transform:scale(1.2)}
