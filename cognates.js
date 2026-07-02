@@ -46,7 +46,7 @@ const SENTENCE_COGNATES = {
   'e0_s3':{
     title:'❓ ¿Podemos…? — 我們可以嗎',
     rows:[
-      '👉 <b>¿Podemos + 原形動詞?</b> = 我們可以 ___？（poder 「我們」的說法）',
+      '👉 <b>¿Podemos + 原形動詞?</b> = 我們可以 ___？（poder 「我們」）',
       '💡 <b>poder</b> ← 英文 <b>power</b>，有能力！',
       '🎯 <b>jugar</b>（玩）← 英文 juggle 同根，字面是「耍把戲」！',
     ]
@@ -68,7 +68,7 @@ const SENTENCE_COGNATES = {
     ]
   },
   'e0_s6':{
-    title:'🔍 ha encontrado — 剛剛做完的說法',
+    title:'🔍 ha encontrado — 剛剛做完',
     rows:[
       '👉 <b>ha + 動詞-ado/-ido形</b> = 已經 ___（剛剛完成）',
       '💡 <b>encontrado</b> ← 英文 <b>encounter</b>（遭遇/發現）同源！',
@@ -94,7 +94,7 @@ const SENTENCE_COGNATES = {
   'e0_s9':{
     title:'🐷 A todos les encanta — 所有人都愛',
     rows:[
-      '👉 <b>A todos les encanta</b> = 所有人都超愛（「他們」的說法，les 取代 me）',
+      '👉 <b>A todos les encanta</b> = 所有人都超愛（「他們」，les 取代 me）',
       '💡 句型升級：me encanta → te encanta → le encanta → les encanta',
       '🎯 <b>todos</b> ← 英文 <b>total</b>（全部）同字根！',
     ]
@@ -118,7 +118,7 @@ const SENTENCE_COGNATES = {
   'e1_s2':{
     title:'😱 ha perdido — 弄丟了',
     rows:[
-      '👉 <b>ha perdido</b> = 已經弄丟了（剛剛做完的說法）',
+      '👉 <b>ha perdido</b> = 已經弄丟了（剛剛做完）',
       '💡 <b>perdido</b> ← 英文 <b>perdition</b>（失落/消失）同源！',
       '🎯 記憶鉤：「per-DEED-o」= 已經做了壞事（丟掉東西）！',
     ]
@@ -126,7 +126,7 @@ const SENTENCE_COGNATES = {
   'e1_s3':{
     title:'🤗 No te preocupes — 別擔心',
     rows:[
-      '👉 <b>No te preocupes</b> = 別擔心（自己對自己做的動詞直接下指令的說法）',
+      '👉 <b>No te preocupes</b> = 別擔心（自己對自己做的動詞直接下指令）',
       '💡 <b>preocupar</b> ← 英文 <b>preoccupy</b>（讓你心裡先佔據了）！',
       '🎯 <b>encontraremos</b> ← encounter + future，我們將會找到！',
     ]
@@ -228,17 +228,17 @@ const SENTENCE_COGNATES = {
     ]
   },
   'e2_s6':{
-    title:'🔮 seré / serás — ser 以後要做的說法',
+    title:'🔮 seré / serás — ser 以後要做',
     rows:[
-      '👉 <b>seré</b>（我將是）/ <b>serás</b>（你將是）= ser 動詞以後要做的說法',
+      '👉 <b>seré</b>（我將是）/ <b>serás</b>（你將是）= ser 動詞以後要做',
       '💡 <b>doctora</b> ← 英文 <b>doctor</b>！加 -a 變女性！',
       '🎯 <b>enfermera</b>（護士）← 英文 infirmary（醫務室）同字根！',
     ]
   },
   'e2_s7':{
-    title:'💨 respira hondo — 直接下指令的說法發音',
+    title:'💨 respira hondo — 直接下指令發音',
     rows:[
-      '👉 直接下指令的說法（你做某事）直接用動詞「你」的動詞變化：<b>respira！</b>',
+      '👉 直接下指令（你做某事）直接用動詞「你」的動詞變化：<b>respira！</b>',
       '💡 <b>respira</b> ← 英文 <b>respire / respiratory</b>（呼吸系統）！',
       '🎯 <b>hondo</b>（深）← 英文 profound（深刻）的 fond 部分！',
     ]
