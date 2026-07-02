@@ -1,4 +1,26 @@
 /* ── YouGlish keywords + 英西同源槓桿資料 ── */
+
+/* ── 陰陽字尾語塊卡：一個字根+兩顆按鈕切換 ── */
+const GENDER_PAIRS = [
+  {zh:'小的', options:[
+    {suf:'o', word:'pequeño', ex:'Mi hermano pequeño.', exZh:'我的小弟弟。'},
+    {suf:'a', word:'pequeña', ex:'Mi hermana pequeña.', exZh:'我的小妹妹。'}
+  ]},
+  {zh:'醫生', options:[
+    {suf:'', word:'doctor', ex:'El doctor es muy bueno.', exZh:'這位醫生很厲害。（男）'},
+    {suf:'a', word:'doctora', ex:'Yo seré la doctora.', exZh:'我來當醫生。（女）'}
+  ]},
+  {zh:'護士', options:[
+    {suf:'o', word:'enfermero', ex:'Tú serás el enfermero.', exZh:'你來當護士。（男）'},
+    {suf:'a', word:'enfermera', ex:'Tú serás la enfermera.', exZh:'你來當護士。（女）'}
+  ]},
+  {zh:'走出來的', options:[
+    {suf:'o', word:'salido', ex:'Un pirata salido de un cuento.', exZh:'從故事走出來的海盜。'},
+    {suf:'a', word:'salida', ex:'Una princesa salida de un cuento.', exZh:'從故事走出來的公主。'}
+  ]}
+];
+
+
 // ── 精準 YouGlish 語塊關鍵字（避免整句搜不到）──
 const SENTENCE_YG_KW = {
   'e0_s0':'Yo soy',            'e0_s1':'Este es mi hermano',
