@@ -1222,6 +1222,7 @@ function toggleConjLib(){
 
 function jumpToConjLib(gId){
   closeGrammarSheet();
+  switchMainTab('know');
   const body=document.getElementById('conjLibBody');
   const t=document.getElementById('conjLibToggle');
   body.classList.add('open');
@@ -1309,6 +1310,21 @@ function speakSentence(text){
 }
 
 // ── INIT ──
+// ── 雙 TAB 切換（語塊遊樂場 / 知識儲藏室）──
+function switchMainTab(tab){
+  const play=document.getElementById('tabPlay');
+  const know=document.getElementById('tabKnow');
+  const btnPlay=document.getElementById('tabBtnPlay');
+  const btnKnow=document.getElementById('tabBtnKnow');
+  if(tab==='know'){
+    play.style.display='none'; know.style.display='';
+    btnPlay.classList.remove('active'); btnKnow.classList.add('active');
+  } else {
+    play.style.display=''; know.style.display='none';
+    btnKnow.classList.remove('active'); btnPlay.classList.add('active');
+  }
+}
+
 (function init(){
   loadFromLS();
   loadVocabFromLS();
