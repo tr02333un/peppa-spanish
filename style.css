@@ -6,7 +6,7 @@ summary { list-style: none; outline: none; }
 :root{
   --mizu:#9FD0DE;--usumizu:#BCE1DF;--sora:#8AC4DE;--misora:#6C9BD2;
   --nezumi:#B8C8D1;--konpeki:#005B98;--benikake:#8491C3;
-  --v-pink:#F5A8C8;--v-purple:#B39DDB;--v-purple-text:#6B4E9E;
+  --v-lavender:#C3B4E8;--v-periwinkle:#9FAEE5;--v-purple-text:#5B4E9E;
   --bg:#EEF7F9;--bg2:#F5FAFA;--card:#fff;
   --tdark:#1A2E3B;--tmid:#4A6572;--tlight:#8AABB8;
   --ok:#3DB87A;--err:#E05C5C;
@@ -58,9 +58,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* 主詞 S — 虛線框 */
 .chunks-area .chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
 /* 動詞 V — 實色底 */
-.chunks-area .chunk-pill.role-v{background:var(--v-pink);color:var(--v-purple-text);border:none}
+.chunks-area .chunk-pill.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
 /* 受詞 O — 實線框 */
-.chunks-area .chunk-pill.role-o{border:1.5px solid var(--v-purple);color:var(--v-purple-text);background:white}
+.chunks-area .chunk-pill.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-purple-text);background:white}
 /* 連接詞 C — 淡色無框 */
 .chunks-area .chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .chunks-area .chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
@@ -142,8 +142,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .btn:active{transform:scale(.97)}
 /* ── 解鎖遮罩按鈕（取代翻譯輸入區） ── */
 .unlock-zone{margin:14px 0 10px;text-align:center}
-.mask-toggle-btn{background:#3b82f6;color:white;border:none;border-radius:24px;padding:12px 28px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 8px rgba(59,130,246,.25);transition:all .2s ease;letter-spacing:.3px}
-.mask-toggle-btn:hover{background:#2563eb;transform:scale(1.04)}
+.mask-toggle-btn{background:var(--misora);color:white;border:none;border-radius:20px;padding:9px 18px;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:0 3px 6px rgba(108,155,210,.25);transition:all .2s ease;letter-spacing:.3px}
+.mask-toggle-btn:hover{background:var(--konpeki);transform:scale(1.04)}
 .mask-toggle-btn:active{transform:scale(.97);opacity:.9}
 .btn-next{flex:2;background:linear-gradient(135deg,var(--misora),var(--konpeki));color:white;box-shadow:0 4px 14px rgba(0,91,152,.2);display:none;font-size:14px}
 
@@ -202,8 +202,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-ex-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
 .suffix-ex-chunk:active{opacity:.6}
 .suffix-ex-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.suffix-ex-chunk.role-v{background:var(--v-pink);color:var(--v-purple-text);border:none}
-.suffix-ex-chunk.role-o{border:1.5px solid var(--v-purple);color:var(--v-purple-text);background:white}
+.suffix-ex-chunk.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
+.suffix-ex-chunk.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-purple-text);background:white}
 .suffix-ex-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .suffix-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
 .suffix-chunk-star:hover{opacity:1}
@@ -292,8 +292,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
 .ammo-fire-chunk:active{opacity:.6}
 .ammo-fire-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.ammo-fire-chunk.role-v{background:var(--v-pink);color:var(--v-purple-text);border:none}
-.ammo-fire-chunk.role-o{border:1.5px solid var(--v-purple);color:var(--v-purple-text);background:white}
+.ammo-fire-chunk.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
+.ammo-fire-chunk.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-purple-text);background:white}
 .ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 .ammo-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
@@ -467,8 +467,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage-chunk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;cursor:pointer;transition:opacity .15s;margin:2px;user-select:none}
 .stage-chunk-pill:active{opacity:.6}
 .stage-chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.stage-chunk-pill.role-v{background:var(--v-pink);color:var(--v-purple-text);border:none}
-.stage-chunk-pill.role-o{border:1.5px solid var(--v-purple);color:var(--v-purple-text);background:white}
+.stage-chunk-pill.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
+.stage-chunk-pill.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-purple-text);background:white}
 .stage-chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .stage-chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 
