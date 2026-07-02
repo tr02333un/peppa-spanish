@@ -1169,7 +1169,7 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
-function buildConjTable(conj, gId){
+function buildConjTable(conj, gId, showLabel){
   if(!conj || !conj.rows || !conj.rows.length) return '';
   const renderRow = r =>
     `<div class="conj-row">
@@ -1185,8 +1185,9 @@ function buildConjTable(conj, gId){
     ? `<details class="conj-expand"><summary class="conj-expand-summary">我們／你們／他們 ▾</summary>${rest3.map(renderRow).join('')}</details>`
     : '';
   const jumpBtn = gId ? `<div class="conj-jump-btn" onclick="jumpToConjLib('${gId}')">🔄 查完整變位庫 →</div>` : '';
+  const labelHtml = showLabel===false ? '' : `<div class="conj-verb-label">${conj.verb}</div>`;
   return `<div class="conj-section">
-    <div class="conj-verb-label">${conj.verb}</div>
+    ${labelHtml}
     <div class="conj-rows">${main3}${restHtml}</div>
     ${jumpBtn}
   </div>`;
@@ -1233,7 +1234,7 @@ function renderConjLibrary(){
   el.innerHTML = verbs.map(g=>`
     <div class="conj-lib-card" id="conjlib-${g.id}">
       <div class="conj-lib-header">${g.conj.verb}</div>
-      ${buildConjTable(g.conj)}
+      ${buildConjTable(g.conj, null, false)}
     </div>`).join('');
 }
 
