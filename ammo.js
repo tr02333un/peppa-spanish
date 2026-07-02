@@ -8,10 +8,10 @@ const AMMO_DATA = [
     pattern:"Yo soy [身分/名字].", pattern_zh:"我是 ___。",
     pattern_note:"省略 Yo 直接說 Soy 也通，西語常省主詞", slots:["身分/名字"],
     fire_peppa:{es:"Yo soy Peppa Pig.", zh:"我是佩佩豬。", ts:null,
-      chunks:[{w:"（我）",role:"s"},{w:"soy",role:"v",note:"ser ➔ 變位 soy ➔ 意思：我是（身分本質，「我」）"},{w:"Peppa Pig.",role:"o"}]},
+      chunks:[{w:"(yo)",role:"s"},{w:"soy",role:"v",note:"ser ➔ 變位 soy ➔ 意思：我是（身分本質，「我」）"},{w:"Peppa Pig.",role:"o"}]},
     fire_daily:[
-      {es:"Yo soy estudiante.", zh:"我是學生。", chunks:[{w:"（Yo）",role:"s"},{w:"soy",role:"v"},{w:"estudiante.",role:"o"}]},
-      {es:"Yo soy de Taiwán.", zh:"我是台灣人。", chunks:[{w:"（Yo）",role:"s"},{w:"soy",role:"v"},{w:"de Taiwán.",role:"o"}]}
+      {es:"Yo soy estudiante.", zh:"我是學生。", chunks:[{w:"(yo)",role:"s"},{w:"soy",role:"v"},{w:"estudiante.",role:"o"}]},
+      {es:"Yo soy de Taiwán.", zh:"我是台灣人。", chunks:[{w:"(yo)",role:"s"},{w:"soy",role:"v"},{w:"de Taiwán.",role:"o"}]}
     ]
   },
   {
@@ -47,10 +47,10 @@ const AMMO_DATA = [
     pattern:"¿Podemos [原形動詞]?", pattern_zh:"我們可以 ___ 嗎？",
     pattern_note:"poder 「我們」，徵求許可", slots:["原形動詞"],
     fire_peppa:{es:"¿Podemos salir a jugar?", zh:"我們可以出去玩嗎？", ts:null,
-      chunks:[{w:"（我們）",role:"s",hideYg:true},{w:"¿Podemos salir a jugar?",role:"v",note:"poder ➔ podemos（「我們」）➔ 意思：我們可以嗎？（徵求許可）"}]},
+      chunks:[{w:"(nosotros)",role:"s",hideYg:true},{w:"¿Podemos salir a jugar?",role:"v",note:"poder ➔ podemos（「我們」）➔ 意思：我們可以嗎？（徵求許可）"}]},
     fire_daily:[
-      {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？", chunks:[{w:"（我們）",role:"s"},{w:"¿Podemos comer ahora?",role:"v"}]},
-      {es:"¿Podemos ver la tele?", zh:"我們可以看電視嗎？", chunks:[{w:"（我們）",role:"s"},{w:"¿Podemos ver la tele?",role:"v"}]}
+      {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？", chunks:[{w:"(nosotros)",role:"s"},{w:"¿Podemos comer ahora?",role:"v"}]},
+      {es:"¿Podemos ver la tele?", zh:"我們可以看電視嗎？", chunks:[{w:"(nosotros)",role:"s"},{w:"¿Podemos ver la tele?",role:"v"}]}
     ]
   },
   {
@@ -62,8 +62,8 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa, debes ponerte las botas de agua.", zh:"佩佩，你必須穿上雨靴。", ts:null,
       chunks:[{w:"Peppa,",hideYg:true},{w:"debes ponerte",role:"v",note:"deber ➔ debes（「你」）+ poner ➔ ponerte ➔ 意思：你必須穿上（deber + 原形 = 義務）"},{w:"las botas de agua.",role:"o"}]},
     fire_daily:[
-      {es:"Debes lavarte las manos.", zh:"你必須洗手。", chunks:[{w:"（tú）",role:"s"},{w:"Debes lavarte",role:"v"},{w:"las manos.",role:"o"}]},
-      {es:"Debes hacer la tarea.", zh:"你必須做功課。", chunks:[{w:"（你）",role:"s"},{w:"Debes hacer",role:"v"},{w:"la tarea.",role:"o"}]}
+      {es:"Debes lavarte las manos.", zh:"你必須洗手。", chunks:[{w:"(tú)",role:"s"},{w:"Debes lavarte",role:"v"},{w:"las manos.",role:"o"}]},
+      {es:"Debes hacer la tarea.", zh:"你必須做功課。", chunks:[{w:"(tú)",role:"s"},{w:"Debes hacer",role:"v"},{w:"la tarea.",role:"o"}]}
     ]
   },
   {
@@ -89,7 +89,7 @@ const AMMO_DATA = [
       chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v",note:"encontrar ➔ encontrado（-ado/-ido形）+ haber ➔ ha ➔ 意思：找到了（已完成說法）"},{w:"un charco pequeño.",role:"o"}]},
     fire_daily:[
       {es:"Mamá ha encontrado las llaves.", zh:"媽媽找到鑰匙了。", chunks:[{w:"Mamá",role:"s"},{w:"ha encontrado",role:"v"},{w:"las llaves.",role:"o"}]},
-      {es:"He encontrado mi libro.", zh:"我找到我的書了。", chunks:[{w:"（我）",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]}
+      {es:"He encontrado mi libro.", zh:"我找到我的書了。", chunks:[{w:"(yo)",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]}
     ]
   },
   {
@@ -168,7 +168,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。", ts:null,
       chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v",note:"perder ➔ perdido（-ado/-ido形）+ haber ➔ ha ➔ 意思：弄丟了（已完成說法）"},{w:"al señor Dinosaurio.",role:"o"}]},
     fire_daily:[
-      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。", chunks:[{w:"（Yo）",role:"s"},{w:"He perdido",role:"v"},{w:"mi mochila.",role:"o"}]},
+      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。", chunks:[{w:"(yo)",role:"s"},{w:"He perdido",role:"v"},{w:"mi mochila.",role:"o"}]},
       {es:"Papá ha perdido las llaves del coche.", zh:"爸爸把車鑰匙弄丟了。", chunks:[{w:"Papá",role:"s"},{w:"ha perdido",role:"v"},{w:"las llaves del coche.",role:"o"}]}
     ]
   },
@@ -218,10 +218,10 @@ const AMMO_DATA = [
     pattern:"¡Ya lo sé dónde está [名詞]!", pattern_zh:"我知道 ___ 在哪裡了！",
     pattern_note:"Ya lo sé = 我知道了，ya 表示已然發生", slots:["名詞"],
     fire_peppa:{es:"¡Ya lo sé dónde está el señor Dinosaurio!", zh:"我知道恐龍先生在哪裡了！", ts:null,
-      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé",role:"v",note:"saber ➔ sé（「我」變化比較特別）+ ya ➔ 意思：我知道了（ya = 已然發生）"},{w:"dónde está",role:"c",note:"estar ➔ está ➔ 意思：在哪裡（位置/狀態用 estar，不用 ser）"},{w:"el señor Dinosaurio!",role:"s"}]},
+      chunks:[{w:"(yo)",role:"s",hideYg:true},{w:"¡Ya lo sé",role:"v",note:"saber ➔ sé（「我」變化比較特別）+ ya ➔ 意思：我知道了（ya = 已然發生）"},{w:"dónde está",role:"c",note:"estar ➔ está ➔ 意思：在哪裡（位置/狀態用 estar，不用 ser）"},{w:"el señor Dinosaurio!",role:"s"}]},
     fire_daily:[
-      {es:"¡Ya lo sé dónde está mi mochila!", zh:"我知道我的書包在哪裡了！", chunks:[{w:"（我）",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"mi mochila!",role:"s"}]},
-      {es:"¡Ya lo sé dónde está el gato!", zh:"我知道貓在哪裡了！", chunks:[{w:"（我）",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"el gato!",role:"s"}]}
+      {es:"¡Ya lo sé dónde está mi mochila!", zh:"我知道我的書包在哪裡了！", chunks:[{w:"(yo)",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"mi mochila!",role:"s"}]},
+      {es:"¡Ya lo sé dónde está el gato!", zh:"我知道貓在哪裡了！", chunks:[{w:"(yo)",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"el gato!",role:"s"}]}
     ]
   },
   {
@@ -257,10 +257,10 @@ const AMMO_DATA = [
     pattern:"Habéis estado [動詞-ndo] en [地點].", pattern_zh:"你們一直在 ___ ___。",
     pattern_note:"habéis estado + -ing形態 = 完成進行式", slots:["動詞-ndo","地點"],
     fire_peppa:{es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!", zh:"我知道了，你們一直在泥巴坑裡跳！", ts:null,
-      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé,",role:"v",note:"saber ➔ sé（變化比較特別）+ ya ➔ 意思：我知道了（強調已知）"},{w:"habéis estado saltando",role:"v",note:"saltar ➔ saltando + haber ➔ habéis + estar ➔ estado ➔ 意思：你們一直在跳（一直做到現在）"},{w:"en los charcos de barro!",role:"o"}]},
+      chunks:[{w:"(yo)",role:"s",hideYg:true},{w:"¡Ya lo sé,",role:"v",note:"saber ➔ sé（變化比較特別）+ ya ➔ 意思：我知道了（強調已知）"},{w:"habéis estado saltando",role:"v",note:"saltar ➔ saltando + haber ➔ habéis + estar ➔ estado ➔ 意思：你們一直在跳（一直做到現在）"},{w:"en los charcos de barro!",role:"o"}]},
     fire_daily:[
-      {es:"Habéis estado corriendo en el parque.", zh:"你們一直在公園裡跑步。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado corriendo",role:"v"},{w:"en el parque.",role:"o"}]},
-      {es:"Habéis estado cantando toda la tarde.", zh:"你們整個下午都在唱歌。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]}
+      {es:"Habéis estado corriendo en el parque.", zh:"你們一直在公園裡跑步。", chunks:[{w:"(vosotros)",role:"s"},{w:"Habéis estado corriendo",role:"v"},{w:"en el parque.",role:"o"}]},
+      {es:"Habéis estado cantando toda la tarde.", zh:"你們整個下午都在唱歌。", chunks:[{w:"(vosotros)",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]}
     ]
   },
 
@@ -275,7 +275,7 @@ const AMMO_DATA = [
       chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v",note:"esperar ➔ esperando + estar ➔ está ➔ 意思：正在等（進行式，-ing形態 -ando）"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}]},
     fire_daily:[
       {es:"Mamá está esperando el autobús.", zh:"媽媽正在等公車。", chunks:[{w:"Mamá",role:"s"},{w:"está esperando",role:"v"},{w:"el autobús.",role:"o"}]},
-      {es:"Estoy esperando a mi amigo en la puerta.", zh:"我正在門口等我朋友。", chunks:[{w:"（我）",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]}
+      {es:"Estoy esperando a mi amigo en la puerta.", zh:"我正在門口等我朋友。", chunks:[{w:"(yo)",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]}
     ]
   },
   {
@@ -298,10 +298,10 @@ const AMMO_DATA = [
     pattern:"Son [形容詞最高級] [名詞複數].", pattern_zh:"她們是 ___ ___。",
     pattern_note:"mejores = mejor 的複數形", slots:["形容詞最高級","名詞複數"],
     fire_peppa:{es:"Son las mejores amigas.", zh:"她們是最好的朋友。", ts:null,
-      chunks:[{w:"（她們）",role:"s",hideYg:true},{w:"Son",role:"v",note:"ser ➔ son（「他們」）➔ 意思：她們是（複數身分關係）"},{w:"las mejores amigas.",role:"o"}]},
+      chunks:[{w:"(ellas)",role:"s",hideYg:true},{w:"Son",role:"v",note:"ser ➔ son（「他們」）➔ 意思：她們是（複數身分關係）"},{w:"las mejores amigas.",role:"o"}]},
     fire_daily:[
-      {es:"Son los mejores jugadores.", zh:"他們是最好的球員。", chunks:[{w:"（他們）",role:"s"},{w:"Son",role:"v"},{w:"los mejores jugadores.",role:"o"}]},
-      {es:"Somos buenos amigos.", zh:"我們是好朋友。", chunks:[{w:"（我們）",role:"s"},{w:"Somos",role:"v"},{w:"buenos amigos.",role:"o"}]}
+      {es:"Son los mejores jugadores.", zh:"他們是最好的球員。", chunks:[{w:"(ellos)",role:"s"},{w:"Son",role:"v"},{w:"los mejores jugadores.",role:"o"}]},
+      {es:"Somos buenos amigos.", zh:"我們是好朋友。", chunks:[{w:"(nosotros)",role:"s"},{w:"Somos",role:"v"},{w:"buenos amigos.",role:"o"}]}
     ]
   },
   {
@@ -324,10 +324,10 @@ const AMMO_DATA = [
     pattern:"¡Soy [角色] salida de [來源]!", pattern_zh:"我是從 ___ 走出來的 ___！",
     pattern_note:"salida de = 從…走出來的（a）", slots:["角色","來源"],
     fire_peppa:{es:"¡Soy una princesa salida de un cuento!", zh:"我是從故事書裡走出來的公主！", ts:null,
-      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Soy",role:"v",note:"ser ➔ soy（「我」）➔ 意思：我是（角色扮演身分，恆久本質用 ser）"},{w:"una princesa salida de un cuento!",role:"o"}]},
+      chunks:[{w:"(yo)",role:"s",hideYg:true},{w:"¡Soy",role:"v",note:"ser ➔ soy（「我」）➔ 意思：我是（角色扮演身分，恆久本質用 ser）"},{w:"una princesa salida de un cuento!",role:"o"}]},
     fire_daily:[
-      {es:"¡Soy un superhéroe!", zh:"我是超級英雄！", chunks:[{w:"（我）",role:"s"},{w:"¡Soy",role:"v"},{w:"un superhéroe!",role:"o"}]},
-      {es:"¡Soy una doctora muy buena!", zh:"我是非常厲害的醫生！", chunks:[{w:"（我）",role:"s"},{w:"¡Soy",role:"v"},{w:"una doctora muy buena!",role:"o"}]}
+      {es:"¡Soy un superhéroe!", zh:"我是超級英雄！", chunks:[{w:"(yo)",role:"s"},{w:"¡Soy",role:"v"},{w:"un superhéroe!",role:"o"}]},
+      {es:"¡Soy una doctora muy buena!", zh:"我是非常厲害的醫生！", chunks:[{w:"(yo)",role:"s"},{w:"¡Soy",role:"v"},{w:"una doctora muy buena!",role:"o"}]}
     ]
   },
   {
@@ -366,7 +366,7 @@ const AMMO_DATA = [
       chunks:[{w:"Ahora George,",hideYg:true},{w:"respira hondo.",role:"v",note:"respirar ➔ respira（直接下指令，「你」）➔ 意思：深呼吸（hondo = 深）"},{w:"Después",role:"c",hideYg:true},{w:"tose.",role:"v",note:"toser ➔ tose（直接下指令，「你」）➔ 意思：咳嗽（直接命令）"}]},
     fire_daily:[
       {es:"Peppa, respira hondo y cuenta hasta diez.", zh:"佩佩，深呼吸然後數到十。", chunks:[{w:"Peppa,",hideYg:true},{w:"respira hondo",role:"v"},{w:"y cuenta hasta diez.",role:"v"}]},
-      {es:"Abre la boca, por favor.", zh:"請張開嘴巴。", chunks:[{w:"（你）",role:"s"},{w:"Abre",role:"v"},{w:"la boca, por favor.",role:"o"}]}
+      {es:"Abre la boca, por favor.", zh:"請張開嘴巴。", chunks:[{w:"(tú)",role:"s"},{w:"Abre",role:"v"},{w:"la boca, por favor.",role:"o"}]}
     ]
   },
   {
@@ -376,10 +376,10 @@ const AMMO_DATA = [
     pattern:"Creo que tienes [身體部位] un poco [形容詞].", pattern_zh:"我認為你的 ___ 有點 ___。",
     pattern_note:"Creo que = 我認為，後接完整子句", slots:["身體部位","形容詞"],
     fire_peppa:{es:"Creo que tienes el corazón un poco flojo.", zh:"我認為你的心臟有點虛弱。", ts:null,
-      chunks:[{w:"（我）",role:"s",hideYg:true},{w:"Creo que",role:"v",note:"creer ➔ creo（「我」）+ que（連接子句）➔ 意思：我認為…（Creo que + 完整句）"},{w:"tienes",role:"v",note:"tener ➔ tienes（「你」）➔ 意思：你有（用於身體感覺：tienes fiebre = 你發燒了）"},{w:"el corazón un poco flojo.",role:"o"}]},
+      chunks:[{w:"(yo)",role:"s",hideYg:true},{w:"Creo que",role:"v",note:"creer ➔ creo（「我」）+ que（連接子句）➔ 意思：我認為…（Creo que + 完整句）"},{w:"tienes",role:"v",note:"tener ➔ tienes（「你」）➔ 意思：你有（用於身體感覺：tienes fiebre = 你發燒了）"},{w:"el corazón un poco flojo.",role:"o"}]},
     fire_daily:[
-      {es:"Creo que tienes fiebre.", zh:"我認為你發燒了。", chunks:[{w:"（我）",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"fiebre.",role:"o"}]},
-      {es:"Creo que tienes razón.", zh:"我認為你說得對。", chunks:[{w:"（我）",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"razón.",role:"o"}]}
+      {es:"Creo que tienes fiebre.", zh:"我認為你發燒了。", chunks:[{w:"(yo)",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"fiebre.",role:"o"}]},
+      {es:"Creo que tienes razón.", zh:"我認為你說得對。", chunks:[{w:"(yo)",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"razón.",role:"o"}]}
     ]
   },
   {
@@ -391,8 +391,8 @@ const AMMO_DATA = [
     fire_peppa:{es:"Todos necesitan muchas galletas para curarse.", zh:"所有人都需要很多餅乾才能康復。", ts:null,
       chunks:[{w:"Todos",role:"s"},{w:"necesitan",role:"v",note:"necesitar ➔ necesitan（「他們」）➔ 意思：需要（para + 原形動詞 = 為了做某事）"},{w:"muchas galletas para curarse.",role:"o"}]},
     fire_daily:[
-      {es:"Necesitas agua para vivir.", zh:"你需要水才能生存。", chunks:[{w:"（tú）",role:"s"},{w:"Necesitas",role:"v"},{w:"agua para vivir.",role:"o"}]},
-      {es:"Necesitamos tiempo para descansar.", zh:"我們需要時間休息。", chunks:[{w:"（我們）",role:"s"},{w:"Necesitamos",role:"v"},{w:"tiempo para descansar.",role:"o"}]}
+      {es:"Necesitas agua para vivir.", zh:"你需要水才能生存。", chunks:[{w:"(tú)",role:"s"},{w:"Necesitas",role:"v"},{w:"agua para vivir.",role:"o"}]},
+      {es:"Necesitamos tiempo para descansar.", zh:"我們需要時間休息。", chunks:[{w:"(nosotros)",role:"s"},{w:"Necesitamos",role:"v"},{w:"tiempo para descansar.",role:"o"}]}
     ]
   },
 ];
