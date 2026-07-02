@@ -868,7 +868,7 @@ function render(){
 
   // ── YouGlish 語塊按鈕 keyword ──
   const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.chunks.find(c=>c.role==='v')?.w || s.es.slice(0,15);
-  const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish/am';
+  const ygUrl = 'https://youtube.com/@peppapigespanollatinooficial?feature=shared';
   const urlEl = document.getElementById('yg-mini-text');
   if(urlEl){ urlEl.textContent = ygUrl; urlEl.dataset.url = ygUrl; }
 
