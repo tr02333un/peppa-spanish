@@ -352,7 +352,6 @@ function renderGroupFireArea(entries){
   el.innerHTML=entries.map(a=>`
     <div class="group-fire-card">
       <div class="group-fire-core" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo} <small style="color:var(--tlight);font-weight:500">${a.core_zh}</small></div>
-      ${renderAmmoFireRow(a.fire_peppa,'peppa')}
       ${a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('')}
     </div>
   `).join('');
