@@ -395,8 +395,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .conj-form:active{opacity:.6}
 .conj-ex{font-size:15px;color:var(--tmid);font-style:italic;cursor:pointer;grid-column:3}
 .conj-ex:active{opacity:.6}
-.conj-zh{font-size:14px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
-.conj-note{font-size:13px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
+.conj-zh{font-size:14px;color:var(--tlight);grid-column:3/-1;padding-left:0;margin-top:-3px}
+.conj-note{font-size:13px;color:var(--err);font-weight:800;grid-column:3/-1;padding-left:0;margin-top:-2px}
 .conj-expand{grid-column:1/-1}
 .conj-expand-summary{font-size:14px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
 .conj-expand-summary::-webkit-details-marker{display:none}
