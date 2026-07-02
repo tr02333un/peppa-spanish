@@ -146,7 +146,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .a-lang{display:none}
 .a-lang.on{display:block;animation:fadeUp .2s ease}
 .a-text{font-size:18px;font-weight:700;color:#059669;line-height:1.6;margin-bottom:8px}
-.a-note{font-size:13px;color:#4b5563;line-height:1.6;padding:12px 14px;background:#fef3c7;border-radius:8px;border-left:4px solid #f59e0b}
+.a-note{font-size:15px;color:#4b5563;line-height:1.7;padding:14px 16px;background:#fef3c7;border-radius:8px;border-left:4px solid #f59e0b;white-space:normal;word-break:break-word}
 
 .btn-row{display:flex;gap:8px}
 .btn{flex:1;padding:11px 8px;border-radius:11px;border:none;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .16s}
@@ -186,7 +186,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .cog-row{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:8px;background:var(--bg2)}
 .cog-en{font-size:12px;font-weight:700;color:var(--tmid);min-width:80px}
 .cog-arrow{color:var(--mizu);font-size:12px;flex-shrink:0}
-.cog-es{font-size:13px;font-weight:900;color:var(--cog-silver);flex:1;text-shadow:0 0 1px rgba(0,0,0,.3)}
+.cog-es{font-size:13px;font-weight:900;color:#1A2E4A;flex:1}
 .cog-zh{font-size:11px;color:var(--tlight);font-weight:600;white-space:nowrap}
 .cog-tip{font-size:12px;font-weight:700;color:var(--misora);background:rgba(108,155,210,.08);border-radius:10px;padding:10px 14px;margin:8px 14px 14px;line-height:1.55;border-left:3px solid var(--mizu)}
 .cog-click{cursor:pointer;text-decoration:underline dotted var(--mizu);transition:all .15s}
@@ -425,21 +425,21 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* 人稱代名詞查詢庫 */
 .pron-cat-card{background:white;border-bottom:1px solid var(--bg2);padding:12px 14px}
 .pron-cat-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
-.pron-cat-header{font-size:14px;font-weight:900;color:var(--konpeki)}
-.pron-cat-en{font-size:10px;font-weight:700;color:var(--tlight);margin-left:4px}
-.pron-cat-hint{font-size:11px;color:var(--tmid);font-weight:600;margin:2px 0 8px}
+.pron-cat-header{font-size:18px;font-weight:900;color:var(--konpeki)}
+.pron-cat-en{font-size:14px;font-weight:700;color:var(--tlight);margin-left:4px}
+.pron-cat-hint{font-size:15px;color:var(--tmid);font-weight:600;margin:2px 0 8px}
 .pron-rows{display:flex;flex-direction:column;gap:2px}
-.pron-row{display:grid;grid-template-columns:20px 64px 1fr auto;align-items:baseline;gap:6px;padding:4px 0;border-top:1px solid rgba(184,200,209,.15)}
+.pron-row{display:grid;grid-template-columns:22px 78px 1fr auto;align-items:baseline;gap:6px;padding:5px 0;border-top:1px solid rgba(184,200,209,.15)}
 .pron-row:first-child{border-top:none}
 .pron-icon{font-size:14px;line-height:1}
-.pron-es{font-size:13px;font-weight:900;color:var(--misora);cursor:pointer}
+.pron-es{font-size:17px;font-weight:900;color:var(--misora);cursor:pointer}
 .pron-es:active{opacity:.6}
-.pron-zh{font-size:11px;color:var(--tmid);font-weight:600}
-.pron-en{font-size:10px;color:var(--tlight);font-style:italic}
+.pron-zh{font-size:15px;color:var(--tmid);font-weight:600}
+.pron-en{font-size:14px;color:var(--tlight);font-style:italic}
 .pron-example{margin-top:8px;padding:7px 10px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;cursor:pointer}
-.pron-ex-es{font-size:12px;font-weight:700;color:var(--konpeki)}
-.pron-ex-zh{font-size:11px;color:var(--tlight);margin-top:2px}
-.pron-note{margin-top:6px;font-size:10px;color:var(--benikake);font-weight:700;line-height:1.5}
+.pron-ex-es{font-size:16px;font-weight:700;color:var(--konpeki)}
+.pron-ex-zh{font-size:15px;color:var(--tlight);margin-top:2px}
+.pron-note{margin-top:6px;font-size:14px;color:var(--benikake);font-weight:700;line-height:1.5}
 
 /* ── 熟悉度星號系統 ── */
 .fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
@@ -460,7 +460,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* ── 詞綴區字體放大 ── */
 .suffix-word-row .cog-en{font-size:15px;font-weight:900;color:var(--tmid)}
-.suffix-word-row .cog-es{font-size:15px;font-weight:900;color:var(--cog-silver);text-shadow:0 0 1px rgba(0,0,0,.3)}
+.suffix-word-row .cog-es{font-size:15px;font-weight:900;color:#1A2E4A}
 .suffix-word-row .cog-zh{font-size:13px;font-weight:700;color:var(--tmid)}
 .suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
 .suffix-ex-chunk{font-size:13px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
