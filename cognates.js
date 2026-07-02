@@ -46,7 +46,7 @@ const SENTENCE_COGNATES = {
   'e0_s3':{
     title:'❓ ¿Podemos…? — 我們可以嗎',
     rows:[
-      '👉 <b>¿Podemos + 原形動詞?</b> = 我們可以 ___？（poder 第一人稱複數）',
+      '👉 <b>¿Podemos + 原形動詞?</b> = 我們可以 ___？（poder 「我們」的說法）',
       '💡 <b>poder</b> ← 英文 <b>power</b>，有能力！',
       '🎯 <b>jugar</b>（玩）← 英文 juggle 同根，字面是「耍把戲」！',
     ]
@@ -68,9 +68,9 @@ const SENTENCE_COGNATES = {
     ]
   },
   'e0_s6':{
-    title:'🔍 ha encontrado — 現在完成式',
+    title:'🔍 ha encontrado — 剛剛做完的說法',
     rows:[
-      '👉 <b>ha + 過去分詞</b> = 已經 ___（剛剛完成）',
+      '👉 <b>ha + 動詞-ado/-ido形</b> = 已經 ___（剛剛完成）',
       '💡 <b>encontrado</b> ← 英文 <b>encounter</b>（遭遇/發現）同源！',
       '🎯 字根 <b>contra</b>（相對/遇見）← counter 也是同源！',
     ]
@@ -94,7 +94,7 @@ const SENTENCE_COGNATES = {
   'e0_s9':{
     title:'🐷 A todos les encanta — 所有人都愛',
     rows:[
-      '👉 <b>A todos les encanta</b> = 所有人都超愛（第三人稱複數，les 取代 me）',
+      '👉 <b>A todos les encanta</b> = 所有人都超愛（「他們」的說法，les 取代 me）',
       '💡 句型升級：me encanta → te encanta → le encanta → les encanta',
       '🎯 <b>todos</b> ← 英文 <b>total</b>（全部）同字根！',
     ]
@@ -108,7 +108,7 @@ const SENTENCE_COGNATES = {
     ]
   },
   'e1_s1':{
-    title:'🛏️ se va a la cama — 反身動詞床上見',
+    title:'🛏️ se va a la cama — 自己對自己做的動詞床上見',
     rows:[
       '👉 <b>se va a la cama</b> = 去睡覺（直譯：自己去到床上）',
       '💡 <b>acurruca</b>（蜷縮）← curl up！概念完全一樣！',
@@ -118,7 +118,7 @@ const SENTENCE_COGNATES = {
   'e1_s2':{
     title:'😱 ha perdido — 弄丟了',
     rows:[
-      '👉 <b>ha perdido</b> = 已經弄丟了（現在完成式）',
+      '👉 <b>ha perdido</b> = 已經弄丟了（剛剛做完的說法）',
       '💡 <b>perdido</b> ← 英文 <b>perdition</b>（失落/消失）同源！',
       '🎯 記憶鉤：「per-DEED-o」= 已經做了壞事（丟掉東西）！',
     ]
@@ -126,7 +126,7 @@ const SENTENCE_COGNATES = {
   'e1_s3':{
     title:'🤗 No te preocupes — 別擔心',
     rows:[
-      '👉 <b>No te preocupes</b> = 別擔心（反身動詞命令式）',
+      '👉 <b>No te preocupes</b> = 別擔心（自己對自己做的動詞直接下指令的說法）',
       '💡 <b>preocupar</b> ← 英文 <b>preoccupy</b>（讓你心裡先佔據了）！',
       '🎯 <b>encontraremos</b> ← encounter + future，我們將會找到！',
     ]
@@ -228,17 +228,17 @@ const SENTENCE_COGNATES = {
     ]
   },
   'e2_s6':{
-    title:'🔮 seré / serás — ser 未來式',
+    title:'🔮 seré / serás — ser 以後要做的說法',
     rows:[
-      '👉 <b>seré</b>（我將是）/ <b>serás</b>（你將是）= ser 動詞未來式',
+      '👉 <b>seré</b>（我將是）/ <b>serás</b>（你將是）= ser 動詞以後要做的說法',
       '💡 <b>doctora</b> ← 英文 <b>doctor</b>！加 -a 變女性！',
       '🎯 <b>enfermera</b>（護士）← 英文 infirmary（醫務室）同字根！',
     ]
   },
   'e2_s7':{
-    title:'💨 respira hondo — 命令式發音',
+    title:'💨 respira hondo — 直接下指令的說法發音',
     rows:[
-      '👉 命令式（你做某事）直接用動詞現在式第二人稱：<b>respira！</b>',
+      '👉 直接下指令的說法（你做某事）直接用動詞「你」的動詞變化：<b>respira！</b>',
       '💡 <b>respira</b> ← 英文 <b>respire / respiratory</b>（呼吸系統）！',
       '🎯 <b>hondo</b>（深）← 英文 profound（深刻）的 fond 部分！',
     ]
@@ -309,8 +309,8 @@ const COGNATE_LIBRARY = [
 // ── 詞綴規律資料（-tion→-ción 等三組） ──
 const SUFFIX_PATTERNS = [
   {
-    rule: '-tion → -ción',
-    hint: '英文 -tion 字尾直接換成 -ción，一秒變西語，幾乎全套用！<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
+    rule: '-tion → la__ -ción',
+    hint: '名詞字尾，發音接近（education → la educación）<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
     words: [
       {en:'nation',      es:'nación',       art:'la', zh:'國家',   ex:{es:'La nación entera celebra.',      zh:'整個國家都在慶祝。', chunks:[{w:"La nación entera",role:"s"},{w:"celebra.",role:"v"}]}},
       {en:'action',      es:'acción',       art:'la', zh:'行動',   ex:{es:'¡En acción!',                   zh:'行動！', chunks:[{w:"¡En acción!",role:"c"}]}},
@@ -321,8 +321,8 @@ const SUFFIX_PATTERNS = [
     ]
   },
   {
-    rule: '-ty → -dad',
-    hint: '英文 -ty 字尾換成 -dad，抽象名詞秒秒懂！<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
+    rule: '-ty → la-dad',
+    hint: '名詞字尾，發音接近（university → la universidad）<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
     words: [
       {en:'city',        es:'ciudad',       art:'la', zh:'城市',   ex:{es:'La ciudad es muy grande.',      zh:'這個城市很大。', chunks:[{w:"La ciudad",role:"s"},{w:"es",role:"v"},{w:"muy grande.",role:"c"}]}},
       {en:'reality',     es:'realidad',     art:'la', zh:'現實',   ex:{es:'En la realidad es diferente.',  zh:'現實中不一樣。', chunks:[{w:"En la realidad",role:"c"},{w:"es",role:"v"},{w:"diferente.",role:"c"}]}},
@@ -333,8 +333,8 @@ const SUFFIX_PATTERNS = [
     ]
   },
   {
-    rule: '-ce / -cy → -cia / -ncia',
-    hint: '英文 -ce/-cy 結尾 → 西語 -cia/-ncia（全部陰性，記得加 la）',
+    rule: '-ce / -cy → -cia / -ncia 形→名',
+    hint: '(importance → la importancia)',
     words: [
       {en:'patience',    es:'paciencia',    art:'la', zh:'耐心',   ex:{es:'Hay que tener paciencia.',      zh:'要有耐心。', chunks:[{w:"Hay que tener",role:"v"},{w:"paciencia.",role:"o"}]}},
       {en:'experience',  es:'experiencia',  art:'la', zh:'經驗',   ex:{es:'Tiene mucha experiencia.',      zh:'她很有經驗。', chunks:[{w:"Tiene",role:"v"},{w:"mucha experiencia.",role:"o"}]}},
@@ -344,8 +344,8 @@ const SUFFIX_PATTERNS = [
     ]
   },
   {
-    rule: '-ment → -mento / -miento',
-    hint: '英文 -ment → 西語 -mento 或 -miento，動作名詞化的規律！全部陽性（el）',
+    rule: '-ment → el___-mento / -miento',
+    hint: '心理狀態/抽象的動作。動作名詞化：mover→movimiento',
     words: [
       {en:'moment',     es:'momento',      art:'el', zh:'時刻',   ex:{es:'Es el momento perfecto.',        zh:'這是完美的時刻。', chunks:[{w:"Es",role:"v"},{w:"el momento perfecto.",role:"c"}]}},
       {en:'movement',   es:'movimiento',   art:'el', zh:'動作',   ex:{es:'Haz el movimiento lento.',      zh:'動作慢一點做。', chunks:[{w:"Haz",role:"v"},{w:"el movimiento",role:"o"},{w:"lento.",role:"c"}]}},
@@ -356,7 +356,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ble → -ble',
-    hint: '英文 -ble 字尾幾乎完全保留！看英文直接念西語！形容詞無冠詞',
+    hint: '英文 -ble 形容詞字尾不變',
     words: [
       {en:'possible',    es:'posible',      art:'', zh:'可能的',     ex:{es:'Todo es posible.',              zh:'一切都是可能的。', chunks:[{w:"Todo",role:"s"},{w:"es",role:"v"},{w:"posible.",role:"c"}]}},
       {en:'terrible',    es:'terrible',     art:'', zh:'可怕的',     ex:{es:'¡Es terrible!',                zh:'太可怕了！', chunks:[{w:"¡Es",role:"v"},{w:"terrible!",role:"c"}]}},
@@ -367,7 +367,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-or → -or / -ora（職業）',
-    hint: '英文 -or 職業 → 西語 -or（男 el）/ -ora（女 la）；actor 例外變 actriz',
+    hint: '英文 -or 職業 → 西語 el__ -or（男）/ la__ -ora（女）；actor 例外變 actriz',
     words: [
       {en:'doctor',    es:'doctor',    art:'el', zh:'醫生',   gendered:{ms:'doctor',fs:'doctora',mp:'doctores',fp:'doctoras'},   ex:{es:'La doctora es muy buena.',    zh:'這位醫生很厲害。', chunks:[{w:"La doctora",role:"s"},{w:"es",role:"v"},{w:"muy buena.",role:"c"}]}},
       {en:'actor',     es:'actor',     art:'el', zh:'演員',   gendered:{ms:'actor',fs:'actriz',mp:'actores',fp:'actrices'},      ex:{es:'Es un actor famoso.',         zh:'他是知名演員。', chunks:[{w:"Es",role:"v"},{w:"un actor famoso.",role:"c"}]}},
@@ -377,8 +377,8 @@ const SUFFIX_PATTERNS = [
     ]
   },
   {
-    rule: '-y → -ia（名詞）',
-    hint: '英文 -y 結尾名詞 → 西語 -ia，發音接近，幾乎零學習成本！全部陰性（la）',
+    rule: '-y → la__ -ia（名詞）',
+    hint: '英文 -y → 西語 la__ -ia,名詞字尾，發音接近',
     words: [
       {en:'history',   es:'historia',  art:'la', zh:'歷史',   ex:{es:'Me gusta la historia.',          zh:'我喜歡歷史。', chunks:[{w:"Me gusta",role:"v"},{w:"la historia.",role:"s"}]}},
       {en:'memory',    es:'memoria',   art:'la', zh:'記憶',   ex:{es:'Tiene buena memoria.',           zh:'她記憶力很好。', chunks:[{w:"Tiene",role:"v"},{w:"buena memoria.",role:"o"}]}},
@@ -389,8 +389,8 @@ const SUFFIX_PATTERNS = [
     ]
   },
   {
-    rule: '-ar / -er / -ir（動詞字尾）',
-    hint: '英文動詞加上 -ar/-er/-ir 就秒變西語動詞！動詞無冠詞',
+    rule: '-ar / -er / -ir（動詞字尾)',
+    hint: '英文動詞加上 -ar/-er/-ir 秒變西語動詞！Link→linkear',
     words: [
       {en:'visit',    es:'visitar',    art:'', zh:'拜訪', ex:{es:'Vamos a visitar a la abuela.',    zh:'我們去探望奶奶。', chunks:[{w:"Vamos a visitar",role:"v"},{w:"a la abuela.",role:"o"}]}},
       {en:'practice', es:'practicar',  art:'', zh:'練習', ex:{es:'Hay que practicar cada día.',     zh:'每天都要練習。', chunks:[{w:"Hay que practicar",role:"v"},{w:"cada día.",role:"c"}]}},

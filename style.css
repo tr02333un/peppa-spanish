@@ -19,7 +19,13 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .header-title span{color:var(--misora)}
 .ep-badge{display:inline-block;background:var(--mizu);color:var(--konpeki);font-size:11px;font-weight:800;padding:4px 14px;border-radius:999px;margin-top:7px;letter-spacing:.5px}
 
-.season-nav{display:flex;gap:8px;margin-bottom:16px;justify-content:center;flex-wrap:wrap}
+.season-nav{display:flex;gap:8px;margin-bottom:10px;justify-content:center;flex-wrap:wrap}
+.yg-mini-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:14px;padding:0 8px}
+.yg-mini-text{font-size:9px;color:var(--nezumi);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:78vw;cursor:pointer}
+.yg-mini-text:active{opacity:.6}
+.yg-mini-copy{flex-shrink:0;font-size:9px;font-weight:700;color:var(--nezumi);border:1px solid var(--nezumi);border-radius:5px;padding:1px 7px;cursor:pointer}
+.yg-mini-copy:active{opacity:.6;background:var(--bg2)}
+.card-num-ts{color:var(--nezumi);font-weight:600;font-size:11px}
 .ep-chip{padding:5px 14px;border-radius:999px;border:1.5px solid var(--usumizu);font-size:12px;font-weight:800;color:var(--misora);background:white;cursor:pointer;transition:all .18s}
 .ep-chip.active{background:var(--misora);color:white;border-color:var(--misora)}
 
@@ -38,37 +44,27 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mizu),var(--misora),var(--benikake))}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
 .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px}
-.yg-url-box{display:flex;align-items:center;gap:6px;margin-bottom:12px;padding:9px 12px;border:1.5px solid var(--usumizu);border-radius:11px;background:white;flex-wrap:wrap}
-.yg-url-label{font-size:11px;font-weight:800;color:var(--misora);flex-shrink:0}
-.yg-url-text{font-size:10px;color:var(--tmid);flex:1;word-break:break-all;cursor:pointer;font-family:monospace}
-.yg-url-text:active{opacity:.6}
-.yg-copy-btn{flex-shrink:0;font-size:11px;font-weight:800;color:white;background:var(--misora);border:none;border-radius:6px;padding:3px 10px;cursor:pointer}
-.yg-copy-btn:active{opacity:.7}
+/* yg-url-box 已搬移至 yg-mini-row（見上方 season-nav 區塊） */
 .card-num{font-size:14px;font-weight:900;color:var(--misora);background:rgba(159,208,222,.2);padding:4px 16px;border-radius:999px;text-align:center;width:100%;display:block;margin-bottom:4px}
 
 
-/* CHUNKS — S(主詞) V(動詞) O(受詞) */
+/* CHUNKS — S(主詞) V(動詞) O(受詞) C(連接詞) */
 .chunks-area{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;padding:12px 8px;background:var(--bg2);border-radius:13px;border:1px solid var(--usumizu)}
 .chunk{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
-.chunk-pill{--vn-lake-green:#A7FFEB;--vn-lavender-purple:#E8DFFF;--vn-baby-blue:#B3E5FC;--vn-bubble-pink:#FFD1DC;--vn-border-gray:#424242;font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
+.chunk-pill{font-size:15px;font-weight:800;border-radius:10px;padding:8px 14px;line-height:1.3;transition:opacity .15s;min-height:34px;display:flex;align-items:center;gap:5px;user-select:none}
 .chunk:active .chunk-pill{opacity:.75}
 
 /* 主詞 S — 虛線框 */
-.chunk-pill.role-s{background:#FAFAFA}
-
+.chunks-area .chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
 /* 動詞 V — 實色底 */
-.chunk-pill.role-v{background:var(--vn-baby-blue)}
-
-/* 受詞 O — 實線框（也用於整句/子句包框）*/
-.chunk-pill.role-o{background:var(--vn-bubble-pink)}
-
-/* 連接詞/介詞 C — 淡色小卡，無框，跟 S/V/O 區隔開但仍是獨立語塊 */
-.chunk-pill.role-c{background:var(--vn-bubble-pink)}
-
-/* 其他純文字（稱呼/感嘆詞等，非連接詞）— 完全無底色 */
-.chunk-pill.role-plain{background:#FAFAFA}
-.chunk-pill.person-yo{background:var(--vn-lake-green) !important}
-.chunk-pill.person-tu{background:var(--vn-lavender-purple) !important}
+.chunks-area .chunk-pill.role-v{background:var(--misora);color:white;border:none}
+/* 受詞 O — 實線框 */
+.chunks-area .chunk-pill.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
+/* 連接詞 C — 淡色無框 */
+.chunks-area .chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
+.chunks-area .chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
+.chunks-area .chunk-pill.role-s.person-yo{border-color:var(--konpeki)}
+.chunks-area .chunk-pill.role-s.person-tu{border-color:var(--benikake)}
 
 .chunk.playing .chunk-pill{opacity:.7}
 @keyframes ripple{0%{box-shadow:0 0 0 0 rgba(108,155,210,.4)}100%{box-shadow:0 0 0 10px rgba(108,155,210,0)}}
@@ -129,21 +125,25 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* ANSWER */
 .answer-box{border-radius:13px;overflow:hidden;border:1.5px solid var(--usumizu);margin-bottom:12px;display:none}
-.answer-box.show{display:block;animation:fadeUp .25s ease}
+.answer-box.show{display:block;animation:slideDownFadeIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes slideDownFadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .answer-tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--usumizu)}
 .a-tab{flex:1;padding:8px;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;border:none;background:transparent;cursor:pointer;color:var(--tlight);transition:all .18s;border-bottom:2.5px solid transparent}
 .a-tab.on{color:var(--konpeki);border-bottom-color:var(--misora);background:white}
 .answer-content{background:white;padding:12px 14px}
 .a-lang{display:none}
 .a-lang.on{display:block;animation:fadeUp .2s ease}
-.a-text{font-size:15px;font-weight:700;color:var(--tdark);line-height:1.6;margin-bottom:6px}
-.a-note{font-size:13px;color:var(--tmid);line-height:1.5;padding:7px 9px;background:rgba(159,208,222,.12);border-radius:7px;border-left:3px solid var(--mizu)}
+.a-text{font-size:18px;font-weight:700;color:#059669;line-height:1.6;margin-bottom:8px}
+.a-note{font-size:13px;color:#4b5563;line-height:1.6;padding:12px 14px;background:#fef3c7;border-radius:8px;border-left:4px solid #f59e0b}
 
 .btn-row{display:flex;gap:8px}
 .btn{flex:1;padding:11px 8px;border-radius:11px;border:none;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .16s}
 .btn:active{transform:scale(.97)}
-.btn-reveal{background:white;color:var(--misora);border:2px solid var(--usumizu)}
-.btn-reveal:hover{border-color:var(--mizu);background:rgba(159,208,222,.08)}
+/* ── 解鎖遮罩按鈕（取代翻譯輸入區） ── */
+.unlock-zone{margin:14px 0 10px;text-align:center}
+.mask-toggle-btn{background:#3b82f6;color:white;border:none;border-radius:24px;padding:12px 28px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 8px rgba(59,130,246,.25);transition:all .2s ease;letter-spacing:.3px}
+.mask-toggle-btn:hover{background:#2563eb;transform:scale(1.04)}
+.mask-toggle-btn:active{transform:scale(.97);opacity:.9}
 .btn-next{flex:2;background:linear-gradient(135deg,var(--misora),var(--konpeki));color:white;box-shadow:0 4px 14px rgba(0,91,152,.2);display:none;font-size:14px}
 
 .nav-row{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:10px}
@@ -207,7 +207,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
 .suffix-chunk-star:hover{opacity:1}
 .suffix-ex-punct{font-size:12px;font-weight:700;color:var(--tlight);padding:2px 1px}
-.suffix-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
+.suffix-ex-zh{font-size:13px;color:var(--tlight);font-weight:600}
 
 /* PATTERN BOOK ENTRIES */
 .pt-entry{align-items:flex-start}
@@ -254,21 +254,21 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-pattern-box{background:rgba(245,166,35,.07);border:1.5px dashed #F5A623;border-radius:10px;padding:9px 12px;margin-bottom:10px}
 .ammo-pattern-es{font-size:14px;font-weight:800;color:var(--tdark);line-height:1.6;margin-bottom:3px}
 .ammo-slot{display:inline-block;background:rgba(245,166,35,.2);color:#B87800;border-radius:5px;padding:1px 7px;font-style:italic;font-size:13px}
-.ammo-pattern-zh{font-size:12px;color:var(--tmid);font-weight:600}
-.ammo-pattern-note{font-size:11px;color:var(--tlight);margin-top:4px;font-weight:600;border-left:2px solid #F5A623;padding-left:6px}
+.ammo-pattern-zh{font-size:13px;color:var(--tmid);font-weight:600}
+.ammo-pattern-note{font-size:12px;color:var(--tlight);margin-top:4px;font-weight:600;border-left:2px solid #F5A623;padding-left:6px}
 /* 實戰射擊 */
 .ammo-fire-section{display:flex;flex-direction:column;gap:6px}
 .ammo-fire-row{border-radius:9px;padding:8px 11px;cursor:pointer;transition:opacity .15s}
 .ammo-fire-row:active{opacity:.7}
-.ammo-fire-row.peppa{background:rgba(108,155,210,.08);border-left:3px solid var(--misora)}
-.ammo-fire-row.daily{background:rgba(61,184,122,.07);border-left:3px solid #3DB87A}
+.ammo-fire-row.peppa{background:rgba(108,155,210,.1);border:1.5px solid var(--misora)}
+.ammo-fire-row.daily{background:white;border:1.5px dashed var(--misora)}
 .ammo-fire-tag{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px;display:flex;align-items:center;gap:6px}
 .ammo-fire-tag.peppa{color:var(--misora)}
-.ammo-fire-tag.daily{color:#3DB87A}
+.ammo-fire-tag.daily{color:var(--konpeki)}
 .ammo-fire-ts{background:var(--misora);color:white;border-radius:5px;padding:1px 7px;font-size:10px;cursor:pointer;font-weight:900}
 .ammo-fire-ts:active{opacity:.7}
 .ammo-fire-es{font-size:13px;font-weight:800;color:var(--konpeki);line-height:1.5}
-.ammo-fire-zh{font-size:11px;color:var(--tlight);font-weight:600}
+.ammo-fire-zh{font-size:13px;color:var(--tlight);font-weight:600}
 /* star */
 .ammo-star{font-size:15px;cursor:pointer;flex-shrink:0;transition:transform .15s;user-select:none;position:absolute;bottom:12px;right:14px}
 .ammo-star:active{transform:scale(1.4)}
@@ -295,6 +295,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-chunk.role-o{border:1.5px solid var(--misora);color:var(--konpeki);background:white}
 .ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
+.ammo-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
+.ammo-chunk-star:hover{opacity:1}
 
 /* VOCAB ADD BUTTON / COLLECTION */
 .vocab-add-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(132,145,195,.15);color:var(--benikake);font-size:12px;font-weight:900;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1;position:relative}
@@ -376,7 +378,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-ex-row{display:flex;flex-direction:column;gap:3px;padding:8px 11px;background:var(--bg2);border-radius:10px;cursor:pointer;transition:background .15s;border:1px solid transparent;user-select:none}
 .grammar-ex-row:active{opacity:.7}
 .grammar-ex-es{font-size:14px;font-weight:800;color:var(--konpeki);line-height:1.4}
-.grammar-ex-zh{font-size:13px;color:var(--tlight);font-weight:600}
+.grammar-ex-zh{font-size:13px;color:var(--tmid);font-weight:600}
 .grammar-trap{font-size:13px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
 .grammar-rule-emph{font-size:14.4px;font-weight:900;color:var(--tmid);line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
@@ -384,20 +386,48 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* ── ¡Variadísimo! 變位速查 ── */
 .conj-section{margin:10px 0 8px;border-radius:10px;overflow:hidden;border:1.5px solid rgba(159,208,222,.4)}
 .conj-title{font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--misora);background:rgba(159,208,222,.12);padding:6px 12px}
-.conj-verb-label{font-size:10px;color:var(--tlight);font-weight:700;padding:2px 12px 6px}
+.conj-verb-label{font-size:14px;color:var(--tlight);font-weight:700;padding:2px 12px 6px}
 .conj-rows{padding:0 0 4px}
-.conj-row{display:grid;grid-template-columns:60px 52px 1fr auto;align-items:baseline;gap:4px;padding:5px 12px;border-top:1px solid rgba(184,200,209,.2)}
+.conj-row{display:grid;grid-template-columns:76px 52px 1fr auto;align-items:baseline;gap:4px;padding:5px 12px;border-top:1px solid rgba(184,200,209,.2)}
 .conj-row:first-child{border-top:none}
-.conj-person{font-size:10px;color:var(--tlight);font-weight:700}
+.conj-person{font-size:14px;color:var(--tlight);font-weight:700}
 .conj-form{font-size:13px;font-weight:900;color:var(--konpeki);cursor:pointer}
 .conj-form:active{opacity:.6}
-.conj-ex{font-size:11px;color:var(--tmid);font-style:italic;cursor:pointer;grid-column:3}
+.conj-ex{font-size:15px;color:var(--tmid);font-style:italic;cursor:pointer;grid-column:3}
 .conj-ex:active{opacity:.6}
-.conj-zh{font-size:13px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
-.conj-note{font-size:11px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
+.conj-zh{font-size:14px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
+.conj-note{font-size:13px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
 .conj-expand{grid-column:1/-1}
-.conj-expand-summary{font-size:10px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
+.conj-expand-summary{font-size:14px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
 .conj-expand-summary::-webkit-details-marker{display:none}
+.conj-jump-btn{margin:6px 12px 4px;padding:6px 10px;background:var(--misora);color:white;font-size:10px;font-weight:800;border-radius:8px;text-align:center;cursor:pointer}
+.conj-jump-btn:active{opacity:.7}
+
+/* 動詞變位庫獨立卡片 */
+.conj-lib-card{background:white;border-bottom:1px solid var(--bg2);padding:10px 4px}
+.conj-lib-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.conj-lib-header{font-size:14px;font-weight:900;color:var(--konpeki);padding:2px 12px 4px}
+.conj-lib-card .conj-section{margin:0 8px 4px;border:none}
+.conj-title{display:none}
+
+/* 人稱代名詞查詢庫 */
+.pron-cat-card{background:white;border-bottom:1px solid var(--bg2);padding:12px 14px}
+.pron-cat-card:last-child{border-bottom:none;border-radius:0 0 14px 14px}
+.pron-cat-header{font-size:14px;font-weight:900;color:var(--konpeki)}
+.pron-cat-en{font-size:10px;font-weight:700;color:var(--tlight);margin-left:4px}
+.pron-cat-hint{font-size:11px;color:var(--tmid);font-weight:600;margin:2px 0 8px}
+.pron-rows{display:flex;flex-direction:column;gap:2px}
+.pron-row{display:grid;grid-template-columns:20px 64px 1fr auto;align-items:baseline;gap:6px;padding:4px 0;border-top:1px solid rgba(184,200,209,.15)}
+.pron-row:first-child{border-top:none}
+.pron-icon{font-size:14px;line-height:1}
+.pron-es{font-size:13px;font-weight:900;color:var(--misora);cursor:pointer}
+.pron-es:active{opacity:.6}
+.pron-zh{font-size:11px;color:var(--tmid);font-weight:600}
+.pron-en{font-size:10px;color:var(--tlight);font-style:italic}
+.pron-example{margin-top:8px;padding:7px 10px;background:rgba(108,155,210,.08);border-left:2px solid var(--misora);border-radius:0 6px 6px 0;cursor:pointer}
+.pron-ex-es{font-size:12px;font-weight:700;color:var(--konpeki)}
+.pron-ex-zh{font-size:11px;color:var(--tlight);margin-top:2px}
+.pron-note{margin-top:6px;font-size:10px;color:var(--benikake);font-weight:700;line-height:1.5}
 
 /* ── 熟悉度星號系統 ── */
 .fam-star-btn{position:absolute;top:14px;right:52px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--konpeki);padding:0;line-height:1;z-index:1}
@@ -408,9 +438,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* ── 性別四形式 ── */
 .suffix-gender-row{display:flex;gap:4px;flex-wrap:wrap;margin:3px 0 5px}
-.sg-cell{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
-.sg-cell.gender-ms{background:rgba(108,155,210,.15);color:var(--misora)}
-.sg-cell.gender-fs{background:rgba(252,209,220,.5);color:#c05080}
+.sg-cell{font-size:12px;font-weight:800;padding:2px 8px;border-radius:999px}
+.sg-cell.gender-ms{background:rgba(108,155,210,.18);color:var(--misora)}
+.sg-cell.gender-fs{background:rgba(252,209,220,.6);color:#c05080}
 .sg-cell.gender-mp{background:rgba(108,155,210,.08);color:var(--konpeki)}
 .sg-cell.gender-fp{background:rgba(252,209,220,.3);color:#a03060}
 /* ── 詞綴陰性提示 ── */
@@ -429,6 +459,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 #grammarSheet{display:none;position:fixed;inset:0;background:rgba(26,46,59,.55);z-index:999}
 .grammar-sheet-box{position:absolute;bottom:0;left:0;right:0;background:white;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px 18px 32px;max-width:480px;margin:0 auto}
 .grammar-chunk-note{font-size:14px;font-weight:700;color:var(--konpeki);line-height:1.7;padding:8px 0 4px;white-space:pre-line}
+.suffix-hint{font-size:13px;color:var(--tmid);font-weight:600;line-height:1.55}
+.suffix-hint strong{color:var(--konpeki);font-weight:900}
 
 /* ── STAGE CHUNK PILLS ── */
 .stage-chunk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;cursor:pointer;transition:opacity .15s;margin:2px;user-select:none}
@@ -453,7 +485,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage-btn.sec{background:rgba(108,155,210,.15);color:var(--misora)}
 .stage-btn:active{opacity:.7}
 .stage-target{font-size:13px;font-weight:800;color:var(--konpeki);background:rgba(159,208,222,.12);border-radius:9px;padding:9px 12px;margin-bottom:8px;line-height:1.5;min-height:36px}
-.stage-chunks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.stage-chunks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;justify-content:center}
 .stage-result{font-size:13px;font-weight:800;border-radius:9px;padding:9px 12px;margin-top:4px}
 .stage-result.ok{background:rgba(61,184,122,.1);color:#1A5C30;border-left:3px solid var(--ok)}
 .stage-result.err{background:rgba(224,92,92,.06);color:var(--err);border-left:3px solid var(--err)}
@@ -472,3 +504,22 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage3-chip:active{opacity:.7}
 .stage3-output{font-size:14px;font-weight:800;color:var(--konpeki);background:rgba(159,208,222,.12);border-radius:10px;padding:10px 13px;min-height:36px;cursor:pointer}
 .stage3-output:active{opacity:.7}
+
+/* ── 分組導覽橫條 ── */
+.ammo-header-container{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:440px;margin:0 auto 12px auto;padding:0 8px}
+.sequence-bar-segments{display:flex;flex:1;justify-content:center;align-items:center;gap:8px;margin-right:12px}
+.sequence-segment-btn{flex:1;max-width:80px;min-width:55px;padding:6px 0;background:var(--misora);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;cursor:pointer;transition:all .2s ease}
+.sequence-segment-btn.is-active{background:var(--konpeki);box-shadow:0 0 0 2px var(--sora)}
+.sequence-segment-btn:hover{opacity:.85}
+.sequence-segment-btn:active{transform:scale(.96)}
+.episode-badge-tag{flex-shrink:0;background:#eff6ff;color:var(--misora);border:1px solid var(--usumizu);padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}
+
+/* ── 分組實戰射擊常駐展示 ── */
+.group-fire-wrap{overflow:hidden}
+.group-fire-header{font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--konpeki);padding:10px 14px 4px;opacity:.7}
+.group-fire-card{border:1px solid var(--usumizu);border-radius:12px;margin:0 12px 10px;overflow:hidden}
+.group-fire-core{padding:10px 12px;font-size:14px;font-weight:700;color:var(--konpeki);background:var(--bg2);cursor:pointer;border-bottom:1px solid var(--usumizu)}
+.group-fire-core:active{opacity:.75}
+
+/* 主卡片語塊：隱藏 + 收藏按鈕 */
+.chunk-pill .vocab-add-btn{display:none}

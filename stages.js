@@ -80,8 +80,9 @@ function _renderS1(){
   document.getElementById('stage1Target').textContent = '👆 點語塊，還原原句順序';
 
   // shuffle chunks
-  const chunks = [...fire.chunks];
-  const shuffled = [...chunks];
+  // 過濾掉全形括號中文主詞提示（如「（我）」「（你們）」）
+  const visibleChunks = fire.chunks.filter(c => !/^（.*）$/.test(c.w.trim()));
+  const shuffled = [...visibleChunks];
   for(let i=shuffled.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
     [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];
@@ -100,14 +101,14 @@ function _renderS1(){
     pill.textContent = c.w;
     pill.dataset.idx = i;
     pill.dataset.w = c.w;
-    pill.onclick = () => _s1Pick(pill, c, built, fire, area);
+    pill.onclick = () => _s1Pick(pill, c, built, visibleChunks, fire, area);
     area.appendChild(pill);
   });
 
   _s1Idx++;
 }
 
-function _s1Pick(pill, c, built, fire, area){
+function _s1Pick(pill, c, built, visibleChunks, fire, area){
   speakWord(c.w, pill);
   if(pill.classList.contains('used')) return;
   pill.classList.add('used');
@@ -117,10 +118,10 @@ function _s1Pick(pill, c, built, fire, area){
   const target = document.getElementById('stage1Target');
   target.textContent = built.join(' ');
 
-  if(built.length === fire.chunks.length){
+  if(built.length === visibleChunks.length){
     const result = document.getElementById('stage1Result');
     const built_str = built.join(' ');
-    const correct_str = fire.chunks.map(x=>x.w).join(' ');
+    const correct_str = visibleChunks.map(x=>x.w).join(' ');
     const ok = built_str === correct_str;
     result.className = 'stage-result '+(ok?'ok':'err');
     result.textContent = ok ? '✅ 正確！'+fire.zh : '❌ 原句：'+correct_str+' ／ '+fire.zh;
@@ -216,4 +217,22 @@ function toggleStages(){
     renderStage2();
     renderStage3();
   }
+}
+
+function jumpToStages(){
+  const body = document.getElementById('stagesBody');
+  const tog = document.getElementById('stagesToggle');
+  const wrap = document.querySelector('.stages-wrap');
+  if(!body) return;
+  body.classList.add('open');
+  tog.textContent = '▲ 收起';
+  renderStage2();
+  renderStage3();
+  setTimeout(()=>{
+    if(wrap){
+      wrap.scrollIntoView({behavior:'smooth',block:'start'});
+      wrap.classList.add('ammo-flash');
+      setTimeout(()=>wrap.classList.remove('ammo-flash'),1200);
+    }
+  },80);
 }

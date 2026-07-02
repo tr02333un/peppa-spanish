@@ -27,16 +27,23 @@ function openYG(word, lang){
   window.open(url, '_blank', 'noopener');
 }
 
-// ── FORVO / SPANISHDICT 自動跳轉 ──
-// openYGPanel 原本開 YouGlish，現在改走 Forvo（給同源詞庫、詞彙收藏用）
+// ── WORDREFERENCE 直接跳轉（給單字：同源詞庫、詞綴單字卡）──
 function openYGPanel(word){
-  openForvo(String(word).replace(/[¡¿.,!?;:（）]/g,'').trim());
+  openWordReference(String(word).replace(/[¡¿.,!?;:（）]/g,'').trim());
 }
 
-function openForvo(word){
+function openWordReference(word){
   if(!word) return;
-  window.open('https://forvo.com/word/'+encodeURIComponent(word)+'/#es','_blank','noopener');
+  window.open('https://www.wordreference.com/es/translation.asp?spen='+encodeURIComponent(word),'_blank','noopener');
   showPronBackup(word);
+}
+
+// ── 陌生詞彙收藏點擊：依內容判斷單字或語塊 ──
+function pronounceVocab(text){
+  const clean=String(text).replace(/[¡¿.,!?;:（）]/g,'').trim();
+  if(!clean) return;
+  if(clean.includes(' ')) speakWord(clean, null); // 語塊/句子 → TTS
+  else openWordReference(clean); // 單字 → WordReference
 }
 
 // ── SPEECH SYNTHESIS (TTS) ──
@@ -71,8 +78,8 @@ function speakWord(text, el){
   // Must cancel first on Android or it queues silently
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(clean);
-  utt.lang = 'es-419';
-  utt.rate = 0.82;
+  utt.lang = 'es-MX';
+  utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.volume = 1;
   if(ttsVoice) utt.voice = ttsVoice;
@@ -155,6 +162,7 @@ function renderStars(){
   row.appendChild(epS);
   const done=answered.length;
   document.getElementById('starLabel').textContent=
+    done===0?'':
     done===n?`🌟 E${ep+1} 全集完成！`:
     `⭐ ${done} / ${n} 句完成`;
 }
@@ -165,8 +173,17 @@ function renderStars(){
 let ammoUnlocked = []; // array of ammo_ids unlocked so far
 let ammoStars = {};    // {ammo_id: 0|1|2}
 
+// ── 分組導覽 (E1 only) ──
+const AMMO_GROUPS = [
+  { label:'uno',    range:['e1_01','e1_02','e1_03'] },
+  { label:'dos',    range:['e1_04','e1_05'] },
+  { label:'tres',   range:['e1_06','e1_07','e1_08'] },
+  { label:'cuatro', range:['e1_09','e1_10'] }
+];
+let currentGroupIndex = 0;
+
 // Map sentence global index → ammo_id(s) to unlock
-// (SENTENCE_AMMO_MAP 保留作備份；實際使用 SENTENCE_AMMO_MAP2)
+// (SENTENCE_AMMO_MAP 保留作備充；實際使用 SENTENCE_AMMO_MAP2)
 const SENTENCE_AMMO_MAP2 = {
   0:['e1_01'], 1:['e1_02'], 2:['e1_03'], 3:['e1_04'], 4:['e1_05'],
   5:['e1_06'], 6:['e1_07'], 7:['e1_08'], 8:['e1_09'], 9:['e1_10'],
@@ -203,7 +220,9 @@ function renderAmmoFireChunks(fire){
   if(!fire.chunks || !fire.chunks.length) return '';
   return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>{
     const personCls=c.role==='s'?getPersonClass(c.w):'';
-    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>`;
+    const clean=c.w.replace(/[¡¿.,!?;:（）]/g,'').trim();
+    const starHtml=isVocabWorthy(clean) ? `<span class="ammo-chunk-star" onclick="event.stopPropagation();addToVocab('${escAttr(c.w)}','${escAttr(fire.zh)}','彈藥例句');this.textContent='⭐'" title="收藏這個語塊">☆</span>` : '';
+    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>${starHtml}`;
   }).join('')}</div>`;
 }
 
@@ -269,7 +288,6 @@ function renderAmmo(){
         <div class="ammo-chunk-row">
           <span class="ammo-chunk" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo}</span>
           ${renderBeVerbTag(a)}
-          <span class="vocab-add-btn" onclick="addToVocab('${escAttr(a.core_ammo)}','${escAttr(a.core_zh)}','彈藥核心')">＋</span>
         </div>
         ${renderBeVerbNote(a)}
         <!-- 武器改裝 -->
@@ -295,6 +313,51 @@ function toggleAmmoCard(ammoId){
   if(card) card.classList.toggle('ammo-collapsed');
 }
 
+// ── 分組導覽函式 ──
+function ammoIdToSentenceIdx(id){ return parseInt(id.split('_')[1],10)-1; }
+
+function initGroupButtons(){
+  document.querySelectorAll('.sequence-segment-btn').forEach((btn,i)=>{
+    btn.addEventListener('click',()=>{
+      if(ep!==0) return;
+      currentGroupIndex=i;
+      idx=ammoIdToSentenceIdx(AMMO_GROUPS[i].range[0]);
+      render();
+    });
+  });
+}
+
+function syncGroupBtn(){
+  const wrap=document.getElementById('seqBarWrap');
+  if(ep!==0){if(wrap)wrap.style.display='none';return;}
+  if(wrap)wrap.style.display='';
+  AMMO_GROUPS.forEach((g,i)=>{
+    const first=ammoIdToSentenceIdx(g.range[0]);
+    const last=ammoIdToSentenceIdx(g.range[g.range.length-1]);
+    if(idx>=first&&idx<=last) currentGroupIndex=i;
+  });
+  document.querySelectorAll('.sequence-segment-btn').forEach((btn,i)=>{
+    btn.classList.toggle('is-active',i===currentGroupIndex);
+  });
+  const entries=AMMO_GROUPS[currentGroupIndex].range
+    .map(k=>AMMO_DATA.find(a=>a.ammo_id===k)).filter(Boolean);
+  renderGroupFireArea(entries);
+  const badge=document.getElementById('seqEpBadge');
+  if(badge) badge.textContent=`ep${ep+1}. ${epData().titleZh}`;
+}
+
+function renderGroupFireArea(entries){
+  const el=document.getElementById('groupFireArea');
+  if(!el) return;
+  el.innerHTML=entries.map(a=>`
+    <div class="group-fire-card">
+      <div class="group-fire-core" onclick="speakFull('${escAttr(a.core_ammo)}')">${a.core_ammo} <small style="color:var(--tlight);font-weight:500">${a.core_zh}</small></div>
+      ${renderAmmoFireRow(a.fire_peppa,'peppa')}
+      ${a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('')}
+    </div>
+  `).join('');
+}
+
 function seekYT(sec){
   if(window.ytPlayer && typeof ytPlayer.seekTo==='function'){
     ytPlayer.seekTo(sec, true);
@@ -309,7 +372,7 @@ function seekYT(sec){
 }
 
 function copyYGUrl(){
-  const el=document.getElementById('yg-url-text');
+  const el=document.getElementById('yg-mini-text');
   if(!el) return;
   const url=el.dataset.url||el.textContent;
   if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>toast('✅ 已複製！')); }
@@ -370,7 +433,7 @@ function renderCogLibrary(filter){
           const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
           if(!clean) return '<span class="suffix-ex-punct">'+ck.w+'</span>';
           const starHtml = isVocabWorthy(ck.w) ? '<span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏">☆</span>' : '';
-          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="openYGPanel(\''+escAttr(clean)+'\')">'+ck.w+'</span>'+starHtml;
+          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="speakWord(\''+escAttr(clean)+'\',this)">'+ck.w+'</span>'+starHtml;
         }).join('');
         return `
         <div class="suffix-word-card">
@@ -468,7 +531,7 @@ function renderVocab(){
   const renderCard=(v)=>`
     <div class="vocab-card${(v.stars||0)>=5?' vocab-done':''}">
       <div class="vocab-text">
-        <div class="vocab-es" onclick="openYGPanel('${escAttr(v.text)}')">${v.text}</div>
+        <div class="vocab-es" onclick="pronounceVocab('${escAttr(v.text)}')">${v.text}</div>
         <div class="vocab-zh">${v.zh}</div>
         <div class="vocab-source">${v.source}</div>
       </div>
@@ -753,6 +816,7 @@ function render(){
   revealed=false;makeOpen=false;builtTokens=[];
   document.getElementById('answerBox').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
+  const uz=document.getElementById('unlockZone');if(uz){uz.style.display='';}
   const tipEl = document.getElementById('grammarTip');
   if(tipEl) tipEl.style.display='none';
   document.getElementById('userInput').value='';
@@ -765,8 +829,9 @@ function render(){
     document.getElementById('makeFreeInput').className='make-free-input';
   }
 
-  document.getElementById('epBadge').textContent=`S1 · E${ep+1} · ${epData().titleZh}`;
-  document.getElementById('cardNum').textContent=`句 ${idx+1} / ${n}`;
+  document.getElementById('epBadge').textContent=`S1 · ep${ep+1} · ${epData().titleZh}`;
+  const tsVal = s.ts!=null ? ` <span class="card-num-ts">${Math.floor(s.ts/60)}:${String(s.ts%60).padStart(2,'0')}</span>` : '';
+  document.getElementById('cardNum').innerHTML = `句 ${idx+1} / ${n}${tsVal}`;
   document.getElementById('navCount').textContent=`${idx+1} / ${n}`;
 
   const area=document.getElementById('chunksArea');
@@ -797,7 +862,7 @@ function render(){
   // ── YouGlish 語塊按鈕 keyword ──
   const ygKw = SENTENCE_YG_KW['e'+ep+'_s'+idx] || s.chunks.find(c=>c.role==='v')?.w || s.es.slice(0,15);
   const ygUrl = 'https://youglish.com/pronounce/'+encodeURIComponent(ygKw.replace(/[¡¿.,!?;:]/g,'').trim())+'/spanish/am';
-  const urlEl = document.getElementById('yg-url-text');
+  const urlEl = document.getElementById('yg-mini-text');
   if(urlEl){ urlEl.textContent = ygUrl; urlEl.dataset.url = ygUrl; }
 
   // ── 英西同源槓桿 details 注入 ──
@@ -820,6 +885,7 @@ function render(){
   const card=document.getElementById('mainCard');
   card.style.animation='none';card.offsetHeight;card.style.animation='';
   switchLang('zh');renderStars();
+  syncGroupBtn();
 }
 
 function smartMatch(input,s){
@@ -844,7 +910,10 @@ function revealAnswer(){
   document.getElementById('aTextEn').textContent=s.en;
   document.getElementById('aNoteEn').textContent=s.noteEn;
   document.getElementById('answerBox').classList.add('show');
-  document.getElementById('nextBtn').style.display='block';
+  const uz=document.getElementById('unlockZone');
+  if(uz){uz.style.display='none';}
+  const nb=document.getElementById('nextBtn');
+  nb.style.display='block';nb.style.flex='1';
   showGrammarTip(ep * 10 + idx);
   if(!answered.includes(idx)){
     answered.push(idx);
@@ -1032,9 +1101,9 @@ function toast(msg){
 }
 
 function showPronBackup(word){
-  const url = 'https://www.spanishdict.com/translate/'+encodeURIComponent(word);
+  const url = 'https://es.wiktionary.org/wiki/'+encodeURIComponent(word);
   const t = document.getElementById('toast');
-  t.innerHTML = 'Forvo 沒有？→ <a href="'+url+'" target="_blank" rel="noopener" style="color:var(--mizu);font-weight:900;text-decoration:none">SpanishDict ↗</a>';
+  t.innerHTML = 'WordReference 沒有？→ <a href="'+url+'" target="_blank" rel="noopener" style="color:var(--mizu);font-weight:900;text-decoration:none">Wiktionary ↗</a>';
   t.classList.add('show');
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(()=>{ t.classList.remove('show'); }, 4000);
@@ -1069,7 +1138,7 @@ function showGrammarTip(globalIdx){
   </div>`;
 }
 
-function buildConjTable(conj){
+function buildConjTable(conj, gId){
   if(!conj || !conj.rows || !conj.rows.length) return '';
   const renderRow = r =>
     `<div class="conj-row">
@@ -1084,10 +1153,79 @@ function buildConjTable(conj){
   const restHtml = rest3.length
     ? `<details class="conj-expand"><summary class="conj-expand-summary">我們／你們／他們 ▾</summary>${rest3.map(renderRow).join('')}</details>`
     : '';
+  const jumpBtn = gId ? `<div class="conj-jump-btn" onclick="jumpToConjLib('${gId}')">🔄 查完整變位庫 →</div>` : '';
   return `<div class="conj-section">
     <div class="conj-verb-label">${conj.verb}</div>
     <div class="conj-rows">${main3}${restHtml}</div>
+    ${jumpBtn}
   </div>`;
+}
+
+// ── 👤 人稱代名詞查詢庫 ──
+const PERSON_ICONS = ['🙋','👉','👤','👥','🙌','👨‍👩‍👧‍👦']; // 依序：1單/2單/3單/1複/2複/3複
+function renderPronounLibrary(){
+  const el = document.getElementById('pronounLibBody');
+  if(!el) return;
+  el.innerHTML = PRONOUN_LIBRARY.map(cat=>`
+    <div class="pron-cat-card">
+      <div class="pron-cat-header">${cat.cat} <span class="pron-cat-en">${cat.catEn}</span></div>
+      <div class="pron-cat-hint">${cat.hint}</div>
+      <div class="pron-rows">
+        ${cat.rows.map((r,i)=>`
+          <div class="pron-row">
+            <span class="pron-icon">${PERSON_ICONS[i]||''}</span>
+            <span class="pron-es" onclick="speakWord('${escAttr(r.es)}',this)">${r.es}</span>
+            <span class="pron-zh">${r.zh}</span>
+            <span class="pron-en">${r.en}</span>
+          </div>`).join('')}
+      </div>
+      ${cat.example?`<div class="pron-example" onclick="speakSentence('${escAttr(cat.example.es)}')">
+        <div class="pron-ex-es">▶ ${cat.example.es}</div>
+        <div class="pron-ex-zh">${cat.example.zh}</div>
+      </div>`:''}
+      ${cat.note?`<div class="pron-note">${cat.note}</div>`:''}
+    </div>`).join('');
+}
+
+function togglePronounLib(){
+  const body=document.getElementById('pronounLibBody');
+  const t=document.getElementById('pronounLibToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+// ── 🔄 動詞變位庫（獨立瀏覽區）──
+function renderConjLibrary(){
+  const el = document.getElementById('conjLibBody');
+  if(!el) return;
+  const verbs = GRAMMAR_DATA.filter(g=>g.conj && g.conj.rows && g.conj.rows.length);
+  el.innerHTML = verbs.map(g=>`
+    <div class="conj-lib-card" id="conjlib-${g.id}">
+      <div class="conj-lib-header">${g.conj.verb}</div>
+      ${buildConjTable(g.conj)}
+    </div>`).join('');
+}
+
+function toggleConjLib(){
+  const body=document.getElementById('conjLibBody');
+  const t=document.getElementById('conjLibToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
+function jumpToConjLib(gId){
+  closeGrammarSheet();
+  const body=document.getElementById('conjLibBody');
+  const t=document.getElementById('conjLibToggle');
+  body.classList.add('open');
+  t.textContent='▲ 收起';
+  setTimeout(()=>{
+    const card=document.getElementById('conjlib-'+gId);
+    if(!card) return;
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    card.classList.add('ammo-flash');
+    setTimeout(()=>card.classList.remove('ammo-flash'),1200);
+  },80);
 }
 
 function openGrammarCard(gId){
@@ -1106,8 +1244,8 @@ function openGrammarCard(gId){
     <div class="grammar-title">${g.title}</div>
     <div class="${ruleClass}">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
-    ${buildConjTable(g.conj)}
-    <div class="grammar-trap">⚠️ ${g.trap}</div>
+    ${buildConjTable(g.conj, g.id)}
+    <div class="grammar-trap">${g.trap}</div>
     <div class="grammar-source">📍 ${g.source}</div>
   `);
 }
@@ -1134,10 +1272,6 @@ function _famStarHtml(word){
 
 function handleChunkTap(c, el){
   speakWord(c.w, el);
-  if(!c.hideYg){
-    const clean = c.w.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) openForvo(clean);
-  }
   if(c.note){
     openGrammarSheet(_famStarHtml(c.w)+'<div class="grammar-chunk-note">'+c.note+'</div>');
   }
@@ -1145,10 +1279,6 @@ function handleChunkTap(c, el){
 
 function ammoChunkTap(word, hideYg, note){
   speakWord(word, null);
-  if(!hideYg){
-    const clean = word.replace(/[¡¿.,!?;:（）\s]/g,'').trim();
-    if(clean) openForvo(clean);
-  }
   if(note){
     openGrammarSheet(_famStarHtml(word)+'<div class="grammar-chunk-note">'+note+'</div>');
   }
@@ -1158,8 +1288,8 @@ function speakSentence(text){
   if(!window.speechSynthesis){ toast('⚠️ 此瀏覽器不支援語音'); return; }
   try{ speechSynthesis.cancel(); }catch(e){}
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'es-419';
-  utt.rate = 0.82;
+  utt.lang = 'es-MX';
+  utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.volume = 1;
   if(ttsVoice) utt.voice = ttsVoice;
@@ -1180,6 +1310,9 @@ function speakSentence(text){
   render();
   renderAmmo();
   renderCogLibrary();
+  renderConjLibrary();
+  renderPronounLibrary();
   renderVocab();
   initTTS();
+  initGroupButtons();
 })();
