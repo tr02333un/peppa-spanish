@@ -266,6 +266,11 @@ function renderBeVerbNote(a){
 }
 
 
+// 西語數字 1-10：基數/序數/emoji 三態並列
+const NUM_EMOJI=['','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
+const NUM_WORDS=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'];
+const ORD_WORDS=['','primero','segundo','tercero','cuarto','quinto','sexto','séptimo','octavo','noveno','décimo'];
+
 function renderAmmo(){
   document.getElementById('ammoCount').textContent = ammoUnlocked.length;
   const el = document.getElementById('ammoEntries');
@@ -277,10 +282,12 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
+    const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
+    const numDisplay = `<span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
-        <span class="ammo-header-zh">${a.core_zh}</span>
+        <span class="ammo-num">${numDisplay}</span>
         <span class="ammo-chevron">▾</span>
       </div>
       <div class="ammo-card-body">
