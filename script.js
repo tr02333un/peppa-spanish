@@ -284,9 +284,11 @@ function renderAmmo(){
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
     const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
-    const numDisplay = `<span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
+    const epNum = (a.ammo_id.match(/^e(\d+)_/)||['','1'])[1];
+    const epTagShort = a.ep.replace(/^E(\d+)/,'ep$1');
+    const numDisplay = `<span class="ammo-num-ep">ep${epNum}-${num}</span><span class="ammo-num-sep">·</span><span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
-      <div class="ammo-ep-tag">${a.ep}</div>
+      <div class="ammo-ep-tag">${epTagShort}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
         <span class="ammo-num">${numDisplay}</span>
         <span class="ammo-chevron">▾</span>
