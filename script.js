@@ -416,6 +416,39 @@ function jumpToAmmo(globalIdx){
 }
 
 // ── 英西同源詞庫總覽（COGNATE_LIBRARY → cognates.js） ──
+// ── 陰陽字尾語塊卡 ──
+function renderGenderPairs(){
+  const el = document.getElementById('genderPairsBody');
+  if(!el) return;
+  el.innerHTML = GENDER_PAIRS.map((p,pi)=>`
+    <div class="gp-card">
+      <div class="gp-zh">${p.zh}</div>
+      <div class="gp-toggles">
+        ${p.options.map((o,oi)=>`<span class="gp-toggle" id="gp-${pi}-${oi}" onclick="pickGenderPair(${pi},${oi})">${o.word}</span>`).join('')}
+      </div>
+      <div class="gp-example" id="gp-ex-${pi}" style="display:none"></div>
+    </div>`).join('');
+}
+function pickGenderPair(pi, oi){
+  const p = GENDER_PAIRS[pi];
+  const o = p.options[oi];
+  p.options.forEach((_,i)=>{
+    const el = document.getElementById(`gp-${pi}-${i}`);
+    if(el) el.classList.toggle('active', i===oi);
+  });
+  const exEl = document.getElementById(`gp-ex-${pi}`);
+  exEl.style.display = 'block';
+  exEl.innerHTML = `<span class="gp-ex-es">▶ ${o.ex}</span><span class="gp-ex-zh">${o.exZh}</span>`;
+  speakSentence(o.ex);
+}
+
+function toggleGenderPairs(){
+  const body=document.getElementById('genderPairsBody');
+  const t=document.getElementById('genderPairsToggle');
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
 function toggleCogLibrary(){
   const body=document.getElementById('cogLibraryBody');
   const t=document.getElementById('cogLibToggle');
@@ -1379,6 +1412,7 @@ function switchMainTab(tab){
   renderCogLibrary();
   renderConjLibrary();
   renderPronounLibrary();
+  renderGenderPairs();
   renderVocab();
   initTTS();
   initGroupButtons();
