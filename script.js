@@ -1196,7 +1196,7 @@ function openGrammarCard(gId){
     <div class="${ruleClass}">${g.rule}</div>
     <div class="grammar-examples">${exHtml}</div>
     ${buildConjTable(g.conj)}
-    <div class="grammar-trap">${g.trap}</div>
+    ${g.trap?`<p class="grammar-trap">⚠️ ${g.trap}</p>`:''}
     <div class="grammar-source">📍 ${g.source}</div>
   `);
 }
