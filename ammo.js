@@ -177,7 +177,7 @@ const AMMO_DATA = [
     core_ammo:"No te preocupes George, entre todos lo encontraremos.", core_zh:"不要擔心喬治，我們大家一起會找到牠的。",
     be_verb_type:"none", be_verb_note:"",
     pattern:"No te preocupes, [理由].", pattern_zh:"不要擔心，___。",
-    pattern_note:"No te preocupes = 自己對自己做的動詞直接下指令，安慰用語", slots:["理由"],
+    pattern_note:"No te preocupes = 西語安慰語（反身動詞命令式）", slots:["理由"],
     fire_peppa:{es:"No te preocupes George, entre todos lo encontraremos.", zh:"不要擔心喬治，我們大家一起會找到牠的。", ts:null,
       chunks:[{w:"No te preocupes",role:"v",note:"preocuparse ➔ preocupes（自己對自己做的動詞，直接下指令否定）➔ 意思：不要擔心（西語安慰語）"},{w:"George,",hideYg:true},{w:"entre todos",role:"s",hideYg:true},{w:"lo encontraremos.",role:"v",note:"encontrar ➔ encontraremos（以後要做複數）➔ 意思：我們將會找到"}]},
     fire_daily:[
