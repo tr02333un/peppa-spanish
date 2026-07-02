@@ -1289,16 +1289,33 @@ function closeGrammarModal(){
   closeGrammarSheet();
 }
 
+let _grammarSheetPushed = false;
+
 function openGrammarSheet(html){
   document.getElementById('grammarSheetContent').innerHTML = html;
   document.getElementById('grammarSheet').style.display = 'block';
   document.body.style.overflow = 'hidden';
+  history.pushState({sheet:'grammar'}, '');
+  _grammarSheetPushed = true;
 }
 
-function closeGrammarSheet(){
+function closeGrammarSheet(_fromPop){
   document.getElementById('grammarSheet').style.display = 'none';
   document.body.style.overflow = '';
+  if(_grammarSheetPushed && !_fromPop){
+    _grammarSheetPushed = false;
+    history.back();
+  } else {
+    _grammarSheetPushed = false;
+  }
 }
+
+window.addEventListener('popstate', ()=>{
+  const sheet = document.getElementById('grammarSheet');
+  if(sheet && sheet.style.display === 'block'){
+    closeGrammarSheet(true);
+  }
+});
 
 function _famStarHtml(word){
   const s = getFamState(word);
