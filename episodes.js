@@ -14,7 +14,7 @@ const EPS=[
       {es:"Susi Sheep",zh:"蘇西羊"},
     ]}]
   }},
-  {es:"Este es mi hermano pequeño George.",chunks:[{w:"Este",role:"s"},{w:"es",role:"v"},{w:"mi hermano pequeño George.",role:"o"}],zh:"這是我的小弟弟喬治。",en:"This is my little brother George.",noteZh:"「hermano pequeño」= 小弟弟；pequeño 陽性形容詞",noteEn:"'hermano' = brother; 'pequeño' = little (masculine)",
+  {es:"Este es mi hermano pequeño George.",chunks:[{w:"Este",role:"s"},{w:"es",role:"v"},{w:"mi hermano pequeño George.",role:"o"}],zh:"這是我的小弟弟喬治。",en:"This is my little brother George.",noteZh:"「hermano pequeño」= 小弟弟；pequeño = 小的（o陽性）",noteEn:"'hermano' = brother; 'pequeño' = little (masculine)",
   expand:{
     pattern:"____ es mi [關係] [大小] [名字]",
     note:"Este/Esta 跟著關係詞的性別走 — 選了 hermana 就要用 Esta",
