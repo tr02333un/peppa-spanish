@@ -131,7 +131,7 @@ function buildNav(){
   EPS.forEach((e,i)=>{
     const chip=document.createElement('div');
     chip.className='ep-chip'+(i===ep?' active':'');
-    chip.textContent=`E${i+1} ${e.titleZh}`;
+    chip.textContent=`${NUM_EMOJI[i+1]} Ep${i+1} ${e.titleZh}`;
     chip.onclick=()=>selectEp(i);
     nav.appendChild(chip);
   });
@@ -163,7 +163,7 @@ function renderStars(){
   const done=answered.length;
   document.getElementById('starLabel').textContent=
     done===0?'':
-    done===n?`🌟 E${ep+1} 全集完成！`:
+    done===n?`🌟 Ep${ep+1} 全集完成！`:
     `⭐ ${done} / ${n} 句完成`;
 }
 
@@ -1080,7 +1080,7 @@ function showComplete(){
   for(let i=0;i<n;i++) stars+='⭐';
   stars += ' 🌟';
   document.getElementById('completeStars').textContent = stars;
-  document.getElementById('completeTitle').textContent = `E${ep+1} 完成！`;
+  document.getElementById('completeTitle').textContent = `Ep${ep+1} 完成！`;
   document.getElementById('completeSub').textContent   = `${epData().titleZh} · 全 ${n} 句`;
   document.getElementById('finalScore').textContent    = score;
   document.getElementById('finalMake').textContent     = makeScore;
