@@ -4,7 +4,7 @@
 const EPS=[
 // ── E1 泥巴坑 ──
 {title:"Charcos de Barro",titleZh:"泥巴坑",dur:187,sentences:[
-  {es:"Yo soy Peppa Pig.",chunks:[{w:"Yo",role:"s"},{w:"soy",role:"v"},{w:"Peppa Pig.",role:"o"}],zh:"我是佩佩豬。",en:"I am Peppa Pig.",noteZh:"「soy」= 我是（ser 動詞「我」）",noteEn:"soy = I am (1st person of 'ser')",
+  {es:"Yo soy Peppa Pig.",chunks:[{w:"Yo",role:"s"},{w:"soy",role:"v"},{w:"Peppa Pig.",role:"o"}],zh:"我是佩佩豬。",en:"I am Peppa Pig.",noteZh:"「soy」= 我是（ser 動詞「我」）",noteEn:"soy = I am (the 'I' form of ser)",
   expand:{
     note:"Yo soy + 名字 = 自我介紹固定句型",
     template:[{t:"Yo soy"},{g:"name"}],
@@ -36,7 +36,7 @@ const EPS=[
       ]},
     ]
   }},
-  {es:"Hoy está lloviendo así que no pueden jugar fuera.",chunks:[{w:"Hoy"},{w:"está lloviendo",role:"v"},{w:"así que",role:"c"},{w:"no pueden jugar fuera.",role:"v"}],zh:"今天在下雨，所以不能去外面玩。",en:"Today it is raining so they cannot play outside.",noteZh:"「está lloviendo」= 現在進行式，正在下雨",noteEn:"'está lloviendo' = present continuous, it is raining",
+  {es:"Hoy está lloviendo así que no pueden jugar fuera.",chunks:[{w:"Hoy"},{w:"está lloviendo",role:"v"},{w:"así que",role:"c"},{w:"no pueden jugar fuera.",role:"v"}],zh:"今天在下雨，所以不能去外面玩。",en:"Today it is raining so they cannot play outside.",noteZh:"「está lloviendo」= 現在進行式，正在下雨",noteEn:"'está lloviendo' = happening right now, it's raining",
   expand:{
     note:"está + Ving = 正在…（天氣現在進行式）",
     template:[{t:"Hoy está"},{g:"weather"},{t:"así que no pueden jugar fuera."}],
@@ -77,7 +77,7 @@ const EPS=[
       {es:"¡Le",zh:"他／她"},
     ]}]
   }},
-  {es:"Peppa ha encontrado un charco pequeño.",chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v"},{w:"un charco pequeño.",role:"o"}],zh:"佩佩找到了一個小水坑。",en:"Peppa has found a small puddle.",noteZh:"「ha encontrado」= 剛剛做完，已經找到了",noteEn:"'ha encontrado' = has found (present perfect tense)",
+  {es:"Peppa ha encontrado un charco pequeño.",chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v"},{w:"un charco pequeño.",role:"o"}],zh:"佩佩找到了一個小水坑。",en:"Peppa has found a small puddle.",noteZh:"「ha encontrado」= 剛剛做完，已經找到了",noteEn:"'ha encontrado' = just found it, all done",
   expand:{
     note:"ha encontrado = 剛剛做完，換主詞練習",
     template:[{g:"name"},{t:"ha encontrado un charco pequeño."}],
@@ -106,7 +106,7 @@ const EPS=[
       {es:"pintura.",zh:"顏料"},
     ]}]
   }},
-  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，「他們」",noteEn:"'A todos les encanta' = everyone loves it (3rd person plural)",
+  {es:"A todos les encanta saltar en los charcos de barro.",chunks:[{w:"A todos les",role:"s"},{w:"encanta",role:"v"},{w:"saltar en los charcos de barro.",role:"o"}],zh:"所有人都超愛在泥巴坑裡跳！",en:"Everyone loves jumping in muddy puddles!",noteZh:"「A todos les encanta」= 所有人都超愛，「他們」",noteEn:"'A todos les encanta' = everyone loves it (the 'they' form)",
   expand:{
     note:"A todos les encanta + 原形動詞 = 所有人都超愛…",
     template:[{t:"A todos les encanta"},{g:"activity"}],
@@ -120,7 +120,7 @@ const EPS=[
 
 // ── E2 恐龍先生不見了 ──
 {title:"El Señor Dinosaurio Se Ha Perdido",titleZh:"恐龍先生不見了",dur:195,sentences:[
-  {es:"El juguete favorito de George es el señor Dinosaurio.",chunks:[{w:"El juguete favorito de George",role:"s"},{w:"es",role:"v"},{w:"el señor Dinosaurio.",role:"o"}],zh:"喬治最喜歡的玩具是恐龍先生。",en:"George's favourite toy is Mr Dinosaur.",noteZh:"「favorito」= 最喜歡的，名詞後置形容詞",noteEn:"'favorito' = favourite (adjective placed after noun)",
+  {es:"El juguete favorito de George es el señor Dinosaurio.",chunks:[{w:"El juguete favorito de George",role:"s"},{w:"es",role:"v"},{w:"el señor Dinosaurio.",role:"o"}],zh:"喬治最喜歡的玩具是恐龍先生。",en:"George's favourite toy is Mr Dinosaur.",noteZh:"「favorito」= 最喜歡的，名詞後置形容詞",noteEn:"'favorito' = favourite (comes after the word it describes)",
   expand:{
     note:"de + 人 = …的（所有格）；換主人練習",
     template:[{t:"El juguete favorito de"},{g:"name"},{t:"es el señor Dinosaurio."}],
@@ -143,7 +143,7 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"George ha perdido al señor Dinosaurio.",chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v"},{w:"al señor Dinosaurio.",role:"o"}],zh:"喬治把恐龍先生弄丟了。",en:"George has lost Mr Dinosaur.",noteZh:"「ha perdido」= 剛剛做完，已經弄丟了",noteEn:"'ha perdido' = has lost (present perfect tense)",
+  {es:"George ha perdido al señor Dinosaurio.",chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v"},{w:"al señor Dinosaurio.",role:"o"}],zh:"喬治把恐龍先生弄丟了。",en:"George has lost Mr Dinosaur.",noteZh:"「ha perdido」= 剛剛做完，已經弄丟了",noteEn:"'ha perdido' = just lost it, all done",
   expand:{
     note:"ha perdido = 弄丟了，換主詞練習",
     template:[{g:"name"},{t:"ha perdido al señor Dinosaurio."}],
@@ -153,7 +153,7 @@ const EPS=[
       {es:"Papá",zh:"爸爸"},
     ]}]
   }},
-  {es:"No te preocupes George, entre todos lo encontraremos.",chunks:[{w:"No te preocupes",role:"v"},{w:"George,"},{w:"entre todos",role:"s"},{w:"lo encontraremos.",role:"v"}],zh:"不要擔心喬治，我們大家一起會找到牠的。",en:"Don't worry George, together we will find it.",noteZh:"「No te preocupes」= 不要擔心，自己對自己做的動詞命令句",noteEn:"'No te preocupes' = Don't worry (reflexive imperative)",
+  {es:"No te preocupes George, entre todos lo encontraremos.",chunks:[{w:"No te preocupes",role:"v"},{w:"George,"},{w:"entre todos",role:"s"},{w:"lo encontraremos.",role:"v"}],zh:"不要擔心喬治，我們大家一起會找到牠的。",en:"Don't worry George, together we will find it.",noteZh:"「No te preocupes」= 不要擔心，自己對自己做的動詞命令句",noteEn:"'No te preocupes' = Don't worry (a command you give yourself)",
   expand:{
     note:"No te preocupes = 安慰語固定句型，換被安慰的人",
     template:[{t:"No te preocupes"},{g:"name"},{t:"entre todos lo encontraremos."}],
@@ -163,7 +163,7 @@ const EPS=[
       {es:"Mamá,",zh:"媽媽"},
     ]}]
   }},
-  {es:"Un detective es una persona muy buena encontrando cosas.",chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena encontrando cosas.",role:"o"}],zh:"偵探是一個非常擅長找東西的人。",en:"A detective is a person who is very good at finding things.",noteZh:"「muy buena encontrando」= 非常擅長於做某事",noteEn:"'muy buena encontrando' = very good at finding (gerund phrase)",
+  {es:"Un detective es una persona muy buena encontrando cosas.",chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena encontrando cosas.",role:"o"}],zh:"偵探是一個非常擅長找東西的人。",en:"A detective is a person who is very good at finding things.",noteZh:"「muy buena encontrando」= 非常擅長於做某事",noteEn:"'muy buena encontrando' = very good at finding (the '-ing' part)",
   expand:{
     note:"muy buena/o + Ving = 非常擅長於做…；換擅長找的東西",
     template:[{t:"Un detective es una persona muy buena encontrando"},{g:"thing"}],
@@ -206,7 +206,7 @@ const EPS=[
       {es:"Papá",zh:"爸爸"},
     ]}]
   }},
-  {es:"Peppa y papá Pig están jugando a las damas.",chunks:[{w:"Peppa y papá Pig",role:"s"},{w:"están jugando",role:"v"},{w:"a las damas.",role:"o"}],zh:"佩佩和豬爸爸正在下西洋棋。",en:"Peppa and Daddy Pig are playing draughts.",noteZh:"「están jugando」= 現在進行式，正在玩",noteEn:"'están jugando' = are playing (present continuous with estar)",
+  {es:"Peppa y papá Pig están jugando a las damas.",chunks:[{w:"Peppa y papá Pig",role:"s"},{w:"están jugando",role:"v"},{w:"a las damas.",role:"o"}],zh:"佩佩和豬爸爸正在下西洋棋。",en:"Peppa and Daddy Pig are playing draughts.",noteZh:"「están jugando」= 現在進行式，正在玩",noteEn:"'están jugando' = happening right now, they're playing",
   expand:{
     note:"están jugando = 兩人以上都用複數動詞，換另一位玩伴",
     template:[{t:"Peppa y"},{g:"name"},{t:"están jugando a las damas."}],
@@ -216,7 +216,7 @@ const EPS=[
       {es:"George",zh:"喬治"},
     ]}]
   }},
-  {es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!",chunks:[{w:"¡Ya lo sé,",role:"v"},{w:"habéis estado saltando",role:"v"},{w:"en los charcos de barro!",role:"o"}],zh:"我知道了，你們一直在泥巴坑裡跳！",en:"I know, you've been jumping in muddy puddles!",noteZh:"「habéis estado + 動名詞」= 現在完成進行式，一直在做…",noteEn:"'habéis estado + gerund' = you have been doing... (present perfect continuous)",
+  {es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!",chunks:[{w:"¡Ya lo sé,",role:"v"},{w:"habéis estado saltando",role:"v"},{w:"en los charcos de barro!",role:"o"}],zh:"我知道了，你們一直在泥巴坑裡跳！",en:"I know, you've been jumping in muddy puddles!",noteZh:"「habéis estado + 動名詞」= 現在完成進行式，一直在做…",noteEn:"'habéis estado + -ing' = you've been doing it for a while",
   expand:{
     note:"habéis estado + Ving = 你們一直在做…（現在完成進行式）",
     template:[{t:"¡Ya lo sé, habéis estado"},{g:"activity"}],
@@ -230,7 +230,7 @@ const EPS=[
 
 // ── E3 最好的朋友 ──
 {title:"La Mejor Amiga",titleZh:"最好的朋友",dur:192,sentences:[
-  {es:"Peppa está esperando a su mejor amiga, Susi Sheep.",chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}],zh:"佩佩正在等她最好的朋友蘇西羊。",en:"Peppa is waiting for her best friend, Suzy Sheep.",noteZh:"「está esperando」= 現在進行式，正在等",noteEn:"'está esperando' = is waiting (present continuous)",
+  {es:"Peppa está esperando a su mejor amiga, Susi Sheep.",chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}],zh:"佩佩正在等她最好的朋友蘇西羊。",en:"Peppa is waiting for her best friend, Suzy Sheep.",noteZh:"「está esperando」= 現在進行式，正在等",noteEn:"'está esperando' = happening right now, waiting",
   expand:{
     note:"está esperando = 正在等，換主詞練習",
     template:[{g:"name"},{t:"está esperando a su mejor amiga, Susi Sheep."}],
@@ -291,7 +291,7 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"Yo seré la doctora y tú serás la enfermera.",chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v"},{w:"la doctora",role:"o"},{w:"y",role:"c"},{w:"tú",role:"s"},{w:"serás",role:"v"},{w:"la enfermera.",role:"o"}],zh:"我來當醫生，你來當護士。",en:"I will be the doctor and you will be the nurse.",noteZh:"「seré / serás」= ser 動詞的以後要做，我/你將是",noteEn:"'seré / serás' = I will be / you will be (future tense of 'ser')",
+  {es:"Yo seré la doctora y tú serás la enfermera.",chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v"},{w:"la doctora",role:"o"},{w:"y",role:"c"},{w:"tú",role:"s"},{w:"serás",role:"v"},{w:"la enfermera.",role:"o"}],zh:"我來當醫生，你來當護士。",en:"I will be the doctor and you will be the nurse.",noteZh:"「seré / serás」= ser 動詞的以後要做，我/你將是",noteEn:"'seré / serás' = I'll be / you'll be (the 'will' form of ser)",
   expand:{
     note:"職業陰陽性成對：la doctora/el doctor、la enfermera/el enfermero…換角色順便練性別變化",
     template:[{t:"Yo seré"},{g:"prof1"},{t:"y tú serás"},{g:"prof2"}],
@@ -314,7 +314,7 @@ const EPS=[
       ]}
     ]
   }},
-  {es:"Ahora George, respira hondo. Después tose.",chunks:[{w:"Ahora George,"},{w:"respira hondo.",role:"v"},{w:"Después",role:"c"},{w:"tose.",role:"v"}],zh:"現在喬治，深呼吸。然後咳嗽。",en:"Now George, breathe deeply. Then cough.",noteZh:"「respira hondo」= 深呼吸，直接下指令動詞直接用",noteEn:"'respira hondo' = breathe deeply (imperative form, informal)",
+  {es:"Ahora George, respira hondo. Después tose.",chunks:[{w:"Ahora George,"},{w:"respira hondo.",role:"v"},{w:"Después",role:"c"},{w:"tose.",role:"v"}],zh:"現在喬治，深呼吸。然後咳嗽。",en:"Now George, breathe deeply. Then cough.",noteZh:"「respira hondo」= 深呼吸，直接下指令動詞直接用",noteEn:"'respira hondo' = breathe deeply (a direct instruction)",
   expand:{
     note:"Ahora + 人, respira hondo. = 直接下指令對某人說",
     template:[{g:"name"},{t:"respira hondo. Después tose."}],
