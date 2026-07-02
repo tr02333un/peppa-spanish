@@ -32,7 +32,7 @@ const SENTENCE_COGNATES = {
     rows:[
       '👉 介紹「身分/本質」永遠用 <b>Ser</b>：<i>Este es mi hermano.</i>',
       '💡 <b>hermano</b>（兄弟）：ger-MAAN-o，英文 germane（同族）同根！',
-      '⚠️ 記住：Este（陽性）Esta（陰性），跟著後面名詞性別走',
+      '⚠️ 記住：Este（陽性）Esta（陰性），跟著後面名詞性別走<br><span style="display:block;margin-top:6px;padding:6px 10px;background:rgba(108,155,210,.08);border-radius:8px;font-size:12px;line-height:1.7"><b>Este</b> es mi hermano George. → 這是我弟弟喬治（hermano 陽性 → Este）<br><b>Esta</b> es mi hermana. → 這是我姊姊（hermana 陰性 → Esta）</span>',
     ]
   },
   'e0_s2':{
