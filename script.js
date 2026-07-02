@@ -282,7 +282,6 @@ function renderAmmo(){
         <!-- 實戰射擊 -->
         <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
         <div class="ammo-fire-section">
-          ${renderAmmoFireRow(a.fire_peppa,'peppa')}
           ${dailyRows}
         </div>
       </div>
