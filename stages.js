@@ -133,16 +133,14 @@ function _s1Pick(pill, c, built, fire, area){
 function renderStage2(){
   const el = document.getElementById('stage2Cards');
   if(!el) return;
-  el.innerHTML = TU_YO_PAIRS.map((p,i)=>`
+  const header = `<div class="stage2-pair" style="margin-bottom:2px">
+    <div style="flex:1;font-size:9px;font-weight:800;letter-spacing:.8px;color:var(--misora);text-align:center;padding:2px 0;text-transform:uppercase">YO</div>
+    <div style="flex:1;font-size:9px;font-weight:800;letter-spacing:.8px;color:var(--ok);text-align:center;padding:2px 0;text-transform:uppercase">TÚ</div>
+  </div>`;
+  el.innerHTML = header + TU_YO_PAIRS.map((p,i)=>`
     <div class="stage2-pair">
-      <div class="stage2-card yo" onclick="speakSentence('${escStage(p.yo)}')">
-        <div class="stage2-card-label">YO</div>
-        ${p.yo}
-      </div>
-      <div class="stage2-card tu" onclick="speakSentence('${escStage(p.tu)}')">
-        <div class="stage2-card-label">TÚ</div>
-        ${p.tu}
-      </div>
+      <div class="stage2-card yo" onclick="speakSentence('${escStage(p.yo)}')">${p.yo}</div>
+      <div class="stage2-card tu" onclick="speakSentence('${escStage(p.tu)}')">${p.tu}</div>
     </div>
     <div style="font-size:10px;color:var(--tlight);font-weight:600;text-align:center;margin:-4px 0 4px">${p.zh}</div>
   `).join('');

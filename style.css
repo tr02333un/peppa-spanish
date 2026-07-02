@@ -9,12 +9,6 @@ summary { list-style: none; outline: none; }
   --bg:#EEF7F9;--bg2:#F5FAFA;--card:#fff;
   --tdark:#1A2E3B;--tmid:#4A6572;--tlight:#8AABB8;
   --ok:#3DB87A;--err:#E05C5C;
-  /* Venngage 馬卡龍語塊配色 */
-  --vn-lake-green:#A7FFEB;
-  --vn-lavender-purple:#E8DFFF;
-  --vn-baby-blue:#B3E5FC;
-  --vn-bubble-pink:#FFD1DC;
-  --vn-border-gray:#424242;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 40px;color:var(--tdark)}
@@ -56,7 +50,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* CHUNKS — S(主詞) V(動詞) O(受詞) */
 .chunks-area{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;padding:12px 8px;background:var(--bg2);border-radius:13px;border:1px solid var(--usumizu)}
 .chunk{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
-.chunk-pill{font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
+.chunk-pill{--vn-lake-green:#A7FFEB;--vn-lavender-purple:#E8DFFF;--vn-baby-blue:#B3E5FC;--vn-bubble-pink:#FFD1DC;--vn-border-gray:#424242;font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
 .chunk:active .chunk-pill{opacity:.75}
 
 /* 主詞 S — 虛線框 */
@@ -101,7 +95,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .make-body{display:none;margin-top:8px}
 .make-body.show{display:block;animation:fadeUp .2s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.make-hint-text{font-size:11px;color:var(--tlight);font-weight:700;margin-bottom:7px}
+.make-hint-text{font-size:13px;color:var(--tlight);font-weight:700;margin-bottom:7px}
 .make-pattern-box{background:var(--bg2);border:1.5px dashed var(--mizu);border-radius:10px;padding:9px 12px;font-size:13px;font-weight:800;color:var(--konpeki);margin-bottom:8px;line-height:1.7}
 .mp-slot{display:inline-block;background:rgba(108,155,210,.15);border-radius:5px;padding:1px 8px;color:var(--misora);font-style:italic;margin:0 2px}
 .make-free-input{width:100%;border:2px solid var(--usumizu);border-radius:11px;padding:10px 13px;font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;color:var(--tdark);background:var(--bg2);outline:none;transition:border-color .2s;resize:none;min-height:48px;margin-bottom:8px}
@@ -143,7 +137,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .a-lang{display:none}
 .a-lang.on{display:block;animation:fadeUp .2s ease}
 .a-text{font-size:15px;font-weight:700;color:var(--tdark);line-height:1.6;margin-bottom:6px}
-.a-note{font-size:12px;color:var(--tmid);line-height:1.5;padding:7px 9px;background:rgba(159,208,222,.12);border-radius:7px;border-left:3px solid var(--mizu)}
+.a-note{font-size:13px;color:var(--tmid);line-height:1.5;padding:7px 9px;background:rgba(159,208,222,.12);border-radius:7px;border-left:3px solid var(--mizu)}
 
 .btn-row{display:flex;gap:8px}
 .btn{flex:1;padding:11px 8px;border-radius:11px;border:none;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .16s}
@@ -195,7 +189,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-summary{display:flex;flex-direction:column;gap:3px;padding:10px 12px;cursor:pointer;background:var(--bg2);list-style:none}
 .suffix-summary::-webkit-details-marker{display:none}
 .suffix-rule{font-size:14px;font-weight:900;color:var(--misora)}
-.suffix-hint{font-size:11px;color:var(--tmid)}
+.suffix-hint{font-size:13px;color:var(--tmid)}
 .suffix-body{padding:4px 8px 8px}
 
 /* 詞綴單字卡 + 例句疊加 */
@@ -377,13 +371,13 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .grammar-modal-close:active{opacity:.7}
 .grammar-cat-tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:10px;background:rgba(138,196,222,.18);color:var(--misora);border:1px solid rgba(138,196,222,.4)}
 .grammar-title{font-size:17px;font-weight:900;color:var(--konpeki);margin-bottom:9px;line-height:1.3}
-.grammar-rule{font-size:12px;color:var(--tmid);font-weight:600;line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
+.grammar-rule{font-size:13px;color:var(--tmid);font-weight:600;line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-examples{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
 .grammar-ex-row{display:flex;flex-direction:column;gap:3px;padding:8px 11px;background:var(--bg2);border-radius:10px;cursor:pointer;transition:background .15s;border:1px solid transparent;user-select:none}
 .grammar-ex-row:active{opacity:.7}
 .grammar-ex-es{font-size:14px;font-weight:800;color:var(--konpeki);line-height:1.4}
-.grammar-ex-zh{font-size:11px;color:var(--tlight);font-weight:600}
-.grammar-trap{font-size:11px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
+.grammar-ex-zh{font-size:13px;color:var(--tlight);font-weight:600}
+.grammar-trap{font-size:13px;font-weight:700;color:var(--err);margin-bottom:8px;line-height:1.6}
 .grammar-rule-emph{font-size:14.4px;font-weight:900;color:var(--tmid);line-height:1.65;margin-bottom:12px;padding:9px 11px;background:rgba(159,208,222,.1);border-radius:9px;border-left:3px solid var(--mizu)}
 .grammar-source{font-size:9px;font-weight:800;color:var(--nezumi);letter-spacing:.5px;text-transform:uppercase}
 
@@ -399,8 +393,8 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .conj-form:active{opacity:.6}
 .conj-ex{font-size:11px;color:var(--tmid);font-style:italic;cursor:pointer;grid-column:3}
 .conj-ex:active{opacity:.6}
-.conj-zh{font-size:10px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
-.conj-note{font-size:9px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
+.conj-zh{font-size:13px;color:var(--tlight);grid-column:1/-1;padding-left:4px;margin-top:-3px}
+.conj-note{font-size:11px;color:var(--err);font-weight:800;grid-column:1/-1;padding-left:4px;margin-top:-2px}
 .conj-expand{grid-column:1/-1}
 .conj-expand-summary{font-size:10px;font-weight:800;color:var(--misora);padding:6px 0 2px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
 .conj-expand-summary::-webkit-details-marker{display:none}
@@ -415,10 +409,12 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* ── 性別四形式 ── */
 .suffix-gender-row{display:flex;gap:4px;flex-wrap:wrap;margin:3px 0 5px}
 .sg-cell{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
-.sg-cell.el{background:rgba(108,155,210,.15);color:var(--misora)}
-.sg-cell.la{background:rgba(252,209,220,.5);color:#c05080}
-.sg-cell.los{background:rgba(108,155,210,.08);color:var(--konpeki)}
-.sg-cell.las{background:rgba(252,209,220,.3);color:#a03060}
+.sg-cell.gender-ms{background:rgba(108,155,210,.15);color:var(--misora)}
+.sg-cell.gender-fs{background:rgba(252,209,220,.5);color:#c05080}
+.sg-cell.gender-mp{background:rgba(108,155,210,.08);color:var(--konpeki)}
+.sg-cell.gender-fp{background:rgba(252,209,220,.3);color:#a03060}
+/* ── 詞綴陰性提示 ── */
+.sfx-remind{color:var(--misora);font-weight:900;font-size:13px}
 
 /* ── 詞綴區字體放大 ── */
 .suffix-word-row .cog-en{font-size:15px;font-weight:900;color:var(--tmid)}
@@ -426,7 +422,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-word-row .cog-zh{font-size:13px;font-weight:700;color:var(--tmid)}
 .suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
 .suffix-ex-chunk{font-size:13px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
-.suffix-ex-zh{font-size:12px;color:var(--tlight);font-weight:700}
+.suffix-ex-zh{font-size:13px;color:var(--tlight);font-weight:700}
 .suffix-title{font-size:13px;font-weight:900;color:var(--konpeki);margin-bottom:8px;padding:2px 0}
 
 /* ── GRAMMAR / CHUNK BOTTOM SHEET ── */
@@ -451,7 +447,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage-section{padding:14px 16px;border-bottom:1px solid var(--bg2)}
 .stage-section:last-child{border-bottom:none;border-radius:0 0 14px 14px}
 .stage-header{font-size:14px;font-weight:900;color:var(--konpeki);margin-bottom:3px}
-.stage-sub{font-size:11px;color:var(--tlight);font-weight:600;margin-bottom:10px}
+.stage-sub{font-size:13px;color:var(--tlight);font-weight:600;margin-bottom:10px}
 .stage-controls{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .stage-btn{padding:7px 14px;border-radius:10px;border:none;background:var(--misora);color:white;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 .stage-btn.sec{background:rgba(108,155,210,.15);color:var(--misora)}
