@@ -345,7 +345,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ment → el___-mento / -miento',
-    hint: '心理狀態/抽象的動作。動作名詞化：mover→movimiento',
+    hint: '心理狀態/抽象的動作。<br>動作名詞化：mover→movimiento',
     words: [
       {en:'moment',     es:'momento',      art:'el', zh:'時刻',   ex:{es:'Es el momento perfecto.',        zh:'這是完美的時刻。', chunks:[{w:"Es",role:"v"},{w:"el momento perfecto.",role:"c"}]}},
       {en:'movement',   es:'movimiento',   art:'el', zh:'動作',   ex:{es:'Haz el movimiento lento.',      zh:'動作慢一點做。', chunks:[{w:"Haz",role:"v"},{w:"el movimiento",role:"o"},{w:"lento.",role:"c"}]}},
@@ -367,7 +367,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-or → -or / -ora（職業）',
-    hint: '英文 -or 職業 → 西語 el__ -or（男）/ la__ -ora（女）；actor 例外變 actriz',
+    hint: '英文 -or 職業 → 西語 el__ -or（男）/ la__ -ora（女）<br>actor 例外變 actriz',
     words: [
       {en:'doctor',    es:'doctor',    art:'el', zh:'醫生',   gendered:{ms:'doctor',fs:'doctora',mp:'doctores',fp:'doctoras'},   ex:{es:'La doctora es muy buena.',    zh:'這位醫生很厲害。', chunks:[{w:"La doctora",role:"s"},{w:"es",role:"v"},{w:"muy buena.",role:"c"}]}},
       {en:'actor',     es:'actor',     art:'el', zh:'演員',   gendered:{ms:'actor',fs:'actriz',mp:'actores',fp:'actrices'},      ex:{es:'Es un actor famoso.',         zh:'他是知名演員。', chunks:[{w:"Es",role:"v"},{w:"un actor famoso.",role:"c"}]}},
