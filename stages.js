@@ -214,33 +214,17 @@ function s3SpeakCurrent(){
 
 function escStage(s){ return String(s).replace(/'/g,"\\'"); }
 
-// ── Toggle ──
-function toggleStages(){
-  const body = document.getElementById('stagesBody');
-  const tog = document.getElementById('stagesToggle');
-  if(!body) return;
-  const open = body.classList.toggle('open');
-  tog.textContent = open ? '▲ 收起' : '▼ 展開';
-  if(open){
-    renderStage2();
-    renderStage3();
-  }
-}
+// ── Toggle / Jump（已換為雙 Tab 架構）──
+function toggleStages(){ switchBottomTab(1); }
 
 function jumpToStages(){
-  const body = document.getElementById('stagesBody');
-  const tog = document.getElementById('stagesToggle');
-  const wrap = document.querySelector('.stages-wrap');
-  if(!body) return;
-  body.classList.add('open');
-  tog.textContent = '▲ 收起';
-  renderStage2();
-  renderStage3();
+  switchBottomTab(1);
+  const panel = document.getElementById('tabPanel1');
   setTimeout(()=>{
-    if(wrap){
-      wrap.scrollIntoView({behavior:'smooth',block:'start'});
-      wrap.classList.add('ammo-flash');
-      setTimeout(()=>wrap.classList.remove('ammo-flash'),1200);
+    if(panel){
+      panel.scrollIntoView({behavior:'smooth',block:'start'});
+      const wrap = document.querySelector('.bottom-tabs-wrap');
+      if(wrap){ wrap.classList.add('ammo-flash'); setTimeout(()=>wrap.classList.remove('ammo-flash'),1200); }
     }
   },80);
 }

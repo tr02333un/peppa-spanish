@@ -57,7 +57,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* CHUNKS — S(主詞) V(動詞) O(受詞) */
 .chunks-area{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;padding:12px 8px;background:var(--bg2);border-radius:13px;border:1px solid var(--usumizu)}
 .chunk{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
-.chunk-pill{font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#212121;background:#FAFAFA;user-select:none}
+.chunk-pill{font-size:1.05rem;font-weight:800;border-radius:16px;padding:10px 18px;line-height:1.3;transition:none !important;min-height:34px;display:flex;align-items:center;gap:5px;border:3px solid var(--vn-border-gray);color:#1e3a8a;background:#FAFAFA;user-select:none}
 .chunk:active .chunk-pill{opacity:.75}
 
 /* ── 馬卡龍配色：僅作用於 .chunks-area 內的語塊卡片，禁止全域污染 ── */
@@ -524,6 +524,22 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* 主卡片語塊：隱藏 + 收藏按鈕 */
 .chunk-pill .vocab-add-btn{display:none}
+
+/* ── 逐 pill 遮罩 ── */
+.chunk-pill{color:#1e3a8a}
+.chunk-pill.is-masked .vocab-zh-hidden{display:none}
+.chunk-pill:not(.is-masked) .vocab-zh-hidden{display:inline-block;margin-left:5px;font-size:.8em;font-weight:700;color:#059669;animation:pillFadeIn .2s ease forwards}
+@keyframes pillFadeIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+
+/* ── 下半部雙 Tab ── */
+.bottom-tabs-wrap{max-width:480px;margin:0 auto 20px;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.bottom-tab-bar{display:flex;background:var(--bg2);border-bottom:2px solid var(--usumizu)}
+.bottom-tab-btn{flex:1;padding:13px 6px;font-size:12px;font-weight:800;border:none;background:transparent;color:var(--tlight);cursor:pointer;font-family:'Nunito',sans-serif;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.2px}
+.bottom-tab-btn.is-active{color:var(--konpeki);background:var(--bg);border-bottom-color:var(--konpeki)}
+.bottom-tab-panel{display:none;background:var(--bg)}
+.bottom-tab-panel.is-active{display:block}
+.bottom-tab-panel .card-container{box-shadow:none;border-radius:0;margin:0;border-top:1px solid var(--usumizu)}
+.stages-inner{padding:4px 0 8px}
 
 /* ── Stage 3 造句核心（重設計版）── */
 .stage3-container{background:#fff;border:2px solid #e2e8f0;border-radius:20px;padding:24px;max-width:600px;margin:20px auto;box-shadow:0 4px 15px rgba(0,0,0,.05);font-family:'Nunito',sans-serif}

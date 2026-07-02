@@ -857,10 +857,14 @@ function render(){
     const famState=getFamState(c.w);
     const famCls=famState>0?' '+FAM_CLASSES[famState]:'';
     const pill=document.createElement('div');
-    pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'')+famCls;
+    pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'')+famCls+' is-masked';
     pill.dataset.famWord=c.w;
-    const word=document.createElement('span');word.textContent=c.w;
+    const word=document.createElement('span');word.className='vocab-es';word.textContent=c.w;
     pill.appendChild(word);
+    if(c.zh){
+      const zhSpan=document.createElement('span');zhSpan.className='vocab-zh-hidden';zhSpan.textContent=c.zh;
+      pill.appendChild(zhSpan);
+    }
     if(isVocabWorthy(c.w)){
       const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
       addBtn.onclick=(e)=>{e.stopPropagation();addToVocab(c.w,'',s.es.slice(0,12)+'…語塊');};
@@ -1222,6 +1226,14 @@ function renderConjLibrary(){
     </div>`).join('');
 }
 
+function switchBottomTab(n){
+  document.querySelectorAll('.bottom-tab-btn').forEach((btn,i)=>btn.classList.toggle('is-active',i===n));
+  document.querySelectorAll('.bottom-tab-panel').forEach((panel,i)=>{
+    panel.classList.toggle('is-active',i===n);
+  });
+  if(n===1){ renderStage2(); renderStage3(); }
+}
+
 function toggleConjLib(){
   const body=document.getElementById('conjLibBody');
   const t=document.getElementById('conjLibToggle');
@@ -1231,6 +1243,7 @@ function toggleConjLib(){
 
 function jumpToConjLib(gId){
   closeGrammarSheet();
+  switchBottomTab(0);
   const body=document.getElementById('conjLibBody');
   const t=document.getElementById('conjLibToggle');
   body.classList.add('open');
@@ -1287,6 +1300,12 @@ function _famStarHtml(word){
 }
 
 function handleChunkTap(c, el){
+  const pill = el.querySelector ? el.querySelector('.chunk-pill') : el;
+  if(pill && pill.classList.contains('is-masked')){
+    pill.classList.remove('is-masked');
+    speakWord(c.w, el);
+    return;
+  }
   speakWord(c.w, el);
   if(c.note){
     openGrammarSheet(_famStarHtml(c.w)+'<div class="grammar-chunk-note">'+c.note+'</div>');
