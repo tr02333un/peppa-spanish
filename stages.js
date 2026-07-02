@@ -98,7 +98,7 @@ function _renderS1(){
   shuffled.forEach((c,i)=>{
     const pill = document.createElement('span');
     pill.className = 'stage-chunk-pill '+_stageChunkClass(c.role);
-    pill.textContent = c.w;
+    if(c.role==='v'){ pill.innerHTML = renderVWords(c.w); } else { pill.textContent = c.w; }
     pill.dataset.idx = i;
     pill.dataset.w = c.w;
     pill.onclick = () => _s1Pick(pill, c, built, visibleChunks, fire, area);
