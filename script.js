@@ -155,7 +155,6 @@ function renderStars(){
   row.appendChild(epS);
   const done=answered.length;
   document.getElementById('starLabel').textContent=
-    done===0?'完成一句點亮一顆星 ⭐':
     done===n?`🌟 E${ep+1} 全集完成！`:
     `⭐ ${done} / ${n} 句完成`;
 }
@@ -247,18 +246,6 @@ function renderBeVerbNote(a){
   return `<div class="be-verb-note ${a.be_verb_type}">💡 ${a.be_verb_note}</div>`;
 }
 
-// 西語數字 1-10：基數/序數/emoji 三態循環（序數預設陽性 primero/segundo…）
-const NUM_EMOJI=['','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
-const NUM_WORDS=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'];
-const ORD_WORDS=['','primero','segundo','tercero','cuarto','quinto','sexto','séptimo','octavo','noveno','décimo'];
-function cycleNumBadge(el){
-  const n = parseInt(el.dataset.n,10);
-  const mode = (parseInt(el.dataset.mode,10)+1)%3;
-  el.dataset.mode = mode;
-  if(mode===0){ el.textContent = NUM_EMOJI[n]; el.classList.remove('word-mode'); }
-  else if(mode===1){ el.textContent = NUM_WORDS[n]; el.classList.add('word-mode'); speakWord(NUM_WORDS[n]); }
-  else { el.textContent = ORD_WORDS[n]; el.classList.add('word-mode'); speakWord(ORD_WORDS[n]); }
-}
 
 function renderAmmo(){
   document.getElementById('ammoCount').textContent = ammoUnlocked.length;
@@ -271,12 +258,10 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
-    const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
-    const numDisplay = `<span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
-        <span class="ammo-num">${numDisplay}</span>
+        <span class="ammo-header-zh">${a.core_zh}</span>
         <span class="ammo-chevron">▾</span>
       </div>
       <div class="ammo-card-body">
@@ -379,7 +364,7 @@ function renderCogLibrary(filter){
       html+=`<details class="suffix-group"><summary class="suffix-summary"><span class="suffix-rule">${p.rule}</span><span class="suffix-hint">${p.hint}</span></summary><div class="suffix-body">`;
       html+=p.words.map(w=>{
         const genderHtml = w.gendered
-          ? `<div class="suffix-gender-row"><span class="sg-cell el">el ${w.gendered.ms}</span><span class="sg-cell la">la ${w.gendered.fs}</span><span class="sg-cell los">los ${w.gendered.mp}</span><span class="sg-cell las">las ${w.gendered.fp}</span></div>`
+          ? `<div class="suffix-gender-row"><span class="sg-cell gender-ms">el ${w.gendered.ms}</span><span class="sg-cell gender-fs">la ${w.gendered.fs}</span><span class="sg-cell gender-mp">los ${w.gendered.mp}</span><span class="sg-cell gender-fp">las ${w.gendered.fp}</span></div>`
           : '';
         const addBtnHtml = isVocabWorthy(w.es) ? `<span class="vocab-add-btn" onclick="addToVocab('${escAttr(w.es)}','${escAttr(w.zh)}','詞綴規律')">＋</span>` : '';
         const chunksHtml = (w.ex?.chunks||[]).map(ck=>{
@@ -1101,7 +1086,6 @@ function buildConjTable(conj){
     ? `<details class="conj-expand"><summary class="conj-expand-summary">我們／你們／他們 ▾</summary>${rest3.map(renderRow).join('')}</details>`
     : '';
   return `<div class="conj-section">
-    <div class="conj-title">¡Variadísimo! 變位速查</div>
     <div class="conj-verb-label">${conj.verb}</div>
     <div class="conj-rows">${main3}${restHtml}</div>
   </div>`;

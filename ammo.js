@@ -10,8 +10,8 @@ const AMMO_DATA = [
     fire_peppa:{es:"Yo soy Peppa Pig.", zh:"我是佩佩豬。", ts:null,
       chunks:[{w:"（我）",role:"s"},{w:"soy",role:"v",note:"ser ➔ 變位 soy ➔ 意思：我是（身分本質，第一人稱）"},{w:"Peppa Pig.",role:"o"}]},
     fire_daily:[
-      {es:"Yo soy estudiante.", zh:"我是學生。", chunks:[{w:"（我）",role:"s"},{w:"soy",role:"v"},{w:"de Taiwán.",role:"o"}]},
-      {es:"Yo soy de Taiwán.", zh:"我是台灣人。", chunks:[{w:"（我）",role:"s"},{w:"soy",role:"v"},{w:"de Taiwán.",role:"o"}]}
+      {es:"Yo soy estudiante.", zh:"我是學生。", chunks:[{w:"（Yo）",role:"s"},{w:"soy",role:"v"},{w:"estudiante.",role:"o"}]},
+      {es:"Yo soy de Taiwán.", zh:"我是台灣人。", chunks:[{w:"（Yo）",role:"s"},{w:"soy",role:"v"},{w:"de Taiwán.",role:"o"}]}
     ]
   },
   {
@@ -23,7 +23,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Este es mi hermano pequeño George.", zh:"這是我的小弟弟喬治。", ts:null,
       chunks:[{w:"Este",role:"s"},{w:"es",role:"v",note:"ser ➔ 變位 es ➔ 意思：是（介紹他人身分）"},{w:"mi hermano pequeño George.",role:"o"}]},
     fire_daily:[
-      {es:"Esta es mi hermana mayor.", zh:"這是我姊姊。", chunks:[{w:"Este",role:"s"},{w:"es",role:"v"},{w:"mi amigo Carlos.",role:"o"}]},
+      {es:"Esta es mi hermana mayor.", zh:"這是我姊姊。", chunks:[{w:"Esta",role:"s"},{w:"es",role:"v"},{w:"mi hermana mayor.",role:"o"}]},
       {es:"Este es mi amigo Carlos.", zh:"這是我朋友卡洛斯。", chunks:[{w:"Este",role:"s"},{w:"es",role:"v"},{w:"mi amigo Carlos.",role:"o"}]}
     ]
   },
@@ -36,7 +36,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Hoy está lloviendo así que no pueden jugar fuera.", zh:"今天在下雨，所以不能去外面玩。", ts:null,
       chunks:[{w:"Hoy",hideYg:true},{w:"está lloviendo",role:"v",note:"estar ➔ está + llover ➔ lloviendo ➔ 意思：正在下雨（estar + -ing形態 = 進行式）"},{w:"así que",role:"c",hideYg:true},{w:"no pueden jugar fuera.",role:"v",note:"poder ➔ pueden（第三人稱複數）+ no ➔ 意思：不能去玩"}]},
     fire_daily:[
-      {es:"Hoy está nevando mucho.", zh:"今天下很大的雪。", chunks:[{w:"Ahora mismo"},{w:"está sonando",role:"v"},{w:"el teléfono.",role:"s"}]},
+      {es:"Hoy está nevando mucho.", zh:"今天下很大的雪。", chunks:[{w:"Hoy",hideYg:true},{w:"está nevando",role:"v"},{w:"mucho.",role:"c"}]},
       {es:"Ahora mismo está sonando el teléfono.", zh:"現在電話正在響。", chunks:[{w:"Ahora mismo"},{w:"está sonando",role:"v"},{w:"el teléfono.",role:"s"}]}
     ]
   },
@@ -49,7 +49,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¿Podemos salir a jugar?", zh:"我們可以出去玩嗎？", ts:null,
       chunks:[{w:"（我們）",role:"s",hideYg:true},{w:"¿Podemos salir a jugar?",role:"v",note:"poder ➔ podemos（第一人稱複數）➔ 意思：我們可以嗎？（徵求許可）"}]},
     fire_daily:[
-      {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？", chunks:[{w:"（我們）",role:"s"},{w:"¿Podemos ver la tele?",role:"v"}]},
+      {es:"¿Podemos comer ahora?", zh:"我們現在可以吃了嗎？", chunks:[{w:"（我們）",role:"s"},{w:"¿Podemos comer ahora?",role:"v"}]},
       {es:"¿Podemos ver la tele?", zh:"我們可以看電視嗎？", chunks:[{w:"（我們）",role:"s"},{w:"¿Podemos ver la tele?",role:"v"}]}
     ]
   },
@@ -62,7 +62,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa, debes ponerte las botas de agua.", zh:"佩佩，你必須穿上雨靴。", ts:null,
       chunks:[{w:"Peppa,",hideYg:true},{w:"debes ponerte",role:"v",note:"deber ➔ debes（第二人稱）+ poner ➔ ponerte ➔ 意思：你必須穿上（deber + 原形 = 義務）"},{w:"las botas de agua.",role:"o"}]},
     fire_daily:[
-      {es:"Debes lavarte las manos.", zh:"你必須洗手。", chunks:[{w:"（你）",role:"s"},{w:"Debes hacer",role:"v"},{w:"la tarea.",role:"o"}]},
+      {es:"Debes lavarte las manos.", zh:"你必須洗手。", chunks:[{w:"（tú）",role:"s"},{w:"Debes lavarte",role:"v"},{w:"las manos.",role:"o"}]},
       {es:"Debes hacer la tarea.", zh:"你必須做功課。", chunks:[{w:"（你）",role:"s"},{w:"Debes hacer",role:"v"},{w:"la tarea.",role:"o"}]}
     ]
   },
@@ -75,7 +75,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡Me encanta saltar en los charcos!", zh:"我超愛在水坑裡跳！", ts:null,
       chunks:[{w:"¡Me",role:"s",hideYg:true},{w:"encanta saltar en los charcos!",role:"v",note:"encantar ➔ encanta（第三人稱）➔ 意思：超愛（比 gustar 語氣更強，倒裝語序）"}]},
     fire_daily:[
-      {es:"¡Me encanta bailar!", zh:"我超愛跳舞！", chunks:[{w:"¡Me",role:"s"},{w:"encanta comer helado!",role:"v"}]},
+      {es:"¡Me encanta bailar!", zh:"我超愛跳舞！", chunks:[{w:"¡Me",role:"s"},{w:"encanta bailar!",role:"v"}]},
       {es:"¡Me encanta comer helado!", zh:"我超愛吃冰淇淋！", chunks:[{w:"¡Me",role:"s"},{w:"encanta comer helado!",role:"v"}]}
     ]
   },
@@ -88,7 +88,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa ha encontrado un charco pequeño.", zh:"佩佩找到了一個小水坑。", ts:null,
       chunks:[{w:"Peppa",role:"s"},{w:"ha encontrado",role:"v",note:"encontrar ➔ encontrado（-ado/-ido形）+ haber ➔ ha ➔ 意思：找到了（已完成說法）"},{w:"un charco pequeño.",role:"o"}]},
     fire_daily:[
-      {es:"Mamá ha encontrado las llaves.", zh:"媽媽找到鑰匙了。", chunks:[{w:"（我）",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]},
+      {es:"Mamá ha encontrado las llaves.", zh:"媽媽找到鑰匙了。", chunks:[{w:"Mamá",role:"s"},{w:"ha encontrado",role:"v"},{w:"las llaves.",role:"o"}]},
       {es:"He encontrado mi libro.", zh:"我找到我的書了。", chunks:[{w:"（我）",role:"s"},{w:"He encontrado",role:"v"},{w:"mi libro.",role:"o"}]}
     ]
   },
@@ -101,7 +101,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡Ese charco sí que es grande!", zh:"那個水坑真的好大！", ts:null,
       chunks:[{w:"¡Ese charco",role:"s"},{w:"sí que es",role:"v",note:"ser ➔ es，加 sí que 強調語氣 ➔ 意思：真的好大（確實是…）"},{w:"grande!",role:"o"}]},
     fire_daily:[
-      {es:"¡Esa casa sí que es grande!", zh:"那間房子真的好大！", chunks:[{w:"¡Este pastel",role:"s"},{w:"sí que es",role:"v"},{w:"rico!",role:"o"}]},
+      {es:"¡Esa casa sí que es grande!", zh:"那間房子真的好大！", chunks:[{w:"¡Esa casa",role:"s"},{w:"sí que es",role:"v"},{w:"grande!",role:"o"}]},
       {es:"¡Este pastel sí que es rico!", zh:"這個蛋糕真的好好吃！", chunks:[{w:"¡Este pastel",role:"s"},{w:"sí que es",role:"v"},{w:"rico!",role:"o"}]}
     ]
   },
@@ -114,7 +114,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"No pasa nada. Sólo es barro.", zh:"沒關係，只是泥巴而已。", ts:null,
       chunks:[{w:"No pasa nada.",role:"v",note:"pasar ➔ pasa（第三人稱）+ no ➔ 意思：沒關係（西語最常用安慰語）"},{w:"Sólo es",role:"v",note:"ser ➔ es + sólo ➔ 意思：只是…而已（描述本質）"},{w:"barro.",role:"o"}]},
     fire_daily:[
-      {es:"No pasa nada. Sólo es agua.", zh:"沒關係，只是水而已。", chunks:[{w:"No pasa nada.",role:"v"},{w:"Sólo es",role:"v"},{w:"un rasguño.",role:"o"}]},
+      {es:"No pasa nada. Sólo es agua.", zh:"沒關係，只是水而已。", chunks:[{w:"No pasa nada.",role:"v"},{w:"Sólo es",role:"v"},{w:"agua.",role:"o"}]},
       {es:"No pasa nada. Sólo es un rasguño.", zh:"沒關係，只是擦傷而已。", chunks:[{w:"No pasa nada.",role:"v"},{w:"Sólo es",role:"v"},{w:"un rasguño.",role:"o"}]}
     ]
   },
@@ -127,7 +127,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"A todos les encanta saltar en los charcos de barro.", zh:"所有人都超愛在泥巴坑裡跳！", ts:null,
       chunks:[{w:"A todos les",role:"s",hideYg:true},{w:"encanta saltar en los charcos de barro.",role:"v",note:"encantar ➔ encanta（第三人稱）+ les（間接受詞代詞）➔ 意思：所有人都超愛（A+人+le/les encanta = 某人超愛）"}]},
     fire_daily:[
-      {es:"A todos les encanta cantar.", zh:"所有人都超愛唱歌。", chunks:[{w:"A todos les",role:"s"},{w:"encanta el verano.",role:"v"}]},
+      {es:"A todos les encanta cantar.", zh:"所有人都超愛唱歌。", chunks:[{w:"A todos les",role:"s"},{w:"encanta cantar.",role:"v"}]},
       {es:"A todos les encanta el verano.", zh:"所有人都超愛夏天。", chunks:[{w:"A todos les",role:"s"},{w:"encanta el verano.",role:"v"}]}
     ]
   },
@@ -142,7 +142,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"El juguete favorito de George es el señor Dinosaurio.", zh:"喬治最喜歡的玩具是恐龍先生。", ts:null,
       chunks:[{w:"El juguete favorito de George",role:"s"},{w:"es",role:"v",note:"ser ➔ es ➔ 意思：是（介紹事物身分，favorito 放在名詞後）"},{w:"el señor Dinosaurio.",role:"o"}]},
     fire_daily:[
-      {es:"El libro favorito de mi hermana es Harry Potter.", zh:"我姊姊最喜歡的書是哈利波特。", chunks:[{w:"Mi color favorito",role:"s"},{w:"es",role:"v"},{w:"el azul.",role:"o"}]},
+      {es:"El libro favorito de mi hermana es Harry Potter.", zh:"我姊姊最喜歡的書是哈利波特。", chunks:[{w:"El libro favorito de mi hermana",role:"s"},{w:"es",role:"v"},{w:"Harry Potter.",role:"o"}]},
       {es:"Mi color favorito es el azul.", zh:"我最喜歡的顏色是藍色。", chunks:[{w:"Mi color favorito",role:"s"},{w:"es",role:"v"},{w:"el azul.",role:"o"}]}
     ]
   },
@@ -155,7 +155,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Cuando George se va a la cama el señor Dinosaurio se acurruca a su lado.", zh:"當喬治上床睡覺時，恐龍先生就蜷縮在他身旁。", ts:null,
       chunks:[{w:"Cuando",role:"c",hideYg:true},{w:"George",role:"s"},{w:"se va a la cama",role:"v",note:"irse ➔ se va（反身動詞）+ a la cama ➔ 意思：去睡覺（irse a = 去做某事）"},{w:"el señor Dinosaurio",role:"s"},{w:"se acurruca",role:"v",note:"acurrucarse ➔ se acurruca ➔ 意思：蜷縮（反身動詞，第三人稱）"},{w:"a su lado.",role:"o"}]},
     fire_daily:[
-      {es:"Cuando mamá se va a la cama, apaga la luz.", zh:"當媽媽上床睡覺時，她會關燈。", chunks:[{w:"Yo",role:"s"},{w:"me voy a la cama",role:"v"},{w:"a las nueve.",role:"o"}]},
+      {es:"Cuando mamá se va a la cama, apaga la luz.", zh:"當媽媽上床睡覺時，她會關燈。", chunks:[{w:"Cuando",role:"c",hideYg:true},{w:"mamá",role:"s"},{w:"se va a la cama,",role:"v"},{w:"apaga",role:"v"},{w:"la luz.",role:"o"}]},
       {es:"Yo me voy a la cama a las nueve.", zh:"我九點去睡覺。", chunks:[{w:"Yo",role:"s"},{w:"me voy a la cama",role:"v"},{w:"a las nueve.",role:"o"}]}
     ]
   },
@@ -168,7 +168,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。", ts:null,
       chunks:[{w:"George",role:"s"},{w:"ha perdido",role:"v",note:"perder ➔ perdido（-ado/-ido形）+ haber ➔ ha ➔ 意思：弄丟了（已完成說法）"},{w:"al señor Dinosaurio.",role:"o"}]},
     fire_daily:[
-      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。", chunks:[{w:"Ella",role:"s"},{w:"ha perdido",role:"v"},{w:"su teléfono.",role:"o"}]},
+      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。", chunks:[{w:"（Yo）",role:"s"},{w:"He perdido",role:"v"},{w:"mi mochila.",role:"o"}]},
       {es:"Papá ha perdido las llaves del coche.", zh:"爸爸把車鑰匙弄丟了。", chunks:[{w:"Papá",role:"s"},{w:"ha perdido",role:"v"},{w:"las llaves del coche.",role:"o"}]}
     ]
   },
@@ -181,7 +181,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"No te preocupes George, entre todos lo encontraremos.", zh:"不要擔心喬治，我們大家一起會找到牠的。", ts:null,
       chunks:[{w:"No te preocupes",role:"v",note:"preocuparse ➔ preocupes（反身動詞，命令式否定）➔ 意思：不要擔心（西語安慰語）"},{w:"George,",hideYg:true},{w:"entre todos",role:"s",hideYg:true},{w:"lo encontraremos.",role:"v",note:"encontrar ➔ encontraremos（未來式複數）➔ 意思：我們將會找到"}]},
     fire_daily:[
-      {es:"No te preocupes, todo va a salir bien.", zh:"不要擔心，一切都會順利的。", chunks:[{w:"No te preocupes,",role:"v"},{w:"（這）",role:"s"},{w:"es normal.",role:"v"}]},
+      {es:"No te preocupes, todo va a salir bien.", zh:"不要擔心，一切都會順利的。", chunks:[{w:"No te preocupes,",role:"v"},{w:"todo",role:"s"},{w:"va a salir bien.",role:"v"}]},
       {es:"No te preocupes por el examen.", zh:"不要為考試擔心。", chunks:[{w:"No te preocupes",role:"v"},{w:"por el examen.",role:"o"}]}
     ]
   },
@@ -194,7 +194,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Un detective es una persona muy buena encontrando cosas.", zh:"偵探是一個非常擅長找東西的人。", ts:null,
       chunks:[{w:"Un detective",role:"s"},{w:"es",role:"v",note:"ser ➔ es ➔ 意思：是（職業定義用 ser）"},{w:"una persona muy buena encontrando cosas.",role:"o"}]},
     fire_daily:[
-      {es:"Un profesor es una persona muy buena explicando cosas.", zh:"老師是一個非常擅長解釋事情的人。", chunks:[{w:"Un maestro",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena enseñando.",role:"o"}]},
+      {es:"Un profesor es una persona muy buena explicando cosas.", zh:"老師是一個非常擅長解釋事情的人。", chunks:[{w:"Un profesor",role:"s"},{w:"es",role:"v"},{w:"una persona muy buena explicando cosas.",role:"o"}]},
       {es:"Mi abuela es muy buena cocinando.", zh:"我奶奶非常擅長煮飯。", chunks:[{w:"Mi abuela",role:"s"},{w:"es muy buena cocinando.",role:"v"}]}
     ]
   },
@@ -207,7 +207,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"George siempre se trae al señor Dinosaurio a la bañera.", zh:"喬治總是帶著恐龍先生去洗澡。", ts:null,
       chunks:[{w:"George",role:"s"},{w:"siempre se trae",role:"v",note:"traerse ➔ se trae（反身動詞）+ siempre（頻率副詞）➔ 意思：總是帶著去（siempre 放動詞前）"},{w:"al señor Dinosaurio",role:"o"},{w:"a la bañera.",role:"o"}]},
     fire_daily:[
-      {es:"Yo siempre me traigo un libro a la escuela.", zh:"我總是帶一本書去學校。", chunks:[{w:"Susi",role:"s"},{w:"siempre se trae",role:"v"},{w:"su muñeca",role:"o"},{w:"al parque.",role:"o"}]},
+      {es:"Yo siempre me traigo un libro a la escuela.", zh:"我總是帶一本書去學校。", chunks:[{w:"Yo",role:"s"},{w:"siempre me traigo",role:"v"},{w:"un libro",role:"o"},{w:"a la escuela.",role:"o"}]},
       {es:"Susi siempre se trae su muñeca al parque.", zh:"蘇西總是帶她的娃娃去公園。", chunks:[{w:"Susi",role:"s"},{w:"siempre se trae",role:"v"},{w:"su muñeca",role:"o"},{w:"al parque.",role:"o"}]}
     ]
   },
@@ -220,7 +220,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡Ya lo sé dónde está el señor Dinosaurio!", zh:"我知道恐龍先生在哪裡了！", ts:null,
       chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé",role:"v",note:"saber ➔ sé（第一人稱不規則）+ ya ➔ 意思：我知道了（ya = 已然發生）"},{w:"dónde está",role:"c",note:"estar ➔ está ➔ 意思：在哪裡（位置/狀態用 estar，不用 ser）"},{w:"el señor Dinosaurio!",role:"s"}]},
     fire_daily:[
-      {es:"¡Ya lo sé dónde está mi mochila!", zh:"我知道我的書包在哪裡了！", chunks:[{w:"（我）",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"el gato!",role:"s"}]},
+      {es:"¡Ya lo sé dónde está mi mochila!", zh:"我知道我的書包在哪裡了！", chunks:[{w:"（我）",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"mi mochila!",role:"s"}]},
       {es:"¡Ya lo sé dónde está el gato!", zh:"我知道貓在哪裡了！", chunks:[{w:"（我）",role:"s"},{w:"¡Ya lo sé",role:"v"},{w:"dónde está",role:"c"},{w:"el gato!",role:"s"}]}
     ]
   },
@@ -233,7 +233,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"El señor Dinosaurio no está en la cama de George.", zh:"恐龍先生不在喬治的床上。", ts:null,
       chunks:[{w:"El señor Dinosaurio",role:"s"},{w:"no está",role:"v",note:"estar ➔ está（第三人稱）+ no ➔ 意思：不在（口訣：SER=本質，ESTAR=位置）"},{w:"en la cama de George.",role:"o"}]},
     fire_daily:[
-      {es:"El gato no está en la cocina.", zh:"貓不在廚房。", chunks:[{w:"Mis llaves",role:"s"},{w:"no están",role:"v"},{w:"en la mesa.",role:"o"}]},
+      {es:"El gato no está en la cocina.", zh:"貓不在廚房。", chunks:[{w:"El gato",role:"s"},{w:"no está",role:"v"},{w:"en la cocina.",role:"o"}]},
       {es:"Mis llaves no están en la mesa.", zh:"我的鑰匙不在桌上。", chunks:[{w:"Mis llaves",role:"s"},{w:"no están",role:"v"},{w:"en la mesa.",role:"o"}]}
     ]
   },
@@ -246,7 +246,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa y papá Pig están jugando a las damas.", zh:"佩佩和豬爸爸正在下西洋棋。", ts:null,
       chunks:[{w:"Peppa y papá Pig",role:"s"},{w:"están jugando",role:"v",note:"jugar ➔ jugando + estar ➔ están ➔ 意思：正在玩（複數進行式，estar + -ing形態）"},{w:"a las damas.",role:"o"}]},
     fire_daily:[
-      {es:"Los niños están jugando al fútbol.", zh:"孩子們正在踢足球。", chunks:[{w:"Mi hermano y yo",role:"s"},{w:"estamos jugando",role:"v"},{w:"a las cartas.",role:"o"}]},
+      {es:"Los niños están jugando al fútbol.", zh:"孩子們正在踢足球。", chunks:[{w:"Los niños",role:"s"},{w:"están jugando",role:"v"},{w:"al fútbol.",role:"o"}]},
       {es:"Mi hermano y yo estamos jugando a las cartas.", zh:"我哥哥和我正在玩牌。", chunks:[{w:"Mi hermano y yo",role:"s"},{w:"estamos jugando",role:"v"},{w:"a las cartas.",role:"o"}]}
     ]
   },
@@ -259,7 +259,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡Ya lo sé, habéis estado saltando en los charcos de barro!", zh:"我知道了，你們一直在泥巴坑裡跳！", ts:null,
       chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Ya lo sé,",role:"v",note:"saber ➔ sé（不規則）+ ya ➔ 意思：我知道了（強調已知）"},{w:"habéis estado saltando",role:"v",note:"saltar ➔ saltando + haber ➔ habéis + estar ➔ estado ➔ 意思：你們一直在跳（一直做到現在的說法）"},{w:"en los charcos de barro!",role:"o"}]},
     fire_daily:[
-      {es:"Habéis estado corriendo en el parque.", zh:"你們一直在公園裡跑步。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]},
+      {es:"Habéis estado corriendo en el parque.", zh:"你們一直在公園裡跑步。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado corriendo",role:"v"},{w:"en el parque.",role:"o"}]},
       {es:"Habéis estado cantando toda la tarde.", zh:"你們整個下午都在唱歌。", chunks:[{w:"（你們）",role:"s"},{w:"Habéis estado cantando",role:"v"},{w:"toda la tarde.",role:"o"}]}
     ]
   },
@@ -274,7 +274,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa está esperando a su mejor amiga, Susi Sheep.", zh:"佩佩正在等她最好的朋友蘇西羊。", ts:null,
       chunks:[{w:"Peppa",role:"s"},{w:"está esperando",role:"v",note:"esperar ➔ esperando + estar ➔ está ➔ 意思：正在等（進行式，-ing形態 -ando）"},{w:"a su mejor amiga, Susi Sheep.",role:"o"}]},
     fire_daily:[
-      {es:"Mamá está esperando el autobús.", zh:"媽媽正在等公車。", chunks:[{w:"（我）",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]},
+      {es:"Mamá está esperando el autobús.", zh:"媽媽正在等公車。", chunks:[{w:"Mamá",role:"s"},{w:"está esperando",role:"v"},{w:"el autobús.",role:"o"}]},
       {es:"Estoy esperando a mi amigo en la puerta.", zh:"我正在門口等我朋友。", chunks:[{w:"（我）",role:"s"},{w:"Estoy esperando",role:"v"},{w:"a mi amigo en la puerta.",role:"o"}]}
     ]
   },
@@ -287,8 +287,8 @@ const AMMO_DATA = [
     fire_peppa:{es:"Peppa quiere mucho a Susi y Susi quiere mucho a Peppa.", zh:"佩佩非常喜歡蘇西，蘇西也非常喜歡佩佩。", ts:null,
       chunks:[{w:"Peppa",role:"s"},{w:"quiere mucho",role:"v",note:"querer ➔ quiere（第三人稱）+ mucho（強調）➔ 意思：非常喜歡/愛（人名前必加 a）"},{w:"a Susi",role:"o"},{w:"y",role:"c",hideYg:true},{w:"Susi",role:"s"},{w:"quiere mucho",role:"v",note:"querer ➔ quiere（第三人稱）+ mucho（強調）➔ 意思：非常喜歡/愛（人名前必加 a）"},{w:"a Peppa.",role:"o"}]},
     fire_daily:[
-      {es:"Yo quiero mucho a mi familia.", zh:"我非常愛我的家人。", chunks:[{w:"George",role:"s"},{w:"quiero mucho",role:"v"},{w:"a su hermana.",role:"o"}]},
-      {es:"George quiere mucho a su hermana.", zh:"喬治非常喜歡他姊姊。", chunks:[{w:"George",role:"s"},{w:"quiero mucho",role:"v"},{w:"a su hermana.",role:"o"}]}
+      {es:"Yo quiero mucho a mi familia.", zh:"我非常愛我的家人。", chunks:[{w:"Yo",role:"s"},{w:"quiero mucho",role:"v"},{w:"a mi familia.",role:"o"}]},
+      {es:"George quiere mucho a su hermana.", zh:"喬治非常喜歡他姊姊。", chunks:[{w:"George",role:"s"},{w:"quiere mucho",role:"v"},{w:"a su hermana.",role:"o"}]}
     ]
   },
   {
@@ -300,7 +300,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Son las mejores amigas.", zh:"她們是最好的朋友。", ts:null,
       chunks:[{w:"（她們）",role:"s",hideYg:true},{w:"Son",role:"v",note:"ser ➔ son（第三人稱複數）➔ 意思：她們是（複數身分關係）"},{w:"las mejores amigas.",role:"o"}]},
     fire_daily:[
-      {es:"Son los mejores jugadores.", zh:"他們是最好的球員。", chunks:[{w:"（我們）",role:"s"},{w:"Somos",role:"v"},{w:"buenos amigos.",role:"o"}]},
+      {es:"Son los mejores jugadores.", zh:"他們是最好的球員。", chunks:[{w:"（他們）",role:"s"},{w:"Son",role:"v"},{w:"los mejores jugadores.",role:"o"}]},
       {es:"Somos buenos amigos.", zh:"我們是好朋友。", chunks:[{w:"（我們）",role:"s"},{w:"Somos",role:"v"},{w:"buenos amigos.",role:"o"}]}
     ]
   },
@@ -313,7 +313,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡No George! Este juego es solo para niñas mayores.", zh:"不行喬治！這個遊戲只給大一點的女孩玩。", ts:null,
       chunks:[{w:"¡No George!",hideYg:true},{w:"Este juego",role:"s"},{w:"es",role:"v",note:"ser ➔ es ➔ 意思：是（規則/本質用 ser，solo para = 只給）"},{w:"solo para niñas mayores.",role:"o"}]},
     fire_daily:[
-      {es:"Esta silla es solo para mamá.", zh:"這張椅子只給媽媽坐。", chunks:[{w:"Este libro",role:"s"},{w:"es",role:"v"},{w:"solo para adultos.",role:"o"}]},
+      {es:"Esta silla es solo para mamá.", zh:"這張椅子只給媽媽坐。", chunks:[{w:"Esta silla",role:"s"},{w:"es",role:"v"},{w:"solo para mamá.",role:"o"}]},
       {es:"Este libro es solo para adultos.", zh:"這本書只給大人看。", chunks:[{w:"Este libro",role:"s"},{w:"es",role:"v"},{w:"solo para adultos.",role:"o"}]}
     ]
   },
@@ -326,7 +326,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"¡Soy una princesa salida de un cuento!", zh:"我是從故事書裡走出來的公主！", ts:null,
       chunks:[{w:"（我）",role:"s",hideYg:true},{w:"¡Soy",role:"v",note:"ser ➔ soy（第一人稱）➔ 意思：我是（角色扮演身分，恆久本質用 ser）"},{w:"una princesa salida de un cuento!",role:"o"}]},
     fire_daily:[
-      {es:"¡Soy un superhéroe!", zh:"我是超級英雄！", chunks:[{w:"（我）",role:"s"},{w:"¡Soy",role:"v"},{w:"una doctora muy buena!",role:"o"}]},
+      {es:"¡Soy un superhéroe!", zh:"我是超級英雄！", chunks:[{w:"（我）",role:"s"},{w:"¡Soy",role:"v"},{w:"un superhéroe!",role:"o"}]},
       {es:"¡Soy una doctora muy buena!", zh:"我是非常厲害的醫生！", chunks:[{w:"（我）",role:"s"},{w:"¡Soy",role:"v"},{w:"una doctora muy buena!",role:"o"}]}
     ]
   },
@@ -339,7 +339,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"A George no le gusta jugar solo.", zh:"喬治不喜歡一個人玩。", ts:null,
       chunks:[{w:"A George",role:"s"},{w:"no le gusta",role:"v",note:"gustar ➔ gusta（第三人稱）+ le（間接受詞）+ no ➔ 意思：不喜歡（倒裝：A+人+le gusta+動詞）"},{w:"jugar solo.",role:"o"}]},
     fire_daily:[
-      {es:"A mí no me gusta el café.", zh:"我不喜歡咖啡。", chunks:[{w:"A Susi",role:"s"},{w:"le gusta",role:"v"},{w:"dibujar.",role:"o"}]},
+      {es:"A mí no me gusta el café.", zh:"我不喜歡咖啡。", chunks:[{w:"A mí",role:"s"},{w:"no me gusta",role:"v"},{w:"el café.",role:"o"}]},
       {es:"A Susi le gusta dibujar.", zh:"蘇西喜歡畫畫。", chunks:[{w:"A Susi",role:"s"},{w:"le gusta",role:"v"},{w:"dibujar.",role:"o"}]}
     ]
   },
@@ -352,7 +352,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Yo seré la doctora y tú serás la enfermera.", zh:"我來當醫生，你來當護士。", ts:null,
       chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v",note:"ser ➔ seré（未來式第一人稱）➔ 意思：我將是/我來當（未來角色）"},{w:"la doctora",role:"o"},{w:"y",role:"c",hideYg:true},{w:"tú",role:"s"},{w:"serás",role:"v",note:"ser ➔ serás（未來式第二人稱）➔ 意思：你將是/你來當"},{w:"la enfermera.",role:"o"}]},
     fire_daily:[
-      {es:"Yo seré el chef y tú serás el cliente.", zh:"我來當主廚，你來當客人。", chunks:[{w:"Tú",role:"s"},{w:"serás",role:"v"},{w:"la profesora",role:"o"},{w:"y",role:"c"},{w:"yo",role:"s"},{w:"seré",role:"v"},{w:"el alumno.",role:"o"}]},
+      {es:"Yo seré el chef y tú serás el cliente.", zh:"我來當主廚，你來當客人。", chunks:[{w:"Yo",role:"s"},{w:"seré",role:"v"},{w:"el chef",role:"o"},{w:"y",role:"c"},{w:"tú",role:"s"},{w:"serás",role:"v"},{w:"el cliente.",role:"o"}]},
       {es:"Tú serás la profesora y yo seré el alumno.", zh:"你來當老師，我來當學生。", chunks:[{w:"Tú",role:"s"},{w:"serás",role:"v"},{w:"la profesora",role:"o"},{w:"y",role:"c"},{w:"yo",role:"s"},{w:"seré",role:"v"},{w:"el alumno.",role:"o"}]}
     ]
   },
@@ -365,7 +365,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Ahora George, respira hondo. Después tose.", zh:"現在喬治，深呼吸。然後咳嗽。", ts:null,
       chunks:[{w:"Ahora George,",hideYg:true},{w:"respira hondo.",role:"v",note:"respirar ➔ respira（命令式，第二人稱）➔ 意思：深呼吸（hondo = 深）"},{w:"Después",role:"c",hideYg:true},{w:"tose.",role:"v",note:"toser ➔ tose（命令式，第二人稱）➔ 意思：咳嗽（直接命令）"}]},
     fire_daily:[
-      {es:"Peppa, respira hondo y cuenta hasta diez.", zh:"佩佩，深呼吸然後數到十。", chunks:[{w:"（你）",role:"s"},{w:"Abre",role:"v"},{w:"la boca, por favor.",role:"o"}]},
+      {es:"Peppa, respira hondo y cuenta hasta diez.", zh:"佩佩，深呼吸然後數到十。", chunks:[{w:"Peppa,",hideYg:true},{w:"respira hondo",role:"v"},{w:"y cuenta hasta diez.",role:"v"}]},
       {es:"Abre la boca, por favor.", zh:"請張開嘴巴。", chunks:[{w:"（你）",role:"s"},{w:"Abre",role:"v"},{w:"la boca, por favor.",role:"o"}]}
     ]
   },
@@ -378,7 +378,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Creo que tienes el corazón un poco flojo.", zh:"我認為你的心臟有點虛弱。", ts:null,
       chunks:[{w:"（我）",role:"s",hideYg:true},{w:"Creo que",role:"v",note:"creer ➔ creo（第一人稱）+ que（連接子句）➔ 意思：我認為…（Creo que + 完整句）"},{w:"tienes",role:"v",note:"tener ➔ tienes（第二人稱）➔ 意思：你有（用於身體感覺：tienes fiebre = 你發燒了）"},{w:"el corazón un poco flojo.",role:"o"}]},
     fire_daily:[
-      {es:"Creo que tienes fiebre.", zh:"我認為你發燒了。", chunks:[{w:"（我）",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"razón.",role:"o"}]},
+      {es:"Creo que tienes fiebre.", zh:"我認為你發燒了。", chunks:[{w:"（我）",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"fiebre.",role:"o"}]},
       {es:"Creo que tienes razón.", zh:"我認為你說得對。", chunks:[{w:"（我）",role:"s"},{w:"Creo que",role:"v"},{w:"tienes",role:"v"},{w:"razón.",role:"o"}]}
     ]
   },
@@ -391,7 +391,7 @@ const AMMO_DATA = [
     fire_peppa:{es:"Todos necesitan muchas galletas para curarse.", zh:"所有人都需要很多餅乾才能康復。", ts:null,
       chunks:[{w:"Todos",role:"s"},{w:"necesitan",role:"v",note:"necesitar ➔ necesitan（第三人稱複數）➔ 意思：需要（para + 原形動詞 = 為了做某事）"},{w:"muchas galletas para curarse.",role:"o"}]},
     fire_daily:[
-      {es:"Necesitas agua para vivir.", zh:"你需要水才能生存。", chunks:[{w:"（我們）",role:"s"},{w:"Necesitamos",role:"v"},{w:"tiempo para descansar.",role:"o"}]},
+      {es:"Necesitas agua para vivir.", zh:"你需要水才能生存。", chunks:[{w:"（tú）",role:"s"},{w:"Necesitas",role:"v"},{w:"agua para vivir.",role:"o"}]},
       {es:"Necesitamos tiempo para descansar.", zh:"我們需要時間休息。", chunks:[{w:"（我們）",role:"s"},{w:"Necesitamos",role:"v"},{w:"tiempo para descansar.",role:"o"}]}
     ]
   },
