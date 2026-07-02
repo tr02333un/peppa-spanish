@@ -6,7 +6,10 @@ summary { list-style: none; outline: none; }
 :root{
   --mizu:#9FD0DE;--usumizu:#BCE1DF;--sora:#8AC4DE;--misora:#6C9BD2;
   --nezumi:#B8C8D1;--konpeki:#005B98;--benikake:#8491C3;
-  --v-lavender:#87CEEB;--v-periwinkle:#4169E1;--v-purple-text:#0d3d5c;
+  --s-babyblue:#89CFF0;
+  --v-navy:#0A192F;--v-gold:#FFD700;
+  --o-deepblue:#1B365D;--o-cream:#FFF9D2;
+  --cog-silver:#CCD6F6;
   --bg:#EEF7F9;--bg2:#F5FAFA;--card:#fff;
   --tdark:#1A2E3B;--tmid:#4A6572;--tlight:#8AABB8;
   --ok:#3DB87A;--err:#E05C5C;
@@ -62,11 +65,11 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .chunk:active .chunk-pill{opacity:.75}
 
 /* 主詞 S — 虛線框 */
-.chunks-area .chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
+.chunks-area .chunk-pill.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
 /* 動詞 V — 實色底 */
-.chunks-area .chunk-pill.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
+.chunks-area .chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
 /* 受詞 O — 實線框 */
-.chunks-area .chunk-pill.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-periwinkle);background:white}
+.chunks-area .chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
 /* 連接詞 C — 淡色無框 */
 .chunks-area .chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .chunks-area .chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
@@ -181,7 +184,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .cog-row{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:8px;background:var(--bg2)}
 .cog-en{font-size:12px;font-weight:700;color:var(--tmid);min-width:80px}
 .cog-arrow{color:var(--mizu);font-size:12px;flex-shrink:0}
-.cog-es{font-size:13px;font-weight:900;color:var(--konpeki);flex:1}
+.cog-es{font-size:13px;font-weight:900;color:var(--cog-silver);flex:1;text-shadow:0 0 1px rgba(0,0,0,.3)}
 .cog-zh{font-size:11px;color:var(--tlight);font-weight:600;white-space:nowrap}
 .cog-tip{font-size:12px;font-weight:700;color:var(--misora);background:rgba(108,155,210,.08);border-radius:10px;padding:10px 14px;margin:8px 14px 14px;line-height:1.55;border-left:3px solid var(--mizu)}
 .cog-click{cursor:pointer;text-decoration:underline dotted var(--mizu);transition:all .15s}
@@ -207,9 +210,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
 .suffix-ex-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
 .suffix-ex-chunk:active{opacity:.6}
-.suffix-ex-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.suffix-ex-chunk.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
-.suffix-ex-chunk.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-periwinkle);background:white}
+.suffix-ex-chunk.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
+.suffix-ex-chunk.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
+.suffix-ex-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
 .suffix-ex-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .suffix-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
 .suffix-chunk-star:hover{opacity:1}
@@ -297,9 +300,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-chunks{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 .ammo-fire-chunk{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;cursor:pointer;transition:opacity .15s}
 .ammo-fire-chunk:active{opacity:.6}
-.ammo-fire-chunk.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.ammo-fire-chunk.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
-.ammo-fire-chunk.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-periwinkle);background:white}
+.ammo-fire-chunk.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
+.ammo-fire-chunk.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
+.ammo-fire-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
 .ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 .ammo-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
@@ -455,7 +458,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* ── 詞綴區字體放大 ── */
 .suffix-word-row .cog-en{font-size:15px;font-weight:900;color:var(--tmid)}
-.suffix-word-row .cog-es{font-size:15px;font-weight:900;color:var(--konpeki)}
+.suffix-word-row .cog-es{font-size:15px;font-weight:900;color:var(--cog-silver);text-shadow:0 0 1px rgba(0,0,0,.3)}
 .suffix-word-row .cog-zh{font-size:13px;font-weight:700;color:var(--tmid)}
 .suffix-ex-chunks{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
 .suffix-ex-chunk{font-size:13px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
@@ -472,9 +475,9 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* ── STAGE CHUNK PILLS ── */
 .stage-chunk-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;cursor:pointer;transition:opacity .15s;margin:2px;user-select:none}
 .stage-chunk-pill:active{opacity:.6}
-.stage-chunk-pill.role-s{border:1.5px dashed var(--misora);color:var(--konpeki);background:white}
-.stage-chunk-pill.role-v{background:var(--v-lavender);color:var(--v-purple-text);border:none}
-.stage-chunk-pill.role-o{border:1.5px solid var(--v-periwinkle);color:var(--v-periwinkle);background:white}
+.stage-chunk-pill.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
+.stage-chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
+.stage-chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
 .stage-chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .stage-chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 
