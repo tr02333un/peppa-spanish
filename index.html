@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>佩佩豬學西語 · 語塊彈藥庫</title>
-<link rel="stylesheet" href="style.css?v=20260702j4">
+<link rel="stylesheet" href="style.css?v=20260702k5">
 </head>
 <body>
 
@@ -15,6 +15,15 @@
     <div class="header-title">🐷 Peppa <span>Español</span></div>
     <div class="ep-badge" id="epBadge">S1 · E1 · Charcos de Barro</div>
   </div>
+
+  <!-- ── 雙 TAB 切換 ── -->
+  <div class="main-tab-bar">
+    <button class="main-tab-btn active" id="tabBtnPlay" onclick="switchMainTab('play')">🎮 語塊遊樂場</button>
+    <button class="main-tab-btn" id="tabBtnKnow" onclick="switchMainTab('know')">📚 知識儲藏室</button>
+  </div>
+
+  <!-- ══════════ TAB A：語塊遊樂場 ══════════ -->
+  <div id="tabPlay" class="main-tab-panel">
 
   <!-- EPISODE NAV -->
   <div class="season-nav" id="seasonNav"></div>
@@ -34,10 +43,10 @@
   <!-- SEQUENCE BAR -->
   <div class="ammo-header-container" id="seqBarWrap">
     <div class="sequence-bar-segments" id="seqBar">
-      <button class="sequence-segment-btn is-active" data-group="0">uno / 1</button>
-      <button class="sequence-segment-btn" data-group="1">dos / 2</button>
-      <button class="sequence-segment-btn" data-group="2">tres / 3</button>
-      <button class="sequence-segment-btn" data-group="3">cuatro / 4</button>
+      <button class="sequence-segment-btn is-active" data-group="0">1️⃣</button>
+      <button class="sequence-segment-btn" data-group="1">2️⃣</button>
+      <button class="sequence-segment-btn" data-group="2">3️⃣</button>
+      <button class="sequence-segment-btn" data-group="3">4️⃣</button>
     </div>
     <div class="episode-badge-tag" id="seqEpBadge">ep1. 泥巴坑</div>
   </div>
@@ -164,48 +173,6 @@
     </div>
   </div>
 
-  <!-- ── 英西同源詞庫總覽 ── -->
-  <div class="cognate-section card-container">
-    <div class="cog-header" onclick="toggleCogLibrary()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">
-      <span>📚 英西同源詞庫</span>
-      <span id="cogLibToggle" style="font-size:11px;font-weight:700">▼ 展開</span>
-    </div>
-    <div class="cog-sub">零學習成本！看英文秒猜西語意思</div>
-    <div id="cogLibraryBody" class="cog-library-body"></div>
-  </div>
-
-  <!-- ── 🔄 動詞變位庫（獨立瀏覽區）── -->
-  <div class="conj-lib-wrap card-container">
-    <div class="ammo-book-top" onclick="toggleConjLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#6C9BD2,#5A7FC7)">
-      <div>
-        <div class="pb-book-title">🔄 動詞變位庫</div>
-        <div class="pb-book-sub">ser／estar／poder／deber…完整六人稱一次查</div>
-      </div>
-      <span id="conjLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
-    </div>
-    <div id="conjLibBody" class="ammo-body"></div>
-  </div>
-
-  <!-- ── 👤 人稱代名詞查詢庫 ── -->
-  <div class="pron-lib-wrap card-container">
-    <div class="ammo-book-top" onclick="togglePronounLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#8AC4DE,#6C9BD2)">
-      <div>
-        <div class="pb-book-title">👤 人稱代名詞查詢庫</div>
-        <div class="pb-book-sub">主詞／直接受詞／間接受詞／反身，一次對照</div>
-      </div>
-      <span id="pronounLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
-    </div>
-    <div id="pronounLibBody" class="ammo-body"></div>
-  </div>
-
-  <!-- ── 文法酷庫 Modal ── -->
-  <div id="grammarModal" onclick="closeGrammarModal()">
-    <div class="grammar-modal-box" onclick="event.stopPropagation()">
-      <button class="grammar-modal-close" onclick="closeGrammarModal()">✕</button>
-      <div id="grammarModalContent"></div>
-    </div>
-  </div>
-
   <!-- ── 陌生詞彙收藏區 ── -->
   <div class="vocab-wrap card-container">
     <div class="ammo-book-top" onclick="toggleVocabBox()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--benikake),#5A6BA8)">
@@ -260,6 +227,55 @@
     </div>
   </div>
 
+  </div> <!-- ══════════ / TAB A：語塊遊樂場 結束 ══════════ -->
+
+  <!-- ══════════ TAB B：知識儲藏室 ══════════ -->
+  <div id="tabKnow" class="main-tab-panel" style="display:none">
+
+  <!-- ── 英西同源詞庫總覽 ── -->
+  <div class="cognate-section card-container">
+    <div class="cog-header" onclick="toggleCogLibrary()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+      <span>📚 英西同源詞庫</span>
+      <span id="cogLibToggle" style="font-size:11px;font-weight:700">▼ 展開</span>
+    </div>
+    <div class="cog-sub">零學習成本！看英文秒猜西語意思</div>
+    <div id="cogLibraryBody" class="cog-library-body"></div>
+  </div>
+
+  <!-- ── 🔄 動詞變位庫（獨立瀏覽區）── -->
+  <div class="conj-lib-wrap card-container">
+    <div class="ammo-book-top" onclick="toggleConjLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#6C9BD2,#5A7FC7)">
+      <div>
+        <div class="pb-book-title">🔄 動詞變位庫</div>
+        <div class="pb-book-sub">ser／estar／poder／deber…完整六人稱一次查</div>
+      </div>
+      <span id="conjLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="conjLibBody" class="ammo-body"></div>
+  </div>
+
+  <!-- ── 👤 人稱代名詞查詢庫 ── -->
+  <div class="pron-lib-wrap card-container">
+    <div class="ammo-book-top" onclick="togglePronounLib()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#8AC4DE,#6C9BD2)">
+      <div>
+        <div class="pb-book-title">👤 人稱代名詞查詢庫</div>
+        <div class="pb-book-sub">主詞／直接受詞／間接受詞／反身，一次對照</div>
+      </div>
+      <span id="pronounLibToggle" style="color:white;font-size:12px;font-weight:800">▼ 展開</span>
+    </div>
+    <div id="pronounLibBody" class="ammo-body"></div>
+  </div>
+
+  </div> <!-- ══════════ / TAB B：知識儲藏室 結束 ══════════ -->
+
+  <!-- ── 文法酷庫 Modal ── -->
+  <div id="grammarModal" onclick="closeGrammarModal()">
+    <div class="grammar-modal-box" onclick="event.stopPropagation()">
+      <button class="grammar-modal-close" onclick="closeGrammarModal()">✕</button>
+      <div id="grammarModalContent"></div>
+    </div>
+  </div>
+
   <!-- ── 文法/語塊說明 Bottom Sheet ── -->
   <div id="grammarSheet" onclick="closeGrammarSheet()">
     <div class="grammar-sheet-box" onclick="event.stopPropagation()">
@@ -268,11 +284,11 @@
     </div>
   </div>
 
-  <script src="episodes.js?v=20260702j4"></script>
-  <script src="ammo.js?v=20260702j4"></script>
-  <script src="cognates.js?v=20260702j4"></script>
-  <script src="grammar.js?v=20260702j4"></script>
-  <script src="stages.js?v=20260702j4"></script>
-  <script src="script.js?v=20260702j4"></script>
+  <script src="episodes.js?v=20260702k5"></script>
+  <script src="ammo.js?v=20260702k5"></script>
+  <script src="cognates.js?v=20260702k5"></script>
+  <script src="grammar.js?v=20260702k5"></script>
+  <script src="stages.js?v=20260702k5"></script>
+  <script src="script.js?v=20260702k5"></script>
 </body>
 </html>
