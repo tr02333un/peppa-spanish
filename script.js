@@ -222,7 +222,8 @@ function renderAmmoFireChunks(fire){
     const personCls=c.role==='s'?getPersonClass(c.w):'';
     const clean=c.w.replace(/[¡¿.,!?;:（）]/g,'').trim();
     const starHtml=isVocabWorthy(clean) ? `<span class="ammo-chunk-star" onclick="event.stopPropagation();addToVocab('${escAttr(c.w)}','${escAttr(fire.zh)}','彈藥例句');this.textContent='⭐'" title="收藏這個語塊">☆</span>` : '';
-    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>${starHtml}`;
+    const disp=c.role==='v'?renderVWords(c.w):c.w;
+    return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${disp}</span>${starHtml}`;
   }).join('')}</div>`;
 }
 
@@ -440,7 +441,8 @@ function renderCogLibrary(filter){
           const clean=ck.w.replace(/^[¡¿]+|[.!?,;:]+$/g,'').trim();
           if(!clean) return '<span class="suffix-ex-punct">'+ck.w+'</span>';
           const starHtml = isVocabWorthy(ck.w) ? '<span class="suffix-chunk-star" onclick="addToVocab(\''+escAttr(ck.w)+'\',\''+escAttr(w.zh)+'\',\'詞綴例句\');this.textContent=\'⭐\'" title="收藏">☆</span>' : '';
-          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="speakWord(\''+escAttr(clean)+'\',this)">'+ck.w+'</span>'+starHtml;
+          const dispW=ck.role==='v'?renderVWords(ck.w):ck.w;
+          return '<span class="suffix-ex-chunk role-'+ck.role+'" onclick="speakWord(\''+escAttr(clean)+'\',this)">'+dispW+'</span>'+starHtml;
         }).join('');
         return `
         <div class="suffix-word-card">
@@ -851,7 +853,8 @@ function render(){
     const pill=document.createElement('div');
     pill.className='chunk-pill role-'+(c.role||'plain')+(personCls?' '+personCls:'')+famCls;
     pill.dataset.famWord=c.w;
-    const word=document.createElement('span');word.textContent=c.w;
+    const word=document.createElement('span');
+    if(c.role==='v'){ word.innerHTML=renderVWords(c.w); } else { word.textContent=c.w; }
     pill.appendChild(word);
     if(isVocabWorthy(c.w)){
       const addBtn=document.createElement('span');addBtn.className='vocab-add-btn';addBtn.textContent='＋';
@@ -1014,6 +1017,27 @@ function cycleFamiliarity(word){
       if(next>0) el.classList.add(FAM_CLASSES[next]);
     }
   });
+}
+
+// ── V語塊同源自動判斷：淺色=有英文同源(好記) 深色=西語特有(需硬記) ──
+function _stripAccent(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+function isCognateLike(word){
+  const clean=_stripAccent(word).replace(/[¡¿.,!?;:()（）]/g,'').trim();
+  if(!clean || clean.length<3) return false;
+  const stem=clean.slice(0,4);
+  return COGNATE_LIBRARY.some(c=>{
+    const es=_stripAccent(c.es);
+    return es.startsWith(stem) || clean.startsWith(es.slice(0,4));
+  });
+}
+function renderVWords(text){
+  return text.split(/(\s+)/).map(tok=>{
+    if(!tok.trim()) return tok;
+    const cls=isCognateLike(tok)?'v-word-light':'v-word-dark';
+    return `<span class="${cls}">${tok}</span>`;
+  }).join('');
 }
 
 function isVocabWorthy(word){
