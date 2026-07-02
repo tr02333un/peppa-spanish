@@ -33,6 +33,43 @@ const STAGE_VERBS = [
   {zh:"洗手",    es:"lavarme las manos"}
 ];
 
+// 解鎖特定彈藥 → Stage 3 新增詞彙選項（進度累積感）
+const STAGE3_UNLOCK_MAP = {
+  'e1_04': { verb: {zh:"吃東西",       es:"comer"} },
+  'e1_05': { verb: {zh:"做功課",       es:"hacer la tarea"} },
+  'e1_06': { verb: {zh:"跳舞",         es:"bailar"} },
+  'e1_09': { verb: {zh:"玩泥巴",       es:"jugar con barro"} },
+  'e1_10': { core: {zh:"所有人都超愛", es:"A todos les encanta"} },
+  'e2_01': { verb: {zh:"玩玩具",       es:"jugar con juguetes"} },
+  'e2_03': { core: {zh:"我有",         es:"Yo tengo"} },
+  'e2_06': { verb: {zh:"唱歌",         es:"cantar"} },
+  'e2_08': { core: {zh:"我想",         es:"Yo quiero"} },
+  'e3_01': { core: {zh:"我喜歡",       es:"Me gusta"} },
+  'e3_04': { verb: {zh:"游泳",         es:"nadar"} },
+  'e3_07': { verb: {zh:"睡覺",         es:"dormir"} },
+  'e3_09': { core: {zh:"今天在",       es:"Hoy está"} },
+};
+
+function _getS3Extras(){
+  const extras = {cores:[], verbs:[]};
+  if(typeof ammoUnlocked === 'undefined' || !Array.isArray(ammoUnlocked)) return extras;
+  const seenC = new Set(STAGE_CORES.map(c=>c.es));
+  const seenV = new Set(STAGE_VERBS.map(v=>v.es));
+  ammoUnlocked.forEach(id=>{
+    const contrib = STAGE3_UNLOCK_MAP[id];
+    if(!contrib) return;
+    if(contrib.core && !seenC.has(contrib.core.es)){
+      seenC.add(contrib.core.es);
+      extras.cores.push(contrib.core);
+    }
+    if(contrib.verb && !seenV.has(contrib.verb.es)){
+      seenV.add(contrib.verb.es);
+      extras.verbs.push(contrib.verb);
+    }
+  });
+  return extras;
+}
+
 // ── Stage 1 State ──
 let _s1Pool = [];
 let _s1Idx = 0;
@@ -142,6 +179,7 @@ function renderStage2(){
     <div class="stage2-pair">
       <div class="stage2-card yo" onclick="speakSentence('${escStage(p.yo)}')">${p.yo}</div>
       <div class="stage2-card tu" onclick="speakSentence('${escStage(p.tu)}')">${p.tu}</div>
+      <button class="s2-star-btn" onclick="if(typeof addToVocab==='function') addToVocab('${escStage(p.yo)} → ${escStage(p.tu)}','${escStage(p.zh)}','Stage2 yo↔tú')" title="收藏這組句型">☆</button>
     </div>
     <div style="font-size:10px;color:var(--tlight);font-weight:600;text-align:center;margin:-4px 0 4px">${p.zh}</div>
   `).join('');
@@ -150,29 +188,39 @@ function renderStage2(){
 // ── Stage 3: 造句核心 ──
 let _s3Core = null;
 let _s3Verb = null;
+let _s3AllCores = [...STAGE_CORES];
+let _s3AllVerbs = [...STAGE_VERBS];
 
 function renderStage3(){
   const el = document.getElementById('stage3Area');
   if(!el) return;
-  el.innerHTML = `
+  const extras = _getS3Extras();
+  _s3AllCores = [...STAGE_CORES, ...extras.cores];
+  _s3AllVerbs = [...STAGE_VERBS, ...extras.verbs];
+  const unlockedBadge = (extras.cores.length + extras.verbs.length) > 0
+    ? `<div style="font-size:10px;color:var(--ok);font-weight:700;margin-bottom:6px">✨ 已解鎖 ${extras.cores.length+extras.verbs.length} 個進階選項！</div>`
+    : '';
+  el.innerHTML = unlockedBadge + `
     <div>
       <div class="stage3-label">選核心主幹</div>
       <div class="stage3-row" id="s3CoreRow">
-        ${STAGE_CORES.map((c,i)=>`<span class="stage3-chip" onclick="s3PickCore(${i})" id="s3c${i}">${c.zh}</span>`).join('')}
+        ${_s3AllCores.map((c,i)=>`<span class="stage3-chip" onclick="s3PickCore(${i})" id="s3c${i}">${c.zh}</span>`).join('')}
       </div>
     </div>
     <div>
       <div class="stage3-label">選補語</div>
       <div class="stage3-row" id="s3VerbRow">
-        ${STAGE_VERBS.map((v,i)=>`<span class="stage3-chip" onclick="s3PickVerb(${i})" id="s3v${i}">${v.zh}</span>`).join('')}
+        ${_s3AllVerbs.map((v,i)=>`<span class="stage3-chip" onclick="s3PickVerb(${i})" id="s3v${i}">${v.zh}</span>`).join('')}
       </div>
     </div>
     <div class="stage3-output" id="s3Output" onclick="s3Speak()">（點上方選項，這裡顯示造句）</div>
   `;
+  _s3Core = null;
+  _s3Verb = null;
 }
 
 function s3PickCore(i){
-  _s3Core = STAGE_CORES[i];
+  _s3Core = _s3AllCores[i];
   document.querySelectorAll('#s3CoreRow .stage3-chip').forEach((el,j)=>{
     el.classList.toggle('selected', j===i);
   });
@@ -180,7 +228,7 @@ function s3PickCore(i){
 }
 
 function s3PickVerb(i){
-  _s3Verb = STAGE_VERBS[i];
+  _s3Verb = _s3AllVerbs[i];
   document.querySelectorAll('#s3VerbRow .stage3-chip').forEach((el,j)=>{
     el.classList.toggle('selected', j===i);
   });
@@ -224,6 +272,7 @@ function jumpToStages(){
   const tog = document.getElementById('stagesToggle');
   const wrap = document.querySelector('.stages-wrap');
   if(!body) return;
+  if(typeof switchBottomTab==='function') switchBottomTab('playground');
   body.classList.add('open');
   tog.textContent = '▲ 收起';
   renderStage2();

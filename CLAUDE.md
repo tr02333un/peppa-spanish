@@ -126,3 +126,12 @@ curl -s -X PUT \
 3. **語塊教學法**：禁止單字死背，所有教學內容以語塊/片語/完整句為單位
 4. **改一個說一個**：每修改一項，說明原因
 5. **LocalStorage key 是 peppa_es_v4**：不要改 key 名稱，會讓用戶資料消失
+
+---
+
+## 系統性重要備註（給接手的人）
+
+- **CDN雙層快取**：CSS/JS靠?v=xxx版本號破快取；HTML本體也有自己的CDN快取層，不受版本號保護，改完通常要等30-60秒才會同步，遇到「明明推了但沒變」先等久一點再判斷。
+- **語塊配色系統**：S=虛線框、V=實色底、O=實線框，色票變數在style.css開頭:root（--v-navy、--o-deepblue等），之前被覆蓋過一次，改動前建議先確認現況。
+- **隱含主詞一律用西語**：不要改回中文括號。
+- **GitHub Actions workflow**：.github/workflows/deploy.yml目前只跑GitHub Pages，Netlify job已經想拿掉但token權限不足沒推成功，如果之後要處理需要有workflow權限的token。

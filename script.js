@@ -1203,6 +1203,37 @@ function closeGrammarModal(){
   closeGrammarSheet();
 }
 
+// ── 底部雙Tab ──
+function switchBottomTab(name){
+  ['Knowledge','Playground'].forEach(t=>{
+    const panel=document.getElementById('tab'+t);
+    if(panel) panel.classList.toggle('active', t.toLowerCase()===name);
+  });
+  document.querySelectorAll('.tab-btn').forEach((btn,i)=>{
+    btn.classList.toggle('active',(i===0&&name==='knowledge')||(i===1&&name==='playground'));
+  });
+}
+
+// ── 🔄 動詞變位庫（Tab1 瀏覽區）──
+function renderConjLibrary(){
+  const el=document.getElementById('conjLibBody');
+  if(!el) return;
+  const verbs=GRAMMAR_DATA.filter(g=>g.conj&&g.conj.rows&&g.conj.rows.length);
+  el.innerHTML=verbs.map(g=>`
+    <div class="conj-lib-card" id="conjlib-${g.id}">
+      <div class="conj-lib-header">${g.conj.verb}</div>
+      ${buildConjTable(g.conj)}
+    </div>`).join('');
+}
+
+function toggleConjLib(){
+  const body=document.getElementById('conjLibBody');
+  const t=document.getElementById('conjLibToggle');
+  if(!body) return;
+  const open=body.classList.toggle('open');
+  t.textContent=open?'▲ 收起':'▼ 展開';
+}
+
 function openGrammarSheet(html){
   document.getElementById('grammarSheetContent').innerHTML = html;
   document.getElementById('grammarSheet').style.display = 'block';
@@ -1259,6 +1290,7 @@ function speakSentence(text){
   render();
   renderAmmo();
   renderCogLibrary();
+  renderConjLibrary();
   renderPronounLibrary();
   renderVocab();
   initTTS();

@@ -523,3 +523,14 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 
 /* 主卡片語塊：隱藏 + 收藏按鈕 */
 .chunk-pill .vocab-add-btn{display:none}
+
+/* ── Stage 2 star bookmark ── */
+.s2-star-btn{flex-shrink:0;background:none;border:none;font-size:16px;color:var(--tlight);cursor:pointer;padding:0 2px 0 4px;line-height:1;transition:color .15s;align-self:center}
+.s2-star-btn:active{color:var(--benikake)}
+
+/* ── 底部雙Tab系統 ── */
+.bottom-tab-bar{display:flex;gap:0;margin:16px 0 0;background:var(--bg2);border:1.5px solid var(--usumizu);border-radius:14px;overflow:hidden;max-width:480px;width:100%;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tab-btn{flex:1;padding:12px 8px;border:none;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .18s;background:transparent;color:var(--tlight);border-bottom:3px solid transparent}
+.tab-btn.active{background:white;color:var(--misora);border-bottom-color:var(--misora)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
