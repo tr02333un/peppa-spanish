@@ -310,7 +310,7 @@ const COGNATE_LIBRARY = [
 const SUFFIX_PATTERNS = [
   {
     rule: '-tion → la__ -ción',
-    hint: '名詞字尾，發音接近（education → la educación）',
+    hint: '名詞字尾，發音接近（education → la educación）<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
     words: [
       {en:'nation',      es:'nación',       art:'la', zh:'國家',   ex:{es:'La nación entera celebra.',      zh:'整個國家都在慶祝。', chunks:[{w:"La nación entera",role:"s"},{w:"celebra.",role:"v"}]}},
       {en:'action',      es:'acción',       art:'la', zh:'行動',   ex:{es:'¡En acción!',                   zh:'行動！', chunks:[{w:"¡En acción!",role:"c"}]}},
@@ -322,7 +322,7 @@ const SUFFIX_PATTERNS = [
   },
   {
     rule: '-ty → la-dad',
-    hint: '名詞字尾，發音接近（university → la universidad）',
+    hint: '名詞字尾，發音接近（university → la universidad）<br><b class="sfx-remind">全部都是陰性，前面記得自動加上 la 喔！</b>',
     words: [
       {en:'city',        es:'ciudad',       art:'la', zh:'城市',   ex:{es:'La ciudad es muy grande.',      zh:'這個城市很大。', chunks:[{w:"La ciudad",role:"s"},{w:"es",role:"v"},{w:"muy grande.",role:"c"}]}},
       {en:'reality',     es:'realidad',     art:'la', zh:'現實',   ex:{es:'En la realidad es diferente.',  zh:'現實中不一樣。', chunks:[{w:"En la realidad",role:"c"},{w:"es",role:"v"},{w:"diferente.",role:"c"}]}},

@@ -265,18 +265,6 @@ function renderBeVerbNote(a){
   return `<div class="be-verb-note ${a.be_verb_type}">💡 ${a.be_verb_note}</div>`;
 }
 
-// 西語數字 1-10：基數/序數/emoji 三態循環（序數預設陽性 primero/segundo…）
-const NUM_EMOJI=['','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
-const NUM_WORDS=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'];
-const ORD_WORDS=['','primero','segundo','tercero','cuarto','quinto','sexto','séptimo','octavo','noveno','décimo'];
-function cycleNumBadge(el){
-  const n = parseInt(el.dataset.n,10);
-  const mode = (parseInt(el.dataset.mode,10)+1)%3;
-  el.dataset.mode = mode;
-  if(mode===0){ el.textContent = NUM_EMOJI[n]; el.classList.remove('word-mode'); }
-  else if(mode===1){ el.textContent = NUM_WORDS[n]; el.classList.add('word-mode'); speakWord(NUM_WORDS[n]); }
-  else { el.textContent = ORD_WORDS[n]; el.classList.add('word-mode'); speakWord(ORD_WORDS[n]); }
-}
 
 function renderAmmo(){
   document.getElementById('ammoCount').textContent = ammoUnlocked.length;
@@ -289,12 +277,10 @@ function renderAmmo(){
   el.innerHTML = unlocked.map(a=>{
     const star = STAR_STATES[ammoStars[a.ammo_id]||0];
     const dailyRows = a.fire_daily.map(f=>renderAmmoFireRow(f,'daily')).join('');
-    const num = parseInt((a.ammo_id.match(/(\d+)$/)||['','0'])[1],10);
-    const numDisplay = `<span class="ammo-num-text">${NUM_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-text">${ORD_WORDS[num]}</span><span class="ammo-num-sep">/</span><span class="ammo-num-emoji">${NUM_EMOJI[num]}</span>`;
     return `<div class="ammo-card ammo-collapsed" id="ammo-${a.ammo_id}">
       <div class="ammo-ep-tag">${a.ep}</div>
       <div class="ammo-header" onclick="toggleAmmoCard('${a.ammo_id}')">
-        <span class="ammo-num">${numDisplay}</span>
+        <span class="ammo-header-zh">${a.core_zh}</span>
         <span class="ammo-chevron">▾</span>
       </div>
       <div class="ammo-card-body">
@@ -314,7 +300,6 @@ function renderAmmo(){
         <!-- 實戰射擊 -->
         <div class="ammo-label l-fire" style="margin-bottom:5px">🎯 實戰射擊</div>
         <div class="ammo-fire-section">
-          ${renderAmmoFireRow(a.fire_peppa,'peppa')}
           ${dailyRows}
         </div>
       </div>
@@ -1170,7 +1155,6 @@ function buildConjTable(conj, gId){
     : '';
   const jumpBtn = gId ? `<div class="conj-jump-btn" onclick="jumpToConjLib('${gId}')">🔄 查完整變位庫 →</div>` : '';
   return `<div class="conj-section">
-    <div class="conj-title">¡Variadísimo! 變位速查</div>
     <div class="conj-verb-label">${conj.verb}</div>
     <div class="conj-rows">${main3}${restHtml}</div>
     ${jumpBtn}
