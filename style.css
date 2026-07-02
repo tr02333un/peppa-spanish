@@ -69,7 +69,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 /* 動詞 V — 實色底 */
 .chunks-area .chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
 /* 受詞 O — 實線框 */
-.chunks-area .chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
+.chunks-area .chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 /* 連接詞 C — 淡色無框 */
 .chunks-area .chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .chunks-area .chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
@@ -212,7 +212,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .suffix-ex-chunk:active{opacity:.6}
 .suffix-ex-chunk.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
 .suffix-ex-chunk.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
-.suffix-ex-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
+.suffix-ex-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 .suffix-ex-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .suffix-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
 .suffix-chunk-star:hover{opacity:1}
@@ -302,7 +302,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .ammo-fire-chunk:active{opacity:.6}
 .ammo-fire-chunk.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
 .ammo-fire-chunk.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
-.ammo-fire-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
+.ammo-fire-chunk.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 .ammo-fire-chunk.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .ammo-fire-chunk.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 .ammo-chunk-star{font-size:11px;cursor:pointer;opacity:.5;margin-right:4px;transition:opacity .15s}
@@ -477,7 +477,7 @@ body::before{content:'';position:fixed;top:-80px;right:-80px;width:300px;height:
 .stage-chunk-pill:active{opacity:.6}
 .stage-chunk-pill.role-s{border:1.5px dashed var(--s-babyblue);color:var(--konpeki);background:white}
 .stage-chunk-pill.role-v{background:var(--v-navy);color:var(--v-gold);border:none}
-.stage-chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-cream);background:var(--o-deepblue)}
+.stage-chunk-pill.role-o{border:1.5px solid var(--o-deepblue);color:var(--o-deepblue);background:white}
 .stage-chunk-pill.role-c{background:rgba(108,155,210,.15);color:var(--tmid);border:none}
 .stage-chunk-pill.role-plain{background:rgba(184,200,209,.2);color:var(--tmid);border:none}
 
