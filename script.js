@@ -221,7 +221,7 @@ function renderAmmoFireChunks(fire){
   return `<div class="ammo-fire-chunks">${fire.chunks.map(c=>{
     const personCls=c.role==='s'?getPersonClass(c.w):'';
     const clean=c.w.replace(/[¡¿.,!?;:（）]/g,'').trim();
-    const starHtml=isVocabWorthy(clean) ? `<span class="ammo-chunk-star" onclick="event.stopPropagation();addToVocab('${escAttr(c.w)}','${escAttr(fire.zh)}','彈藥例句');this.textContent='⭐'" title="收藏這個語塊">☆</span>` : '';
+    const starHtml=isVocabWorthy(clean) ? `<span class="ammo-chunk-star" onclick="event.stopPropagation();addToVocab('${escAttr(c.w)}','','彈藥例句');this.textContent='⭐'" title="收藏這個語塊">☆</span>` : '';
     return `<span class="ammo-fire-chunk role-${c.role||'plain'}${personCls?' '+personCls:''}" onclick="event.stopPropagation();ammoChunkTap('${escAttr(c.w)}',${!!c.hideYg},'${escAttr(c.note||'')}')">${c.w}</span>${starHtml}`;
   }).join('')}</div>`;
 }
