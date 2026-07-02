@@ -160,12 +160,12 @@ const GRAMMAR_DATA = [
 
   {
     id:"g05", cat:"tense",
-    title:"「已經做了」的說法：haber + 動詞-ado/-ido形",
+    title:"「已經做了」：haber + 動詞-ado/-ido形",
     rule:"haber（幫忙的動詞）+ 動詞-ado/-ido形 = 「已經做了某事」，結果跟現在有關。",
     examples:[
       {es:"Peppa ha encontrado un charco pequeño.", zh:"佩佩找到了一個小水坑。（ha + encontrado）"},
       {es:"George ha perdido al señor Dinosaurio.", zh:"喬治把恐龍先生弄丟了。（ha + perdido）"},
-      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。（「我」的說法用 he）"}
+      {es:"He perdido mi mochila.", zh:"我把我的書包弄丟了。（「我」用 he）"}
     ],
     trap:"字尾規則：-ar → -ado（encontrar→encontrado）；-er/-ir → -ido（perder→perdido）",
     source:"E1·S7 / E2·S3",
@@ -184,7 +184,7 @@ const GRAMMAR_DATA = [
 
   {
     id:"g06", cat:"tense",
-    title:"「一直做到現在」的說法：haber + estado + -ando",
+    title:"「一直做到現在」：haber + estado + -ando",
     rule:"haber + estado + 動詞-ando = 「一直在做某事直到現在」，動作從過去延續到現在。",
     examples:[
       {es:"Habéis estado saltando en los charcos de barro.", zh:"你們一直在泥巴坑裡跳。"},
@@ -207,7 +207,7 @@ const GRAMMAR_DATA = [
     trap:"SER 未來人稱：seré / serás / será / seremos / seréis / serán",
     source:"E3·S7",
     conj:{
-      verb:"ser（以後要做的說法：將成為）",
+      verb:"ser（以後要做：將成為）",
       rows:[
         {person:"yo",         form:"seré",    ex:"Seré médico.",        zh:"我會成為醫生。"},
         {person:"tú",         form:"serás",   ex:"Serás famosa.",       zh:"你會出名的。"},
@@ -356,7 +356,7 @@ const GRAMMAR_DATA = [
   {
     id:"g16", cat:"phrase",
     title:"直接下指令（對你說）",
-    rule:"對「你」直接下指令：直接用動詞「他/她」的說法的形式就行了，就像英文命令句去掉 You 一樣。",
+    rule:"對「你」直接下指令：直接用動詞「他/她」的形式就行了，就像英文命令句去掉 You 一樣。",
     examples:[
       {es:"Respira hondo.", zh:"深呼吸。（respirar → respira）"},
       {es:"Tose.", zh:"咳嗽。（toser → tose）"},
